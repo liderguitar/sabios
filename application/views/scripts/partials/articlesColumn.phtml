@@ -1,0 +1,16 @@
+<div class="second-column">
+ <?php
+        foreach ($this->articles as $article) {
+             if ( $article->id <> $this->articleId) {
+    ?>  
+            <div class="column-item">
+                    <center><img src="<?= PUBLIC_FOLDER ?>/files/<?= $article->foto;?>"/></center>
+                    <a href="<?php echo $article->link !== '' ? $article->link : '/articulo/' . $article->urlCode ;   ?>">
+                        <h3><?=strtoupper( utf8_encode(stripslashes ( $article->titulo))); ?></h3>
+                    </a>
+                    <p><?=  utf8_encode(str_replace("\n", "<br/>", My_Function_Function::word_trim($article->contenido, 160, true))) ?></p>
+            </div>	
+             <?php }
+ 
+             } ?>    
+</div>

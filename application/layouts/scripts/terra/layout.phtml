@@ -1,0 +1,79 @@
+<?php
+echo $this->doctype();
+?>
+<html>
+<head>
+
+<?php echo $this->headTitle ()?>
+
+<?php echo $this->headMeta ()?>
+
+<?php echo $this->headScript ()?>
+
+<?php echo $this->headLink ()?>
+
+<?php echo $this->headStyle ()?>
+
+</head>
+<body class="_showgrid">
+<div id="wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="#">TerraFirma<sup>2</sup></a></h1>
+			<p>By <a href="http://www.nodethirtythree.com/">nodethirtythree</a> + <a href="http://www.freecsstemplates.org/">FCT</a></p>
+		</div>
+		<div id="banner"><img src="/css/terra/images/img01.jpg" width="667" height="118" alt="" /></div>
+	</div>
+	<div id="menu" class="container">
+		<ul>
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Archives</a></li>
+			<li><a href="#">Links</a></li>
+			<li><a href="#">Resources</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</div>
+	<div id="top-bar" class="container">
+		<div class="bar">
+			<div class="text">Aliquam sit amet veroeros dolore sed tempus nullam</div>
+			<div id="search">
+				<form method="get" action="">
+					<fieldset>
+						<input type="text" name="query" value="" class="input-text" />
+						<input type="submit" value="Search" class="input-submit" />
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="page" class="container">
+		<div id="content">
+			<div class="post">
+                <?php 
+                echo $this->layout()->content;
+                ?>
+			</div>
+		</div>
+		<div class="clearfix">&nbsp;</div>
+		<div id="footer-bar" class="two-cols">
+			<div class="col1">
+				<h2>Aliquam sit amet veroeros</h2>
+				<p>Faucibus non sit amet elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer placerat, dui sed posuere molestie, urna sapien porta purus, vel sodales ante erat sed arcu. Nunc semper, diam ut blandit elementum, ipsum purus vestibulum quam, sit amet auctor est ut risus. Maecenas sed dolore.</p>
+			</div>
+			<div class="col2">
+				<ul>
+					<li><a href="#">Faucibus non sit amet elit nulla</a></li>
+					<li><a href="#">Consectetur adipiscing elit integer</a></li>
+					<li><a href="#">Placerat dui sed posuere molestie</a></li>
+					<li><a href="#">Urna sapien porta purus vel</a></li>
+				</ul>
+			</div>
+			<div class="clearfix">&nbsp;</div>
+		</div>
+	</div>
+</div>
+<div id="footer" class="container">
+	<p>(c) 2009 Sitename.com. Design by <a href="http://www.nodethirtythree.com/">nodethirtythree</a> + <a href="http://www.freecsstemplates.org/">Free CSS Templates</a></p>
+</div>
+</body>
+</html>

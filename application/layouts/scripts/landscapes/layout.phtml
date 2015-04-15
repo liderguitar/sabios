@@ -1,0 +1,63 @@
+<?php
+echo $this->doctype();
+?>
+<html>
+<head>
+
+<?php echo $this->headTitle ()?>
+
+<?php echo $this->headMeta ()?>
+
+<?php echo $this->headScript ()?>
+
+<?php echo $this->headLink ()?>
+
+<?php echo $this->headStyle ()?>
+
+</head>
+<body class="_showgrid">
+<div id="header" class="container">
+	<div id="logo">
+		<h1><a href="#">Mercenarios</a></h1>
+	</div>
+</div>
+<div id="menu">
+	<ul>
+		<li class="current_page_item"><a href="#">Homepage</a></li>
+		<li><a href="#">Blog</a></li>
+		<li><a href="#">Photo Gallery</a></li>
+		<li><a href="#">About Us</a></li>
+		<li><a href="#">Contact Us</a></li>
+	</ul>
+</div>
+<!-- end #header -->
+<div id="splash"><img src="/css/landscapes/images/img02.jpg" width="800" height="250" alt="" /></div>
+<div id="page">
+	<div id="box1">
+                <?php 
+                echo $this->layout()->content;
+                ?>
+	</div>
+	<div id="poptrox">
+		<!-- start -->
+		<ul id="gallery">
+			<li><a href="/css/landscapes/images/img03_big.jpg"><img src="images/img03.jpg" width="240" height="92" alt="" title="Fusce ultrices fringilla metus" /></a></li>
+			<li><a href="/css/landscapes/images/img04_big.jpg"><img src="images/img04.jpg" width="240" height="92" alt="" title="Praesent scelerisque scelerisque erat" /></a></li>
+			<li><a href="/css/landscapes/images/img05_big.jpg"><img src="images/img05.jpg" width="240" height="92" alt="" title="Integer sit amet pede vel arcu aliquet pretium" /></a></li>
+			<li><a href="/css/landscapes/images/img06_big.jpg"><img src="images/img06.jpg" width="240" height="92" alt="" title="Phasellus nec erat sit amet nibh pellentesque congue" /></a></li>
+			<li><a href="/css/landscapes/images/img07_big.jpg"><img src="images/img07.jpg" width="240" height="92" alt="" title="Pellentesque quis elit non lectus gravida blandit" /></a></li>
+			<li><a href="/css/landscapes/images/img08_big.jpg"><img src="images/img08.jpg" width="240" height="92" alt="" title="Cras vitae metus aliquam risus pellentesque pharetra" /></a></li>
+		</ul>
+		<br class="clear" />
+		<script type="text/javascript">
+		$('#gallery').poptrox();
+		</script>
+		<!-- end -->
+	</div>
+</div>
+<div id="footer">
+	<p>Copyright (c) 2011 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+</div>
+<!-- end #footer -->
+</body>
+</html>

@@ -1,0 +1,65 @@
+<?php
+$this->headScript()->offsetSetFile(1600, PUBLIC_FOLDER . '/js/comentario.js');
+$this->headScript()->offsetSetFile(605, PUBLIC_FOLDER . '/js/libro-list.js');
+
+$this->headLink()->offsetSetStylesheet(900, PUBLIC_FOLDER . '/css/table.css');
+$locale = new Zend_Locale('de_AT');
+?>
+<input type="hidden" id="page" value="<?= $this->page ?>"/>
+<div style="float: left; padding: 10px;">
+<div class="filter-container"><?= $this->filterForm;?></div>
+<table summary="Meeting Results" id="gradient-style">
+	<thead>
+	<tr>
+		<th	scope="col"></th>
+		<th scope="col"><a href="">Id</a></th>
+		<th scope="col"><a href="">Libro</a></th>
+		<th scope="col"><a href="">texto</a></th>
+		<th scope="col"><a href="">Autor</a></th>		
+		<th scope="col" class="center"><a href="">Publicar</a></th>
+		<th scope="col" class="center"><a href="">Bloq</a></th>
+		<th scope="col" class="center"><a href="">Borrar</a></th>	
+		<th scope="col" class="center"><a href="">Editar</a></th>	
+		
+	</thead>	
+	<tfoot>
+		<tr>
+			<td colspan="10"></td>
+		</tr>
+	</tfoot>		
+		<?php 
+		foreach($this->objects as $articulo){
+			?>
+		<tr>
+			<td><input id="id_row_<?= $articulo->id ?>" type="checkbox" value="" name="id_rows"></td>
+			<td><a href=""><?= $articulo->id ?></a></td>
+			<td><a href=""><?= utf8_encode($articulo->ComentariosPorLibro[0]->Libro->titulo) ?></a></td>
+			<td><div id="comentarioConteiner_<?= $articulo->id ?>" onclick="editComentario('<?= $articulo->id ?>');"><?= utf8_encode($articulo->texto) ?></div>
+				<div id="textoContainer_<?= $articulo->id ?>" class="hide">
+					<textarea id="texto_<?= $articulo->id ?>" cols="70" rows="5" class="rounded"><?= utf8_encode($articulo->texto) ?></textarea>
+					<input class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only comentario-submit" type="button" id="cancelEdit" onclick="comentarioCancel('<?=$articulo->id?>')" value="Cancelar"/>
+					<input class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only comentario-submit" type="button" id="editSubmit" onclick="comentarioSave('<?=$articulo->id?>')" value="Grabar"/> 
+				</div>
+			</td>
+			<td><a href=""><?= utf8_encode($articulo->Post->Usuario_2->nombre) ?></a></td>
+			<td class="center"><a href="#" onClick="confirmPublicar('<?= $articulo->id ?>');"><img title="<?= $articulo->Post->publicado == "Y" ? "No publicar" : "Publicar"?>" height="25px" src="<?= $articulo->Post->publicado == "Y" ? PUBLIC_FOLDER . "/images/"."unpublish.gif" : PUBLIC_FOLDER . "/images/"."publish.gif" ?>"/></a></td>
+			<td class="center"><span class="ui-icon center  <?= $articulo->Post->blockUsuarioId == null ? "ui-icon-unlocked" : "ui-icon ui-icon-locked" ?>"></span></td>
+			<td class="center"><a href="#" onClick="confirmDelete('<?= $articulo->id ?>');"><span class="ui-icon center ui-icon-closethick"></span></a></td>
+			<td class="center"><a href="#" onclick="editComentario('<?= $articulo->id ?>');"><span class="ui-icon center ui-icon-pencil"></span></a></td>
+
+		</tr>
+		<?php
+		
+		}?>
+
+	</table>
+	<?php
+/*
+* Print the pagination of type , drop down or search type or of your choice.
+*/
+echo $this->paginationControl($this->objects,
+                                    'Sliding',
+                                    '/partials/my_pagination_control.phtml',
+									array('object' => $this->object)); ?>
+</div>
+<?php echo $this->partial( 'partials/dialog.phtml', array());?>

@@ -1,0 +1,37 @@
+<div class="sabios-container">
+
+
+
+    <?php
+    $novs = array(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+    foreach ($novs as $nov) :
+        
+      //  dump($this->novedades[$nov]);
+        if (isset($this->novedades[$nov])) {
+            
+            $link = is_null($this->novedades[$nov]['url']) ? "#" : $this->novedades[$nov]['url'];
+        } else {
+            $link = "#";
+        }
+        ?>
+        <a href="<?= $link ?>" <?= $link == "#" ? "" : "target='_blank'" ?>>
+            <div id="novedad_<?= $nov ?>" class="novedad">
+                <div class="image-container">
+
+    <?php if (isset($this->novedades[$nov])) : ?>
+                        <img src="/files/thumb_<?= $this->novedades[$nov]['imagen'] ?>" onclick="<?= $link == "#" ? "sabiosShowImage('large_".$this->novedades[$nov]['imagen']."');" : "" ?>" />
+                    <?php else : ?>
+                        <div class="sin-nvd"></div>
+                    <?php endif; ?>
+                </div>
+
+            </div>           
+        </a>
+
+
+<?php endforeach; ?>
+
+
+
+</div>

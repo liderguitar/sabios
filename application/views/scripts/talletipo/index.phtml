@@ -1,0 +1,63 @@
+<?php $this->headScript()->offsetSetFile(1009, PUBLIC_FOLDER . '/js/talletipo.js'); ?>
+
+
+
+<div class="sabios-row left-column">
+    <div class="inline2 sabios-label sabios-row"><h1>Tipos de Talle:</h1></div>
+    <div class="sabios-row separador"></div>
+    <div class="sabios-label sabios-row">AGREGAR NUEVO TIPO DE TALLE</div>
+    
+        <div class="sabios-row">
+             <form id="fdp-form" action="/talletipo/add" method="POST">
+                <div class="inline">
+                    <input class="sabios-input fdp" type="text" placeholder="Ingrese Nombre para el tipo de talle" id="nombre" value="" name="nombre">
+                </div>
+                <div class="inline">
+                    <input type="submit" class="sabios-submit submit-filter" name="submit" value="Agregar">
+                </div>
+            </form>
+            <div class="sabios-row separador"></div>
+        </div>
+    <div class="sabios-row"></div>
+    <div class="inline label sabios-row"><label>Tipos de Talle:</label></div>
+    <div class="sabios-row"></div>
+</div>
+<div class="sabios-table-container sabios-row left-column">
+    <div class="sabios-table">
+
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
+
+                <div class="sabios-table-td" style="width: 88%">Nombre</div>
+                <div class="sabios-table-td" style="width: 6%">Editar</div>
+                <div class="sabios-table-td" style="width: 6%">Borrar</div>
+            </div>
+
+        </div>
+        <div class="sabios-table-tbody">
+            <?php
+            $count = 0;
+            foreach ($this->fdps as $fdp) :
+                ?>
+                <div id="tr-data-<?= $fdp->id ?>" class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div class="sabios-table-td" style="width: 88%"><a href=""><?= $fdp->descripcion ?></a></div>
+                    <div class="sabios-table-td" style="width: 6%"><a href="#"><span class="sabios-edit" value="<?= $fdp->id ?>"></span></a></div>
+                    <div class="sabios-table-td" style="width: 6%"><a><span value="<?= $fdp->id ?>" class="sabios-delete"></span></a></div>
+                </div>
+                <div id="tr-form-<?= $fdp->id ?>" class="hide sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <form method="post" id="form-fdp-<?= $fdp->id ?>" action="/talletipo/edit">
+                        <input class="fdp-" name ="id" type="hidden" value="<?= $fdp->id ?>">
+                        <div class="sabios-table-td" style="width: 88%"><input class="fdp-nombre sabios-input fdp" type="text" id="nombre" value="<?= $fdp->descripcion ?>" name="nombre"></div>
+                        <div class="sabios-table-td" style="width: 6%"><a href="#"><i class="fdp-grabar fa fa-floppy-o" title="Grabar" value="<?= $fdp->id ?>"></i></a><i title="Cancelar" class="fdp-cancelar fa fa-times" value="<?= $fdp->id ?>"></i></div>
+                        <div class="sabios-table-td" style="width: 6%"><a href="#"><span class="sabios-delete"></span></a></div>
+                    </form>
+                </div>
+                <?php
+                $count++;
+            endforeach;
+            ?>                                
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>	
+    </div>
+</div>

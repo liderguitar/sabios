@@ -1,0 +1,173 @@
+<?php
+//
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/producto-edit.js');
+?>
+<script>
+    $(document).ready(function() {
+        $(".sabios-row.tb-close").click(function() {
+            $.unblockUI();
+        });
+    });
+</script>
+<div class="sabios-container">
+
+    <div class="middle">
+        <div class="left-column" style="width: 100%">
+            <form method="post" action="" id="product-form">
+                <h1>Editar Producto</h1>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <input type="hidden" id="id" name="id" value="<?= $this->producto['id'] ?>">   
+                <div class="sabios-row label"><label>C&oacute;digo</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="C&oacute;digo del producto" type="text" name="codigo" id="codigo" value="<?= $this->producto['codigo'] ?>"/>
+                    <div class="error-field codigo-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">C&oacute;digo Inv&aacute;lido<br></span><span class="white">Por favor ingrese el c&oacute;digo</span></div></div>
+                </div> 
+                <div class="sabios-row label"><label>Nombre</label></div>
+                
+                <div class="sabios-row"><input class="sabios-input" placeholder="Nombre del producto" type="text" name="nombre" id="nombre" value="<?= $this->producto['nombre'] ?>"/>
+                    <div class="error-field nombre-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor ingrese su Nombre</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Descripci&oacute;n</label></div>
+                
+                <div class="sabios-row"><textarea rows="5" class="sabios-input" placeholder="Descripci&oacute;n" type="text" name="descripcion" id="descripcion"><?= $this->producto['descripcion'] ?></textarea>
+                    <div class="error-field descripcion-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor ingrese su Nombre</span></div></div>
+                </div>                
+                <div class="sabios-row label"><label>Precio</label></div>
+                
+                <div class="sabios-row"><input class="sabios-input" placeholder="Precio" type="text" name="precio" id="precio" value="<?= $this->producto['precio'] ?>"/>
+                    <div class="error-field precio-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Precio Inv&aacute;lido<br></span><span class="white">Por favor ingrese un precio valido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Costo</label></div>
+                
+                <div class="sabios-row"><input class="sabios-input" placeholder="Costo" type="text" name="costo" id="costo" value="<?= $this->producto['costo'] ?>"/>
+                    <div class="error-field costo-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Costo Inv&aacute;lido<br></span><span class="white">Por favor ingrese un costo valido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Tipo de Talle</label></div>
+                
+                <div class="sabios-row">
+                    <div class="talletipo">
+                        <div class="sabios-row"><div class="sabios-select sabios-input" id="talletipo"><span><?= $this->producto['ProductoTextil'][0]['TalleTipo']['descripcion'] ?></span><div class="down-arrow sabios-gradient"></div></div>
+                            <div class="error-field tipodecuenta-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                            <input class="input-field" type="hidden" name="tipotalle" id="tipotalle" value="<?= $this->producto['ProductoTextil'][0]['TalleTipo']['id'] ?>"/>
+                        </div>                
+                        <div class="sabios-row">                
+                            <div class="sabios-row select-container">
+                                <div class="sabios-input sabios-option first-option" value="0">Tipos de Talles</div>
+                                <?php foreach ($this->tallesTipo as $talle) : ?>
+                                    <div class="sabios-input sabios-option first-option" value="<?= $talle->id ?>"><?= $this->escape($talle->descripcion) ?></div> 
+                                <? endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sabios-row label"><label>Categoria</label></div>
+                
+                <div class="categoria">
+                    <div class="sabios-row"><div class="sabios-select sabios-input" id="cats"><span><?= $this->escape($this->categoria->nombre) ?></span><div class="down-arrow sabios-gradient"></div></div>
+                        <div class="error-field categoria-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                        <input class="input-field" type="hidden" text="<?= $this->categoria->nombre ?>" name="categoria" id="categoria" value="<?= $this->producto['id_subcategoria'] ?>"/>
+                    </div>                
+                    <div class="sabios-row">                
+                        <div class="sabios-row select-container">
+                            <div class="sabios-input sabios-option first-option" value="0">Categoria</div>
+                            <?php foreach ($this->categorias as $categoria) : ?>
+                                <div class="sabios-input sabios-option first-option" value="<?= $categoria['id'] ?>"><?= $this->escape($categoria['categoria']) ?></div> 
+                            <? endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="sabios-row label"><label>Stock por Talle</label></div>
+                
+                <div class="sabios-row">
+                    <?php foreach ($this->producto['ProductoTextil'][0]["TallePorProductoTextil"] as $talle) : ?>
+                        <div class="box_talle"><div class="talle-text"><?= $talle["Talle"]["talle"] ?></div>
+                            <input type="hidden" id="id_talle[]" name="id_talle[]"  value="<?=isset($talle["Talle"]["id"]) ? $talle["Talle"]["id"] : "0" ?>">
+                            <input class="talle-input" type="text" id="stock[]" name="stock[]" value="<?= $talle["stock"]?>">
+                            <div class="talle-stock"><?php echo $talle["stock"]; ?></div>
+                        </div>
+                    <?php endforeach; ?>
+
+                </div>
+                <div class="sabios-row label"><label>Fotos</label></div>
+                
+                <div class="sabios-row">
+                    <div id="foto-container" class="foto-container rounded first">
+                        <?php
+                        $counter = 1;
+                        foreach ($this->producto["FotosPorProducto"] as $foto) :
+                            ?>
+
+                            <div class="foto-file">
+                                <label>Foto <?= $counter ?>:&nbsp;</label>
+                                <input type="file" name="foto-<?= $counter ?>" id="foto-<?= $counter ?>" number="<?= $counter ?>" style="display: none;">
+                                <div class="close"></div><img width="100px" src="/files/<?= $foto["Foto"]["url"] ?>">
+                            </div> 
+                            <input class="fotoname" type="hidden" value="<?= $foto["Foto"]["url"] ?>" name="fotoname-<?= $counter ?>" id="fotoname-<?= $counter ?>">
+                            <?php
+                            $counter++;
+                        endforeach;
+                        ?>
+                    </div>
+                    <div class="add-foto sabios-submit">Agregar foto</div>
+
+                </div>
+
+                <div class="sabios-row"><a href="index/register"><button class="sabios-submit">Guardar Producto</button></a></div>
+            </form>            
+        </div>
+    </div>
+    <div class="bottom">
+    </div>    
+</div>
+<div class="textbox tb-login" id="textbox">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-title login">Iniciar sesi&oacute;n</div>
+    <div class="sabios-row"><input class="sabios-input" placeholder="Correo electr&oacute;nico" type="text" name="email" id="email"/></div>
+    <div class="sabios-row"><input class="sabios-input" placeholder="Contraseña" type="password" name="password" id="password"/></div>
+    <input type="hidden" name="tyc" id="tyc" value="0"/>
+    <div class="sabios-row"><div id="check-uncheck" class="check unchecked">Recordar mi cuenta</div></div>
+    <div class="sabios-row">
+        <a href="index/register">
+            <button class="login-submit">
+                Enviar
+            </button>
+        </a>
+    </div>  
+    <div class="sabios-row"><div class="forgot-pass">&#191;Olvidaste tu contraseña&#63;</div></div>
+</div>
+<div class="textbox message" id="flashmessenger">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image"></div>
+    <div class="sabios-row tb-title">Mensaje</div>
+    <div class="sabios-row tb-text">
+        <?php if (count($this->messages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->messages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({message: $('#flashmessenger'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+        <?php endif; ?>
+    </div>
+</div>
+<div class="textbox invalid" id="flashmessenger-error">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image-invalid"></div>
+    <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
+    <div class="sabios-row tb-text-invalid">
+        <?php if (count($this->errormessages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->errormessages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({message: $('#flashmessenger-error'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+        <?php endif; ?>
+    </div>
+</div>   

@@ -1,0 +1,6 @@
+@CHARSET "ISO-8859-1";
+.required:after
+{
+    content: "*";
+    color: #F00;
+}

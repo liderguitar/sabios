@@ -1,0 +1,30 @@
+<div class="sabios-container">
+
+
+
+    <?php
+    $novs = array(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+    foreach ($novs as $nov) :
+        ?>
+        <a href="/novedad/edit/<?= $nov ?>">
+            <div id="novedad_<?= $nov ?>" class="novedad">
+                <div class="nov-title sabios-back-gradient">EDITAR NOVEDAD <?= $nov ?></div>
+                <div class="image-container">
+
+                    <?php if (isset($this->novedades[$nov])) : ?>
+                        <img src="/files/thumb_<?= $this->novedades[$nov]['imagen'] ?>"/>
+                    <?php else : ?>
+                        <div class="sin-nvd">ESPACIO SIN UTILIZAR</div>
+                        <?php endif;?>
+                </div>
+
+            </div>           
+        </a>
+
+
+    <?php endforeach; ?>
+
+
+
+</div>

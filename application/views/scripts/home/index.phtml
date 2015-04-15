@@ -1,0 +1,123 @@
+<?php
+$this->headScript()->offsetSetFile(1999, PUBLIC_FOLDER . '/js/invest.js');
+$this->headLink()->offsetSetStylesheet(657, PUBLIC_FOLDER . '/css/estilos_home.css');
+?>
+<?php if ($this->contactsuccess) : ?>
+    <script>
+        $.blockUI({ message: $('.valid'), css: { 'width' : '326px','border': 'none', 'border-radius' : '8px' } });     
+    </script>
+<?php endif; ?>
+<script>
+    $(document).ready(function() {
+        $(".sabios-row.tb-close").click(function() {
+            $.unblockUI();
+        });
+        $(".iniciar-sesion").click(function() {
+            $.blockUI({message: $('.tb-login'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+        });
+    });
+</script>
+<div class="sabios-container">
+    <div class="logo"><img alt="Sabios - Software de Gestión" title="Sabios - Software de Gestión" src="/images/sabios-logo.png"/></div>
+    <div class="middle">
+        <div class="left-column">
+            <div class="text">
+                Sabios es un software on-line de gestión y 
+                administración de stock enfocado a mejorar 
+                las ventas. 
+                <span>Mirá el video.</span>
+            </div>
+            <div class="youtube">
+                <iframe width="400" height="275" src="//www.youtube.com/embed/JPl9bI0RX3o" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="right-column">
+            <h1>Beneficios:</h1>
+            <span><ul>
+                    <li>Control y manejo de stock, mercader&iacute;a</li>
+                    e insumos con c&oacute;digo de barras.</li>
+                    <li>Cat&aacute;logo para realizar ventas online.</li>
+                    <li>Informaci&oacute;n al instante desde </li>
+                    cualquier lugar.</li>
+                    <li>Sin instalaci&oacute;n y muy seguro.</li>
+                    <li>Gratis.</li>
+                </ul>
+            </span>
+            <div class=""><a href="/home/register"><button class="login-submit login">Registrarse</button></a></div>
+            <div class="iniciar-sesion">Iniciar sesión</div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="links">
+            <ul>
+                <a href="/home/contact"><li>Contacto</li></a>
+                <a href="/home/condiciones"><li>Condiciones</li></a>
+                <a href="/home/privacidad"><li>Privacidad</li></a>
+                <a href="/home"><li>home</li></a>
+            </ul>
+        </div>
+        <div class="social"><a href="https://www.facebook.com/sabiosweb"><img src="/images/fb.png"/></a><a href="https://twitter.com/sabiosweb"><img src="/images/tw.png"/></a></div>
+    </div>
+</div>
+<div class="textbox tb-login" id="textbox">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-title login">Iniciar sesi&oacute;n</div>
+    <div class="sabios-row"><input class="sabios-input" placeholder="Correo electr&oacute;nico" type="text" name="email" id="email"/></div>
+    <div class="sabios-row"><input class="sabios-input" placeholder="Contraseña" type="password" name="password" id="password"/></div>
+    <input type="hidden" name="tyc" id="tyc" value="0"/>
+    <div class="sabios-row"><div id="check-uncheck" class="check unchecked">Recordar mi cuenta</div></div>
+    <div class="sabios-row">
+        <a href="home/register">
+            <button class="login-submit">
+                Enviar
+            </button>
+        </a>
+    </div>  
+    <div class="sabios-row"><div class="forgot-pass">&#191;Olvidaste tu contraseña&#63;</div></div>
+</div>
+<div class="textbox message" id="flashmessenger">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image"></div>
+    <div class="sabios-row tb-title">Mensaje</div>
+    <div class="sabios-row tb-text">
+<?php if (count($this->messages)) : ?>
+            <ul id="messages">
+            <?php foreach ($this->messages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({message: $('#flashmessenger'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+<?php endif; ?>
+    </div>
+</div>
+<div class="textbox invalid" id="flashmessenger-error">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image-invalid"></div>
+    <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
+    <div class="sabios-row tb-text-invalid">
+<?php if (count($this->errormessages)) : ?>
+            <ul id="messages">
+            <?php foreach ($this->errormessages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({message: $('#flashmessenger-error'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+<?php endif; ?>
+    </div>
+</div>
+<div class="textbox valid" id="textbox">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image"></div>
+    <div class="sabios-row tb-title">&#161;Listo&#33;</div>
+    <div class="sabios-row tb-text">Su consulta ha sido enviada<br>satisfactoriamente.</div>
+</div>
+<div class="textbox invalid" id="textbox">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image-invalid"></div>
+    <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
+    <div class="sabios-row tb-text-invalid">Se ha producido un error,<br>intente nuevamente en unos minutos.</div>
+</div>

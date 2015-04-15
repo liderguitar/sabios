@@ -1,0 +1,44 @@
+<?php 
+
+$this->headScript()->offsetSetFile(530, PUBLIC_FOLDER .  '/js/frontpage.js');
+$this->headScript()->offsetSetFile(531, PUBLIC_FOLDER .  '/js/genero.js');
+$this->headTitle(utf8_encode(strtoupper(stripslashes ( $this->generoName))));
+?>
+
+<div class="first-row">
+	<div class="list-result">
+	<div><h1>GENERO <?= utf8_encode(strtoupper($this->generoName))?></h1></div>
+		<?php 
+		foreach ($this->librosSearch as $libro) {
+		?>
+				<div class="result">
+		         	<div class="result-image"><img width="100px" src="<?= PUBLIC_FOLDER . "/files/" . $libro->foto; ?>" />
+		         		<div id="carrito-container">
+			         	<?= $this->agregarCarrito($libro) ?>
+			         	</div>
+		         	</div>
+				<div class="link">
+					<a href="/libro/<?= $libro->urlCode ?>">
+			         		<div class="titulo"><h2><?= utf8_encode(strtoupper(stripslashes ( $libro->titulo))); ?></h2></div>
+		         		</a>
+		         	</div>
+		         	<div class="autor-class"><?=$this->autorLink($libro)?></div>
+		         	<div class="description">
+		         	<?=utf8_encode(My_Function_Function::word_trim($libro->descripcion, 100, true))?>
+		         	</div>
+
+				</div>
+		<?php }?>
+<?php echo $this->paginationControl($this->librosSearch,
+                                    'Sliding',
+                                    '/partials/my_pagination_control_genero.phtml',
+									array('genero' => $this->genero)); ?>	
+	</div>
+        
+<?php 
+
+     echo $this->partial(  '/partials/articlesColumn.phtml',
+                                array('articles' => $this->articles)
+                );
+    ?>
+</div>

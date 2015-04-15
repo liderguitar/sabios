@@ -1,0 +1,48 @@
+<div class="paginator">
+
+<?php 
+
+if ($this->pageCount): ?>
+<div class="paginationControl">
+P&aacute;gina &nbsp;<?= $this->pageCount ?>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+&nbsp; de &nbsp;<?php echo $this->totalItemCount; ?>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<?php foreach ($this->pagesInRange as $page): ?>
+                  <?php if ($page != $this->current): ?>
+ 					<a href="/categoria/list/<?php echo $this->object . Zend_Locale_Format::toNumber($page);?>?nombre=<?=$this->nombre?>"><?php echo Zend_Locale_Format::toNumber($page); ?></a>
+                  <?php else: ?>
+					<span><?php echo Zend_Locale_Format::toNumber($page); ?></span>
+                  <?php endif; ?>
+                  &nbsp;
+<?php endforeach; ?>
+
+<!-- First page link -->
+&nbsp;|&nbsp;
+<?php if (isset($this->previous)): ?>
+  <a href="/categoria/list/<?= $this->object . $this->first; ?>?nombre=<?=$this->nombre?>">Primero </a> |
+<?php else: ?>
+  <span class="disabled">Primero</span> |
+<?php endif; ?>
+<!-- Previous page link -->
+<?php if (isset($this->previous)): ?>
+<a href="/categoria/list/<?= $this->object . $this->previous ?>?nombre=<?=$this->nombre?>"> &lt; Anterior  </a> |
+<?php else: ?>
+  <span class="disabled">&lt; Anterior</span> |
+<?php endif; ?>
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+<a href="/categoria/list/<?= $this->object . $this->next; ?>?nombre=<?=$this->nombre?>">  Siguiente &gt; </a> |
+<?php else: ?>
+  <span class="disabled">Siguiente &gt;</span> |
+<?php endif; ?>
+<!-- Last page link -->
+<?php if (isset($this->next)): ?>
+  <a href="/categoria/list/<?= $this->object . $this->last; ?>?nombre=<?=$this->nombre?>">  &Uacute;ltimo  </a>
+<?php else: ?>
+  <span class="disabled">&Uacute;ltimo</span>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+</div>

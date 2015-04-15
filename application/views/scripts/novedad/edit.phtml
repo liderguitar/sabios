@@ -1,0 +1,67 @@
+<?php
+//
+$this->headScript()->offsetSetFile(1400, PUBLIC_FOLDER . '/js/novedad-add.js');
+?>
+<div class="sabios-container">
+    <form id="novedad-form" enctype="multipart/form-data" method="post" action="">  
+        <input type="hidden" name="id" value="<?= $this->id; ?>">
+        <h1>Editando Novedad:<?= $this->id; ?></h1>
+        <div class="sabios-row separador"></div>
+        <div class="sabios-row">
+
+            <?php if (!$this->novedad) : ?>            
+                <div class="sabios-row">
+                    <div id="foto-container" class="foto-container rounded first">
+                        <div class="foto-file nov-file" style="width: 100%">
+                            <div class="sabios-row label"><label>Seleccione una imagen:</label></div>
+                            <div class="sabios-row"></div>
+                            <div class="sabios-row"></div>
+                            <input id="imagen" type="file" name="imagen" style="float: left;">
+                            <div class="error-field file-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Por favor ingrese una imagen<br></span><span class="white">Campo obligatorio</span></div></div>                    
+                        </div>
+                        <input class="fotoname" type="hidden" name="imagen" id="fotoname-1">
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class="sabios-row">
+                    <div id="foto-container" class="foto-container rounded first">
+                        <div class="foto-file nov-file" style="width: 100%; display:none;">
+                            <div class="sabios-row label"><label>Seleccione una imagen:</label></div>
+                            <div class="sabios-row"></div>
+                            <div class="sabios-row"></div>
+                            <input id="imagen" type="file" name="imagen" style="float: left;">
+                            <div class="error-field file-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Por favor ingrese una imagen<br></span><span class="white">Campo obligatorio</span></div></div>                    
+                        </div>
+                        <input class="fotoname" type="hidden" name="imagen" id="fotoname-1" value="<?= $this->novedad->imagen ?>">
+                        <div class="close novedad-close"></div>
+                        <img width="176px" src="/files/thumb_<?= $this->novedad->imagen ?>">                    
+                    </div>
+                </div>            
+
+            <?php endif; ?>            
+
+
+        </div>
+        <div class="sabios-row label"><label>Seleccione una de las siguientes opciones:</label></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>    
+        <div class="sabios-row">
+            <div id="opcion_1" class="sabios-radio sabios-radio-<?= isset($this->novedad->url) && !is_null($this->novedad->url) ? 'on' : 'off' ?>"></div><label>La novedad abre una pesta&ntilde;a con el siguiente link:</label>
+        </div>
+        <div class="sabios-row">
+            <input class="sabios-input" placeholder="Ingrese direccion web (www...)" type="text" name="link" id="link" value="<?= isset($this->novedad->url) ? $this->novedad->url : '' ?>" <?= !isset($this->novedad->url) ? 'disabled="disabled"' : '' ?>/>    
+            <div class="error-field link-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Por favor ingrese una direccion web<br></span><span class="white">Campo obligatorio. Verifique Formato</span></div></div>
+
+        </div>   
+        <div class="sabios-row">
+            <div id="opcion_2" class="sabios-radio sabios-radio-<?= isset($this->novedad->url) && !is_null($this->novedad->url) ? 'off' : 'on' ?>">
+                <input type="hidden" id="opcion" name="opcion" value="<?= is_null($this->novedad->url) ? '2' : '1' ?>">
+            </div><label>Solo amplie la imagen Novedad.</label>
+        </div>    
+        <div class="sabios-row">
+            <input id="nov-submit" type="submit" class="sabios-submit" value="Guardar">
+        </div>
+    </form>
+</div>

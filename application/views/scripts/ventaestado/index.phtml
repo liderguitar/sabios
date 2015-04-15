@@ -1,0 +1,67 @@
+<?php $this->headScript()->offsetSetFile(1009, PUBLIC_FOLDER . '/js/ventaestado.js'); ?>
+
+
+
+<div class="sabios-row left-column">
+    <div class="inline2 sabios-label sabios-row"><h1>Estados de Ventas:</h1></div>
+    <div class="sabios-row separador"></div>
+    <div class="sabios-label sabios-row">AGREGAR NUEVO ESTADO DE VENTAS</div>
+    
+        <div class="sabios-row">
+             <form id="fdp-form" action="/ventaestado/add" method="POST">
+                <div class="inline">
+                    <input class="sabios-input fdp" type="text" placeholder="Ingrese Nombre para el estado" id="nombre" value="" name="nombre">
+                </div>
+                <div class="inline">
+                    <input type="submit" class="sabios-submit submit-filter" name="submit" value="Agregar">
+                </div>
+            </form>
+            <div class="sabios-row separador"></div>
+        </div>
+    <div class="sabios-row"></div>
+    <div class="inline label sabios-row"><label>Estados de Ventas:</label></div>
+    <div class="sabios-row"></div>
+</div>
+<div class="sabios-table-container sabios-row left-column">
+    <div class="sabios-table">
+
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
+
+                <div class="sabios-table-td" style="width: 66%">Nombre</div>
+                <div class="sabios-table-td" style="width: 13%">Devuelve Stock</div>
+                <div class="sabios-table-td sabios-quest" style="width: 7%">(?)</div>
+                <div class="sabios-table-td" style="width: 7%">Editar</div>
+                <div class="sabios-table-td" style="width: 7%">Borrar</div>
+            </div>
+
+        </div>
+        <div class="sabios-table-tbody">
+            <?php
+            $count = 0;
+            foreach ($this->fdps as $fdp) :
+                ?>
+                <div id="tr-data-<?= $fdp->id ?>" class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div class="sabios-table-td" style="width: 47%"><a href=""><?= $fdp->nombre ?></a></div>
+                    <div class="sabios-table-td" style="width: 41%"><a href=""><div class="decimal"><input name="devuelveStock" class="sabios-input" type="checkbox" disabled="disabled" <?= $fdp->devuelveStock == 'Y' ? 'checked="checked"' : '' ?>></div></a></div>
+                    <div class="sabios-table-td" style="width: 6%"><a href="#"><span class="sabios-edit" value="<?= $fdp->id ?>"></span></a></div>
+                    <div class="sabios-table-td" style="width: 6%"><a><span value="<?= $fdp->id ?>" class="sabios-delete"></span></a></div>
+                </div>
+                <div id="tr-form-<?= $fdp->id ?>" class="hide sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <form method="post" id="form-fdp-<?= $fdp->id ?>" action="/ventaestado/edit">
+                        <input class="fdp-" name ="id" type="hidden" value="<?= $fdp->id ?>">
+                        <div class="sabios-table-td" style="width: 47%"><input class="fdp-nombre sabios-input fdp" type="text" id="nombre" value="<?= $fdp->nombre ?>" name="nombre"></div>
+                        <div class="sabios-table-td" style="width: 41%"><input name="devuelveStock" class="sabios-input" type="checkbox" <?= $fdp->devuelveStock == 'Y' ? 'checked="checked"' : '' ?>></div>
+                        <div class="sabios-table-td" style="width: 6%"><a href="#"><i class="fdp-grabar fa fa-floppy-o" title="Grabar" value="<?= $fdp->id ?>"></i></a><i title="Cancelar" class="fdp-cancelar fa fa-times" value="<?= $fdp->id ?>"></i></div>
+                        <div class="sabios-table-td" style="width: 6%"><a href="#"><span class="sabios-delete"></span></a></div>
+                    </form>
+                </div>
+                <?php
+                $count++;
+            endforeach;
+            ?>                                
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>	
+    </div>
+</div>

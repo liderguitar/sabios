@@ -1,0 +1,128 @@
+/*
+	root element for the scrollable.
+	when scrolling occurs this element stays still.
+*/
+
+.scrollable {
+
+	/* required settings */
+	position:relative;
+	overflow:hidden;
+	width: 600px;
+	height:315px;
+	
+
+	/* custom decorations */
+	border:1px solid #ccc;
+	background:url(../img/global/gradient/h300.png) repeat-x;
+}
+
+
+
+/*
+	root element for scrollable items. Must be absolutely positioned
+	and it should have a extremely large width to accomodate scrollable items.
+	it's enough that you set the width and height for the root element and
+	not for this element.
+*/
+.scrollable .items {
+    clear: both;
+    position: relative;
+    width: 20000em;
+    
+}
+
+.items div {
+	float:left;
+
+}
+
+.item {
+	cursor: pointer;
+    float: left;
+    height: 315px;
+    padding: 0 10px;
+    text-align: center;
+    width: 129px;
+    border-left: 1px solid #CCCCCC;
+    height: 315px;
+}
+
+/* single scrollable item */
+.scrollable img {
+	float:left;
+	margin:20px 5px 20px 13px;
+	background-color:#fff;
+	padding:2px;
+	border:1px solid #ccc;
+	width:100px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+
+/* active item */
+.scrollable .active {
+	border:2px solid #000;
+	position:relative;
+	cursor:default;
+}
+
+
+/* this makes it possible to add next button beside scrollable */
+.scrollable {
+	float:left;	
+}
+a {
+    color: #666666;
+    outline: medium none;
+    text-decoration: none;
+}
+.items div.carrito {
+    clear: both;
+    float: none;
+    position: absolute;
+    top: 250px;
+    width: 115px;
+    background-image: url("/images/carrito_plus.png");
+    background-repeat: no-repeat;
+    height: 33px;
+    border: 1px solid #CCC;
+    padding: 15px 0 0 15px;
+   	background-position:5px; 10px;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+.items div.titulo {
+    clear: both;
+    float: none;
+    position: absolute;
+    top: 180px;
+    width: 129px;
+}
+.tooltip {
+	display:none;
+	background:transparent url(/tools/img/tooltip/black_arrow.png);
+	font-size:12px;
+	height:70px;
+	width:160px;
+	padding:25px;
+	color:#fff;	
+}
+.prev {
+	background-image: url(../images/marq-prev.png);
+	float:left;
+	
+}
+.next {
+	background-image: url(../images/marq-next.png);
+	float: right;
+}
+.browse {
+	height: 315px;
+	width: 18px;
+	cursor: pointer;
+}
+.marquesina {
+	float: left;
+}

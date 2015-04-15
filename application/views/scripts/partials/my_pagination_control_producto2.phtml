@@ -1,0 +1,34 @@
+<div class="prod-index">
+    <div class="pi-left">
+        <div class="pi-inicio"><a href="/catalogo/producto/<?=$this->result[0]['Producto']['id']?>">Inicio <</a></div>
+        <?php   $antkey = $this->index -2 >= 0 ? $this->index - 2 : 0;
+                $sigkey = $this->index + 1 <= count($this->result) -1   ? $this->index + 1 : $this->index;
+        
+        ?>
+        <div class="pi-anterior"><a href="/catalogo/producto/<?=$this->result[$antkey]['Producto']['id']?>">Ant <<</a></div>
+        
+    </div>
+    <div class="pi-center">
+    <?php
+    $count = 0;
+    foreach ($this->productos->getIterator() as $item) {
+
+        $prod = $item->toArray();
+        ?>
+        <a href="/catalogo/producto/<?= $prod["Producto"]["id"] ?>">
+            <img style="width: 40px" class="<?= $prod["Producto"]["id"] == $this->id ? "current-prod" : "prod" ?>" style="width: 50px" src="/files/icon_<?= $prod["Producto"]["FotosPorProducto"][0]["Foto"]["url"] ?>">
+        </a>
+
+        <?php
+    }
+
+    ?>        
+        
+        
+    </div>
+    <div class="pi-right">
+        <div class="pi-final"><a href="/catalogo/producto/<?=$this->result[count($this->result)-1]['Producto']['id']?>">Final ></a></div>
+        <div class="pi-siguiente"><a href="/catalogo/producto/<?=$this->result[$sigkey]['Producto']['id']?>">Sig >></a></div>        
+        
+    </div>
+</div>

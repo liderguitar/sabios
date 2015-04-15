@@ -1,0 +1,1083 @@
+<?php $this->headScript()->offsetSetFile(1009, PUBLIC_FOLDER . '/js/client-add.js'); ?>
+<div align="left" class="texto">
+    <form id="cliente-form" name="cliente-form" enctype="multipart/form-data" method="post" action="">
+        <input type="hidden" id="id" value="" name="id">
+        <h1>Agregar Cliente</h1>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Principal</a></li>
+                <li><a href="#tabs-2">Configuraci&oacute;n de la Cuenta</a></li>
+                <li><a href="#tabs-3">Sms/Mailing</a></li>
+                <li><a href="#tabs-4">Env&iacute;os</a></li>
+                <li><a href="#tabs-5">Personal</a></li>
+                <li><a href="#tabs-6">Sucursales</a></li>
+                <li><a href="#tabs-7">Facturaci&oacute;n</a></li>
+            </ul>   
+            <div id="tabs-1">
+                <div class="sabios-row label"><label>Nombre Comercial</label></div>                
+                <div class="sabios-row">
+                    <input class="sabios-input" placeholder="Nombre" type="text" name="nombre" id="nombre" value="<?= $this->nombre ?>"/>
+                    <div class="error-field nombre-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor verifique el nombre</span></div></div>
+                </div>        
+                <div class="sabios-row label"><label>Estado</label></div>
+                <div class="sabios-row">
+                    <div class="estado">
+                        <div class="sabios-row"><div class="sabios-select sabios-input" id="talletipo"><span>Aceptado</span><div class="down-arrow sabios-gradient"></div></div>
+                            <div class="error-field tipotalle-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                            <input class="input-field" type="hidden" name="id_estado" id="id_estado" value="<?= (isset($this->estado) ? $this->estado : "1") ?>"/>
+                        </div>                
+                        <div class="sabios-row">                
+                            <div class="sabios-row select-container">
+                                <div class="sabios-input sabios-option first-option" value="0">Pendiente de Revisi&oacute;n</div> 
+                                <div class="sabios-input sabios-option first-option" value="1">Aceptado</div> 
+                                <div class="sabios-input sabios-option first-option" value="0">Rechazado</div> 
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <div class="sabios-row label"><label>Viajante Asignado</label></div>
+                <div class="sabios-row">
+                    <div class="viajante">
+                        <div class="sabios-row"><div class="sabios-select sabios-input" id="talletipo"><span>Cualquiera</span><div class="down-arrow sabios-gradient"></div></div>
+                            <div class="error-field tipotalle-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                            <input class="input-field" type="hidden" name="viajante_id" id="viajante_id" value="<?= (isset($this->viajante_id) ? $this->viajante_id : "0") ?>"/>
+                        </div>                
+                        <div class="sabios-row">                
+                            <div class="sabios-row select-container">
+                                <div class="sabios-input sabios-option first-option" value="0">Cualquiera</div> 
+                                <?php foreach ($this->vendedores as $viajante) : ?>
+                                    <div class="sabios-input sabios-option first-option" value="<?= $viajante->id ?>"><?= $viajante->nombre ?></div> 
+                                <?php endforeach; ?>                                
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <div class="sabios-row">
+                    <input class="sabios-submit small-submit" type="button" id="viajantes" value="Viajantes" name="viajantes">
+                </div>
+                <div class="sabios-row label"><label>Tipo de Cliente</label></div>
+                <div class="sabios-row">
+                    <div class="cliente-tipo">
+                        <div class="sabios-row"><div class="sabios-select sabios-input" id="talletipo"><span>Seleccione un Tipo</span><div class="down-arrow sabios-gradient"></div></div>
+                            <div class="error-field tipocliente-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                            <input class="input-field" type="hidden" name="tipo_cliente_id" id="tipo_cliente_id" value="<?= (isset($this->tipo_cliente_id) ? $this->tipo_cliente_id : "0") ?>"/>
+                        </div>                
+                        <div class="sabios-row">                
+                            <div class="sabios-row select-container">
+                                <div class="sabios-input sabios-option first-option" value="0">Seleccione un Tipo</div> 
+                                <?php foreach ($this->clientesTipo as $ct) : ?>
+                                    <div class="sabios-input sabios-option first-option" value="<?= $ct->id ?>"><?= $ct->nombre ?></div> 
+                                <?php endforeach; ?>                               
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <div class="sabios-row">
+                    <a href="/clientetipo/list"><input class="sabios-submit small-submit" type="button" value="Tipos de clientes"></a>
+                </div>                
+                <div class="sabios-row label"><label>Telefono 1</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Telefono 1" type="text" name="telefono1" id="telefono1" value="<?= $this->telefono1 ?>"/>
+                    <div class="error-field telefono1-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Tel&eacute;fono Inv&aacute;lido<br></span><span class="white">Por favor ingrese un Tel&eacute;fono v&aacute;lido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Telefono 2</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Telefono 2" type="text" name="telefono2" id="telefono2" value="<?= $this->telefono2 ?>"/>
+                    <div class="error-field telefono2-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Tel&eacute;fono Inv&aacute;lido<br></span><span class="white">Por favor ingrese un Tel&eacute;fono v&aacute;lido</span></div></div>
+                </div>
+            </div>
+            <div id="tabs-2">
+                <div class="sabios-row label"><label>Usuario Login</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="login" type="text" name="email" id="email" value="<?= $this->email ?>"/>
+                    <div class="error-field email-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Email Inv&aacute;lido<br></span><span class="white">Por favor ingrese un email v&aacute;lido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Password</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="password" type="text" name="password" id="password" value="<?= $this->password ?>"/>
+                    <div class="error-field password-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Contrase&ntilde;a Inv&aacute;lida<br></span><span class="white">Por favor ingrese una contrase&ntilde;a v&aacute;lida</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Deshabilitar acceso al sistema de pedidos? </label></div>
+                <div class="sabios-row">
+                    <label>Si</label><input type="radio" value="s" name="acceso" id="acceso">
+                    <label>No</label><input type="radio" value="n" name="acceso" id="acceso" checked="checked" >
+                </div> 
+
+            </div>
+            <div id="tabs-3">
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row label"><label>Contacto para Avisos</label></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row label"><label>SMS 1</label></div>
+
+                <div class="sabios-row"><input class="sabios-input" placeholder="SMS 1" type="text" name="sms1" id="sms1" value="<?= $this->sms1 ?>"/>
+                    <div class="error-field sms1-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>SMS 2</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="SMS 2" type="text" name="sms2" id="sms2" value="<?= $this->sms2 ?>"/>
+                    <div class="error-field sms2-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>SMS 3</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="SMS 3" type="text" name="sms3" id="sms3" value="<?= $this->sms3 ?>"/>
+                    <div class="error-field sms3-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Email 1</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Email 1" type="text" name="email1" id="email1" value="<?= $this->email1 ?>"/>
+                    <div class="error-field email1-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Campo Obligatorio<br></span><span class="white">Por favor ingrese un Email v&aacute;lido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Email 2</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Email 2" type="text" name="email2" id="email2" value="<?= $this->email2 ?>"/>
+                    <div class="error-field email2-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Email Inv&aacute;lido<br></span><span class="white">Por favor ingrese un email v&aacute;lido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Email 3</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Email 3" type="text" name="email3" id="email3" value="<?= $this->email3 ?>"/>
+                    <div class="error-field email3-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Email Inv&aacute;lido<br></span><span class="white">Por favor ingrese un email v&aacute;lido</span></div></div>
+                </div>
+            </div>
+            <div id="tabs-4">
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row label"><label>Datos para env&iacute;os de pedidos</label></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>                  
+                <div class="sabios-row label"><label>Recibe</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Nombre / Nombres" type="text" name="enviar_nombres" id="enviar_nombres" value="<?= $this->enviar_nombres ?>"/>
+                    <div class="error-field enviar_nombres-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>  
+                <div class="sabios-row label"><label>Direcci&oacute;n</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Calle Número CP Ciudad Pais / Lugar de Retiro" type="text" name="direccion_envio" id="direccion_envio" value="<?= $this->direccion_envio ?>"/>
+                    <div class="error-field direccion_envio-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>                
+                <div class="sabios-row label"><label>Empresa de Transporte de Preferencia</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Empresa / Empresas" type="text" name="empresa_preferencia" id="empresa_preferencia" value="<?= $this->empresa_preferencia ?>"/>
+                    <div class="error-field empresa_preferencia-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>                
+                <div class="sabios-row label"><label>Información sobre Seguro</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Porcentaje de valor asegurado (vacio = no)" type="text" name="porcentaje_asegurado" id="porcentaje_asegurado" value="<?= $this->porcentaje_asegurado ?>"/>
+                    <div class="error-field porcentaje_asegurado-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>                
+
+            </div>
+            <div id="tabs-5"> 
+                <div id="personal_container">
+                    <div class="personal" id="personal_1">
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row label personal-label"><label>Personal <span>1</span></label></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row label"><label>Nombre</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Nombre" type="text" name="personal[1][nombre]" value=""/>
+                        </div>                
+                        <div class="sabios-row label"><label>Cargo</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Cargo Descripción" type="text" name="personal[1][cargo]" value=""/>
+                        </div>                
+                        <div class="sabios-row label"><label>Telefono 1</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Número" type="text" name="personal[1][telefono1]" value=""/>
+                        </div>                
+                        <div class="sabios-row label"><label>Telefono 2</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Número" type="text" name="personal[1][telefono2]" value=""/>
+                        </div>                
+                        <div class="sabios-row label"><label>Email 1</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Email" type="text" name="personal[1][email1]" value=""/>
+                        </div>                
+                        <div class="sabios-row label"><label>Email 2</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Email" type="text" name="personal[1][email2]" value=""/>
+                        </div>                
+                        <div class="sabios-row label cumple-label"><label>Cumplea&ntilde;os</label></div>
+                        <div class="sabios-row label small-label"><label>Dia</label><label>Mes</label></div>
+                        <div class="sabios-row">
+                            <input class="sabios-input nac" type="text" name="personal[1][dia_nacimiento]" value=""/>
+                            <input class="sabios-input nac" type="text" name="personal[1][mes_nacimiento]" value=""/>
+                        </div> 
+                    </div>
+                </div>
+                <div class="sabios-row">
+                    <input id="agregar_personal" class="sabios-submit small-submit" type="button" value="Agregar Personal">
+                </div> 
+                <div class="sabios-row">
+                    <input id="borrar_personal" class="sabios-submit small-submit" type="button" value="Borrar Personal">
+                </div> 
+            </div>
+            <div id="tabs-6">
+                <div id="sucursal_container">
+                    <div class="sucursal" id="sucursal_1">
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row label sucursal-label"><label>Sucursal <span>1</span></label></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>    
+                        <div class="sabios-row label"><label>Nombre</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Nombre" type="text" name="sucursal[1][nombre]" value=""/>
+                        </div>                         
+                        <div class="sabios-row label"><label>Encargado / Contacto</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Nombre/s" type="text" name="sucursal[1][encargados]" value=""/>
+                        </div>                         
+                        <div class="sabios-row label"><label>Direcci&oacute;n</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Nombre/s" type="text" name="sucursal[1][direccion]" value=""/>
+                        </div>                         
+                        <div class="sabios-row label"><label>Tel&eacute;fono 1</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese N&uacute;mero" type="text" name="sucursal[1][telefono1]" value=""/>
+                        </div>                         
+                        <div class="sabios-row label"><label>Tel&eacute;fono 2</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese N&uacute;mero" type="text" name="sucursal[1][telefono2]"value=""/>
+                        </div>
+                        <div class="sabios-row"><textarea rows="5" class="sabios-input" type="text" name="sucursal[1][observaciones]"></textarea>
+                        </div>
+                    </div>
+                    <div class="sabios-row">
+                        <input id="agregar_sucursal" class="sabios-submit small-submit" type="button" value="Agregar Sucursal">
+                    </div> 
+                    <div class="sabios-row">
+                        <input id="borrar_sucursal" class="sabios-submit small-submit" type="button" value="Borrar Sucursal">
+                    </div>                      
+                </div>
+            </div>
+            <div id="tabs-7">
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row label"><label>Datos de Facturaci&oacute;n</label></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>                
+                <div class="sabios-row label"><label>Razon Social</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Razon Social" type="text" name="razon_social" id="razon_social" value="<?= $this->razon_social ?>"/>
+                    <div class="error-field razon_social-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor ingrese su Nombre</span></div></div>
+                </div>                
+                <div class="sabios-row label"><label>Cuit</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Cuit" type="text" name="cuit" id="cuit" value="<?= $this->cuit ?>"/>
+                    <div class="error-field cuit-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor ingrese su Nombre</span></div></div>
+                </div>                
+                <div class="sabios-row label"><label>Tipo de Contribuidor</label></div>
+                <div class="sabios-row">
+                    <div class="tipo-iva">
+                        <div class="sabios-row"><div class="sabios-select sabios-input" id="select-tipo_contribucion"><span>Elija una Opci&oacute;n</span><div class="down-arrow sabios-gradient"></div></div>
+                            <div class="error-field tipo_contribucion-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                            <input class="input-field" type="hidden" name="tipo_contribucion" id="tipo_contribucion" value="<?= (isset($this->tipo_contribucion) ? $this->tipo_contribucion : "0") ?>"/>
+                        </div>                
+                        <div class="sabios-row">                
+                            <div class="sabios-row select-container">
+                                <div class="sabios-input sabios-option first-option" value="0">Elija una Opci&oacute;n</div> 
+                                <div class="sabios-input sabios-option first-option" value="Consumidor Final">Consumidor Final</div> 
+                                <div class="sabios-input sabios-option first-option" value="Excento">Excento</div> 
+                                <div class="sabios-input sabios-option first-option" value="No Responsable">No Responsable</div> 
+                                <div class="sabios-input sabios-option first-option" value="Responsable Inscripto">Responsable Inscripto</div> 
+                                <div class="sabios-input sabios-option first-option" value="Responsable Monotributo">Responsable Monotributo</div> 
+                            </div>
+                        </div>
+                    </div>  
+                </div>                
+                <div class="sabios-row label"><label>Direcci&oacute;n de Facturaci&oacute;n</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Dirección" type="text" name="direccion_facturacion" id="direccion_facturacion" value="<?= $this->direccion_facturacion ?>"/>
+                    <div class="error-field direccion_facturacion-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor ingrese su Nombre</span></div></div>
+                </div>  
+                <div class="sabios-row label"><label>Observaciones</label></div>
+                <div class="sabios-row"><textarea class="sabios-input" type="text" name="observaciones" id="observaciones"><?= $this->observaciones ?></textarea>
+                    <div class="error-field observaciones-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor ingrese su Nombre</span></div></div>
+                </div>  
+
+            </div>
+
+        </div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row">
+            <input class="sabios-submit" type="submit" id="enviar" value="Guardar" name="enviar">
+        </div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+
+    </form>
+</div>
+<div class="hide" id="clones">
+    <div id="personal-template" style="display: none;">
+        <div class="personal" id="personal_#">
+            <div class="sabios-row"></div>
+            <div class="sabios-row"></div>
+            <div class="sabios-row label personal-label"><label>Personal <span>1</span></label></div>
+            <div class="sabios-row"></div>
+            <div class="sabios-row"></div>
+            <div class="sabios-row"></div>
+            <div class="sabios-row label"><label>Nombre</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Nombre" type="text" name="personal[#][nombre]" value=""/>
+            </div>                
+            <div class="sabios-row label"><label>Cargo</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Cargo Descripción" type="text" name="personal[#][cargo]" value=""/>
+            </div>                
+            <div class="sabios-row label"><label>Telefono 1</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Número" type="text" name="personal[#][telefono1]" value=""/>
+            </div>                
+            <div class="sabios-row label"><label>Telefono 2</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Número" type="text" name="personal[#][telefono2]" value=""/>
+            </div>                
+            <div class="sabios-row label"><label>Email 1</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Email" type="text" name="personal[#][email1]" value=""/>
+            </div>                
+            <div class="sabios-row label"><label>Email 2</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Email" type="text" name="personal[#][email2]" value=""/>
+            </div>                
+            <div class="sabios-row label cumple-label"><label>Cumplea&ntilde;os</label></div>
+            <div class="sabios-row label small-label"><label>Dia</label><label>Mes</label></div>
+            <div class="sabios-row">
+                <input class="sabios-input nac" type="text" name="personal[#][dia_nacimiento]" id="personal[#][dia_nacimiento]" value=""/>
+                <input class="sabios-input nac" type="text" name="personal[#][mes_nacimiento]" id="personal[#][mes_nacimiento]" value=""/>
+            </div> 
+        </div>
+    </div>
+    <div id="sucursal-template" style="display: none;">
+        <div class="sucursal" id="sucursal_#">
+            <div class="sabios-row"></div>
+            <div class="sabios-row"></div>
+            <div class="sabios-row label sucursal-label"><label>Sucursal <span>1</span></label></div>
+            <div class="sabios-row"></div>
+            <div class="sabios-row"></div>
+            <div class="sabios-row"></div>    
+            <div class="sabios-row label"><label>Nombre</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Nombre" type="text" name="sucursal[#][nombre]" value=""/>
+            </div>                         
+            <div class="sabios-row label"><label>Encargado / Contacto</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Nombre/s" type="text" name="sucursal[#][encargados]" value=""/>
+            </div>                         
+            <div class="sabios-row label"><label>Direcci&oacute;n</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Nombre/s" type="text" name="sucursal[#][direccion]" value=""/>
+            </div>                         
+            <div class="sabios-row label"><label>Tel&eacute;fono 1</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese N&uacute;mero" type="text" name="sucursal[#][telefono1]" value=""/>
+            </div>                         
+            <div class="sabios-row label"><label>Tel&eacute;fono 2</label></div>
+            <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese N&uacute;mero" type="text" name="sucursal[#][telefono2]"value=""/>
+            </div>
+            <div class="sabios-row"><textarea rows="5" class="sabios-input" type="text" name="sucursal[#][observaciones]"></textarea>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--table width="700" cellspacing="0" cellpadding="0" border="0" style="margin-left:10px;">
+    <tbody>
+        <tr>
+            <td width="334">
+                <strong>
+                    <br>
+                    <input type="text" maxlength="100" value="" id="nombre" name="nombre" size="30" style="float:right; margin-right:20px;">
+                    Nombre Comercial: 
+                </strong>
+
+            </td>
+            <td>
+                <br>
+                <select style="width:180px; float:right;margin-right:20px;" id="id_estado" name="id_estado">
+                    <option selected="selected" value="0">
+                        Pendiente de Revisión
+                    </option>
+                    <option value="1" selected>
+                        Aceptado
+                    </option>
+                    <option value="2">
+                        Rechazado
+                    </option>
+                </select>
+                <strong>
+                    Estado: 
+                </strong>                    
+            </td>
+        </tr>
+        <tr>
+            <td width="334">
+                <br>
+                <select style="width:180px; float:right;margin-right:20px;" id="viajante_id" name="viajante_id">
+                    <option value="0" selected>
+                        Cualquiera
+                    </option>
+
+                </select>
+                <strong>
+                    Viajante asignado: 
+                </strong>
+            </td>
+            <td>
+                <br>
+
+                <select style="width:180px; float:right;margin-right:20px;" name="tipo_cliente_id" id="tipo_cliente_id">
+                    <option value="0">
+                        Seleccione un Tipo
+                    </option>
+
+                </select>
+                <strong>
+                    Tipo de Cliente 
+                    <br>
+                    (Lista de precios): 
+                </strong> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+                <input type="text" maxlength="100" value="" size="30" style="float:right; margin-right:20px;" id="telefono1" name="telefono1">
+                <strong>
+                    Teléfono 1: 
+                </strong>
+                <br>
+            </td>
+            <td>
+                <br>
+                <input type="text" maxlength="100" value="" size="30" style="float:right; margin-right:20px;" id="telefono2" name="telefono2">
+                <strong>
+                    Teléfono 2: 
+                </strong>
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+                <strong>
+                    <input type="text" maxlength="100" value="" size="30" style="float:right; margin-right:20px;" id="email" name="email">
+                    Usuario Login: 
+                </strong>
+                <br>
+            </td>
+            <td>
+                <br>
+                <strong>
+                    <input type="text" maxlength="100" size="30" style="float:right; margin-right:20px;" id="password" name="password">
+                    Password: 
+                </strong>
+                <br>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<fieldset>
+    <legend style="color:#006699;">
+        Contacto para Avisos
+    </legend>
+    <table width="700" cellspacing="0" cellpadding="0" border="0" style="margin-left:10px;">
+        <tbody>
+            <tr>
+                <td>
+                    SMS 1:
+                    <br>
+                    <input type="text" maxlength="20" value="" size="30" id="sms1" name="sms1">
+                </td>
+                <td>
+                    SMS 2:
+                    <br>
+                    <input type="text" maxlength="20" value="" size="30" id="sms2" name="sms2">
+                </td>
+                <td>
+                    SMS 3:
+                    <br>
+                    <input type="text" maxlength="20" value="" size="30" id="sms3" name="sms3">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    E-mail 1:
+                    <br>
+                    <input type="text" maxlength="100" value="" size="30" id="email1" name="email1">
+                </td>
+                <td>
+                    E-mail 2:
+                    <br>
+                    <input type="text" maxlength="100" value="" size="30" id="email2" name="email2">
+                </td>
+                <td>
+                    E-mail 3:
+                    <br>
+                    <input type="text" maxlength="100" value="" size="30" id="email3" name="email3">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</fieldset>
+<fieldset>
+    <legend style="color:#006699;">
+        Datos para envios de mercaderia
+    </legend>
+    <table width="700" cellspacing="15" cellpadding="0" border="0">
+        <tbody>
+            <tr>
+                <td width="422" align="right">
+                    <strong>
+                        Empresa/s de Preferencia:
+                        <input type="text" maxlength="255" value="" size="35" id="empresa_preferencia" name="empresa_preferencia">
+                    </strong>
+                </td>
+                <td width="233" align="right">
+                    <strong>
+                        Asegurado:
+                    </strong>
+                    Si 
+                    <input type="radio" value="Y" name="asegurado">
+                    No
+                    <input type="radio" value="N" name="asegurado">
+                    <input type="text" maxlength="20" size="2" value="" id="porcentaje_asegurado" name="porcentaje_asegurado">
+                    %
+                </td>
+            </tr>
+            <tr>
+                <td align="right" colspan="2">
+                    <strong>
+                        Dirección para el envio:
+                        <input type="text" maxlength="255" size="80" value="" id="direccion_envio" name="direccion_envio">
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" colspan="2">
+                    <strong>
+                        Enviar a nombre/s de:
+                        <input type="text" maxlength="255" size="80" value="" id="enviar_nombres" name="enviar_nombres">
+                    </strong>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+<br>
+
+<fieldset>
+    <legend style="color:#006699;">
+        Comunicaciones
+    </legend>
+    No hay comentarios 
+    <span onclick="abrir(591)" style="cursor:pointer;">
+        (ver comunicacioes anteriores / Nueva comunicación)
+    </span>
+</fieldset>
+<div id="personal">
+    <span id="span_personal">
+        <fieldset>
+            <legend>Personal</legend>                    
+            <table style="border-bottom:1px solid #CCCCCC;" border="0" cellpadding="0" cellspacing="10" width="693">
+                <tbody>
+                    <tr>
+                        <td align="right" width="319">
+                            <strong>
+                                Nombre y Apellido:				  
+                                <input name="personal_id[]" value="{{id}}" type="hidden">
+                                <input name="personal_nombre[]" id="personal_nombre[]" value="" size="25" maxlength="100" type="text">
+                            </strong>
+                        </td>
+                        <td align="right" width="304">
+                            <strong>
+                                Cargo:				  
+                                <select name="personal_cargo[]" style="width:180px;">
+                                    <option value="0">
+                                        Seleccione un Cargo
+                                    </option>
+                                    {{#viajantes}}
+                                    <option value=""></option>
+                                    {{/viajantes}} 
+                                </select>
+                            </strong>
+                        </td>
+                        <td align="right" width="30">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <strong>
+                                Apodo:				  
+                                <input name="personal_apodo[]" value="" size="25" maxlength="100" type="text">
+                            </strong>
+                        </td>
+                        <td align="right">
+                            <strong>
+                                Fecha de Nacimiento:				  
+                                <input name="personal_fecha[]" id="personal_fecha[]" value="" size="21" maxlength="100" type="text">
+                            </strong>
+                        </td>
+                        <td align="right">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <strong>
+                                Tel&eacute;ono Fijo:				  
+                                <input name="personal_tel1[]" value="" size="25" maxlength="100" type="text">
+
+                            </strong>
+                        </td>
+
+                        <td align="right">
+                            <strong>
+                                Tel&eacute;fono Movil:				  
+                                <input name="personal_tel2[]" value="" size="25" maxlength="100" type="text">
+                            </strong>
+                        </td>
+                        <td align="right">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <strong>
+                                E-mail:				  
+                                <input name="personal_email1[]" value="" size="25" maxlength="100" type="text">
+                            </strong>
+                        </td>
+                        <td colspan="2" align="right">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <strong>
+                                Observaciones:
+                            </strong>
+                            <br>
+
+                            <textarea name="personal_observaciones[]" cols="75" rows="4">
+                            </textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </span>
+
+</div>
+<input name="addpersonal" id="addpersonal" value="Nuevo" type="button">
+<input name="delpersonal" id="delpersonal" value="Borrar" type="button">
+
+<br>
+<div id="sucursal">
+    <span id="span_sucursal">
+        <fieldset>
+            <legend style="color:#006699;">
+                Sucursales
+            </legend>
+            <br>
+            <span id="span_sucursal_1">
+                <table width="684" cellspacing="6" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <table width="667" cellspacing="0" cellpadding="" border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    Número:                            
+                                                    <input type="hidden" value="" ame="sucursal_id[]">
+                                                    <input type="text" maxlength="100" size="20" value="" name="sucursal_nombre[]">
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    Pcia:
+                                                </strong>
+                                                <input type="hidden" value="0" name="sucursal_id_provincia_hidden[]">
+                                                <select style="width: 180px;" id="pais" name="pais">
+                                                    <option value="0">
+                                                        Seleccione un Pais
+                                                    </option>
+                                                </select>       
+                                                <select style="width: 180px;" id="sucursal_id_provincia[]" name="sucursal_id_provincia[]">
+
+                                                    <option value="0">
+                                                        Seleccione una Provincia
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td align="right">
+                                                <strong>
+                                                    Localidad:                           
+                                                    <input type="text" maxlength="100" size="18" value="" name="sucursal_localidad[]">
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="" id="sucursal_renglon1_1">
+                            <td align="right">
+                                <strong>
+                                    Dirección:                      
+                                    <input type="text" maxlength="100" size="35" value="" name="sucursal_direccion[]">
+                                </strong>
+                            </td>
+                            <td align="right">
+                                <strong>
+                                    Encargados:                      
+                                    <input type="text" maxlength="100" size="35" value="" name="sucursal_encargados[]">
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr style="" id="sucursal_renglon2_1">
+                            <td align="right">
+                                <strong>
+                                    Teléfono 1:                      
+                                    <input type="text" maxlength="100" size="35" value="" name="sucursal_tel1[]">
+                                </strong>
+                            </td>
+                            <td align="right">
+                                <strong>
+                                    Teléfono 2:                      
+                                    <input type="text" maxlength="100" size="35" value="" name="sucursal_tel2[]">
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr style="" id="sucursal_renglon3_1">
+                            <td colspan="2">
+                                <strong>
+                                    Observaciones:
+                                </strong>
+                                <textarea rows="3" cols="70" name="sucursal_observaciones[]"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        </fieldset>
+    </span>
+
+</div>
+<input name="addsucursal" id="addsucursal" value="Nuevo" type="button">
+<input name="delsucursal" id="delsucursal" value="Borrar" type="button">
+<br>        
+<fieldset>
+    <legend style="color:#006699;">
+        Datos de Facturación
+    </legend>
+    <table width="700" cellspacing="15" cellpadding="0" border="0">
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div style="float:left; width:233px;">
+                        <strong>
+                            Razón Social:
+                            <br>
+                            <input type="text" maxlength="100" size="30" value="" id="razon_social" name="razon_social">
+                        </strong>
+                    </div>
+                    <div style="float:left; width:233px;">
+                        <strong>
+                            Tipo de Contribución: 
+                            <br>
+                            <select style="width:190px;" name="id_responsabilidad" id="id_responsabilidad">
+                                <option value="0">
+                                    Seleccione un Tipo
+                                </option>
+                                <option selected="selected" value="4">
+                                    Consumidor Final
+                                </option>
+                                <option value="2">
+                                    Excento
+                                </option>
+                                <option value="3">
+                                    No Responsable
+                                </option>
+                                <option value="1">
+                                    Responsable Inscripto
+                                </option>
+                                <option value="5">
+                                    Responsable Monotributista
+                                </option>
+                            </select>
+                        </strong>
+                    </div>
+                    <div style="float:left; width:203px;">
+                        <strong>
+                            Cuit: 
+                            <br>
+                            <input type="text" maxlength="100" size="20" value="" id="cuit" name="cuit">
+                        </strong>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="326" align="right">
+                    <strong>
+                        País:
+                        <select style="width:200px;" name="id_pais" id="id_pais">
+                            <option value="0">
+                                Seleccione un País
+                            </option>
+                            <option selected="selected" value="1">
+                                Argentina (AR)
+                            </option>
+                            <option value="7">
+                                Brasil (BR)
+                            </option>
+                            <option value="3">
+                                Canada (CA)
+                            </option>
+                            <option value="4">
+                                Chile (CL)
+                            </option>
+                            <option value="5">
+                                Costa Rica (CR)
+                            </option>
+                            <option value="2">
+                                España (ES)
+                            </option>
+                            <option value="8">
+                                Mexico (MX)
+                            </option>
+                            <option value="6">
+                                Uruguay (UR)
+                            </option>
+                        </select>
+                    </strong>
+                </td>
+                <td width="344" align="right">
+                    <strong>
+                        Provincia: 
+                    </strong>
+
+                    <select style="width:200px;" name="id_provincia">
+                        <option value="0">
+                            Seleccione una Provincia
+                        </option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <strong>
+                        Localidad:
+                        <input type="text" maxlength="100" size="30" value="" id="localidad" name="localidad">
+                    </strong>
+                </td>
+                <td align="right">
+                    <strong>
+                        Dirección:
+                        <input type="text" maxlength="100" size="30" value="" id="direccion" name="direccion">
+                    </strong>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+<strong>
+    Deshabilitar acceso al sistema de pedidos? 
+</strong>
+<br>
+Si
+<input type="radio" value="s" name="acceso" id="acceso">
+No
+<input type="radio" value="n" name="acceso" id="acceso" checked="checked" >
+<br>
+<div align="center">
+    <br>
+    <input type="submit" id="enviar" value="Guardar" name="enviar">
+    <br>
+</div>
+</form>
+<br>
+</div>
+<div id="templates" style="display:none">
+<div id="sucursal">
+<span id="span_sucursal">
+    <fieldset>
+        <legend style="color:#006699;">
+            Sucursales
+        </legend>
+        <br>
+        <span id="span_sucursal_1">
+            <table width="684" cellspacing="6" cellpadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <table width="667" cellspacing="0" cellpadding="" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                Número:                            
+                                                <input type="hidden" value="" ame="sucursal_id[]">
+                                                <input type="text" maxlength="100" size="20" value="" name="sucursal_nombre[]">
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                Pcia:
+                                            </strong>
+                                            <input type="hidden" value="0" name="sucursal_id_provincia_hidden[]">
+                                            <select style="width: 180px;" id="pais" name="pais">
+                                                <option value="0">
+                                                    Seleccione un Pais
+                                                </option>
+                                            </select>       
+                                            <select style="width: 180px;" id="sucursal_id_provincia[]" name="sucursal_id_provincia[]">
+
+                                                <option value="0">
+                                                    Seleccione una Provincia
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td align="right">
+                                            <strong>
+                                                Localidad:                           
+                                                <input type="text" maxlength="100" size="18" value="" name="sucursal_localidad[]">
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="" id="sucursal_renglon1_1">
+                        <td align="right">
+                            <strong>
+                                Dirección:                      
+                                <input type="text" maxlength="100" size="35" value="" name="sucursal_direccion[]">
+                            </strong>
+                        </td>
+                        <td align="right">
+                            <strong>
+                                Encargados:                      
+                                <input type="text" maxlength="100" size="35" value="" name="sucursal_encargados[]">
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr style="" id="sucursal_renglon2_1">
+                        <td align="right">
+                            <strong>
+                                Teléfono 1:                      
+                                <input type="text" maxlength="100" size="35" value="" name="sucursal_tel1[]">
+                            </strong>
+                        </td>
+                        <td align="right">
+                            <strong>
+                                Teléfono 2:                      
+                                <input type="text" maxlength="100" size="35" value="" name="sucursal_tel2[]">
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr style="" id="sucursal_renglon3_1">
+                        <td colspan="2">
+                            <strong>
+                                Observaciones:
+                            </strong>
+                            <textarea rows="3" cols="70" name="sucursal_observaciones[]"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </fieldset>
+</span>
+
+</div> 
+<div id="personal">
+<span id="span_personal">
+    <fieldset>
+        <legend>Personal</legend>                    
+        <table style="border-bottom:1px solid #CCCCCC;" border="0" cellpadding="0" cellspacing="10" width="693">
+            <tbody>
+                <tr>
+                    <td align="right" width="319">
+                        <strong>
+                            Nombre y Apellido:				  
+                            <input name="personal_id[]" value="{{id}}" type="hidden">
+                            <input name="personal_nombre[]" id="personal_nombre[]" value="" size="25" maxlength="100" type="text">
+                        </strong>
+                    </td>
+                    <td align="right" width="304">
+                        <strong>
+                            Cargo:				  
+                            <select name="personal_cargo[]" style="width:180px;">
+                                <option value="0">
+                                    Seleccione un Cargo
+                                </option>
+                                {{#viajantes}}
+                                <option value=""></option>
+                                {{/viajantes}} 
+                            </select>
+                        </strong>
+                    </td>
+                    <td align="right" width="30">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <strong>
+                            Apodo:				  
+                            <input name="personal_apodo[]" value="" size="25" maxlength="100" type="text">
+                        </strong>
+                    </td>
+                    <td align="right">
+                        <strong>
+                            Fecha de Nacimiento:				  
+                            <input name="personal_fecha[]" id="personal_fecha[]" value="" size="21" maxlength="100" type="text">
+                        </strong>
+                    </td>
+                    <td align="right">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <strong>
+                            Tel&eacute;ono Fijo:				  
+                            <input name="personal_tel1[]" value="" size="25" maxlength="100" type="text">
+
+                        </strong>
+                    </td>
+
+                    <td align="right">
+                        <strong>
+                            Tel&eacute;fono Movil:				  
+                            <input name="personal_tel2[]" value="" size="25" maxlength="100" type="text">
+                        </strong>
+                    </td>
+                    <td align="right">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <strong>
+                            E-mail:				  
+                            <input name="personal_email1[]" value="" size="25" maxlength="100" type="text">
+                        </strong>
+                    </td>
+                    <td colspan="2" align="right">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <strong>
+                            Observaciones:
+                        </strong>
+                        <br>
+
+                        <textarea name="personal_observaciones[]" cols="75" rows="4">
+                        </textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</span>
+</div>    
+</div-->

@@ -1,0 +1,53 @@
+<?php
+
+echo $this->doctype();
+
+?>
+<html>
+	<head>
+	
+	<?php
+	echo $this->headTitle()?>
+	
+	<?php
+	echo $this->headMeta()?>
+	
+	<?php
+	echo $this->headScript()?>
+	
+	<?php
+	echo $this->headLink()?>
+	
+	<?php
+	echo $this->headStyle()?>
+	
+	<?php 
+	if (count($this->messages)) {
+		echo "
+			<script>
+			$(document).ready(function(){
+		    	mensajeModal('Mensaje','".$this->messages[0]."', 'error');
+			});
+			</script>
+	";
+	}
+	?>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+	
+	</head>
+	<body class="_showgrid">
+	<center>
+		<div class="wrapper2">
+			<div align="center" class="main rounded-main" id="main">                
+					<?php 
+	                	echo $this->layout()->content;
+	                ?>
+	        </div>
+        </div>
+     </center>
+     <div id="dialog" title="Basic dialog"><div id="innerDialog"></div></div>
+     <div id="dialog-confirm" title="Seguro de Borrar?" style="display:none">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Este Item ser&aacute; borrado desea continuar?</p>
+</div>
+	</body>
+</html>

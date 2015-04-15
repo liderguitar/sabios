@@ -1,0 +1,52 @@
+<?php
+
+$this->headScript()->offsetSetFile(605, PUBLIC_FOLDER . '/js/usuario.js');
+$this->headLink()->offsetSetStylesheet(900, PUBLIC_FOLDER . '/css/table.css');
+
+?>
+
+<div class="rounded-container">
+<?= $this->filterForm;?>
+<table summary="Meeting Results" id="gradient-style">
+	<thead>
+	<tr>
+		<th	scope="col"></th>
+		<th scope="col"><a href="">Id</a></th>
+		<th scope="col"><a href="">Nick</a></th>
+		<th scope="col"><a href="">Actualizado</a></th>
+		<th scope="col" class="center"><a href="">Verificado</a></th>
+		<th scope="col" class="center"><a href="">Bloqueado</a></th>
+		<th scope="col" class="center"><a href="">Borrar</a></th>	
+		<th scope="col" class="center"><a href="">Editar</a></th>	
+		
+	</thead>	
+	<tfoot>
+		<tr>
+			<td colspan="10">Listado de Libros. Usted puede editar, borrar cualquier item.</td>
+		</tr>
+	</tfoot>		
+		<?php foreach($this->objects as $articulo){?>
+		<tr>
+			<td></td>
+			<td><a href=""><?= $articulo->id ?></a></td>
+			<td><a href=""><?= utf8_encode($articulo->nick) ?></a></td>
+			<td><a href=""><?= $articulo->Post->fechaCreacion ?></a></td>
+			<td class="center"><a href=""><?= $articulo->blockeado == 'N' ? 'Y' : 'N' ?></a></td>
+			<td class="center"><span class="ui-icon center  <?= $articulo->Post->blockUsuarioId == null ? "ui-icon-unlocked" : "ui-icon ui-icon-locked" ?>"></span></td>
+			<td class="center"><a href="#" onClick="confirmDelete('<?= $articulo->id ?>');"><span class="ui-icon center ui-icon-closethick"></span></a></td>
+			<td class="center"><a href="/admin/usuario/edit/<?= $this->page ?>/<?= $articulo->id?>"><span class="ui-icon center ui-icon-pencil"></span></a></td>
+
+		</tr>
+		<?php }?>
+
+	</table>
+	<?php
+/*
+* Print the pagination of type , drop down or search type or of your choice.
+*/
+echo $this->paginationControl($this->objects,
+                                    'Sliding',
+                                    '/partials/my_pagination_control.phtml',
+									array('object' => $this->object)); ?>
+</div>
+<?php echo $this->partial( 'partials/dialog.phtml', array());?>

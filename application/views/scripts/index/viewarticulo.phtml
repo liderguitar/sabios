@@ -1,0 +1,26 @@
+<?php 
+$this->headScript()->offsetSetFile(533, PUBLIC_FOLDER .  '/js/frontpage.js');
+$this->headScript()->offsetSetFile(533, PUBLIC_FOLDER .  '/js/comentarioFrontpage.js');
+
+?>
+<div>
+	<div class="left-column">
+		<div class="resumen-art">
+			<h1><?=utf8_encode(strtoupper(stripslashes ( $this->articulo->titulo)))?></h1>
+		</div>	
+		<div id="foto-description" class="foto-description">
+			<div class="foto-view-container"><img width="200px" src="<?= PUBLIC_FOLDER . "/files/" . $this->articulo->foto ?>"/></div>
+
+		</div>
+		<div class="descripcion-articulo">
+			<p><?=utf8_encode(str_replace("\n", "<br/>", $this->articulo->contenido))?></p>
+		</div>		
+	</div>
+
+    <?php echo $this->partial(  '/partials/articlesColumn.phtml',
+                                array(  'articles' => $this->articles, 
+                                        'articleId' => $this->articulo->id
+                                )
+                );
+    ?>
+</div>

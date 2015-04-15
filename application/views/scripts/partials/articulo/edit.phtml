@@ -1,0 +1,68 @@
+<?php
+$this->headScript()->offsetSetFile(605, PUBLIC_FOLDER . '/js/articulo-add.js');
+?>
+<div class="rounded-container">
+<h1>Editar Art&iacute;culo</h1>
+	<form action="" method="post">
+		<div class="form-container">
+				<input type="hidden" id="page" value="<?= $this->page ?>"/>
+				<?=$this->form->id;?>
+				<?=$this->form->postId;?>	
+				<?=$this->form->fotoname;?>				
+				<div class="line-fields">
+					<div class="label">Titulo:</div>
+					<div class="field"><?= stripslashes ( $this->form->titulo)?></div>
+				</div>
+				<div class="line-fields">
+					<div class="label">Subtitulo:</div>
+					<div class="field"><?=$this->form->subtitulo ?></div>
+				</div>
+				<div class="line-fields">
+					<div class="label">Categor&iacute;a:</div>
+					<div class="field"><?=$this->form->categoria ?></div>
+				
+				</div>	
+				<div class="line-fields">
+					<div class="label">Foto:</div>
+					<div id="container-0" class="foto-container rounded first">
+					    <div class="close"></div>
+					    <?php if($this->form->fotoname->getValue()) {?>					    
+						<img src="<?= $this->form->fotoname->getValue() ? PUBLIC_FOLDER . "/files/" . $this->form->fotoname->getValue() : PUBLIC_FOLDER . '/images/sin-imagen.jpg' ?>" width="100px"/>
+						<?php }?>
+						<div class="foto-file"><input id="foto-0" type="file" name="foto-0" style="display:<?php echo $this->form->fotoname->getValue() ? "none" : "block"; ?>"></div>
+						
+					</div>
+				</div>				
+				<div class="line-fields">
+					<div class="field-body"><?=$this->form->body ?>
+					</div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Desde:</div>
+					<div class="field"><?=$this->form->desde ?></div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Hasta:</div>
+					<div class="field"><?=$this->form->hasta ?></div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Peso:</div>
+					<div class="field"><?=$this->form->peso ?></div>
+				</div>						
+				<div class="line-fields">
+					<div class="label">Link:</div>
+					<div class="field"><?=$this->form->link ?></div>
+				</div>			
+				<div class="line-fields">
+					<div class="submit"><?=$this->form->agregar ?></div>
+				</div>					
+
+
+		</div>
+	</form>
+
+</div>
+<div id="dialog" title="Basic dialog">
+	<div id="inner-dialog"></div>
+</div>
+

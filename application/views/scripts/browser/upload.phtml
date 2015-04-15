@@ -1,0 +1,14 @@
+<html><body>
+<?php if(isset($this->filename)) {?>
+<script type="text/javascript">window.parent.CKEDITOR.tools.callFunction('<?= $this->callbackFunction ?>' , '<?= $this->filename ?>','Se cargo la imagen con exito');</script>
+<?php }else {?>
+
+<form lang="es" action="/browser/upload?CKEditor=body&CKEditorFuncNum=2&langCode=es" dir="ltr" method="POST" enctype="multipart/form-data">
+<input type="file" size="38" name="upload">
+<input type="submit" value="submit"/>
+</form>
+
+<?php }?>
+
+
+</body></html>

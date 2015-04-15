@@ -1,0 +1,55 @@
+<?php
+$this->headScript()->offsetSetFile(605, PUBLIC_FOLDER . '/js/articulo-list.js');
+$this->headLink()->offsetSetStylesheet(900, PUBLIC_FOLDER . '/css/table.css');
+?>
+
+<div class="rounded-container">
+<?= $this->filterForm;?>
+<table summary="Meeting Results" id="gradient-style">
+	<thead>
+	<tr>
+		<th	scope="col"></th>
+		<th scope="col"><a href="">Id</a></th>
+		<th scope="col"><a href="">Titulo</a></th>
+		<th scope="col"><a href="">Categor&iacute;a</a></th>
+		<th scope="col"><a href="">Usuario</a></th>
+		<th scope="col"><a href="">Actualizado</a></th>
+		<th scope="col" class="center"><a href="">Publicado</a></th>
+		<th scope="col" class="center"><a href="">Bloqueado</a></th>
+		<th scope="col" class="center"><a href="">Borrar</a></th>	
+		<th scope="col" class="center"><a href="">Editar</a></th>	
+		
+	</thead>	
+	<tfoot>
+		<tr>
+			<td colspan="10">Listado de Art&iacute;culos. Usted puede editar, borrar, publicar cualquier item.</td>
+		</tr>
+	</tfoot>		
+		<?php foreach($this->objects as $articulo){?>
+		<tr>
+			<td></td>
+			<td><a href=""><?= $articulo->id ?></a></td>
+			<td><a href=""><?= utf8_encode(stripslashes ( $articulo->titulo)) ?></a></td>
+			<td><a href=""><?= utf8_encode($articulo->Categoria->nombre) ?></a></td>
+			<td><a href=""><?= utf8_encode($articulo->Post->Usuario_2->nombre) ?></a></td>
+			<td><a href=""><?= $articulo->Post->fechaCreacion ?></a></td>
+			<td class="center"><div onClick="confirmPublicar('<?= $articulo->id ?>');"><img title="<?= $articulo->Post->publicado == "Y" ? "No publicar" : "Publicar"?>" height="20px" src="<?= $articulo->Post->publicado == "Y" ? PUBLIC_FOLDER . "/images/"."no_publicar.png" : PUBLIC_FOLDER . "/images/"."publicar.png" ?>"/></div></td>
+			<td class="center"><span class="ui-icon center  <?= $articulo->Post->blockUsuarioId == null ? "ui-icon-unlocked" : "ui-icon ui-icon-locked" ?>"></span></td>
+			<td class="center"><a href="#" onClick="confirmDelete('<?= $articulo->id ?>');"><span class="ui-icon center ui-icon-closethick"></span></a></td>
+			<td class="center"><a href="/admin/articulo/edit/<?= $this->page ?>/<?= $articulo->id?>"><span class="ui-icon center ui-icon-pencil"></span></a></td>
+
+		</tr>
+		<?php }?>
+
+	</table>
+	<?php
+/*
+* Print the pagination of type , drop down or search type or of your choice.
+*/
+echo $this->paginationControl($this->objects,
+                                    'Sliding',
+                                    '/partials/my_pagination_control.phtml',
+									array('object' => $this->object)
+									); ?>
+</div>
+<?php echo $this->partial( 'partials/dialog.phtml', array());?>

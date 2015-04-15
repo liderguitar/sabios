@@ -1,0 +1,82 @@
+<script>
+    $(document).ready(function() {
+        Sabios.sabiosSelect(".categoria");
+    });
+</script>
+<input type="hidden" id="page" value="<?= $this->page ?>"/>
+
+<div class="stock-filters sabios-row">
+    <div class="sabios-row">
+        <div class="sabios-label label-codigo">C&oacute;digo</div>
+        <div class="sabios-label label-categoria">Categoria</div>
+    </div>    
+    <div class="sabios-filters">
+        <form type="post" id="filter-form">
+            <div class="inline">
+                <input class="sabios-input" type="text" placeholder="Código" id="codigo" value="<?= $this->codigo ?>" name="codigo">
+            </div>
+            <div class="inline">
+
+                <div class="categoria">
+                    <div class="sabios-row"><div class="sabios-select sabios-input" id="cats"><span>Categoria</span><div class="down-arrow sabios-gradient"></div></div>
+                        <input class="input-field" type="hidden" text="<?= $this->categoria->nombre ?>" name="categoria" id="categoria" value="<?= (isset($this->categoria->id) ? $this->categoria->id : "0") ?>"/>
+                    </div>                
+                    <div class="sabios-row">                
+                        <div class="sabios-row select-container">
+                            <div class="sabios-input sabios-option first-option" value="0">Categoria</div>
+                            <?php foreach ($this->categorias as $categoria) : ?>
+                                <div class="sabios-input sabios-option first-option" value="<?= $categoria['id'] ?>"><?= $this->escape($categoria['categoria']) ?></div> 
+                            <? endforeach; ?>
+                        </div>
+                    </div>
+                </div>  
+            </div>    
+            <div class="inline" style="float:right">
+                <input type="submit" class="sabios-submit submit-filter" name="submit" value="Filtrar">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="sabios-table-container">
+    <div class="sabios-table talles-table">
+
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
+                <div class="sabios-table-td" style="width: 15%">C&oacute;digo</div>
+                <div class="sabios-table-td" style="width: 25%">Nombre</div>
+                <div class="sabios-table-td" style="width: 60%">Talles</div>
+            </div>
+
+        </div>
+        <div class="sabios-table-tbody">
+            <?php 
+            $count = 0;
+            foreach ($this->objects as $producto) :
+                ?>
+                <div class="sabios-table-tr table-row <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div class="sabios-table-td" style="width: 15%"><a href=""><?= $producto->codigo ?></a></div>
+                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $producto->nombre ?></a></div>
+                    <div class="sabios-table-td stock-list" style="width: 60%">
+                        <?php if ($producto->bloqueado_id_usuario && $producto->bloqueado_id_usuario !== $this->userId) : ?>
+                            <i title="Bloqueado por otro Usuario" class="fa fa-lock"></i> 
+                        <?php else : ?>
+                            <div class="stock-container" style="float:right" productoid="<?= $producto->ProductoTextil[0]->id ?>">     
+                                
+                                <?php echo $this->partial('partials/producto-textil-stock.phtml', array('talles' => ProductoTextil::getTallesPorProducto($producto->ProductoTextil[0]->id))); ?>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                </div> 
+                <?php
+                $count++;
+            endforeach;
+            ?>                                
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>	
+    </div>   
+</div>
+<?php
+echo $this->paginationControl($this->objects, 'Sliding', '/partials/my_pagination_control.phtml', array('object' => $this->object));
+?> 

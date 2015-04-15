@@ -1,0 +1,15 @@
+<?php
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/ckeditor/ckeditor.js');
+$this->headScript()->offsetSetFile(600, PUBLIC_FOLDER . '/js/libro-add.js');
+$this->headLink()->offsetSetStylesheet(900, PUBLIC_FOLDER . '/css/table.css');
+
+echo $this->partial( 'partials/' . $this->className . '/list.phtml', array(
+			'objects' => $this->objects, 
+			'messages' => $this->messages, 
+			'filterForm' => $this->filterForm, 
+			'page' => $this->page,
+		    'object' => $this->object
+		)
+	);
+
+?>

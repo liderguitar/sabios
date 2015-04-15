@@ -1,0 +1,68 @@
+<?php /*
+ * nombre
+ * apellido
+ * direccion
+ * localidad
+ * codigo postal
+ * provincia
+ * telefono
+ * horario de consulta
+ * email
+ * consulta
+ * 
+ * 
+ */
+
+?>
+<form method="post" action="/index/contacto" enctype="application/x-www-form-urlencoded">
+	<div class="line-fields">
+		<div class="label">Nombre:</div>
+		<div class="field"><?=$this->form->nombre?>		</div>
+	</div>
+	<div class="line-fields">
+		<div class="label">Apellido:</div>
+		<div class="field"><?=$this->form->apellido?>		</div>
+	</div>
+	<div class="line-fields">
+		<div class="label">Direcci&oacute;n:</div>
+		<div class="field"><?=$this->form->direccion?>		</div>
+	</div>
+
+	<div class="line-fields">
+		<div class="label">Localidad:</div>
+		<div class="field"><?=$this->form->localidad?>		</div>
+	</div>
+
+	<div class="line-fields">
+		<div class="label">C&oacute;odigo Postal:</div>
+		<div class="field"><?=$this->form->codigoPostal?>		</div>
+	</div>	
+	<div class="line-fields">
+		<div class="label">Provincia:</div>
+		<div class="field"><?=$this->form->provincia?>		</div>
+	</div>			
+	<div class="line-fields">
+		<div class="label">Tel&eacute;fono:</div>
+		<div class="field"><?=$this->form->telefono?>		</div>
+	</div>
+	<div class="line-fields">
+		<div class="label">E-mail:</div>
+		<div class="field"><?=$this->form->email?>		<div class="mandatory">*</div></div>
+	</div>	
+	<div class="line-fields">
+		<div class="label">Cod. de Seguridad:</div>
+                <div class="field"><?=$this->form->captcha?></div>
+                <input id="captchaId" name="captchaId" type="hidden" value="<?=$this->captchaid?>">
+                <div class="lefty"><img src='<?=$this->captchaImage?>'/></div>
+                <div class="righty obligatorio"><div class="mandatory">*</div></div>
+	</div>    
+	<div class="line-fields">
+		<div class="label">Consulta:</div>
+		<div class="field"><?=$this->form->consulta?>		<div class="mandatory">*</div></div>
+	</div>	
+
+	<div class="line-fields">
+		<div class="registrarme"><?=$this->form->agregar?></div>
+		<div class="righty obligatorio"><div class="mandatory lefty">*</div>&nbsp;Datos obligatorios</div>
+	</div>    
+</form>

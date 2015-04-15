@@ -1,0 +1,97 @@
+<?php
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/libro-add.js');
+$this->headScript()->offsetSetFile(501, PUBLIC_FOLDER . '/js/libro.js');
+?>
+<div class="rounded-container">
+<h1>Nuevo Libro</h1>
+	<form action="" method="post" enctype="multipart/form-data">
+		<div class="form-container">
+				<?=$this->form->id;?>
+				<?=$this->form->editorialId;?>	
+				<?=$this->form->autorId;?>	
+				<?=$this->form->generoId;?>		
+				<?=$this->form->fotoname;?>	
+				<?=$this->form->fotoname2;?>	
+				<?=$this->form->fotoname3;?>	
+				<?=$this->form->fotoname4;?>	
+				<?=$this->form->fotoname5;?>	
+				<div class="line-fields">
+					<div class="label">Titulo:</div>
+					<div class="field"><?=$this->form->titulo?></div>
+				</div>
+				<div class="line-fields">
+					<div class="label">Descripcion:</div>
+					<div class="field"><?=$this->form->descripcion ?></div>
+				</div>
+				<div class="line-fields">
+					<div class="label">Autor:</div>
+					<div class="field"><?=$this->form->autor ?></div>
+				
+				</div>	
+				<div class="line-fields">
+					<div class="label">Editorial:</div>
+					<div class="field"><?=$this->form->editorial ?>
+					</div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Genero:</div>
+					<div class="field"><?=$this->form->genero ?></div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Tapa:</div>
+					<div class="field"><?=$this->form->encuadernacion ?></div>
+				</div>		
+				<div class="last-line leftclm">
+					<div class="line-label first">A&ntilde;o:</div>
+					<div class="field-label"><?=$this->form->anio ?></div>
+					<div class="line-label">Stock:</div>
+					<div class="field-label"><?=$this->form->stock ?></div>
+					<div class="line-label">Precio:</div>
+					<div class="field-label"><?=$this->form->precio ?></div>	
+					<div class="line-label">Tomos:</div>
+					<div class="field-label"><?=$this->form->tomos ?></div>	
+					<div class="checkboxes">
+					    <div class="field-label"><label for="oferta">Oferta</label></div>
+						<div class="line-label"><?=$this->form->oferta ?></div>
+						<div class="field-label"><label for="destacado">Destacado</label></div>
+						<div class="line-label"><?=$this->form->destacado ?></div>
+						<div class="field-label"><label for="novedad">Novedad</label></div>
+						<div class="line-label"><?=$this->form->novedad ?></div>
+						<div class="field-label"><label for="mostrarPrecio">Mostrar</label></div>
+						<div class="line-label"><?=$this->form->mostrarPrecio ?></div>						
+					</div>					
+				</div>		
+				<div class="line-fields">
+					<div class="field-label valoracion"><?=$this->form->valoracion ?></div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Fotos:</div>
+					<div id="container-0" class="foto-container rounded first">
+						<div class="foto-file"><label>Foto 1:&nbsp;</label><input id="foto-0" type="file" name="foto-0"></div>
+					</div>
+					<div id="container-1" class="foto-container rounded">
+						<div class="foto-file"><label>Foto 2:&nbsp;</label><input id="foto-1" type="file" name="foto-1"></div>
+					</div>
+					<div id="container-2" class="foto-container rounded">
+						<div class="foto-file"><label>Foto 3:&nbsp;</label><input id="foto-2" type="file" name="foto-2"></div>
+					</div>
+					<div id="container-3" class="foto-container rounded">
+						<div class="foto-file"><label>Foto 4:&nbsp;</label><input id="foto-3" type="file" name="foto-3"></div>
+					</div>
+					<div id="container-4" class="foto-container rounded">
+						<div class="foto-file"><label>Foto 5:&nbsp;</label><input id="foto-4" type="file" name="foto-4"></div>
+					</div>
+				</div>	
+			
+				<div class="line-fields">
+					<div class="submit"><?=$this->form->agregar ?></div>
+				</div>					
+
+
+		</div>
+	</form>
+
+</div>
+<div id="dialog" title="Basic dialog">
+	<div id="inner-dialog"></div>
+</div>

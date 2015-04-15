@@ -1,0 +1,95 @@
+<div class="sabios-container">
+    <h1>Modificar / Visualizar Venta</h1>
+    <div class="sabios-row"></div>
+    <div class="sabios-row"></div>
+    <div class="sabios-row"></div>
+    <div class="sabios-row"></div>
+    <input type="hidden" id="id" name="id" value="<?= $this->venta->id ?>">   
+    <div class="sabios-row label"><label>N&uacute;umero de Venta</label></div>
+    <div class="sabios-row">
+        <input class="sabios-input disabled-input" type="text" id="codigo" disabled="disabled" value="<?= $this->venta->id ?>"/>
+    </div> 
+    <div class="sabios-row label"><label>Fecha</label></div>
+    <div class="sabios-row">
+        <input class="sabios-input disabled-input" type="text" id="codigo" disabled="disabled" value="<?= $this->venta->fecha ?>"/>
+    </div> 
+    <div class="sabios-row label"><label>Cliente</label></div>
+    <div class="sabios-row">
+        <input class="sabios-input disabled-input" type="text" id="codigo" disabled="disabled" value="<?= $this->venta->Cliente->nombre_comercial ?>"/>
+    </div> 
+    <div class="sabios-row label"><label>E-mail</label></div>
+    <div class="sabios-row">
+        <input class="sabios-input disabled-input" type="text" id="codigo" disabled="disabled" value="<?= $this->venta->Cliente->email1 ?>"/>
+    </div> 
+    <div class="sabios-row label"><label>Estado</label></div>
+    <div class="sabios-row sabios-s2">
+        <form method="post" action="" id="venta-form">
+            <input type="hidden" name="id" value="<?= $this->venta->id ?>"/>
+            <select id="vd-estado" name="vd-estado">
+                <?php foreach ($this->estados as $pt) : ?>
+                    <option value="<?= $pt['id'] ?>"<?= $this->venta->ventaEstadoId == $pt['id'] ? 'selected' : '' ?>><?= $pt['nombre'] ?></option>
+                <?php endforeach; ?>         
+            </select>    
+        </form>
+    </div> 
+
+    <div class="sabios-row"></div>
+    <div class="sabios-row"></div>
+    <div class="sabios-row"></div>
+    <div class="sabios-row"></div>        
+    <div class="sabios-row vd-header sabios-back-gradient">
+        <div style="width: 35%; float: left; font-size: 14px">C&oacute;digo Nombre</div>
+        <div style="width: 45%; float: left; font-size: 14px">Cantidad por Talles</div>
+        <div style="width: 10%; float: left; font-size: 14px">Precio</div>
+        <div style="width: 10%; float: left; font-size: 14px">Subtotal</div>
+
+    </div>
+
+    <?php
+    $count = 0;
+    $total = 0;
+    $subtotal = 0;
+    foreach ($this->ventadetalle as $vds) :
+        ?>
+        <div class="sabios-row vd-row <?= ($count % 2) ? "grey" : ""; ?>">
+            <div class="venta-detalle-row" style="width: 35%"><?= $vds["codigo"] ?></div>
+            <div style="width: 40%; float: left">
+                <div class="vd-titulo"><b>talle</b><br/>cantidad</div>
+                <?php $cantidad = 0; $subtotal = 0; ?>
+                <?php foreach ($vds["talles"] as $vd) : $cantidad += $vd["cant"]; ?>
+                    <div class="box_talle talle-list"><div class="talle-text"><?= $vd["talle"] ?></div>
+                        <input class="talle-input" type="text" id="stock[]" name="stock[]" value="<?= $vd["cant"] ?>">
+                        <div class="talle-stock"><?= $vd["cant"] ?></div>
+                    </div>        
+                <?php endforeach; 
+                
+                $subtotal = $cantidad * $vds["precio"]; $total += $subtotal;?>
+            </div>
+            <div class="venta-detalle-row currency" style="width: 10%">$ <?= $vds["precio"] ?></div>
+            <div class="venta-detalle-row currency" style="width: 10%">$ <?= number_format($subtotal, 2, '.', ',') ?></div>
+
+        </div>
+        <?php
+        $count++;
+    endforeach;
+    ?>
+    <div class="sabios-row venta-detalle-row currency dc-total">Subtotal:<span>$ <?=number_format($total, 2, '.', ',')?></span></div>
+    <div class="sabios-row venta-detalle-row currency dc-total">Tipo de Pago:<span><?=$this->venta->PagoTipo->descripcion?></span></div>
+    <div class="sabios-row venta-detalle-row currency dc-total">Interes / Descuento:<span><?=$this->venta->formaDePagoPorc?> %</span></div>
+    <div class="sabios-row venta-detalle-row currency dc-total">Total:<span>$ <?=number_format($total * ((100 + $this->venta->formaDePagoPorc) /100 ), 2, '.', ',')?></span></div>
+    <div class="sabios-row">
+            <input class="sabios-submit" type="submit" id="enviar" value="Guardar" name="enviar">
+    </div>
+</div>
+<script>
+
+    $(document).ready(function() {
+        $("#vd-estado").select2({width: "element"});
+        
+        $("#enviar").click(function(){
+            $("#venta-form").submit();
+            
+        });
+    });
+
+</script>

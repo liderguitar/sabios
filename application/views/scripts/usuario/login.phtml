@@ -1,0 +1,32 @@
+<?php
+$this->headScript()->offsetSetFile(507, PUBLIC_FOLDER . '/js/login.js');
+?>
+
+<div id="wrap" class="sabios-container">
+    <div class="top-login">
+        <img src="<?= PUBLIC_FOLDER ?>/images/sabios-logo.png"/>
+    </div>
+    <div class="middle">
+        <div class="left-column" style="width: 100%">
+            <form id="login-form" enctype="application/x-www-form-urlencoded" method="post" action="/usuario/login?type=local">
+                <div class="sabios-row"><h1>Loguearse</h1></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row label"><label>Email</label></div>
+                <div class="sabios-row"><input type="text" name="nick" id="nick" value="" class="sabios-input">
+                    <div class="error-field nick-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Direcci&oacute;n de E-mail Inv&aacute;lida<br></span><span class="white">Por favor ingrese una direcci&oacute;n de E-mail correcta</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Contrase&ntilde;a</label></div>
+                <div class="sabios-row"><input type="password" name="password" id="password" value="" class="sabios-input">
+                    <div class="error-field password-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Contrase&ntilde;a Inv&aacute;lida<br></span><span class="white">Por favor prueba ingresa una contrase&ntilde;a</span></div></div>
+                </div>
+                <div class="sabios-row"><input type="submit" name="submit" id="submit" value="Enviar" class="sabios-submit"></div>
+            </form>
+        </div>
+        <div class="bottom">
+        </div>    
+    </div>
+    <div class="sabios-inline"><div class="contacto push-13"><img src="<?= PUBLIC_FOLDER ?>/images/contacto.png"/></div></div>    
+</div>

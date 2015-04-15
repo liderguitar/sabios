@@ -1,0 +1,71 @@
+<?php
+//
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/aviso.js');
+?>
+<div class="sabios-container">
+    <form id="alerta-emails" method="post">
+        <div class="middle">
+            <div class="left-column" style="width: 100%">
+                <div class="sabios-row" style="float: top; height: 50px">
+                    <div style="float: left; width: 51%">
+                        <h1>Aviso de Nuevos Clientes</h1>
+                    </div>
+                    <div style="float: left; margin-left: 10px">
+                        <button id="guardar" class="sabios-submit small-submit2">Guardar</button>
+                    </div>
+                    <div style="float: left; margin-left: 10px">
+                        <button class="sabios-submit small-submit2">Cancelar</button>
+                    </div>
+                </div>
+                <div style="width: 100%; float: left; height: 50px">
+                    <div style="float: left; width: 49%"><h2>ENVIAR AVISO DE CLIENTES NUEVOS A:</h2></div>
+                    <div style="float: left; width: 10%"><h2 style="color: #CC0000">(?)</h2></div>
+                </div>
+                <div>
+                    <div class="sabios-row label">
+                        <label>Email 1</label>
+                    </div>
+                    <div class="sabios-row">
+                        <input class="sabios-input" placeholder="Ingrese Email" disabled="disabled" type="text" name="email" id="email" value="<?= $this->email ?>"/>
+                        <div class="error-field codigo-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Ingrese Email<br></span><span class="white">Por favor ingrese el c&oacute;digo</span></div></div>
+                    </div> 
+                </div>
+                <div>
+                    <div class="sabios-row">
+                        <div class="sabios-row label">
+                            <label>Email 2</label>
+                        </div>
+
+                    </div>
+                    <div class="sabios-row">
+                        <input class="sabios-input" placeholder="Ingrese Email" type="text" name="email1" id="email1" value="<?= $this->email1 ?>"/>
+                        <div class="error-field email1-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Ingrese Email<br></span><span class="white">Por favor ingrese un email valido</span></div></div>
+                    </div> 
+                    <div id="email3" class="<?= !$this->email2 ? 'hide' : '' ?>">
+                        <div class="sabios-row">
+                            <div class="sabios-row label">
+                                <label>Email 3</label>
+                            </div>
+                        </div>
+                        <div class="sabios-row">
+                            <input class="sabios-input" placeholder="Ingrese Email" type="text" name="email2" id="email2" value="<?= $this->email2 ?>"/>
+                            <div class="error-field email2-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Ingrese Email<br></span><span class="white">Por favor ingrese un email valido</span></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sabios-row">
+                    <a href="#">
+                        <div style="width: 100%; float: left; height: 50px">
+                            <div style="float: left; width: 29%">
+                                <h2> AGREGAR OTRO EMAIL</h2>
+                            </div>
+                            <div style="float: left; margin-top: 9px"><span class="sabios-mas"></span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+        </div>   
+    </form>
+</div>

@@ -1,0 +1,15 @@
+<?php
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/ckeditor/ckeditor.js');
+$this->headScript()->offsetSetFile(600, PUBLIC_FOLDER . '/js/articulo-add.js');
+?>
+<div class="rounded-container">
+	<h1>Editar Alumno</h1>
+	<?php if (count($this->messages)) : ?>
+	<ul class="messages">
+	<?php foreach ($this->messages as $message) : ?>
+	    <li><?php echo $this->escape($message); ?></li>
+	<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+	<?php echo $this->form;?>
+</div>

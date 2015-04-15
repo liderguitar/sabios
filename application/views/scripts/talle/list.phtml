@@ -1,0 +1,75 @@
+<script>
+    $(document).ready(function() {
+        Sabios.sabiosSelect(".talle_tipo_id");
+    });
+</script>
+<div class="stock-filters sabios-row">
+    <div class="sabios-row">
+        <div class="sabios-label label-codigo">Nombre</div>
+        <div class="sabios-label label-categoria">Tipo</div>
+    </div>    
+    <div class="sabios-filters">
+        <form type="post" id="filter-form">
+            <div class="inline">
+                <input class="sabios-input" type="text" placeholder="Nombre" id="nombre" value="<?= $this->nombre ?>" name="nombre">
+            </div>
+            <div class="inline">
+
+                <div class="talle_tipo_id">
+                    <div class="sabios-row sabios-select-title"><div class="sabios-select sabios-input" id="cats"><span>Tipo</span><div class="down-arrow sabios-gradient"></div></div>
+                        <input class="input-field" type="hidden" text="<?= isset( $this->talleTipo->descripcion) ? $this->talleTipo->descripcion : 'Tipo' ?>" name="talle_tipo_id" id="talle_tipo_id" value="<?= (isset($this->talle_tipo_id) ? $this->talle_tipo_id : "0") ?>"/>
+                    </div>                
+                    <div class="sabios-row">                
+                        <div class="sabios-row select-container">
+                            <div class="sabios-input sabios-option first-option" value="0">Tipo</div>
+                            <?php foreach ($this->TalleTipos as $talleTipo) : ?>
+                                <div class="sabios-input sabios-option first-option" value="<?= $talleTipo->id ?>"><?= $this->escape($talleTipo->descripcion) ?></div> 
+                            <? endforeach; ?>
+                        </div>
+                    </div>
+                </div>  
+            </div>    
+            <div class="inline" style="float:right">
+                <input type="submit" class="sabios-submit submit-filter" name="submit" value="Filtrar">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="sabios-table-container">
+    <div class="sabios-table">
+
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
+
+                <div class="sabios-table-td" style="width: 35%">Nombre</div>
+                <div class="sabios-table-td" style="width: 35%">Tipo</div>
+                <div class="sabios-table-td" style="width: 20%">Prioridad</div>
+                <div class="sabios-table-td" style="width: 5%">Editar</div>
+                <div class="sabios-table-td" style="width: 5%">Borrar</div>
+            </div>
+
+        </div>
+        <div class="sabios-table-tbody">
+            <?php
+            $count = 0;
+            foreach ($this->objects as $talle) :
+                ?>
+                <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div class="sabios-table-td" style="width: 35%"><a href=""><?= $talle->talle ?></a></div>
+                    <div class="sabios-table-td" style="width: 35%"><a href=""><?= $talle->TalleTipo->descripcion ?></a></div>
+                    <div class="sabios-table-td" style="width: 20%"><a href=""><?=  $talle->prioridad ?></a></div>
+                    <div class="sabios-table-td" style="width: 5%"><a href="#" onClick="confirmDelete('<?= $talle->id ?>');"><span class="ui-icon center ui-icon-closethick"></span></a></div>
+                    <div class="sabios-table-td" style="width: 5%"><a href="/talle/edit/<?= $talle->id ?>"><span class="ui-icon center ui-icon-pencil"></span></a></div>
+                </div> 
+                <?php
+                $count++;
+            endforeach;
+            ?>                                
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>	
+    </div>
+</div>
+<?php
+echo $this->paginationControl($this->objects, 'Sliding', '/partials/my_pagination_control_talle.phtml', array( 'nombre'=> $this->nombre, 'talle_tipo_id' => $this->talle_tipo_id));
+?> 

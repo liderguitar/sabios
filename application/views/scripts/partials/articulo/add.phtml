@@ -1,0 +1,77 @@
+<div class="rounded-container">
+<h1>Nuevo Art&iacute;culo</h1>
+	<?php
+if (count($this->messages)) :
+    ?>
+	<ul class="messages">
+	<?php
+    foreach ($this->messages as $message) :
+        ?>
+	    <li><?php
+        echo $this->escape($message);
+        ?></li>
+	<?php
+    endforeach
+    ;
+    ?>
+	</ul>
+
+
+<?php endif;
+?>
+
+	<form action="" method="post">
+		<div class="form-container">
+				<?=$this->form->id;?>
+				<?=$this->form->fotoname;?>					
+				<div class="line-fields">
+					<div class="label">Titulo:</div>
+					<div class="field"><?=$this->form->titulo?></div>
+				</div>
+				<div class="line-fields">
+					<div class="label">Subtitulo:</div>
+					<div class="field"><?=$this->form->subtitulo ?></div>
+				</div>
+				<div class="line-fields">
+					<div class="label">Categor&iacute;a:</div>
+					<div class="field"><?=$this->form->categoria ?></div>
+				
+				</div>	
+				<div class="line-fields">
+					<div class="label">Fotos:</div>
+					<div id="container-0" class="foto-container rounded first">
+						<div class="foto-file"><label>Foto 1:&nbsp;</label><input id="foto-0" type="file" name="foto-0"></div>
+					</div>
+				</div>				
+				<div class="line-fields">
+					<div class="label">Texto:</div>
+					<div class="field-body"><?=$this->form->body ?>
+					</div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Desde:</div>
+					<div class="field"><?=$this->form->desde ?></div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Hasta:</div>
+					<div class="field"><?=$this->form->hasta ?></div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Peso:</div>
+					<div class="field"><?=$this->form->peso ?></div>
+				</div>
+
+			
+				<div class="line-fields">
+					<div class="submit"><?=$this->form->agregar ?></div>
+				</div>					
+
+
+		</div>
+	</form>
+
+</div>
+<div id="dialog" title="Basic dialog">
+	<div id="inner-dialog"></div>
+</div>
+

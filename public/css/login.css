@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+#nick-label,
+#password-label {
+    float: left;
+    margin-right: 5px;
+    padding-top: 10px;
+}
+.messages {
+	padding: 15px;
+	border: solid 1px;
+	margin: 15px 0px 15px;
+	color: green;
+}

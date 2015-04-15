@@ -1,0 +1,8 @@
+<?php 
+$this->headScript()->offsetSetFile(101, PUBLIC_FOLDER . '/js/usuario.js');
+?>
+
+<div class="rounded-container">
+	<input type="hidden" id="page" value="<?= $this->page ?>"/>
+	<?php echo $this->form;?>
+</div>

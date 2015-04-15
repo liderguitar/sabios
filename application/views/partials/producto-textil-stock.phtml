@@ -1,0 +1,8 @@
+                <?php foreach ($this->talles as $talle) : ?>
+                    <div class="box_talle"><div class="talle-text"><?= $talle["Talle"]["talle"] ?></div>
+                        <input type="hidden" id="id_talle[]" name="id_talle[]"  value="<?=isset($talle["Talle"]["id"]) ? $talle["Talle"]["id"] : "0" ?>">
+                        <input type="hidden" id="id_producto" name="id_producto"  value="<?= $this->productoId; ?>">
+                        <input class="talle-input" type="text" id="stock[]" name="stock[]" value="<?= $talle["stock"]?>">
+                        <div class="talle-stock"><?php echo $talle["stock"]; ?></div>
+                    </div>
+                <?php endforeach; ?>

@@ -1,0 +1,47 @@
+<?php 
+
+$this->headScript()->offsetSetFile(530, PUBLIC_FOLDER .  '/js/frontpage.js');
+?>
+<div class="first-row">
+	<div class="list-result">
+	<div><h1>Resultados de la B&uacute;squeda</h1></div>
+		<?php 
+		foreach ($this->librosSearch as $libro) {
+		?>
+				<div class="result">
+		         	<div class="result-image"><img width="100px" src="<?= PUBLIC_FOLDER . "/files/" . $libro->foto; ?>" />
+		         		<div id="carrito-container">
+			         	<?= $this->agregarCarrito($libro) ?>
+			         	</div>
+		         	</div>
+
+					<div class="link">
+						<a href="/libro/<?= $libro->urlCode ?>">
+			         		<div class="titulo"><h2><?= utf8_encode(strtoupper(stripslashes ( $libro->titulo))); ?></h2></div>
+		         		</a>
+		         	</div>
+		         	<div class="autor-class"><?=$this->autorLink($libro)?></div>
+		         	<div class="description">
+		         	<?=utf8_encode(My_Function_Function::word_trim($libro->descripcion, 100, true))?>
+		         	</div>
+
+				</div>
+		<?php }?>
+<?php echo $this->paginationControl($this->librosSearch,
+                                    'Sliding',
+                                    '/partials/my_pagination_control_search.phtml',
+									array('search' => $this->search)); ?>	
+	</div>
+<div class="second-column">
+	<div class="column-item">
+		<center><img src="<?= PUBLIC_FOLDER ?>/files/<?= $this->columnaUno->foto ?>"/></center>
+		<h3><?=strtoupper( utf8_encode(stripslashes ( $this->columnaUno->titulo))); ?></h3>
+		<p><?=  utf8_encode(str_replace("\n", "<br/>", My_Function_Function::word_trim($this->columnaUno->contenido, 160, true))) ?></p>
+	</div>	
+	<div class="column-item">
+		<center><img src="<?= PUBLIC_FOLDER ?>/files/<?= $this->columnaDos->foto ?>"/></center>
+		<h3><?=	strtoupper( utf8_encode(stripslashes ( $this->columnaDos->titulo))); ?></h3>
+		<p><?= utf8_encode(str_replace("\n", "<br/>", My_Function_Function::word_trim($this->columnaDos->contenido, 160, true))) ?></p>
+	</div>					
+</div>
+</div>

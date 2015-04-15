@@ -1,0 +1,11 @@
+<div class="rounded-container">
+	<h1>Nueva Categoria</h1>
+	<?php if (count($this->messages)) : ?>
+	<ul class="messages">
+	<?php foreach ($this->messages as $message) : ?>
+	    <li><?php echo $this->escape($message); ?></li>
+	<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+	<?php echo $this->form;?>
+</div>

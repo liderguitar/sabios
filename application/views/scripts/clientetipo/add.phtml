@@ -1,0 +1,56 @@
+<?php
+//
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/categoria-add.js');
+?>
+<script>
+    $(document).ready(function() {
+        $(".sabios-row.tb-close").click(function() {
+            $.unblockUI();
+        });
+    });
+</script>
+<div class="sabios-container">
+
+    <div class="middle">
+        <div class="left-column" style="width: 100%">
+            <form method="post" action="" id="clientetipo-form">
+                <h1>Agregar Tipo de Cliente</h1>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+     
+                <div class="sabios-row label"><label>Nombre</label></div>
+                
+                <div class="sabios-row"><input class="sabios-input" placeholder="Nombre" type="text" name="nombre" id="nombre" value="<?= $this->nombre ?>"/>
+                    <div class="error-field nombre-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor ingrese su Nombre</span></div></div>
+                </div>
+                <div class="sabios-row"><a href="index/register"><button class="sabios-submit">Agregar Tipo</button></a></div>
+            </form>            
+        </div>
+    </div>
+    <div class="bottom">
+    </div>    
+</div>
+ <?php if (count($this->messages)) : ?>
+
+     <?php foreach ($this->messages as $message) : ?>
+                    
+<script>
+        $.growlUI('Clientes Tipo', '<?= $this->escape($message); ?>','notification');
+</script>
+    <?php endforeach; ?>
+
+<?php endif; ?>
+ <?php if (count($this->errormessages)) : ?>
+
+     <?php foreach ($this->errormessages as $message) : ?>
+                    
+<script>
+        $.growlUI('Clientes Tipo', '<?= $this->escape($message); ?>','error');
+</script>
+    <?php endforeach; ?>
+
+<?php endif; ?>

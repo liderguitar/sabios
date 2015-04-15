@@ -1,0 +1,96 @@
+<script>
+    $(document).ready(function() {
+        Sabios.sabiosSelect(".categoria");
+    });
+</script>
+<div class="stock-filters sabios-row">
+    <div class="sabios-row">
+        <div class="sabios-label label-codigo">C&oacute;digo</div>
+        <div class="sabios-label label-categoria">Categoria</div>
+    </div>    
+    <div class="sabios-filters">
+        <form type="post" id="filter-form">
+            <div class="inline">
+                <input class="sabios-input" type="text" placeholder="Código" id="codigo" value="<?= $this->codigo ?>" name="codigo">
+            </div>
+            <div class="inline">
+
+                <div class="categoria">
+                    <div class="sabios-row"><div class="sabios-select sabios-input" id="cats"><span>Categoria</span><div class="down-arrow sabios-gradient"></div></div>
+                        <input class="input-field" type="hidden" text="<?= $this->categoria->nombre ?>" name="categoria" id="categoria" value="<?= (isset($this->categoria->id) ? $this->categoria->id : "0") ?>"/>
+                    </div>                
+                    <div class="sabios-row">                
+                        <div class="sabios-row select-container">
+                            <div class="sabios-input sabios-option first-option" value="0">Categoria</div>
+                            <?php foreach ($this->categorias as $categoria) : ?>
+                                <div class="sabios-input sabios-option first-option" value="<?= $categoria['id'] ?>"><?= $this->escape($categoria['categoria']) ?></div> 
+                            <? endforeach; ?>
+                        </div>
+                    </div>
+                </div>  
+            </div>    
+            <div class="inline" style="float:right">
+                <input type="submit" class="sabios-submit submit-filter" name="submit" value="Filtrar">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="sabios-table-container">
+    <div class="sabios-table">
+
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
+
+                <div class="sabios-table-td" style="width: 15%">C&oacute;digo</div>
+                <div class="sabios-table-td" style="width: 25%">Nombre</div>
+                <div class="sabios-table-td" style="width: 15%">Precio</div>
+                <div class="sabios-table-td" style="width: 15%">Costo</div>
+                <div class="sabios-table-td" style="width: 15%">Editar</div>
+                <div class="sabios-table-td" style="width: 15%">Borrar</div>
+
+            </div>
+
+        </div>
+        <div class="sabios-table-tbody">
+            <?php
+            $count = 0;
+            foreach ($this->objects as $producto) :
+                ?>
+                <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div class="sabios-table-td" style="width: 15%"><a href=""><?= $producto->codigo ?></a></div>
+                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $producto->nombre ?></a></div>
+                    <div class="sabios-table-td" style="width: 15%"><a href=""><?= $producto->precio ?></a></div>
+                    <div class="sabios-table-td" style="width: 15%"><a href=""><?= $producto->costo ?></a></div>
+                    <div class="sabios-table-td" style="width: 15%"><a href="#" onClick="confirmDelete('<?= $producto->id ?>');"><span class="ui-icon center ui-icon-closethick"></span></a></div>
+                    <div class="sabios-table-td" style="width: 15%"><a href="/productotextil/edit/<?= $producto->id ?>"><span class="ui-icon center ui-icon-pencil"></span></a></div>
+                </div> 
+                <?php
+                $count++;
+            endforeach;
+            ?>                                
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>	
+    </div>
+</div>
+
+<div class="textbox invalid" id="flashmessenger-error">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image-invalid"></div>
+    <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
+    <div class="sabios-row tb-text-invalid">
+            <?php if (count($this->errormessages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->errormessages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+    <?php endforeach; ?>
+            </ul>
+            <script>
+                    $.blockUI({message: $('#flashmessenger-error'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+<?php endif; ?>
+    </div>
+</div>
+<?php
+echo $this->paginationControl($this->objects, 'Sliding', '/partials/my_pagination_control_producto.phtml', array( 'nombre'=> $this->nombre, 'codigo' => $this->codigo, 'categoria' => (isset($this->categoria->id) ? $this->categoria->id : "") ));
+?> 

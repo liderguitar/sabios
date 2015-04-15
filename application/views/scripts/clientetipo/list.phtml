@@ -1,0 +1,82 @@
+<div class="stock-filters sabios-row" style="padding-bottom: 8px; padding-top: 10px">
+    <div style="margin-left: 10px">
+			<div class="sabios-row label">
+				<label>Nombre</label>
+			</div>    
+			<div class="sabios-filters">
+				<form type="post" id="filter-form">
+					<div class="inline">
+						<input class="sabios-input" type="text" placeholder="Nombre" id="nombre" value="<?= $this->nombre ?>" name="nombre">
+					</div>
+					<div class="inline" style="float:left; margin-left: 3px">
+						<input type="submit" class="sabios-submit submit-filter" name="submit" value="Filtrar">
+					</div>
+				</form>
+			</div>
+	</div>
+</div>
+<div class="sabios-table-container">
+    <div class="sabios-table">
+
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
+
+                <div class="sabios-table-td" style="width: 10%">C&oacute;digo</div>
+                <div class="sabios-table-td" style="width: 74%">Nombre</div>
+                <div class="sabios-table-td" style="width: 8%; text-align: center">Editar</div>
+                <div class="sabios-table-td" style="width: 8%; float: right; text-align: center">Borrar</div>
+
+            </div>
+
+        </div>
+        <div class="sabios-table-tbody">
+            <?php
+            $count = 0;
+            foreach ($this->objects as $producto) :
+                ?>
+                <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div class="sabios-table-td" style="width: 10%; padding-left: 3px"><a href=""><?= $producto->id ?></a></div>
+                    <div class="sabios-table-td" style="width: 73%"><a href=""><?= $producto->nombre ?></a></div>
+                    <div class="sabios-table-td" style="width: 3%; padding-left: 4%">
+						<a href="/clientetipo/edit/<?= $producto->id ?>">
+							<span class="sabios-edit">
+							</span>
+						</a>
+					</div>
+					<div class="sabios-table-td" style="width: 4; padding-left: 5%">
+						<a href="#" onClick="confirmDelete('<?= $producto->id ?>');">
+							<span class="sabios-delete">
+							</span>
+						</a>
+					</div>
+                </div> 
+                <?php
+                $count++;
+            endforeach;
+            ?>                                
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>	
+    </div>
+</div>
+<?php
+echo $this->paginationControl($this->objects, 'Sliding', '/partials/my_pagination_control_clientetipo.phtml', array('nombre' => $this->nombre, 'codigo' => $this->codigo, 'categoria' => (isset($this->categoria->id) ? $this->categoria->id : "")));
+?> 
+<?php if (count($this->messages)) : ?>
+
+    <?php foreach ($this->messages as $message) : ?>
+        <script>
+             $.growlUI('Clientes Tipo', '<?= $this->escape($message); ?>', 'notification');
+        </script>
+    <?php endforeach; ?>
+
+<?php endif; ?>
+<?php if (count($this->errormessages)) : ?>
+
+    <?php foreach ($this->errormessages as $message) : ?>
+        <script>
+            $.growlUI('Clientes Tipo', '<?= $this->escape($message); ?>', 'error');
+        </script>
+    <?php endforeach; ?>
+
+<?php endif; ?>

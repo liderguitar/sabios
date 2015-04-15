@@ -1,0 +1,146 @@
+<?php
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/invest.js');
+?>
+
+<div class="sabios-container">
+    <div class="logo">
+        <div class="sabios-row">
+            <a href="/">
+                <div class="logo-image">
+                    <img alt="Sabios - Gestión de negocios on-line" title="Sabios - Gestión de negocios on-line" src="/images/sabios-logo.png"/>
+                </div>
+            </a>    
+            <div class="home"></div>
+        </div>    
+    </div>
+    <div class="middle">
+        <div class="left-column">
+            <form method="post" action="" id="invest-form">
+                <h1>
+                    Inversionistas:
+                </h1>
+               <div class="sabios-row">
+                    <input class="sabios-input" placeholder="Nombre" type="text" name="nombre" id="nombre"/>
+                </div>
+                <div class="sabios-row">
+                    <input class="sabios-input" placeholder="Apellido" type="text" name="apellido" id="apellido"/>
+                </div>
+                <div class="sabios-row">
+                    <input class="sabios-input" placeholder="E-mail" type="text" name="email" id="email"/>
+                </div>                
+                <div class="sabios-row">
+                    &#191;Est&aacute; interesado en invertir en esta empresa&#63;<br><br>
+                    &#191;Por que esta interesado&#63;
+                </div>          
+                <div class="sabios-row">
+                    <textarea class="sabios-input" type="text" name="intereses" id="intereses"></textarea>
+                </div>
+                <div class="sabios-row">
+                    &#191;Qu&eacute; necesita saber&#63;
+                </div>                 
+                <div class="sabios-row">
+                    <textarea class="sabios-input" type="text" name="preguntas" id="preguntas"></textarea>            
+                </div>
+                <div class="sabios-row">
+                    <a href="index/register">
+                        <button class="login-submit">
+                            Enviar
+                        </button>
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="right-column">
+            <div class="errors">
+                <div class="sabios-row error-field nombre-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            Nombre Inv&aacute;lido
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingrese su Nombre
+                        </span>
+                    </div>
+                </div>
+                <div class="sabios-row error-field apellido-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            Apellido Inv&aacute;lido
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingrese su Apellido
+                        </span>
+                    </div>
+                </div>
+                <div class="sabios-row error-field email-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            Direcci&oacute;n de E-mail Inv&aacute;lida
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingrese una direcci&oacute;n de E-mail correcta
+                        </span>
+                    </div>
+                </div>
+                <div class="sabios-row error-field intereses-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            Casillero obligatorio
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingrese su Nombre
+                        </span>
+                    </div>
+                </div>
+                <div class="sabios-row error-field preguntas-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            Casillero obligatorio
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingrese su Apellido
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="links">
+            <ul>
+                <a href="/index/contact"><li>Contacto</li></a>
+                <li>Condiciones</li>
+                <li>Privacidad</li>
+                <li>home</li>
+            </ul>
+        </div>
+        <div class="social"><a href="https://www.facebook.com/sabiosweb"><img src="images/fb.png"/></a><a href="https://twitter.com/sabiosweb"><img src="images/tw.png"/></a></div>
+    </div>    
+</div>
+<div class="textbox valid" id="textbox">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image"></div>
+    <div class="sabios-row tb-title">&#161;Listo&#33;</div>
+    <div class="sabios-row tb-text">Su consulta ha sido enviada<br>satisfactoriamente.</div>
+</div>
+<div class="textbox invalid" id="textbox">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image-invalid"></div>
+    <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
+    <div class="sabios-row tb-text-invalid">Se ha producido un error,<br>intente nuevamente en unos minutos.</div>
+</div>

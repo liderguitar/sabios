@@ -1,0 +1,135 @@
+<?php
+//
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/talle-add.js');
+?>
+<script>
+    $(document).ready(function() {
+        $(".sabios-row.tb-close").click(function() {
+            $.unblockUI();
+        });
+    });
+</script>
+<div class="sabios-container">
+
+    <div class="middle">
+        <div class="left-column" style="width: 100%">
+            <form method="post" action="" id="talle-form">
+                <h1>Agregar Talle</h1>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row label"><label>Prioridad</label></div>
+                <div class="sabios-row">
+                    <div class="prioridad">
+                        <div class="sabios-row"><div class="sabios-select sabios-input" id="cats"><span>Prioridad</span><div class="down-arrow sabios-gradient"></div></div>
+                            <div class="error-field prioridad-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                            <input class="input-field" type="hidden" text="" name="prioridad" id="prioridad" value="<?= (isset($this->prioridad) ? $this->prioridad : "0") ?>"/>
+                        </div>                
+                        <div class="sabios-row">                
+                            <div class="sabios-row select-container">
+                                <div class="sabios-input sabios-option first-option" value="0">Prioridad</div>
+                                <div class="sabios-input sabios-option first-option" value="1">1</div> 
+                                <div class="sabios-input sabios-option first-option" value="2">2</div> 
+                                <div class="sabios-input sabios-option first-option" value="3">3</div> 
+                                <div class="sabios-input sabios-option first-option" value="4">4</div> 
+                                <div class="sabios-input sabios-option first-option" value="5">5</div> 
+                                <div class="sabios-input sabios-option first-option" value="6">6</div> 
+                                <div class="sabios-input sabios-option first-option" value="7">7</div> 
+                                <div class="sabios-input sabios-option first-option" value="8">8</div> 
+                                <div class="sabios-input sabios-option first-option" value="9">9</div> 
+                                <div class="sabios-input sabios-option first-option" value="10">10</div> 
+                                <div class="sabios-input sabios-option first-option" value="11">11</div> 
+                                <div class="sabios-input sabios-option first-option" value="12">12</div> 
+                                <div class="sabios-input sabios-option first-option" value="13">13</div> 
+                                <div class="sabios-input sabios-option first-option" value="14">14</div> 
+                                <div class="sabios-input sabios-option first-option" value="15">15</div> 
+                                <div class="sabios-input sabios-option first-option" value="16">16</div> 
+                                <div class="sabios-input sabios-option first-option" value="17">17</div> 
+                                <div class="sabios-input sabios-option first-option" value="18">18</div> 
+                                <div class="sabios-input sabios-option first-option" value="19">19</div> 
+                                <div class="sabios-input sabios-option first-option" value="20">20</div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sabios-row label"><label>Tipo de Talle</label></div>
+                <div class="sabios-row">
+                    <div class="talle">
+                        <div class="sabios-row"><div class="sabios-select sabios-input" id="cats"><span>Tipo de Talle</span><div class="down-arrow sabios-gradient"></div></div>
+                            <div class="error-field tipo-talle-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                            <input class="input-field" type="hidden" text="" name="id_tipo_talle" id="id_tipo_talle" value="<?= (isset($this->id_tipo_talle) ? $this->id_tipo_talle : "0") ?>"/>
+                        </div>                
+                        <div class="sabios-row">                
+                            <div class="sabios-row select-container">
+                                <div class="sabios-input sabios-option first-option" value="0">Tipo de Talle</div>
+                                <?php foreach ($this->tipoTalles as $talle) : ?>
+                                    <div class="sabios-input sabios-option first-option" value="<?= $talle->id ?>"><?= $this->escape($talle->descripcion) ?></div> 
+                                <? endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sabios-row label"><label>Nombre</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Talle" type="text" name="nombre" id="nombre" value="<?= $this->nombre ?>"/>
+                    <div class="error-field nombre-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor ingrese su Nombre</span></div></div>
+                </div>                
+                <div class="sabios-row"><a href="index/register"><button class="sabios-submit">Agregar Talle</button></a></div>
+            </form>            
+        </div>
+    </div>
+    <div class="bottom">
+    </div>    
+</div>
+<div class="textbox tb-login" id="textbox">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-title login">Iniciar sesi&oacute;n</div>
+    <div class="sabios-row"><input class="sabios-input" placeholder="Correo electr&oacute;nico" type="text" name="email" id="email"/></div>
+    <div class="sabios-row"><input class="sabios-input" placeholder="Contraseña" type="password" name="password" id="password"/></div>
+    <input type="hidden" name="tyc" id="tyc" value="0"/>
+    <div class="sabios-row"><div id="check-uncheck" class="check unchecked">Recordar mi cuenta</div></div>
+    <div class="sabios-row">
+        <a href="index/register">
+            <button class="login-submit">
+                Enviar
+            </button>
+        </a>
+    </div>  
+    <div class="sabios-row"><div class="forgot-pass">&#191;Olvidaste tu contraseña&#63;</div></div>
+</div>
+<div class="textbox message" id="flashmessenger">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image"></div>
+    <div class="sabios-row tb-title">Mensaje</div>
+    <div class="sabios-row tb-text">
+        <?php if (count($this->messages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->messages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({message: $('#flashmessenger'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+        <?php endif; ?>
+    </div>
+</div>
+<div class="textbox invalid" id="flashmessenger-error">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image-invalid"></div>
+    <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
+    <div class="sabios-row tb-text-invalid">
+        <?php if (count($this->errormessages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->errormessages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({message: $('#flashmessenger-error'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+        <?php endif; ?>
+    </div>
+</div>   

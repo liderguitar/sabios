@@ -1,0 +1,169 @@
+<?php
+$this->headScript()->offsetSetFile(1302, PUBLIC_FOLDER . '/js/producto.js');
+?>
+
+<div class="sabios-container">
+    <input type="hidden" id="id" value="<?= $this->id ?>">
+    <input type="hidden" id="productoTextilId" value="<?= $this->productoTextilId ?>">
+    <input type="hidden" id="codigo" value="<?= $this->producto["Producto"]["codigo"] ?>">
+    <input type="hidden" id="nombre" value="<?= $this->producto["Producto"]["nombre"] ?>">
+    <input type="hidden" id="precio" value="<?= $this->producto["Producto"]["precio"] ?>">
+    <div class="sabios-breadcrum"><?= $this->bread ?></div>
+    <div id="prod-left"><img src="/files/medium_<?= $this->producto["Producto"]["FotosPorProducto"][0]["Foto"]["url"] ?>">
+
+        <?php
+        echo $this->paginationControl($this->objects, 'Sliding', '/partials/my_pagination_control_producto2.phtml', array(
+            'id' => $this->id,
+            'tipo' => $this->cliente_tipo_id,
+            'productos' => $this->objects,
+            'index' => $this->index,
+            'result' => $this->productos
+                )
+        );
+        ?> 
+
+    </div>
+    <div id="prod-right">
+        <div class="info-prod">
+            <div class="sabios-row">
+                INFORMACI&Oacute;N DE PRODUCTO
+            </div>
+            <div class="sabios-row">
+                C&oacute;digo:<?= $this->producto["Producto"]["codigo"] ?>
+            </div>
+            <div class="sabios-row">
+                Nombre:<?= $this->producto["Producto"]["nombre"] ?>
+            </div>
+        </div>
+        <div class="info-prod">
+            <div class="sabios-row">
+                PRECIOS
+            </div>
+            <div class="sabios-row">
+                Formas de Pago:
+            </div>
+            <?php foreach ($this->pagosTipos as $pt) : ?>
+                <div class="sabios-row">
+                    <?php $interes = $this->producto["Producto"]["precio"] > 0 ? $this->producto["Producto"]["precio"] * $pt["interes"] / 100 : 0; ?>
+
+                    <?= $pt["descripcion"] ?> : <div class="fdp-currency">$<?= number_format($this->producto["Producto"]["precio"] + ( $interes ), 2, ",", ".") ?></div>
+                </div>
+            <?php endforeach; ?>            
+        </div>
+        <?php if ($this->isLogged) : ?>
+            <div id="stock-container">
+
+                <div class="sabios-row">
+                    Talle Stock Cantidad
+
+
+                </div>
+                <?php foreach ($this->stock as $talle): ?>
+
+                    <div class="sabios-row">
+                        <div class="prod-talle stock-item"><?= $talle['Talle']['talle'] ?> </div>
+                        <div class="prod-stock stock-item"><?= $talle['stock'] ?> </div>
+                        <div class="prod-talle">
+                            <div class="prod-menos sabios-back-gradient"></div>
+                            <input class="stock-item-input" id="cantidad_<?= $talle['id'] ?>" nombre="<?= $talle['Talle']['talle'] ?>" data="<?= $talle['id'] ?>" value="0" max="<?= $talle['stock'] ?>" disabled="disabled"> 
+                            <div class="prod-mas sabios-back-gradient"></div>
+                        </div>
+                    </div>
+
+                    <?php
+                endforeach;
+                ?>
+                <div class="sabios-row">
+                    <button value="Agregar al Pedido" class="sabios-submit" id="carrito-submit">Agregar al<br> Pedido</button>
+                </div>
+            </div>
+        <?php endif; ?>
+
+
+    </div>
+    <div id="carrito-container"></div>
+    <div class="sabios-row divconfirm hide">
+        <button class="sabios-submit" id="carrito-confirm">Confirmar Pedido</button>
+    </div>
+</div>
+<div id="carrito-tpl" class="hide">
+    <div class="sabios-carrito">
+        <div class="sabios-row">
+            RESUMEN DEL PEDIDO:
+        </div>
+        <div class="sabios-table">
+            <div class="sabios-table-head sabios-back-gradient">
+                <div class="sabios-table-tr">
+                    <div class="sabios-table-td" style="width: 10%">Código</div>
+                    <div class="sabios-table-td" style="width: 25%">Nombre</div>
+                    <div class="sabios-table-td" style="width: 40%">Cantidad por Talle</div>
+                    <div class="sabios-table-td" style="width: 10%">
+
+                        <select id="carrito-fdp">
+                                <option value="0">Precio</option>
+                            <?php foreach ($this->pagosTipos as $pt) : ?>
+                                <option value="<?= $pt['id'] ?>"><?= $pt['descripcion'] ?></option>
+                            <?php endforeach; ?>         
+                        </select>
+
+
+                    </div>
+                    <div class="sabios-table-td" style="width: 10%">Total</div>
+                    <div class="sabios-table-td" style="width: 5%"></div>
+                </div>
+            </div>
+            <div class="sabios-table-tbody">
+                %tr
+            </div>
+            <div class="sabios-table-tfooter">        
+                <div class="sabios-table-tr">
+                    <div class="sabios-table-td sabios-total sabios-total-last currency" style="width: 10%">%totalcarrito</div>
+                    <div class="sabios-table-td sabios-total-first" style="width: 10%">Total</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div id="row-carrito" class="hide">
+    <div class="sabios-table-tr %clase">
+        <div class="sabios-table-td" style="width: 10%">%codigo</div>
+        <div class="sabios-table-td" style="width: 25%">%nombre</div>
+        <div class="sabios-table-td" style="width: 40%">%talles</div>
+        <div class="sabios-table-td" style="width: 10%">$%precio</div>
+        <div class="sabios-table-td currency" style="width: 10%">$%total</div>
+        <div class="sabios-table-td" style="width: 5%"><a class="borrarcarrito" prodid="%id" href="#"><span class="ui-icon center ui-icon-closethick"></span></a></div>
+
+    </div>
+
+</div>
+<div id="carrito-confirm-dialog" class="hide sabios-table-container sabios-row">
+    <div class="sabios-table carrito-title">
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
+
+                <div class="sabios-table-td sabios-table-titulo" style="width: 100%"><span>Forma de pago del pedido</span></div>
+            </div>
+        </div>
+        <div class="sabios-table-tbody">
+            <div id="description" class="sabios-table-ttr">
+                <p>Debe Seleccionar una forma de pago</p>
+                <select id="fdp" name="fdp">
+                    <?php foreach ($this->pagosTipos as $pt) : ?>
+                        <option value="<?= $pt['id'] ?>"><?= $pt['descripcion'] ?></option>
+                    <?php endforeach; ?>         
+                </select>
+            </div>
+            <div class="sabios-table-ttr">
+                <button class="sabios-fdp-submit option-no">Cancelar</button>
+                <button class="sabios-fdp-submit option-yes">Confirmar</button>
+            </div>                    
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>	
+    </div>
+</div>
+<script>
+    var pagostipo = <?= json_encode($this->pts); ?>;
+</script>

@@ -1,0 +1,21 @@
+<div class="sabios-container categoria-container">
+    <input type="hidden" id="id" value="<?= $this->id ?>">
+    <input type="hidden" id="codigo" value="<?= $this->producto["Producto"]["codigo"] ?>">
+    <input type="hidden" id="nombre" value="<?= $this->producto["Producto"]["nombre"] ?>">
+    <input type="hidden" id="precio" value="<?= $this->producto["Producto"]["precio"] ?>">
+    <div class="sabios-breadcrum"><?= $this->bread ?></div>    
+    <?php foreach ($this->objects as $prod) : ?>
+
+        <a href="/catalogo/producto/<?= $prod->id_producto ?>">
+            <div class="cat-image-container">
+                <img title="<?= $prod->Producto->nombre ?>" style="width: 175px;" src="/files/thumb_<?= $prod->Producto->FotosPorProducto[0]->Foto->url ?>"/>
+            </div>
+        </a>
+
+    <?php endforeach; ?>
+
+    <div class="sabios-row"><?php
+        echo $this->paginationControl($this->objects, 'Sliding', '/partials/my_pagination_control_categoria.phtml', array('id' => $this->id));
+        ?>     
+    </div>
+</div>

@@ -1,0 +1,117 @@
+<?php $this->headScript()->offsetSetFile(1009, PUBLIC_FOLDER . '/js/registro.js'); ?>
+<div align="left" class="texto sabios-container">
+    <form id="cliente-form" name="cliente-form" enctype="multipart/form-data" method="post" action="">
+        <input type="hidden" id="id" value="" name="id">
+        <h1>Solicitud de nuevo cliente</h1>
+        <div class="sabios-row">
+            Complete estos datos para solicitar la apertura de su cuenta como cliente.<br>
+            Luego recibir&aacute;a un correo en el Email de Acceso, confirmando la<br>
+            apertura de su cuenta o la verificaci&oacute;n sobre alguno de los datos que <br>
+            ingres&oacute;, para que pueda acceder a nuestro catalogo.
+        </div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+            <div id="tabs-1">
+                <div class="sabios-row label"><label>Nombre Comercial</label></div>                
+                <div class="sabios-row">
+                    <input class="sabios-input" placeholder="Nombre" type="text" name="nombre" id="nombre" value="<?= $this->nombre ?>"/>
+                    <div class="error-field nombre-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Nombre Inv&aacute;lido<br></span><span class="white">Por favor verifique el nombre</span></div></div>
+                </div>        
+                <div class="sabios-row label"><label>Tipo de Cliente</label></div>
+                <div class="sabios-row">
+                    <div class="cliente-tipo">
+                        <div class="sabios-row"><div class="sabios-select sabios-input" id="talletipo"><span>Seleccione un Tipo</span><div class="down-arrow sabios-gradient"></div></div>
+                            <div class="error-field tipocliente-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Debe seleccionar una opci&oacute;n v&aacute;lida<br></span><span class="white">Intenta nuevamente</span></div></div>
+                            <input class="input-field" type="hidden" name="tipo_cliente_id" id="tipo_cliente_id" value="<?= (isset($this->tipo_cliente_id) ? $this->tipo_cliente_id : "0") ?>"/>
+                        </div>                
+                        <div class="sabios-row">                
+                            <div class="sabios-row select-container">
+                                <div class="sabios-input sabios-option first-option" value="0">Seleccione un Tipo</div> 
+                                <?php foreach ($this->clientesTipo as $ct) : ?>
+                                    <div class="sabios-input sabios-option first-option" value="<?= $ct->id ?>"><?= $ct->nombre ?></div> 
+                                <?php endforeach; ?>                               
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div id="tabs-2">
+                <div class="sabios-row label"><label>Email de Acceso:</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="login" type="text" name="email" id="email" value="<?= $this->email ?>"/>
+                    <div class="error-field email-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Email Inv&aacute;lido<br></span><span class="white">Por favor ingrese un email v&aacute;lido</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Password</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="password" type="password" name="password_" id="password_"/>
+                    <div class="error-field password-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Contrase&ntilde;a Inv&aacute;lida<br></span><span class="white">Por favor ingrese una contrase&ntilde;a v&aacute;lida</span></div></div>
+                </div>
+                <div class="sabios-row label"><label>Repite Password</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="password" type="password" name="repite_password" id="repite_password"/>
+                    <div class="error-field repite-password-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Contrase&ntilde;as no Coinciden<br></span><span class="white">Por favor ingrese una contrase&ntilde;a v&aacute;lida</span></div></div>
+                </div>
+            </div>
+ 
+            <div id="tabs-4">
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row label"><label>Datos para env&iacute;os de pedidos</label></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>                  
+                <div class="sabios-row label"><label>Recibe</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Nombre / Nombres" type="text" name="enviar_nombres" id="enviar_nombres" value="<?= $this->enviar_nombres ?>"/>
+                    <div class="error-field enviar_nombres-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>  
+                <div class="sabios-row label"><label>Direcci&oacute;n</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Calle Número CP Ciudad Pais / Lugar de Retiro" type="text" name="direccion_envio" id="direccion_envio" value="<?= $this->direccion_envio ?>"/>
+                    <div class="error-field direccion_envio-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>                
+                <div class="sabios-row label"><label>Empresa de Transporte de Preferencia</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Empresa / Empresas" type="text" name="empresa_preferencia" id="empresa_preferencia" value="<?= $this->empresa_preferencia ?>"/>
+                    <div class="error-field empresa_preferencia-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>                
+                <div class="sabios-row label"><label>Información sobre Seguro</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="Porcentaje de valor asegurado (vacio = no)" type="text" name="porcentaje_asegurado" id="porcentaje_asegurado" value="<?= $this->porcentaje_asegurado ?>"/>
+                    <div class="error-field porcentaje_asegurado-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">N&uacute;mero Inv&aacute;lido<br></span><span class="white">Por favor ingrese un sms v&aacute;lido</span></div></div>
+                </div>                
+
+            </div>
+            <div id="tabs-5"> 
+                <div id="personal_container">
+                    <div class="personal" id="personal_1">
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row label personal-label"><label>Personal <span>1</span></label></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row"></div>
+                        <div class="sabios-row label"><label>Nombre</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Nombre" type="text" name="personal[1][nombre]" value=""/>
+                        </div>                
+                        <div class="sabios-row label"><label>Cargo</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Cargo Descripción" type="text" name="personal[1][cargo]" value=""/>
+                        </div>                
+                        <div class="sabios-row label"><label>Telefono 1</label></div>
+                        <div class="sabios-row"><input class="sabios-input" placeholder="Ingrese Número" type="text" name="personal[1][telefono1]" value=""/>
+                        </div>                
+                     </div>
+                </div>
+
+            </div>
+
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row">
+            <input class="sabios-submit" type="submit" id="enviar" value="Guardar" name="enviar">
+        </div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-row"></div>
+
+    </form>
+</div>

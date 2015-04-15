@@ -1,0 +1,33 @@
+.listar-ventas1 {
+height: 730pxpx;
+width: 718pxpx;
+border: 1px;
+solid: #A4A5A5;
+-webkit-border-radius: 6px; /* Android ≤ 1.6, iOS 1-3.2, Safari 3-4 */
+border-radius: 6px;
+color: #A4A5A5;
+}
+(aclaracion: no se que es "/* Android ≤ 1.6, iOS 1-3.2, Safari 3-4 */")
+.titulo-input1 {
+font-family: helveticaneuelight;
+font-size: 18px;
+color: #2a1b78;
+}
+.listar-ventas2 {
+margin-left: 0;
+width: 357px;
+}
+.listar-ventas3 {
+margin-right: 0;
+width: 357px;
+}
+(aclaracion: con el "margin-right: 0" es con la intencion que este div queda al lado del div que esta en el mismo div y que usa la otra clase con "margin-left: 0")
+.listar-ventas4 {
+height: 125px;
+width: 960px;
+border: 1px;
+solid: #A4A5A5;
+-webkit-border-radius: 6px; /* Android ≤ 1.6, iOS 1-3.2, Safari 3-4 */ 
+border-radius: 6px;
+color: #A4A5A5;
+}

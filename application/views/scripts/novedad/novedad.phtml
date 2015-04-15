@@ -1,0 +1,22 @@
+<div id="container">
+    
+    
+    
+    <?php $novs= array(1,2,3,4,5,6,7,8,9);
+    
+    foreach($novs as $nov) :?>
+        <div id="novedad_<?=$nov?>" class="novedad">
+                    <?php if(isset($this->novedades[$nov])) :?>
+                        
+                        <img src="/files/<?=$this->novedades[$nov]['url']?>.jpg"/>
+            
+                    <?php endif; ?>
+
+        </div>           
+    
+    
+    <?php endforeach;?>
+    
+   
+    
+</div>

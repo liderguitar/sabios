@@ -1,0 +1,108 @@
+<div class="stock-filters sabios-row">
+    <div class="sabios-row" style="padding-top: 10px">
+		<div class="sabios-label label-codigo">Buscar Palabra:</div>
+        <div class="sabios-label label-categoria2">Tipo de Cliente:</div>
+    </div>    
+    <div class="sabios-filters">
+        <form type="post" id="filter-form">
+            <div class="inline2">
+                <input class="sabios-input" type="text" placeholder="Nombre" id="nombre" value="<?= $this->nombre ?>" name="nombre">
+            </div>
+            <div class="inline2">
+
+                <div class="cliente_tipo_id">
+                    <div class="sabios-row sabios-select-title"><div class="sabios-select sabios-input" id="cats"><span>Tipo</span><div class="down-arrow sabios-gradient"></div></div>
+                        <input class="input-field" type="hidden" text="<?= isset( $this->clienteTipoNombre) ? $this->clienteTipoNombre[0]->nombre : '' ?>" name="cliente_tipo_id" id="cliente_tipo_id" value="<?= (isset($this->cliente_tipo_id) ? $this->cliente_tipo_id : "0") ?>"/>
+                    </div>                
+                    <div class="sabios-row">                
+                        <div class="sabios-row select-container">
+                            <div class="sabios-input sabios-option first-option" value="0">Tipo</div>
+                            <?php foreach ($this->clienteTipos as $clienteTipo) : ?>
+                                <div class="sabios-input sabios-option first-option" value="<?= $clienteTipo->id ?>"><?= $this->escape($clienteTipo->nombre) ?></div> 
+                            <? endforeach; ?>
+                        </div>
+                    </div>
+                </div>  
+            </div>    
+            <div class="inline2" style="float:right">
+                <input type="submit" class="sabios-submit submit-filter" name="submit" value="Filtrar">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="vertical-align:top"	>
+	<div style="margin-left: 10px; margin-top: 5px">
+		<div class="sabios-row">
+				<div class="sabios-table-head" style="height: 40px">
+				</div>
+				<div class="sabios-table-tbody" style="height: 55px">
+					<div style="margin-left: 10px">
+						<div style="width: 40%" class="sabios-table-td label2">
+						Buscar Palabra:
+						<input id="nombre" style="width: 85%" class="sabios-input2" type="text" value="" name="nombre" placeholder="Ingrese Palabra">
+						</div>
+						<div style="width: 40%" class="sabios-table-td label2 ">
+						Tipo de Cliente
+						<div id="talletipo" class="sabios-select sabios-input2" style="width: 85%">
+							<span>Seleccione un Tipo</span>
+							<div class="down-arrow sabios-gradient">
+							</div>
+						</div>
+						<div class="error-field tipocliente-error">
+							<div class="error-arrow">
+							</div>
+							<div class="sabios-error">
+							<span class="red">Debe seleccionar una opción válida<br></span>
+							<span class="white">Intenta nuevamente</span>
+							</div>
+						</div>
+						<input type="hidden" value="0" id="tipo_cliente_id" name="tipo_cliente_id" class="input-field">
+                        </div>
+						<div style="width: 20%" class="sabios-table-td">
+						<input id="viajantes" class="sabios-submit2 small-submit2" type="button" name="viajantes" value="BUSCAR" style="margin-top: 20px">
+						</div>
+					</div>
+				</div>
+				<div class="sabios-table-tfooter" style="height: 10px"> 
+				</div>
+		</div>
+		<div class="sabios-row" style="margin-top: 10px">
+				
+					<div class="sabios-table-head sabios-back-gradient"> 
+						<div class="sabios-table-tr sabios-table">
+							<div style="width: 10%" class="sabios-table-td">&nbspID</div>
+							<div style="width: 38%" class="sabios-table-td">Nombre</div>
+							<div style="width: 38%" class="sabios-table-td">Tipo de Cliente</div>
+							<div style="width: 7%" class="sabios-table-td">Editar</div>
+							<div style="width: 7%" class="sabios-table-td">Borrar</div>
+						</div>
+					</div>
+				
+				<div class="sabios-table-tbody">
+							<div class="sabios-table-tr">
+								<div style="width: 10%" class="sabios-table-td">(PHP ID)</div>
+								<div style="width: 38%" class="sabios-table-td">(PHP Nombre)</div>
+								<div style="width: 38%" class="sabios-table-td">(PHP Tipo de Cliente)</div>
+								<div style="width: 7%" class="sabios-table-td">
+									<div class="sabios-table-td" style="width: 13%;padding-left: 2%">
+										<a href="/categoria/edit/1">
+											<span class="sabios-edit"></span>
+										</a>
+									</div>
+								</div>
+								<div style="width: 7%" class="sabios-table-td">
+									<div class="sabios-table-td" style="width: 13%;padding-left: 2%">
+										<a onclick="confirmDelete('1');" href="#">
+											<span class="sabios-delete"></span>
+										</a>
+									</div>
+								</div>
+							</div>
+				</div>
+				<div class="sabios-table-tfooter">
+							<div class="sabios-table-tr"></div>
+				</div>
+		</div>
+	</div>
+</div>

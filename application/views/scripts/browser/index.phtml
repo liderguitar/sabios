@@ -1,0 +1,16 @@
+<div class="browser">
+<?php 
+$this->headScript()->offsetSetFile(501, PUBLIC_FOLDER . '/js/browser.js');
+$cont=0;
+foreach ($this->files as $file) {
+	
+	?>
+	<div class="thumb" id="thumb_<?= $cont ?>">
+	 	<img src="<?= PUBLIC_FOLDER . "/upload/" . $file ?>" height="100"/>
+	 	<div class="fileName"><?= $file ?></div>
+	</div>
+	<?php 	
+    $cont++;
+}
+?>
+</div>

@@ -1,0 +1,126 @@
+<?php
+$this->headScript()->offsetSetFile(537, PUBLIC_FOLDER .  '/js/libro-edit.js');
+$this->headScript()->offsetSetFile(536, PUBLIC_FOLDER .  '/js/libro.js');
+
+?>
+<div class="rounded-container">
+<h1><?=stripslashes ( $this->form->titulo->getValue())?></h1>
+
+	<form action="" method="post" enctype="multipart/form-data">
+		<div class="form-container">
+				<?=$this->form->id;?>
+				<input type="hidden" id="page" value="<?= $this->page ?>"/>
+				<?=$this->form->postId;?>
+				<?=$this->form->editorialId;?>
+				<?=$this->form->generoId;?>	
+				<?=$this->form->autorId;?>						
+				<?=$this->form->urlCode;?>	
+				<?=$this->form->fotoname;?>
+				<?=$this->form->fotoname2;?>												
+				<?=$this->form->fotoname3;?>
+				<?=$this->form->fotoname4;?>
+				<?=$this->form->fotoname5;?>
+												
+				<div class="line-fields">
+					<div class="label">Titulo:</div>
+					<div class="field"><?= stripslashes ( $this->form->titulo)?></div>
+				</div>
+				<div class="line-fields">
+					<div class="label">Descripcion:</div>
+					<div class="field"><?=$this->form->descripcion ?></div>
+				</div>
+				<div class="line-fields">
+					<div class="label">Autor:</div>
+					<div class="field"><?=$this->form->autor ?></div>
+				
+				</div>	
+				<div class="line-fields">
+					<div class="label">Editorial:</div>
+					<div class="field"><?=$this->form->editorial ?>
+					</div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Genero:</div>
+					<div class="field"><?=$this->form->genero ?></div>
+				</div>	
+				<div class="line-fields">
+					<div class="label">Tapa:</div>
+					<div class="field"><?=$this->form->encuadernacion ?></div>
+				</div>		
+				<div class="last-line leftclm">
+					<div class="line-label first">A&ntilde;o:</div>
+					<div class="field-label"><?=$this->form->anio ?></div>
+					<div class="line-label">Stock:</div>
+					<div class="field-label"><?=$this->form->stock ?></div>
+					<div class="line-label">Precio:</div>
+					<div class="field-label"><?=$this->form->precio ?></div>	
+					<div class="line-label">Tomos:</div>
+					<div class="field-label"><?=$this->form->tomos ?></div>	
+					<div class="checkboxes">
+					    <div class="field-label"><label for="oferta">Oferta</label></div>
+						<div class="line-label"><?=$this->form->oferta ?></div>
+						<div class="field-label"><label for="destacado">Destacado</label></div>
+						<div class="line-label"><?=$this->form->destacado ?></div>
+						<div class="field-label"><label for="novedad">Novedad</label></div>
+						<div class="line-label"><?=$this->form->novedad ?></div>
+						<div class="field-label"><label for="mostrarPrecio">Mostrar</label></div>
+						<div class="line-label"><?=$this->form->mostrarPrecio ?></div>						
+					</div>					
+				</div>						
+				<div class="line-fields">
+					<div class="label">Foto:</div>
+					<div id="container-0" class="foto-container rounded first">
+					    <div class="close"></div>
+					    <?php if($this->form->fotoname->getValue()) {?>					    
+						<img src="<?= $this->form->fotoname->getValue() ? PUBLIC_FOLDER . "/files/" . $this->form->fotoname->getValue() : PUBLIC_FOLDER . '/images/sin-imagen.jpg' ?>" width="100px"/>
+						<?php }?>
+						<div class="foto-file"><input id="foto-0" type="file" name="foto-0" style="display:<?php echo $this->form->fotoname->getValue() ? "none" : "block"; ?>"></div>
+						
+					</div>
+					<div id="container-1" class="foto-container rounded">
+					    <div class="close"></div>
+					    <?php if($this->form->fotoname2->getValue()) {?>
+							<img src="<?= $this->form->fotoname2->getValue() ? PUBLIC_FOLDER . "/files/" . $this->form->fotoname2->getValue() : PUBLIC_FOLDER . '/images/sin-imagen.jpg' ?>" width="100px"/>
+						<?php }?>
+						<div class="foto-file"><input id="foto-1" type="file" name="foto-1" style="display:<?php echo $this->form->fotoname2->getValue() ? "none" : "block"; ?>"></div>
+						
+					</div>
+				
+					<div id="container-2" class="foto-container rounded">
+					    <div class="close"></div>
+					    <?php if($this->form->fotoname3->getValue()) {?>					    
+						<img src="<?= $this->form->fotoname3->getValue() ? PUBLIC_FOLDER . "/files/" . $this->form->fotoname3->getValue() : PUBLIC_FOLDER . '/images/sin-imagen.jpg' ?>" width="100px"/>
+						<?php }?>						
+						<div class="foto-file"><input id="foto-2" type="file" name="foto-2" style="display:<?php echo $this->form->fotoname3->getValue() ? "none" : "block"; ?>"></div>
+					</div>
+					<div id="container-3" class="foto-container rounded">
+					    <div class="close"></div>
+					    <?php if($this->form->fotoname4->getValue()) {?>					    
+						<img src="<?= $this->form->fotoname4->getValue() ? PUBLIC_FOLDER . "/files/" . $this->form->fotoname4->getValue() : PUBLIC_FOLDER . '/images/sin-imagen.jpg' ?>" width="100px"/>
+						<?php }?>						
+						<div class="foto-file"><input id="foto-3" type="file" name="foto-3" style="display:<?php echo $this->form->fotoname4->getValue() ? "none" : "block"; ?>"></div>
+						
+					</div>
+					<div id="container-4" class="foto-container rounded">
+					    <div class="close"></div>
+					    <?php if($this->form->fotoname5->getValue()) {?>					    
+						<img src="<?= $this->form->fotoname5->getValue() ? PUBLIC_FOLDER . "/files/" . $this->form->fotoname5->getValue() : PUBLIC_FOLDER . '/images/sin-imagen.jpg' ?>" width="100px"/>
+						<?php }?>						
+						<div class="foto-file"><input id="foto-4" type="file" name="foto-4" style="display:<?php echo $this->form->fotoname5->getValue() ? "none" : "block"; ?>"></div>
+					</div>
+				</div>			
+				<div class="last-line">
+					<div class="field-label valoracion"><?=$this->form->valoracion ?></div>
+				</div>				
+				<div class="line-fields">
+					<div class="submit"><?=$this->form->agregar ?></div>
+				</div>					
+
+
+		</div>
+	</form>
+
+</div>
+<div id="dialog" title="Basic dialog">
+	<div id="inner-dialog"></div>
+</div>

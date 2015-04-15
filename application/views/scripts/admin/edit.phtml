@@ -1,0 +1,6 @@
+<?php
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/ckeditor/ckeditor.js');
+$this->headScript()->offsetSetFile(600, PUBLIC_FOLDER . '/js/articulo-add.js');
+
+echo $this->partial( 'partials/' . $this->className . '/edit.phtml', array('form' => $this->form, 'messages' => $this->messages, 'page' => $this->page));
+?>

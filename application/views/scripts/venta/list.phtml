@@ -1,0 +1,182 @@
+
+<?php $this->headScript()->offsetSetFile(1009, PUBLIC_FOLDER . '/js/ventalist.js'); ?>
+
+<div class="sabios-row left-column" style=vertical-align:top">
+    <form id="filtro-venta" method="POST">
+        <div class="inline2 sabios-label sabios-row"><h1>Listar Ventas:</h1></div>
+        <div class="sabios-row separador"></div>
+        <div class="sabios-row"></div>
+        <div class="sabios-label sabios-table-tr ">
+            <div class="txt-bubmit1 sabios-table-td">
+                FECHA:
+            </div>
+            <div class="sabios-table-td">
+                <a href="#" id="but_desde" class="sabios-submit submit-filter" value="Desde:">Desde:</a>
+            </div>
+            <div class="sabios-table-td date-bubmit">
+                <input class="sabios-input fecha-input" id="fecha_desde" name="fecha_desde" value="<?= $this->fecha_desde ?>" readonly="readonly"> 
+            </div>
+            <div class="sabios-table-td">
+                <a href="#" id="but_hasta" class="sabios-submit submit-filter" value="Desde:">Hasta:</a>
+            </div>
+            <div class="sabios-table-td date-bubmit">
+                <input class="sabios-input fecha-input"  id="fecha_hasta" name="fecha_hasta" value="<?= $this->fecha_hasta ?>" readonly="readonly"> 
+            </div>
+            <div class="separador2"></div>
+            <div class="sabios-table-td txt-bubmit2" > 
+                FILTROS:
+            </div>
+
+            <a href="#" class="sabios-submit submit-filter" id="mostrar" value="Mostar">Mostar</a>
+            <a href="#" class="sabios-submit submit-filter" id="ocultar" value="Ocultar">Ocultar</a>
+            <input type="submit" class="sabios-submit submit-filter" id="submit" value="Filtrar">
+        </div>
+        <div id="filtros-div" class="sabios-row sabios-table hide" style="margin-top: 30px; width: 350px">
+            <div class="sabios-table-head2"> 
+                <div class="sabios-table-tr2 sabios-table" style="width: 350px">
+                    <div style="width: 210px" class="sabios-table-td">Estados de Venta:</div>
+                    <div style="width: 70px" class="sabios-table-td">Mostrar:</div>
+                    <div style="width: 70px" class="sabios-table-td">Subtotal:</div>
+                </div>
+            </div>
+            <div class="sabios-table-tbody">
+
+                <?php foreach ($this->ventaEstados as $ve) : ?>
+
+                    <div class="sabios-table-tr2 sabios-table" style="width: 350px">
+                        <div style="width: 210px" class="sabios-table-td"><?= $ve->nombre; ?></div>
+                        <div style="width: 70px" class="sabios-table-td"><span class="sabios-check sabios-sin-tilde" value=""><input type="hidden" name="estado_mostrar_<?= $ve->id; ?>" value="0"></span></div>
+                        <div style="width: 70px" class="sabios-table-td"><span class="sabios-check sabios-sin-tilde" value=""><input type="hidden" name="estado_subtotal_<?= $ve->id; ?>" value="0"></span></div>
+                    </div>
+
+                <? endforeach; ?>
+
+                <div class="sabios-table-tr3 sabios-table" style="width: 347px">
+                    <div style="width: 207px" class="sabios-table-td">Formas de Pago</div>
+                    <div style="width: 70px" class="sabios-table-td">Mostrar:</div>
+                    <div style="width: 70px" class="sabios-table-td">Subtotal:</div>
+                </div>
+
+                <?php foreach ($this->formasDePago as $ve) : ?>
+
+                    <div class="sabios-table-tr2 sabios-table" style="width: 350px">
+                        <div style="width: 210px" class="sabios-table-td"><?= $ve->descripcion; ?></div>
+                        <div style="width: 70px" class="sabios-table-td"><span class="sabios-check sabios-sin-tilde" value=""><input type="hidden" name="fdp_mostrar_<?= $ve->id; ?>" value="0"></span></div>
+                        <div style="width: 70px" class="sabios-table-td"><span class="sabios-check sabios-sin-tilde" value=""><input type="hidden" name="fdp_subtotal_<?= $ve->id; ?>" value="0"></span></div>
+                    </div>
+
+                <? endforeach; ?>         
+
+
+                <div class="sabios-table-tr3 sabios-table" style="width: 347px">
+                    <div style="width: 207px" class="sabios-table-td">Vendedores:</div>
+                    <div style="width: 70px" class="sabios-table-td">Mostar:</div>
+                    <div style="width: 70px" class="sabios-table-td">Subtotal:</div>
+                </div>
+
+
+                <?php foreach ($this->vendedores as $ve) : ?>
+
+                    <div class="sabios-table-tr2 sabios-table" style="width: 350px">
+                        <div style="width: 210px" class="sabios-table-td"><?= $ve->nombre; ?></div>
+                        <div style="width: 70px" class="sabios-table-td"><span class="sabios-check sabios-sin-tilde" value=""><input type="hidden" name="vendedor_mostrar_<?= $ve->id; ?>" value="0"></span></div>
+                        <div style="width: 70px" class="sabios-table-td"><span class="sabios-check sabios-sin-tilde" value=""><input type="hidden" name="vendedor_subtotal_<?= $ve->id; ?>" value="0"></span></div>
+                    </div>
+
+                <? endforeach; ?>           
+
+            </div>
+            <div class="sabios-table-tfooter">
+                <div class="sabios-table-tr4"></div>
+            </div>
+        </div>
+        <div class="sabios-row"></div>
+        <div class="separador"></div>
+    </form>
+</div>
+
+
+
+
+<div class="sabios-row sabios-table left-column ventas-list" style="vertical-align:top">
+    <div class="inline label sabios-row"><label>Listado de Ventas:</label></div>
+    <div class="sabios-row"></div>
+    <div style="margin-left: 10px; margin-top: 5px">
+    </div>
+    <div class="sabios-row" style="margin-top: 10px">
+        <div class="sabios-table-head sabios-back-gradient"> 
+            <div class="sabios-table-tr sabios-table">
+                <div style="width: 3%" class="sabios-table-td">Nro</div>
+                <div style="width: 12%" class="sabios-table-td">Fecha</div>
+                <div style="width: 20%" class="sabios-table-td">Nombre de Cliente</div>
+                <div style="width: 27%" class="sabios-table-td">Estado</div>
+                <div style="width: 19%" class="sabios-table-td">Formas de Pago</div>
+                <div style="width: 9%" class="sabios-table-td">Importe</div>
+                <div style="width: 15%" class="sabios-table-td">Editar</div>
+            </div>
+        </div>
+        <div class="sabios-table-tbody">
+            <?php
+            $count = 0;
+
+            foreach ($this->ventas as $venta) :
+                // dump($venta->id);
+                $total = 0;
+                foreach ($venta->VentaDetalle as $detalle) {
+                    $total += $detalle->precioUnitario * $detalle->cantidad;
+                }
+                ?>
+                <div class="sabios-table-tr sabios-table <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div style="width: 3%" class="sabios-table-td"><?= $venta->id ?></div>
+                    <div style="width: 12%" class="sabios-table-td"><?= substr($venta->fecha, 0, 10) ?></div>
+                    <div style="width: 20%" class="sabios-table-td"><?= $venta->Cliente->nombre_comercial ?></div>
+                    <div style="width: 27%" class="sabios-table-td"><?= $venta->VentaEstado->nombre ?></div>
+                    <div style="width: 19%" class="sabios-table-td"><?= $venta->PagoTipo->descripcion ?></div>
+                    <div style="width: 9%" class="sabios-table-td right"><?= number_format($total, 2, ',', '.') ?></div>
+                    <div class="sabios-table-td edit"> <a href="/venta/edit/<?= $venta->id ?>"><span class="sabios-edit"></span></a></div>
+                </div>
+                <?php
+                $count++;
+            endforeach;
+            ?>
+        </div>
+        <div class="sabios-table-tfooter">
+            <div class="sabios-table-tr"></div>
+        </div>
+    </div>
+<?php
+echo $this->paginationControl($this->ventas, 'Sliding', '/partials/my_pagination_control_ventas.phtml', array()); ?>     
+</div>
+
+
+
+
+<?php
+$filtros = new Zend_Session_Namespace('filters');
+
+if (isset($filtros->filtros)) :
+    ?>
+
+    <script>
+        var filtros = <?= json_encode($filtros->filtros) ?>;
+    </script>
+
+<?php endif; ?>
+
+<script>
+    $('#fecha_desde').datepicker({dateFormat: 'dd-mm-yy'});
+    $('#fecha_hasta').datepicker({dateFormat: 'dd-mm-yy'});
+    $('#but_desde').click(function()
+    {
+        $('#fecha_desde').datepicker("show");
+    });
+    $('#but_hasta').click(function()
+    {
+        $('#fecha_hasta').datepicker("show");
+    });
+
+</script>
+
+
+
+

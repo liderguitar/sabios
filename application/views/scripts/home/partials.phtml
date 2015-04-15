@@ -1,0 +1,6 @@
+<table>
+<?php
+//echo $this->partial('index/_nombres.phtml', $this->nombres);
+echo $this->partialLoop('index/_nombresLoop.phtml', $this->nombres);
+?>
+</table>

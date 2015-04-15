@@ -1,0 +1,66 @@
+<?php
+$this->headScript()->offsetSetFile(600, PUBLIC_FOLDER . '/js/libro.js');
+$this->headScript()->offsetSetFile(605, PUBLIC_FOLDER . '/js/libro-list.js');
+
+$this->headLink()->offsetSetStylesheet(900, PUBLIC_FOLDER . '/css/table.css');
+$locale = new Zend_Locale('de_AT');
+?>
+<input type="hidden" id="page" value="<?= $this->page ?>"/>
+<div class="rounded-container">
+<div class="filter-container"><?= $this->filterForm;?></div>
+<table summary="Meeting Results" id="gradient-style">
+	<thead>
+	<tr>
+		<th scope="col"><a href="">Id</a></th>
+		<th scope="col"><a href="">Titulo</a></th>
+		<th scope="col"><a href="">G&eacute;nero</a></th>
+		<th scope="col"><a href="">Autor</a></th>
+		<th scope="col"><a href="">Usuario</a></th>
+		<th scope="col"><a href="">Precio</a></th>
+		<th scope="col" class="center"><a href="">Publicar</a></th>
+		<th scope="col" class="center"><a href="">Bloq</a></th>
+		<th scope="col" class="center"><a href="">Borrar</a></th>	
+		<th scope="col" class="center"><a href="">Editar</a></th>	
+		
+	</thead>	
+	<tfoot>
+		<tr>
+			<td colspan="10"></td>
+		</tr>
+	</tfoot>		
+		<?php 
+		foreach($this->objects as $articulo){
+		
+			$number = Zend_Locale_Format::toNumber($articulo->precio,
+                                       array('precision' => 2,
+                                             'locale' => $locale));
+
+			?>
+		<tr>
+			<td><a href=""><?= $articulo->id ?></a></td>
+			<td><a href=""><?= utf8_encode(stripslashes ( $articulo->titulo)) ?></a></td>
+			<td><a href=""><?= utf8_encode($articulo->Genero->nombre) ?></a></td>
+			<td><a href=""><?= utf8_encode($articulo->Autor->nombre) ?></a></td>			
+			<td><a href=""><?= utf8_encode($articulo->Post->Usuario_2->nombre) ?></a></td>
+			<td style="text-align: right" ><a href="">$<?= $number ?></a></td>
+			<td class="center"><div onClick="confirmPublicar('<?= $articulo->id ?>');"><img title="<?= $articulo->Post->publicado == "Y" ? "No publicar" : "Publicar"?>" height="20px" src="<?= $articulo->Post->publicado == "Y" ? PUBLIC_FOLDER . "/images/"."no_publicar.png" : PUBLIC_FOLDER . "/images/"."publicar.png" ?>"/></div></td>
+			<td class="center"><span class="ui-icon center  <?= $articulo->Post->blockUsuarioId == null ? "ui-icon-unlocked" : "ui-icon ui-icon-locked" ?>"></span></td>
+			<td class="center"><a href="#" onClick="confirmDelete('<?= $articulo->id ?>');"><span class="ui-icon center ui-icon-closethick"></span></a></td>
+			<td class="center"><a href="/admin/libro/edit/<?= $this->page ?>/<?= $articulo->id?>"><span class="ui-icon center ui-icon-pencil"></span></a></td>
+
+		</tr>
+		<?php
+		
+		}?>
+
+	</table>
+	<?php
+/*
+* Print the pagination of type , drop down or search type or of your choice.
+*/
+echo $this->paginationControl($this->objects,
+                                    'Sliding',
+                                    '/partials/my_pagination_control.phtml',
+									array('object' => $this->object)); ?>
+</div>
+<?php echo $this->partial( 'partials/dialog.phtml', array());?>

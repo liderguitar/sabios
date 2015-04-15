@@ -1,0 +1,74 @@
+<?php 
+$this->headScript()->offsetSetFile(533, PUBLIC_FOLDER .  '/js/frontpage.js');
+$this->headScript()->offsetSetFile(534, PUBLIC_FOLDER .  '/js/comentarioFrontpage.js');
+
+$this->headTitle(utf8_encode(strtoupper(stripslashes ( $this->libro->titulo))));
+
+
+?>
+<div class="first-row-view">
+	<div id="foto-description" class="foto-description">
+		<div class="foto-view-container"><img width="200px" src="http://mejorunlibro.com/<?= PUBLIC_FOLDER . "/files/" . $this->libro->foto ?>"/></div>
+		<div class="resumen">
+			<h2><?=utf8_encode(strtoupper(stripslashes ( $this->libro->titulo)))?></h2>
+			<p><h2><a href="#"><?=utf8_encode(strtoupper($this->libro->Genero->nombre))?></a></h2></p>
+			<p><?=$this->valoracion($this->libro) ?></p>
+			<p>AUTOR: <?=$this->autorLink($this->libro)?></p>
+			<p>TOMOS: <?=$this->libro->tomos ?></p>
+			<p>ENCUADERNACI&Oacute;N: <?=$this->libro->encuadernacion ?></p>
+		</div>
+	</div>
+</div>
+<div class="second-column">
+	<div class="carrito-container">
+	<?php if ($this->libro->mostrarPrecio == "Y") { ?>
+		<div class="carrito-image"><img <?=$this->onClickCarrito($this->libro)?> src="<?= PUBLIC_FOLDER . "/images/carrito_large.png" ?>"/></div>
+		<div class="precio">AR$ <?= $this->libro->precio ?></div>
+		<div class="pagos-envios"><a href="#">Ver Metodos de Pago y Env&iacute;os</a></div>
+		<?php } else {?><center>
+				         	<?= $this->agregarCarrito($this->libro) ?>
+				        </center>
+		<?php }?>
+	</div>
+	<div class="share-container">
+		<div>
+			<div class="share-text">Compartir:</div>
+				<div class="share-img">
+					<a href="<?= $this->shareFacebook($this->libro) ?>"><img src="<?= PUBLIC_FOLDER . "/images/share_facebook.png" ?>"/></a>
+					<a href="<?= $this->shareTwitter($this->libro) ?>"><img src="<?= PUBLIC_FOLDER . "/images/share_twitter.png" ?>"/></a>
+				</div>
+			</div>
+	</div>
+</div>
+<div class="descripcion-libro">
+	<p><?=utf8_encode(str_replace("\n", "<br/>",$this->libro->descripcion))?></p>
+</div>
+<div class="titleComents"><h3>Comenta</h3></div>
+
+<div id="nuevoComment" class="lefty clearly">
+	<div class="comentarioTextarea lefty"><textarea  id="texto_<?= $this->libro->id ?>" cols="100" rows="4" class="rounded"></textarea></div>
+	<div class="righty"><input class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only comentario-submit righty" type="button" id="editSubmit" onclick="comentarioSave('<?=$this->libro->id?>')" value="Comentar"/></div>
+</div>
+<div class="lefty clearly comment-icon">COMENTARIOS (<?=count($this->libro->ComentariosPorLibro) ?>)</div>
+<?php 
+
+foreach($this->libro->ComentariosPorLibro as $comentario) {
+	
+	$fecha = new Zend_Date($comentario->Comentario->Post->fechaCreacion, 'yyyy-mm-dd hh:ii:ss');
+	
+	$usuario = $comentario->Comentario->Post->toArray();
+	
+	$fecha = $fecha->toString("dd-mm-YYYY");
+	$user = Usuario::getById($usuario['usuarioId']);
+	if($comentario->Comentario->Post->publicado == "Y") {?> 
+	<div class="lefty clearly fecha"><?=$fecha?></div>
+	<div class="comentario">
+	<div class="comentario-text"><?php echo $this->escape(utf8_encode($comentario->Comentario->texto)); ?></div>
+	<div class="lefty clearly usuario"><?=$this->escape(utf8_encode($user->nick))?></div>
+	</div>
+	<?php }
+}
+?>
+
+
+

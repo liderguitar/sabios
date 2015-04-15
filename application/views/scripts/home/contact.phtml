@@ -1,0 +1,112 @@
+<?php
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/contacto.js');
+$this->headLink()->offsetSetStylesheet(657, PUBLIC_FOLDER . '/css/estilos_home.css');
+?>
+<div class="sabios-container">
+    <div class="logo">
+        <div class="sabios-row">
+            <a href="/">
+                <div class="logo-image">
+                    <img alt="Sabios - Gestión de negocios on-line" title="Sabios - Gestión de negocios on-line" src="/images/sabios-logo.png"/>
+                </div>
+            </a>    
+            <div class="home"></div>
+        </div>    
+    </div>
+    <div class="middle">
+        <div class="left-column">
+            <form method="post" action="" id="contact-form">
+                <h1>
+                    Formulario de contacto:
+                </h1>
+                <div class="sabios-row">
+                    <input class="sabios-input" placeholder="Nombre" type="text" name="nombre" id="nombre"/>
+                </div>
+                <div class="sabios-row">
+                    <input class="sabios-input" placeholder="Apellido" type="text" name="apellido" id="apellido"/>
+                </div>
+                <div class="sabios-row">
+                    <input class="sabios-input" placeholder="E-mail" type="text" name="email" id="email"/>
+                </div>
+                <div class="sabios-row">
+                    <textarea class="sabios-input" placeholder="Comentarios" type="text" name="comentarios" id="comentarios">
+                    </textarea>
+                </div>
+                <div class="sabios-row">
+                    <a href="index/register">
+                        <button class="login-submit">
+                            Enviar
+                        </button>
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="right-column">
+            <div class="errors">
+                <div class="sabios-row error-field nombre-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            Nombre Inv&aacute;lido
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingrese su Nombre
+                        </span>
+                    </div>
+                </div>
+                <div class="sabios-row error-field apellido-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            Apellido Inv&aacute;lido
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingrese su Apellido
+                        </span>
+                    </div>
+                </div>
+                <div class="sabios-row error-field email-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            Direcci&oacute;n de E-mail Inv&aacute;lida
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingrese una direcci&oacute;n de E-mail correcta
+                        </span>
+                    </div>
+                </div>
+                <div class="sabios-row error-field comentarios-error">
+                    <div class="error-arrow">
+                    </div>
+                    <div class="sabios-error">
+                        <span class="red">
+                            No hay comentarios
+                            <br>
+                        </span>
+                        <span class="white">
+                            Por favor ingresa un comentario
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="links">
+            <ul>
+                <a href="/home/contact"><li>Contacto</li></a>
+                <a href="/home/condiciones"><li>Condiciones</li></a>
+                <li>Privacidad</li>
+                <a href="/home/invest"><li>Inversionistas</li></a>
+            </ul>
+        </div>
+        <div class="social"><a href="https://www.facebook.com/sabiosweb"><img src="/images/fb.png"/></a><a href="https://twitter.com/sabiosweb"><img src="/images/tw.png"/></a></div>
+    </div>    
+</div>
