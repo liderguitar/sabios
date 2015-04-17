@@ -85,32 +85,45 @@ class HomeController extends My_Controller_Sabios {
                 $this->_helper->flashMessenger->setNamespace('error')->addMessage($mensaje);
             }
 
-
-
-
-            /*
-              $transport = new Zend_Mail_Transport_Smtp();
-              Zend_Mail::setDefaultTransport($transport);
-
-
-              $html = "Estimado " . $data['nombre'] . " " . $data['apellido'] . ", <br>
+            My_Function_Function::sendEmail(
+                array(
+                    "bodytext" => "Estimado " . $data['nombre'] . " " . $data['apellido'] . ", <br>
               &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirar su cuenta SABIOS gratuita:<br>
               <a href='http://sabiosweb.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
               http://sabiosweb.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
               Saludos Cordiales<br>
-              <a href='http://sabiosweb.com'>SABIOS</a><br>
-              <a href='http://sabiosweb.com/index/condiciones'>Condiciones</a> Privacidad";
+              <a href='http://sabbios.com'>SABIOS</a><br>
+              <a href='http://sabbios.com/index/condiciones'>Condiciones</a> Privacidad",
+                    "subject" => "Registro en Sabios",
+                    "email" => $data['email'],
+                    "name" => $newUser->nombre
+            ));
 
 
-              // mandar email!!
-              $mail = new Zend_Mail();
-              $mail->setBodyHtml($html);
-              $mail->setFrom('info@sabiosweb.com', 'Sabios');
-              $mail->addTo($data['email'], 'registro');
-              $mail->setSubject('Sabios - registro');
-              $mail->send();
 
-             */
+
+//              $transport = new Zend_Mail_Transport_Smtp();
+//              Zend_Mail::setDefaultTransport($transport);
+//
+//
+//              $html = "Estimado " . $data['nombre'] . " " . $data['apellido'] . ", <br>
+//              &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirar su cuenta SABIOS gratuita:<br>
+//              <a href='http://sabiosweb.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
+//              http://sabiosweb.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
+//              Saludos Cordiales<br>
+//              <a href='http://sabbios.com'>SABIOS</a><br>
+//              <a href='http://sabbios.com/index/condiciones'>Condiciones</a> Privacidad";
+//
+//
+//              // mandar email!!
+//              $mail = new Zend_Mail();
+//              $mail->setBodyHtml($html);
+//              $mail->setFrom('info@sabiosweb.com', 'Sabios');
+//              $mail->addTo($data['email'], 'registro');
+//              $mail->setSubject('Sabios - registro');
+//              $mail->send();
+
+
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Verifique su casilla de email para confirmar su registro.');
             return $this->_redirect("/home/?success=1");
         } else {
