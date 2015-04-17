@@ -89,7 +89,7 @@ class HomeController extends My_Controller_Sabios {
                 array(
                     "bodytext" => "Estimado " . $data['nombre'] . " " . $data['apellido'] . ", <br>
               &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirar su cuenta SABIOS gratuita:<br>
-              <a href='http://sabiosweb.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
+              <a href='http://sabibos.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
               http://sabiosweb.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
               Saludos Cordiales<br>
               <a href='http://sabbios.com'>SABIOS</a><br>
