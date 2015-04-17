@@ -117,10 +117,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 define("APPLICATION_NAME", $this->configuration->nombre);
             } else {
                 if (APPLICATION_ENV == 'production') {
-                    header('location: http://www.sabiosweb.com/home');
+                    header('location: http://www.sabbios.com/home');
                     die;
                 } else {
-                    header('location: http://www.sabiosweb.com/home');
+                    header('location: http://www.sabbios.com/home');
 
                     die('sin autorizacion');
                 }
