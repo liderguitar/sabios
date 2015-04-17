@@ -61,7 +61,7 @@ class CategoriaController extends My_Controller_Sabios {
         //die("nombre:".$this->view->nombre);
         $categorias = $this->filterCategorias($this->view->nombre, My_Function_Function::getCategoriaCombo());
        //die;
-        $adapter = new My_CategoriasPaginator($categorias);
+        $adapter = new My_Categoriaspaginator($categorias);
 
         $paginator = new Zend_Paginator($adapter);
         $paginator->setItemCountPerPage(8);
