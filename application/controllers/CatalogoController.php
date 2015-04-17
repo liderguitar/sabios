@@ -84,6 +84,10 @@ class CatalogoController extends My_Controller_Sabios {
     }
 
     public function categoriaAction() {
+
+        if(APPLICATION_ID == 'home'){
+            header('Location: /home');
+        }
         $this->view->id = $id = $this->_request->getParam('id', false);
         $cats = array();
         if (!$id) {
