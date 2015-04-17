@@ -115,6 +115,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 define("APPLICATION_SECRET", $this->configuration->app_secret);
                 define("APPLICATION_LOGO", $this->configuration->logo);
                 define("APPLICATION_NAME", $this->configuration->nombre);
+                if($this->configuration->estado == 'OFFLINE') {
+                    header('location: http://www.sabbios.com/home');
+
+                }
             } else {
                 if (APPLICATION_ENV == 'production') {
                     header('location: http://www.sabbios.com/home');
