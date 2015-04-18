@@ -8,7 +8,7 @@ class SuperadminController extends Zend_Controller_Action
 
     public function listAction(){
 
-        $adapter = Doctrine_Query::create()->from('Application')->where("app_id <>  'home'")->execute();
+        $adapter = new My_Paginator(Doctrine_Query::create()->from('Application')->where("app_id not in ('home','admin')"));
 
         $this->view->page = $this->_request->getParam('page');
         //die($this->view->page);

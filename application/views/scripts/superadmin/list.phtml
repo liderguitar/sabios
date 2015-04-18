@@ -1,9 +1,3 @@
-<script>
-    $(document).ready(function() {
-        Sabios.sabiosSelect(".cliente_tipo_id");
-    });
-</script>
-
 <div class="stock-filters sabios-row sabios-table" style="padding-top: 10px; padding-bottom: 5px">
      <div class="sabios-filters" >
         <form type="post" id="filter-form">
@@ -12,34 +6,10 @@
 					<label>Buscar Palabra:</label>
 				</div>
 				<div class="sabios-row">
-					<input class="sabios-input" type="text" placeholder="Nombre" id="nombre" value="<?= $this->nombre ?>" name="nombre">
+					<input class="sabios-input" type="text" placeholder="Nombre" id="nombre" value="" name="nombre">
 				</div>
 			</div>
-            <div class="inline" style="margin-left: 2px; width: 250px">
-                <div class="cliente_tipo_id">
-					<div class=" sabios-row label">
-						<label>Tipo de Cliente:</label>
-					</div>
-					<div class="sabios-row">
-						<div class="sabios-row sabios-select-title">
-							<div class="sabios-select sabios-input" id="cats">
-								<span>Tipo</span>
-								<div class="down-arrow sabios-gradient">
-								</div>
-							</div>
-							<input class="input-field" type="hidden" text="<?= isset( $this->clienteTipoNombre) ? $this->clienteTipoNombre[0]->nombre : '' ?>" name="cliente_tipo_id" id="cliente_tipo_id" value="<?= (isset($this->cliente_tipo_id) ? $this->cliente_tipo_id : "0") ?>"/>
-						</div>  
-					</div>	
-                    <div class="sabios-row">                
-                        <div class="sabios-row select-container">
-                            <div class="sabios-input sabios-option first-option" value="0">Tipo</div>
-                            <?php foreach ($this->clienteTipos as $clienteTipo) : ?>
-                                <div class="sabios-input sabios-option first-option" value="<?= $clienteTipo->id ?>"><?= $this->escape($clienteTipo->nombre) ?></div> 
-                            <? endforeach; ?>
-                        </div>
-                    </div>
-                </div>  
-            </div>    
+
             <div class="inline" style="float: left; margin-top: 26px; margin-left: 6px">
                 <input type="submit" class="sabios-submit submit-filter" name="submit" value="Filtrar">
             </div>
@@ -55,10 +25,10 @@
         <div class="sabios-table-head sabios-back-gradient">
             <div class="sabios-table-tr">
 
-                <div class="sabios-table-td" style="width: 10%">C&oacute;digo</div>
+                <div class="sabios-table-td" style="width: 10%">Id</div>
                 <div class="sabios-table-td" style="width: 25%">Nombre</div>
-                <div class="sabios-table-td" style="width: 25%">Tipo</div>
-                <div class="sabios-table-td" style="width: 24%">Estado</div>
+                <div class="sabios-table-td" style="width: 25%">Estado</div>
+                <div class="sabios-table-td" style="width: 24%">subdominio</div>
                 <div class="sabios-table-td" style="width: 8%">Editar</div>
                 <div class="sabios-table-td" style="width: 8%">Borrar</div>
 
@@ -68,14 +38,14 @@
         <div class="sabios-table-tbody">
             <?php
             $count = 0;
-            foreach ($this->objects as $cliente) :
+            foreach ($this->objects as $app) :
                 ?>
                 <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
-                    <div class="sabios-table-td" style="width: 10%"><a href=""><?= $cliente->id ?></a></div>
-                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $cliente->nombre_comercial ?></a></div>
-                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $cliente->ClienteTipo['nombre'] ?></a></div>
-                    <div class="sabios-table-td" style="width: 24%"><a href=""><?=  $cliente->ClienteEstado['descripcion'] ?></a></div>
-                    <div class="sabios-table-td" style="width: 8%"><a href="/cliente/edit/<?= $cliente->id ?>"><span class="sabios-edit"></span></a></div>
+                    <div class="sabios-table-td" style="width: 10%"><a href=""><?= $app->id ?></a></div>
+                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->nombre ?></a></div>
+                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->estado ?></a></div>
+                    <div class="sabios-table-td" style="width: 24%"><a href=""><?=  $app->subdominio ?></a></div>
+                    <div class="sabios-table-td" style="width: 8%"><a href="/superadmin/edit/<?= $app->id ?>"><span class="sabios-edit"></span></a></div>
                     <div class="sabios-table-td" style="width: 8%"><a onclick="confirmDelete('1');" href="#"><span class="sabios-delete"></span></a></div>
 				</div>
                 <?php
@@ -105,5 +75,3 @@
 <?php endif; ?>
     </div>
 </div>
-<?php
-echo $this->paginationControl($this->objects, 'Sliding', '/partials/my_pagination_control_cliente.phtml', array( 'nombre'=> $this->nombre, 'tipo' => $this->cliente_tipo_id)); ?> 
