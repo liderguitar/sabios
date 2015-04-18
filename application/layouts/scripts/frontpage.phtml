@@ -1,6 +1,7 @@
 <?php
 $this->headScript()->offsetSetFile(101, PUBLIC_FOLDER . '/js/validation.js');
 echo $this->doctype();
+$menuId = APPLICATION_ID == 'admin' ? 3 : 1;
 ?>
 
 <html>
@@ -28,7 +29,9 @@ echo $this->doctype();
                     <td width="710" align="right" class="">
                         <div class="dashboard">
                             <div class="newline">Bienvenido, <?= $this->user ?></div>
-                            <div class="newline">Tipo de Actividad: Sabios Textil y Calzado</div>
+                            <?php if(APPLICATION_ID !== 'admin') :?>
+                                <div class="newline">Tipo de Actividad: Sabios Textil y Calzado</div>
+                            <?php endif;?>
                             <div class="newline">Versi&oacute;n: 1.0</div>
                             <div class="newline"><div style="float:left;">Hora:</div><div id="tiempo"></div></div>
                             <div class="newline"><a href="">Home</a> | <a href="/usuario/logout">Cerrar Sessión </a></div>
@@ -55,7 +58,7 @@ echo $this->doctype();
 
                                                             <div class="menu2" id="menu-principal" style="display: block;">
                                                                 <?php
-                                                                echo '<ul>' . My_Function_Function::getMenuHtml() . '</ul>';
+                                                                echo '<ul>' . My_Function_Function::getMenuHtml(0,0,$menuId) . '</ul>';
                                                                 ?>
                                                             </div>
                                                             <br><br><br><br><br><br>
