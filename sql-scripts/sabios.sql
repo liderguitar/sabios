@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 21-10-2014 a las 16:16:41
--- Versión del servidor: 5.5.32
--- Versión de PHP: 5.4.16
+-- Servidor: localhost
+-- Tiempo de generación: 17-04-2015 a las 23:02:01
+-- Versión del servidor: 5.5.41-0ubuntu0.14.04.1
+-- Versión de PHP: 5.5.9-1ubuntu4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sabios`
 --
-CREATE DATABASE IF NOT EXISTS `sabios` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `sabios`;
 
 -- --------------------------------------------------------
 
@@ -41,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `alerta_emails` (
 --
 
 INSERT INTO `alerta_emails` (`id`, `app_id`, `email1`, `email2`) VALUES
-(1, '36dd07ce38b167636f2b1fe96bb44ee6', 'liderguitar@gmail.com', 'lider@gmail.com');
+(1, '36dd07ce38b167636f2b1fe96bb44ee6', 'liderguitar@gmail.com', 'pepito@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -66,20 +64,25 @@ CREATE TABLE IF NOT EXISTS `application` (
   `responsable_email` varchar(250) NOT NULL,
   `responsable_telefono` varchar(250) NOT NULL,
   `responsable_direccion` varchar(250) NOT NULL,
+  `logo` varchar(250) NOT NULL,
+  `email2` varchar(250) DEFAULT NULL,
+  `email3` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE` (`subdominio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `application`
 --
 
-INSERT INTO `application` (`id`, `app_id`, `nombre`, `template`, `estado`, `publicFolder`, `subdominio`, `app_secret`, `auth_token`, `auth_token_expires`, `tipo_actividad`, `web`, `responsable_nombre`, `responsable_email`, `responsable_telefono`, `responsable_direccion`) VALUES
-(1, '04f50f7dfc94e524e2fc6ce675663c1d', 'MottaCo', 'admin', 'ONLINE', '', 'motta', '11d54b904e378009ce0b009cd7041a15', 'MTI3LjAuMC4xMjAxMzEyMDIxODQ3NDg=', '2013-12-02 18:47:48', '', '', '', '', '', ''),
-(2, '221f67098b91c66830d0ec9b9305f510', 'Artesanias', 'admin', 'ONLINE', '', 'artesanias', 'd4b426ca4bd99cd61ebfbabd04ae7d4f', NULL, NULL, '', '', '', '', '', ''),
-(3, '04f50f7dfc94e524e2fc6ce675663c1d', 'API', 'admin', 'ONLINE', '', 'api', NULL, NULL, NULL, '', '', '', '', '', ''),
-(4, 'home', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', ''),
-(6, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepito', '', 'ONLINE', NULL, 'pepito', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.pepito.com', 'gustavo', 'liderguitar@gmail.com', '456456456', 'lkdflgkdfg');
+INSERT INTO `application` (`id`, `app_id`, `nombre`, `template`, `estado`, `publicFolder`, `subdominio`, `app_secret`, `auth_token`, `auth_token_expires`, `tipo_actividad`, `web`, `responsable_nombre`, `responsable_email`, `responsable_telefono`, `responsable_direccion`, `logo`, `email2`, `email3`) VALUES
+(1, '04f50f7dfc94e524e2fc6ce675663c1d', 'MottaCo', 'admin', 'ONLINE', '', 'motta', '11d54b904e378009ce0b009cd7041a15', 'MTI3LjAuMC4xMjAxMzEyMDIxODQ3NDg=', '2013-12-02 18:47:48', '', '', '', '', '', '', '', NULL, NULL),
+(2, '221f67098b91c66830d0ec9b9305f510', 'Artesanias', 'admin', 'ONLINE', '', 'artesanias', 'd4b426ca4bd99cd61ebfbabd04ae7d4f', NULL, NULL, '', '', '', '', '', '', '', NULL, NULL),
+(3, '04f50f7dfc94e524e2fc6ce675663c1d', 'API', 'admin', 'ONLINE', '', 'api', NULL, NULL, NULL, '', '', '', '', '', '', '', NULL, NULL),
+(4, 'home', 'Sabbios', '', 'ONLINE', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', '', 'logo.png', NULL, NULL),
+(6, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepito', '', 'ONLINE', NULL, 'pepito', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.pepito.com', 'gustavo', 'pepito@gmail.com', '456456456', 'lkdflgkdfg', 'logo.png', NULL, NULL),
+(7, 'c96bd135ae37d6153418d5dd766f9d70', 'GanjaStore', '', 'ONLINE', NULL, 'GanjaStore', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.popo.com', 'pepe', 'lider@sdfsd.com', '23423423423', 'cuchacuca 456', '', NULL, NULL),
+(10, 'f50863d2cc199ac104dbdf601b5bd3fd', 'charuto', '', 'ONLINE', NULL, 'charuto', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.charuto.com', '', 'lider@dgf.com', '', '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -122,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `auditoria` (
   `data_new` text,
   `data_old` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=164 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=171 ;
 
 --
 -- Volcado de datos para la tabla `auditoria`
@@ -292,7 +295,14 @@ INSERT INTO `auditoria` (`id`, `app_id`, `id_usuario`, `entidad`, `id_entidad`, 
 (160, '36dd07ce38b167636f2b1fe96bb44ee6', 42, 'cliente', 13, 'edit', '2014-09-08 09:57:59', '[]', '[]'),
 (161, '36dd07ce38b167636f2b1fe96bb44ee6', 42, 'cliente', 13, 'edit', '2014-09-08 09:59:50', '[]', '[]'),
 (162, '36dd07ce38b167636f2b1fe96bb44ee6', 42, 'cliente', 16, 'add', '2014-09-08 10:38:16', '[]', '[]'),
-(163, '36dd07ce38b167636f2b1fe96bb44ee6', 42, 'cliente', 15, 'edit', '2014-09-08 10:59:12', '[]', '[]');
+(163, '36dd07ce38b167636f2b1fe96bb44ee6', 42, 'cliente', 15, 'edit', '2014-09-08 10:59:12', '[]', '[]'),
+(164, '36dd07ce38b167636f2b1fe96bb44ee6', 0, 'catalogo', 17, 'registro', '2015-02-03 22:16:05', '[]', '[]'),
+(165, '36dd07ce38b167636f2b1fe96bb44ee6', 0, 'catalogo', 18, 'registro', '2015-02-03 22:37:23', '[]', '[]'),
+(166, '36dd07ce38b167636f2b1fe96bb44ee6', 0, 'catalogo', 19, 'registro', '2015-02-03 22:46:48', '[]', '[]'),
+(167, '36dd07ce38b167636f2b1fe96bb44ee6', 0, 'catalogo', 20, 'registro', '2015-02-03 22:51:39', '[]', '[]'),
+(168, '36dd07ce38b167636f2b1fe96bb44ee6', 0, 'catalogo', 21, 'registro', '2015-02-03 22:54:26', '[]', '[]'),
+(169, '36dd07ce38b167636f2b1fe96bb44ee6', 0, 'catalogo', 22, 'registro', '2015-02-04 11:25:41', '[]', '[]'),
+(170, '36dd07ce38b167636f2b1fe96bb44ee6', 0, 'catalogo', 23, 'registro', '2015-02-04 11:30:01', '[]', '[]');
 
 -- --------------------------------------------------------
 
@@ -332,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `borrado` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `app_id` (`app_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Volcado de datos para la tabla `categoria`
@@ -353,7 +363,8 @@ INSERT INTO `categoria` (`id`, `app_id`, `nombre`, `parent_id`, `prioridad`, `bo
 (12, '36dd07ce38b167636f2b1fe96bb44ee6', 'Cuello en V', 5, 0, 'N'),
 (13, '36dd07ce38b167636f2b1fe96bb44ee6', 'Cuello en U', 5, 0, 'N'),
 (19, '36dd07ce38b167636f2b1fe96bb44ee6', 'Cuello Mao', 0, 0, 'N'),
-(20, '36dd07ce38b167636f2b1fe96bb44ee6', 'Zapatillas', 1, 0, 'N');
+(20, '36dd07ce38b167636f2b1fe96bb44ee6', 'Zapatillas', 1, 0, 'N'),
+(21, 'c96bd135ae37d6153418d5dd766f9d70', 'Hombre', 0, 0, 'N');
 
 -- --------------------------------------------------------
 
@@ -427,17 +438,24 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   KEY `app_id` (`app_id`),
   KEY `estado_id` (`estado_id`),
   KEY `viajante_id` (`viajante_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
 INSERT INTO `cliente` (`id`, `app_id`, `nombre_comercial`, `tipo`, `telefono1`, `telefono2`, `usuario_id`, `sms1`, `sms2`, `sms3`, `email1`, `email2`, `email3`, `empresa_de_preferencia`, `asegurado`, `direccion_de_envio`, `enviar_a_nombre_de`, `razon_social`, `tipo_contribucion`, `cuit`, `provincia_id`, `localidad`, `muestra_precio`, `aplica_iva`, `habilita_acceso_pedidos`, `borrado`, `estado_id`, `fecha_alta`, `direccion_facturacion`, `observaciones`, `viajante_id`) VALUES
-(13, '36dd07ce38b167636f2b1fe96bb44ee6', 'nombre comer2', 4, 'sdfsdfsd', 'sdfsdfsdf', 43, 'sms1', 'sms2', 'sms3', 'email1@sdfsd.onm', 'email2@sdfs.com', 'email@asd.com', 'empresa de preed', 34, 'cucha cucha 3434', 'Recibe', 'pepito srl', 'No Responsable', '20227929899', NULL, '', 'SI', 'SI', '', 'N', 1, '2014-09-08 09:59:50', 'popo 234234', 'observa', 0),
-(14, '36dd07ce38b167636f2b1fe96bb44ee6', 'Lider Guitar', 2, '345345345', '345345345', 43, '', '', '', '', '', '', '', 0, '', '', '', '', '', NULL, '', 'SI', 'SI', '', 'N', 0, '2014-09-08 10:37:31', '', '', 0),
-(15, '36dd07ce38b167636f2b1fe96bb44ee6', 'Lider Guitar', 2, '345345345', '345345345', 43, '', '', '', '', '', '', '', 0, '', '', '', '', '', NULL, '', 'SI', 'SI', '', 'N', 1, '2014-09-08 10:59:12', '', '', 0),
-(16, '36dd07ce38b167636f2b1fe96bb44ee6', 'Lider Guitar', 2, '345345345', '345345345', 43, '', '', '', '', '', '', '', 0, '', '', '', '', '', NULL, '', 'SI', 'SI', '', 'N', 0, '2014-09-08 10:38:16', '', '', 0);
+(13, '36dd07ce38b167636f2b1fe96bb44ee6', 'nombre comer2', 4, 'sdfsdfsd', 'sdfsdfsdf', 42, 'sms1', 'sms2', 'sms3', 'email1@sdfsd.onm', 'email2@sdfs.com', 'email@asd.com', 'empresa de preed', 34, 'cucha cucha 3434', 'Recibe', 'pepito srl', 'No Responsable', '20227929899', NULL, '', 'SI', 'SI', '', 'N', 1, '2014-09-08 09:59:50', 'popo 234234', 'observa', 0),
+(14, '36dd07ce38b167636f2b1fe96bb44ee6', 'Lider Guitar', 2, '345345345', '345345345', 42, '', '', '', 'email1@sdfsd.onm', '', '', '', 0, '', '', '', '', '', NULL, '', 'SI', 'SI', '', 'N', 0, '2014-09-08 10:37:31', '', '', 0),
+(15, '36dd07ce38b167636f2b1fe96bb44ee6', 'Lider Guitar', 2, '345345345', '345345345', 42, '', '', '', 'email1@sdfsd.onm', '', '', '', 0, '', '', '', '', '', NULL, '', 'SI', 'SI', '', 'N', 1, '2014-09-08 10:59:12', '', '', 0),
+(16, '36dd07ce38b167636f2b1fe96bb44ee6', 'Lider Guitar', 2, '345345345', '345345345', 43, '', '', '', 'email1@sdfsd.onm', '', '', '', 0, '', '', '', '', '', NULL, '', 'SI', 'SI', '', 'N', 0, '2014-09-08 10:38:16', '', '', 0),
+(17, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepe', 3, '', '', 0, '', '', '', '', '', '', '', 0, '', '', '', 'Consumidor Final', '', NULL, '', 'SI', 'SI', 'SI', 'N', 0, '2015-02-03 22:16:04', NULL, NULL, 0),
+(18, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepe5', 3, '', '', 0, '', '', '', '', '', '', 'empresa pref', 34, 'direccion', 'recibe', '', 'Consumidor Final', '', NULL, '', 'SI', 'SI', 'SI', 'N', 0, '2015-02-03 22:37:23', NULL, NULL, 0),
+(19, '36dd07ce38b167636f2b1fe96bb44ee6', 'PEPE80', 4, '', '', 0, '', '', '', '', '', '', '', 0, '', '', '', 'Consumidor Final', '', NULL, '', 'SI', 'SI', 'SI', 'N', 0, '2015-02-03 22:46:48', NULL, NULL, 0),
+(20, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepe90', 3, '', '', 0, '', '', '', '', '', '', '', 0, '', '', '', 'Consumidor Final', '', NULL, '', 'SI', 'SI', 'SI', 'N', 0, '2015-02-03 22:51:38', NULL, NULL, 0),
+(21, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepito8', 3, '', '', 0, '', '', '', '', '', '', '', 0, '', '', '', 'Consumidor Final', '', NULL, '', 'SI', 'SI', 'SI', 'N', 0, '2015-02-03 22:54:26', NULL, NULL, 0),
+(22, '36dd07ce38b167636f2b1fe96bb44ee6', 'popopo', 5, '', '', 0, '', '', '', '', '', '', '', 0, '', '', '', 'Consumidor Final', '', NULL, '', 'SI', 'SI', 'SI', 'N', 0, '2015-02-04 11:25:41', NULL, NULL, 0),
+(23, '36dd07ce38b167636f2b1fe96bb44ee6', 'lider', 6, '', '', 0, '', '', '', '', '', '', '', 0, '', '', '', 'Consumidor Final', '', NULL, '', 'SI', 'SI', 'SI', 'N', 0, '2015-02-04 11:30:01', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -524,32 +542,6 @@ CREATE TABLE IF NOT EXISTS `comentario_por_cliente` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `forma_de_pago`
---
-
-CREATE TABLE IF NOT EXISTS `forma_de_pago` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_id` varchar(50) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
-  `porcentaje` decimal(4,2) NOT NULL,
-  `borrado` enum('Y','N') NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Volcado de datos para la tabla `forma_de_pago`
---
-
-INSERT INTO `forma_de_pago` (`id`, `app_id`, `nombre`, `porcentaje`, `borrado`) VALUES
-(1, '36dd07ce38b167636f2b1fe96bb44ee6', 'Efectivo', '0.00', 'N'),
-(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'Cheque', '12.50', 'N'),
-(5, '36dd07ce38b167636f2b1fe96bb44ee6', 'Tarjeta de Credito', '15.00', 'N'),
-(6, '36dd07ce38b167636f2b1fe96bb44ee6', 'DepÃ³sito Bancario', '-5.85', 'N'),
-(7, '36dd07ce38b167636f2b1fe96bb44ee6', 'Pagare', '15.00', 'N');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `foto`
 --
 
@@ -559,7 +551,7 @@ CREATE TABLE IF NOT EXISTS `foto` (
   `descripcion` text,
   `id_cliente` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Volcado de datos para la tabla `foto`
@@ -614,7 +606,33 @@ INSERT INTO `foto` (`id`, `url`, `descripcion`, `id_cliente`) VALUES
 (46, '', NULL, NULL),
 (47, '1392248602.jpg', NULL, NULL),
 (48, '', NULL, NULL),
-(49, '', NULL, NULL);
+(49, '', NULL, NULL),
+(50, '1420466687.jpg', NULL, NULL),
+(51, '1420468225.jpg', NULL, NULL),
+(52, '1420473498.jpg', NULL, NULL),
+(53, '1420598374.jpg', NULL, NULL),
+(54, '1420598808.jpg', NULL, NULL),
+(55, '1420598978.jpg', NULL, NULL),
+(56, '1420599035.jpg', NULL, NULL),
+(57, '1420599063.jpg', NULL, NULL),
+(58, '1420599092.jpg', NULL, NULL),
+(59, '', NULL, NULL),
+(60, '1420599158.jpg', NULL, NULL),
+(61, '1420642069.jpg', NULL, NULL),
+(62, '1420642128.jpg', NULL, NULL),
+(63, '1420642398.jpg', NULL, NULL),
+(64, '1420598808.jpg', NULL, NULL),
+(65, '1420919965.jpg', NULL, NULL),
+(66, '1420919965.jpg', NULL, NULL),
+(67, '1420920032.jpg', NULL, NULL),
+(68, '1420920070.jpg', NULL, NULL),
+(69, '1420920213.jpg', NULL, NULL),
+(70, '1420920240.jpg', NULL, NULL),
+(71, '1420920263.jpg', NULL, NULL),
+(72, '1420920363.jpg', NULL, NULL),
+(73, '1420920469.jpg', NULL, NULL),
+(74, '1420920363.jpg', NULL, NULL),
+(75, '1420987469.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -629,20 +647,24 @@ CREATE TABLE IF NOT EXISTS `fotos_por_producto` (
   PRIMARY KEY (`id`),
   KEY `id_foto` (`id_foto`),
   KEY `id_producto` (`id_producto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
 -- Volcado de datos para la tabla `fotos_por_producto`
 --
 
 INSERT INTO `fotos_por_producto` (`id`, `id_foto`, `id_producto`) VALUES
-(32, 32, 2),
-(43, 43, 4),
-(44, 44, 3),
-(45, 45, 3),
-(46, 46, 5),
-(47, 47, 6),
-(49, 49, 7);
+(53, 53, 2),
+(55, 55, 1),
+(66, 66, 3),
+(67, 67, 4),
+(68, 68, 5),
+(69, 69, 6),
+(70, 70, 7),
+(71, 71, 8),
+(73, 73, 10),
+(74, 74, 9),
+(75, 75, 12);
 
 -- --------------------------------------------------------
 
@@ -654,14 +676,15 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `menu`
 --
 
 INSERT INTO `menu` (`id`, `nombre`) VALUES
-(1, 'Admin');
+(1, 'Admin'),
+(2, 'Catalogo');
 
 -- --------------------------------------------------------
 
@@ -676,59 +699,94 @@ CREATE TABLE IF NOT EXISTS `menu_item` (
   `icon_url` varchar(250) DEFAULT NULL,
   `id_parent_menu_item` int(11) DEFAULT '0',
   `prioridad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`,`nombre`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+  `id_menu` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`,`nombre`),
+  KEY `id_menu` (`id_menu`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Volcado de datos para la tabla `menu_item`
 --
 
-INSERT INTO `menu_item` (`id`, `nombre`, `path`, `icon_url`, `id_parent_menu_item`, `prioridad`) VALUES
-(1, 'Inicio', '/', NULL, 0, 1),
-(2, 'Catalogo', NULL, NULL, 0, 2),
-(3, 'Productos', NULL, NULL, 2, 3),
-(4, 'Agregar Productos', '/productotextil/add', NULL, 3, 4),
-(5, 'Editar Productos', '/productotextil/list', NULL, 3, 5),
-(6, 'Editar Stock', '/stock', NULL, 2, 6),
-(7, 'Categorias de Productos', NULL, NULL, 2, 7),
-(8, 'Agregar Categorias', '/categoria/add', NULL, 7, 8),
-(9, 'Editar Categorias', '/categoria/list', NULL, 7, 9),
-(10, 'Editar Talles', '/talle/list', NULL, 42, 10),
-(11, 'Novedades', NULL, NULL, 2, 11),
-(12, 'Agregar Destacados', '/destacado/add', NULL, 11, 12),
-(13, 'Editar Destacados', '/destacado/list', NULL, 11, 13),
-(14, 'Informaci&oacute;n Adicional', NULL, NULL, 2, 14),
-(15, 'Listar y Editar Secciones', '/seccion/list', NULL, 14, 15),
-(16, 'Visualizaci&oacute;n Gr&aacute;fica', NULL, NULL, 2, 16),
-(17, 'Cargar Logo', '/logo/add', NULL, 16, 17),
-(18, 'Cargar Fondo', '/fondo/cargar', NULL, 16, 18),
-(19, 'Color y Tama&ntilde;o de Texto', '/texto/add', NULL, 16, 19),
-(20, 'Clientes', NULL, NULL, 0, 20),
-(21, 'Agregar Cliente', '/cliente/add', NULL, 20, 21),
-(22, 'Listar y Editar Clientes', '/cliente/list', NULL, 20, 22),
-(23, 'Exportar Clientes', '/cliente/export', NULL, 20, 23),
-(24, 'Editar Tipos de Clientes', '/clientetipo/list', NULL, 20, 25),
-(25, 'Aviso de Nuevos Clientes', '/cliente/avisonuevocliente', NULL, 20, 26),
-(26, 'Ventas', NULL, NULL, 0, 26),
-(27, 'Listar Ventas', '/venta/list', NULL, 26, 27),
-(28, 'Aviso de Nuevas Ventas', '/venta/avisonv', NULL, 26, 28),
-(29, 'Formas de Pago', '/formadepago', NULL, 26, 29),
-(30, 'Informes', NULL, NULL, 0, 30),
-(31, 'Productos mas Vendidos', '/informe/masvendido', NULL, 30, 31),
-(32, 'Productos menos Vendidos', '/informe/menosvendidos', NULL, 30, 32),
-(33, 'Valor de Stock a Venta', '/stock/venta', NULL, 30, 33),
-(34, 'Valor de Stock a Costo', '/stock/costo', NULL, 30, 34),
-(35, 'Movimientos de Stock', '/stock/movimientos', NULL, 30, 35),
-(37, 'Configuracion General', NULL, NULL, 0, 37),
-(38, 'Establecer Horario Local', '/horario/list', NULL, 37, 38),
-(39, 'Email para reestablecer contrasena', '/usuario/email', NULL, 37, 39),
-(40, 'Cambiar Contrase&ntilde;a', '/usuario/password', NULL, 37, 40),
-(41, 'Agregar Tipo de Cliente', '/clientetipo/add', NULL, 20, 24),
-(42, 'Talles', '', NULL, 2, 10),
-(43, 'Agregar Talles', '/talle/add', NULL, 42, 11),
-(44, 'Administraci&oacute;n de Usuarios', NULL, NULL, 0, 31),
-(45, 'Vendedores', '/vendedor', NULL, 44, 41),
-(46, 'Estados de Ventas', '/ventaestado', NULL, 26, 100);
+INSERT INTO `menu_item` (`id`, `nombre`, `path`, `icon_url`, `id_parent_menu_item`, `prioridad`, `id_menu`) VALUES
+(1, 'Inicio', '/', NULL, 0, 1, 1),
+(2, 'Catalogo', NULL, NULL, 0, 2, 1),
+(3, 'Productos', NULL, NULL, 2, 3, 1),
+(4, 'Agregar Productos', '/productotextil/add', NULL, 3, 4, 1),
+(5, 'Editar Productos', '/productotextil/list', NULL, 3, 5, 1),
+(6, 'Editar Stock', '/stock', NULL, 2, 6, 1),
+(7, 'Categorias de Productos', NULL, NULL, 2, 7, 1),
+(8, 'Agregar Categorias', '/categoria/add', NULL, 7, 8, 1),
+(9, 'Editar Categorias', '/categoria/list', NULL, 7, 9, 1),
+(10, 'Editar Talles', '/talle/list', NULL, 42, 10, 1),
+(11, 'Novedades', NULL, NULL, 2, 11, 1),
+(13, 'Editar Novedades', '/novedad/admin', NULL, 11, 13, 1),
+(14, 'Informaci&oacute;n Adicional', NULL, NULL, 2, 14, 1),
+(15, 'Listar y Editar Secciones', '/seccion/list', NULL, 14, 15, 1),
+(16, 'Visualizaci&oacute;n Gr&aacute;fica', NULL, NULL, 2, 16, 1),
+(17, 'Cargar Logo', '/logo/add', NULL, 16, 17, 1),
+(18, 'Cargar Fondo', '/fondo/cargar', NULL, 16, 18, 1),
+(19, 'Color y Tama&ntilde;o de Texto', '/texto/add', NULL, 16, 19, 1),
+(20, 'Clientes', NULL, NULL, 0, 20, 1),
+(21, 'Agregar Cliente', '/cliente/add', NULL, 20, 21, 1),
+(22, 'Listar y Editar Clientes', '/cliente/list', NULL, 20, 22, 1),
+(23, 'Exportar Clientes', '/cliente/export', NULL, 20, 23, 1),
+(24, 'Editar Tipos de Clientes', '/clientetipo/list', NULL, 20, 25, 1),
+(25, 'Aviso de Nuevos Clientes', '/cliente/avisonuevocliente', NULL, 20, 26, 1),
+(26, 'Ventas', NULL, NULL, 0, 26, 1),
+(27, 'Listar Ventas', '/venta/list', NULL, 26, 27, 1),
+(28, 'Aviso de Nuevas Ventas', '/venta/avisonv', NULL, 26, 28, 1),
+(29, 'Formas de Pago', '/formadepago', NULL, 26, 29, 1),
+(30, 'Informes', NULL, NULL, 0, 30, 1),
+(31, 'Productos mas Vendidos', '/informe/masvendido', NULL, 30, 31, 1),
+(32, 'Productos menos Vendidos', '/informe/menosvendidos', NULL, 30, 32, 1),
+(33, 'Valor de Stock a Venta', '/stock/venta', NULL, 30, 33, 1),
+(34, 'Valor de Stock a Costo', '/stock/costo', NULL, 30, 34, 1),
+(35, 'Movimientos de Stock', '/stock/movimientos', NULL, 30, 35, 1),
+(37, 'Configuracion General', NULL, NULL, 0, 37, 1),
+(38, 'Establecer Horario Local', '/horario/list', NULL, 37, 38, 1),
+(39, 'Email para reestablecer contrasena', '/usuario/email', NULL, 37, 39, 1),
+(40, 'Cambiar Contrase&ntilde;a', '/usuario/password', NULL, 37, 40, 1),
+(41, 'Agregar Tipo de Cliente', '/clientetipo/add', NULL, 20, 24, 1),
+(42, 'Talles', '', NULL, 2, 10, 1),
+(43, 'Agregar Talles', '/talle/add', NULL, 42, 11, 1),
+(44, 'Administraci&oacute;n de Usuarios', NULL, NULL, 0, 31, 1),
+(45, 'Vendedores', '/vendedor', NULL, 44, 41, 1),
+(46, 'Estados de Ventas', '/ventaestado', NULL, 26, 100, 1),
+(47, 'Novedades', '/novedades', NULL, 0, 1, 2),
+(48, 'Tipos de Talle', '/talletipo', NULL, 42, 100, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `novedad`
+--
+
+CREATE TABLE IF NOT EXISTS `novedad` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_id` varchar(50) DEFAULT NULL,
+  `imagen` varchar(250) DEFAULT NULL,
+  `url` varchar(250) DEFAULT NULL,
+  `posicion` tinyint(1) DEFAULT NULL,
+  `borrado` enum('Y','N') DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Volcado de datos para la tabla `novedad`
+--
+
+INSERT INTO `novedad` (`id`, `app_id`, `imagen`, `url`, `posicion`, `borrado`) VALUES
+(1, '36dd07ce38b167636f2b1fe96bb44ee6', '1420046055.jpg', 'www.pepito.com', 9, 'N'),
+(2, '36dd07ce38b167636f2b1fe96bb44ee6', '1420044170.jpg', 'www.pepito.com', 2, 'N'),
+(3, '36dd07ce38b167636f2b1fe96bb44ee6', '1420046172.jpg', 'www.pepito.com', 3, 'N'),
+(5, '36dd07ce38b167636f2b1fe96bb44ee6', '1420046004.jpg', NULL, 5, 'N'),
+(8, '36dd07ce38b167636f2b1fe96bb44ee6', '1423237312.jpg', NULL, 1, 'N'),
+(9, '36dd07ce38b167636f2b1fe96bb44ee6', '1420043881.jpg', NULL, 8, 'N'),
+(10, '36dd07ce38b167636f2b1fe96bb44ee6', '1420046022.jpg', NULL, 6, 'N'),
+(11, '36dd07ce38b167636f2b1fe96bb44ee6', '1420046082.jpg', NULL, 7, 'N'),
+(12, '36dd07ce38b167636f2b1fe96bb44ee6', '1420465306.jpg', NULL, 4, 'N'),
+(13, 'c96bd135ae37d6153418d5dd766f9d70', '1423163424.jpg', NULL, 1, 'N');
 
 -- --------------------------------------------------------
 
@@ -737,21 +795,24 @@ INSERT INTO `menu_item` (`id`, `nombre`, `path`, `icon_url`, `id_parent_menu_ite
 --
 
 CREATE TABLE IF NOT EXISTS `pago_tipo` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_id` varchar(100) DEFAULT NULL,
   `descripcion` varchar(250) NOT NULL DEFAULT '',
   `interes` float(4,2) NOT NULL DEFAULT '0.00',
   `contenido` text NOT NULL,
+  `borrado` char(1) DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `pago_tipo`
 --
 
-INSERT INTO `pago_tipo` (`id`, `descripcion`, `interes`, `contenido`) VALUES
-(1, 'Precio de Lista (acepta Cheques)', 0.00, '<P>Ud. dispone de 7 días corridos para enviar el cheque. <BR>Pasado este tiempo, la orden será cancelada, la mercadería será nuevamente puesta a disposición de otros clientes y se tendrá en cuanta para la continuidad como cliente de Motta Company.<BR>La mercadería será enviada dentro de los 7 días posteriores a la recepción del mismo.<BR>El tiempo de entrega depende del trasporte. Motta Company no se responsabiliza por demoras de la empresa trasportista.</P>\r\n<P>Por favor envíe el cheque a la siguiente dirección: <BR>Francisco de Olea 4777<BR>Alejandro Centeno<BR>Córdoba (CP 5009)<BR>Córdoba – Argentina</P>\r\n<P>Gracias por su pedido!<BR>Atentamente</P>\r\n<P>Carlos Cangiano<BR>Motta Company<BR><A href="mailto:carloscangiano@mottaco.com.ar">carloscangiano@mottaco.com.ar</A><BR>Tel: (0351) 155-900312</P>'),
-(2, 'Efectivo', -10.00, '<P>Ud. dispone de 7 días corridos para efectuar el pago. <BR>Pasado este tiempo, la orden será cancelada, la mercadería será nuevamente puesta a disposición de otros clientes y se tendrá en cuanta para la continuidad como cliente de Motta Company.</P>\r\n<P>Por favor comuníquese con nosotros para coordinar el día y horario de pago en la siguiente dirección: <BR>Francisco de Olea 4777<BR>Alejandro Centeno<BR>Córdoba (CP 5009)<BR>Córdoba – Argentina<BR><BR>La mercadería será entregada en el momento.<BR><BR>Gracias por su pedido!<BR>Atentamente</P>\r\n<P>Carlos Cangiano<BR>Motta Company<BR><A href="mailto:carloscangiano@mottaco.com.ar">carloscangiano@mottaco.com.ar</A><BR>Tel: (0351) 155-900312</P>'),
-(3, 'Deposito / transferencia', -3.00, '<P>Ud. dispone de 7 días corridos para efectuar el depósito. <BR>Pasado este tiempo, la orden será cancelada, la mercadería será nuevamente puesta a disposición de otros clientes y se tendrá en cuanta para la continuidad como cliente de Motta Company.<BR>La mercadería será enviada dentro de los 7 días posteriores a la acreditación de los fondos. <BR>El tiempo de entrega depende del trasporte. Motta Company no se responsabiliza por demoras de la empresa trasportista. <BR></P>\r\n<P>Por favor efectúe el depósito en la siguiente cuenta:  <BR><SPAN style="FONT-SIZE: 10pt; FONT-FAMILY: Arial"><U>Banco:</U> Banco de la Nacion Argentina<FONT face=Verdana> </FONT><BR></SPAN><SPAN style="FONT-SIZE: 10pt; FONT-FAMILY: Arial"><U>Tipo de cuenta:</U> Caja de Ahorros<BR><U>Sucursal:</U> 9201<BR><U>Número de cuenta:</U> 1420948954<BR><U>CBU:</U> 01101429 30014209489547<BR><U>Titular:</U> Juan Carlos Cangiano<BR><U>CUIT:</U> 20-30331249-9<FONT face=Verdana> </FONT><BR></SPAN><SPAN style="FONT-SIZE: 10pt; FONT-FAMILY: Arial"><U>DNI:</U> 30.331.249<?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></P>\r\n<P>\r\n<P>Gracias por su pedido!<BR></P>\r\n<P>Atentamente</P>\r\n<P>Carlos Cangiano<BR>Motta Company<BR><A href="mailto:carloscangiano@mottaco.com.ar">carloscangiano@mottaco.com.ar</A><BR>Tel: (0351) 155-900312</P>\r\n<P></P>');
+INSERT INTO `pago_tipo` (`id`, `app_id`, `descripcion`, `interes`, `contenido`, `borrado`) VALUES
+(1, '36dd07ce38b167636f2b1fe96bb44ee6', 'Precio de Lista', 0.00, '<P>Ud. dispone de 7 días corridos para enviar el cheque. <BR>Pasado este tiempo, la orden será cancelada, la mercadería será nuevamente puesta a disposición de otros clientes y se tendrá en cuanta para la continuidad como cliente de Motta Company.<BR>La mercadería será enviada dentro de los 7 días posteriores a la recepción del mismo.<BR>El tiempo de entrega depende del trasporte. Motta Company no se responsabiliza por demoras de la empresa trasportista.</P>\r\n<P>Por favor envíe el cheque a la siguiente dirección: <BR>Francisco de Olea 4777<BR>Alejandro Centeno<BR>Córdoba (CP 5009)<BR>Córdoba – Argentina</P>\r\n<P>Gracias por su pedido!<BR>Atentamente</P>\r\n<P>Carlos Cangiano<BR>Motta Company<BR><A href="mailto:carloscangiano@mottaco.com.ar">carloscangiano@mottaco.com.ar</A><BR>Tel: (0351) 155-900312</P>', 'N'),
+(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'Efectivo', -10.00, '<P>Ud. dispone de 7 días corridos para efectuar el pago. <BR>Pasado este tiempo, la orden será cancelada, la mercadería será nuevamente puesta a disposición de otros clientes y se tendrá en cuanta para la continuidad como cliente de Motta Company.</P>\r\n<P>Por favor comuníquese con nosotros para coordinar el día y horario de pago en la siguiente dirección: <BR>Francisco de Olea 4777<BR>Alejandro Centeno<BR>Córdoba (CP 5009)<BR>Córdoba – Argentina<BR><BR>La mercadería será entregada en el momento.<BR><BR>Gracias por su pedido!<BR>Atentamente</P>\r\n<P>Carlos Cangiano<BR>Motta Company<BR><A href="mailto:carloscangiano@mottaco.com.ar">carloscangiano@mottaco.com.ar</A><BR>Tel: (0351) 155-900312</P>', 'N'),
+(3, '36dd07ce38b167636f2b1fe96bb44ee6', 'Deposito/Transferencia', -3.00, '<P>Ud. dispone de 7 días corridos para efectuar el depósito. <BR>Pasado este tiempo, la orden será cancelada, la mercadería será nuevamente puesta a disposición de otros clientes y se tendrá en cuanta para la continuidad como cliente de Motta Company.<BR>La mercadería será enviada dentro de los 7 días posteriores a la acreditación de los fondos. <BR>El tiempo de entrega depende del trasporte. Motta Company no se responsabiliza por demoras de la empresa trasportista. <BR></P>\r\n<P>Por favor efectúe el depósito en la siguiente cuenta:  <BR><SPAN style="FONT-SIZE: 10pt; FONT-FAMILY: Arial"><U>Banco:</U> Banco de la Nacion Argentina<FONT face=Verdana> </FONT><BR></SPAN><SPAN style="FONT-SIZE: 10pt; FONT-FAMILY: Arial"><U>Tipo de cuenta:</U> Caja de Ahorros<BR><U>Sucursal:</U> 9201<BR><U>Número de cuenta:</U> 1420948954<BR><U>CBU:</U> 01101429 30014209489547<BR><U>Titular:</U> Juan Carlos Cangiano<BR><U>CUIT:</U> 20-30331249-9<FONT face=Verdana> </FONT><BR></SPAN><SPAN style="FONT-SIZE: 10pt; FONT-FAMILY: Arial"><U>DNI:</U> 30.331.249<?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></P>\r\n<P>\r\n<P>Gracias por su pedido!<BR></P>\r\n<P>Atentamente</P>\r\n<P>Carlos Cangiano<BR>Motta Company<BR><A href="mailto:carloscangiano@mottaco.com.ar">carloscangiano@mottaco.com.ar</A><BR>Tel: (0351) 155-900312</P>\r\n<P></P>', 'N'),
+(4, '36dd07ce38b167636f2b1fe96bb44ee6', 'Tarjeta de Credito', 10.00, '', 'N');
 
 -- --------------------------------------------------------
 
@@ -1066,7 +1127,7 @@ CREATE TABLE IF NOT EXISTS `pedido_detalle_por_talle` (
 --
 
 INSERT INTO `pedido_detalle_por_talle` (`id`, `id_pedido`, `id_producto`, `id_talle`, `cantidad`, `precio`) VALUES
-(10, 13, 1, 1, 4, '103.45');
+(10, 13, 1, 1, 4, 103.45);
 
 -- --------------------------------------------------------
 
@@ -1143,7 +1204,7 @@ CREATE TABLE IF NOT EXISTS `personal` (
   KEY `cargo_id` (`cargo`),
   KEY `cargo_id_2` (`cargo`),
   KEY `app_id` (`app_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `personal`
@@ -1155,7 +1216,9 @@ INSERT INTO `personal` (`id`, `app_id`, `nombre_apellido`, `cargo`, `telefono1`,
 (12, '36dd07ce38b167636f2b1fe96bb44ee6', 'nuevo per', 'cargo nuevo', 'tel', 'tel2', 'emalsdfsd@sada.com', 'lider', 3, 3, NULL, 'N'),
 (13, '36dd07ce38b167636f2b1fe96bb44ee6', 'nuevo per', 'cargo nuevo', 'tel', 'tel2', 'emalsdfsd@sada.com', 'lider', 3, 3, NULL, 'N'),
 (14, '36dd07ce38b167636f2b1fe96bb44ee6', 'nuevo per', 'cargo nuevo', 'tel', 'tel2', 'emalsdfsd@sada.com', 'lider', 3, 3, NULL, 'N'),
-(15, '36dd07ce38b167636f2b1fe96bb44ee6', 'nuevo per', 'cargo nuevo', 'tel', 'tel2', 'emalsdfsd@sada.com', 'lider', 3, 3, NULL, 'N');
+(15, '36dd07ce38b167636f2b1fe96bb44ee6', 'nuevo per', 'cargo nuevo', 'tel', 'tel2', 'emalsdfsd@sada.com', 'lider', 3, 3, NULL, 'N'),
+(16, '36dd07ce38b167636f2b1fe96bb44ee6', 'pers 1', 'cargo nuevo', 'tel', NULL, NULL, NULL, NULL, NULL, NULL, 'N'),
+(17, '36dd07ce38b167636f2b1fe96bb44ee6', 'pers 1', 'cargo nuevo', 'tel', NULL, NULL, NULL, NULL, NULL, NULL, 'N');
 
 -- --------------------------------------------------------
 
@@ -1170,14 +1233,16 @@ CREATE TABLE IF NOT EXISTS `personal_por_cliente` (
   PRIMARY KEY (`id`),
   KEY `id_cliente` (`id_cliente`,`id_personal`),
   KEY `personal_id` (`id_personal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Volcado de datos para la tabla `personal_por_cliente`
 --
 
 INSERT INTO `personal_por_cliente` (`id`, `id_cliente`, `id_personal`) VALUES
-(12, 13, 15);
+(12, 13, 15),
+(13, 18, 16),
+(14, 18, 17);
 
 -- --------------------------------------------------------
 
@@ -1224,20 +1289,25 @@ CREATE TABLE IF NOT EXISTS `producto` (
   KEY `categoria_id` (`id_subcategoria`),
   KEY `subcategoria_id` (`id_subcategoria`),
   KEY `app_id` (`app_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`id`, `app_id`, `codigo`, `nombre`, `descripcion`, `precio`, `costo`, `id_subcategoria`, `foto`, `borrado`, `bloqueado_id_usuario`, `bloqueado_datetime`) VALUES
-(1, '04f50f7dfc94e524e2fc6ce675663c1d', 'YYY67364', 'Remera Dub Explosion2', 'Remera blancas con colores rasta', '101.45', '33.56', 4, '', 'N', NULL, NULL),
-(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'JH87687', 'Camisa lagarto juancho', 'Una camisa manga de lagarto', '150.00', '100.00', 10, '', 'N', 0, NULL),
-(3, '36dd07ce38b167636f2b1fe96bb44ee6', 'UYH65R', 'muchas fotos modified', 'dsfsdfsdf modified', '151.00', '101.00', 10, '', 'N', 42, '2014-09-12 11:01:04'),
-(4, '36dd07ce38b167636f2b1fe96bb44ee6', 'HRC0194-B', 'Psicotropic Circle B', '', '101.00', '51.00', 11, '', 'N', 42, '2014-02-17 14:58:34'),
-(5, '36dd07ce38b167636f2b1fe96bb44ee6', 'UHJ-895', 'Camisa Cheta', '', '120.00', '100.00', 11, '', 'N', 0, NULL),
-(6, '36dd07ce38b167636f2b1fe96bb44ee6', 'HRC0196', 'Gorila Rastaman', '', '150.00', '100.00', 11, '', 'N', 0, NULL),
-(7, '36dd07ce38b167636f2b1fe96bb44ee6', 'asdasd-345', 'Numeros test', '', '150.00', '100.00', 1, '', 'N', 0, NULL);
+(1, '36dd07ce38b167636f2b1fe96bb44ee6', 'YYY67364', 'Remera Dub Explosion2', 'Remera blancas con colores rasta', 101.45, 33.56, 4, '', 'N', 42, '2015-01-26 12:36:00'),
+(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'JH87687', 'Do the Evolution', 'Una camisa manga de lagarto', 150.00, 100.00, 4, '', 'N', 42, '2015-01-10 17:57:50'),
+(3, '36dd07ce38b167636f2b1fe96bb44ee6', 'UYH65R', 'muchas fotos modified', 'dsfsdfsdf modified', 151.00, 101.00, 10, '', 'N', 42, '2015-01-10 17:59:57'),
+(4, '36dd07ce38b167636f2b1fe96bb44ee6', 'HRC0194-B', 'Psicotropic Circle B', '', 101.00, 51.00, 11, '', 'N', 0, NULL),
+(5, '36dd07ce38b167636f2b1fe96bb44ee6', 'UHJ-895', 'Camisa Cheta', '', 120.00, 100.00, 11, '', 'N', 0, NULL),
+(6, '36dd07ce38b167636f2b1fe96bb44ee6', 'HRC0196', 'Gorila Rastaman', '', 150.00, 100.00, 11, '', 'N', 0, NULL),
+(7, '36dd07ce38b167636f2b1fe96bb44ee6', 'asdasd-345', 'Numeros test', '', 150.00, 100.00, 1, '', 'N', 0, NULL),
+(8, '36dd07ce38b167636f2b1fe96bb44ee6', 'HG8676876', 'Pepe', 'sdfsd', 146.00, 100.00, 11, '', 'N', 42, '2015-01-10 18:08:22'),
+(9, '36dd07ce38b167636f2b1fe96bb44ee6', '3345345', 'Remera corta', 'sdf', 345.00, 234.00, 11, '', 'N', 0, NULL),
+(10, '36dd07ce38b167636f2b1fe96bb44ee6', 'HG5656', 'Otra remera', 'sdf', 200.00, 100.00, 10, '', 'N', 0, NULL),
+(11, '36dd07ce38b167636f2b1fe96bb44ee6', 'GRFE3434', 'SIn prod textill', 'cvx', 100.00, 100.00, 10, '', 'N', 0, NULL),
+(12, '36dd07ce38b167636f2b1fe96bb44ee6', 'TYU543', 'Alterno', 'sdfs', 100.00, 60.00, 7, '', 'N', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1252,7 +1322,7 @@ CREATE TABLE IF NOT EXISTS `producto_textil` (
   PRIMARY KEY (`id`),
   KEY `id_producto` (`id_producto`,`talle_tipo_id`),
   KEY `talle_tipo_id` (`talle_tipo_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `producto_textil`
@@ -1265,7 +1335,11 @@ INSERT INTO `producto_textil` (`id`, `id_producto`, `talle_tipo_id`) VALUES
 (4, 4, 2),
 (5, 5, 2),
 (6, 6, 2),
-(7, 7, 1);
+(7, 7, 1),
+(8, 8, 1),
+(9, 9, 1),
+(10, 10, 1),
+(11, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -2179,14 +2253,17 @@ INSERT INTO `recurso` (`nombre`, `descripcion`) VALUES
 ('alertaemails', ''),
 ('browser', ''),
 ('cargo', ''),
+('catalogo', ''),
 ('categoria', ''),
 ('cliente', ''),
 ('clientetipo', ''),
 ('formadepago', ''),
 ('home', ''),
 ('index', ''),
+('novedad', ''),
 ('productotextil', ''),
 ('talle', ''),
+('talletipo', ''),
 ('usuario', ''),
 ('vendedor', ''),
 ('venta', ''),
@@ -2207,7 +2284,7 @@ CREATE TABLE IF NOT EXISTS `recursos_por_perfil` (
   KEY `privilegio` (`privilegio`),
   KEY `perfil` (`perfil`),
   KEY `recurso` (`recurso`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=93 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
 
 --
 -- Volcado de datos para la tabla `recursos_por_perfil`
@@ -2267,7 +2344,41 @@ INSERT INTO `recursos_por_perfil` (`id`, `perfil`, `recurso`, `privilegio`) VALU
 (89, 'ADMIN', 'ventaestado', 'edit'),
 (90, 'ADMIN', 'ventaestado', 'delete'),
 (91, 'ADMIN', 'alertaemails', 'index'),
-(92, 'ADMIN', 'venta', 'avisonv');
+(92, 'ADMIN', 'venta', 'avisonv'),
+(93, 'ADMIN', 'novedad', 'admin'),
+(94, 'ADMIN', 'novedad', 'edit'),
+(95, 'ADMIN', 'browser', 'ajaxuploadnovedad'),
+(96, 'ADMIN', 'venta', 'edit'),
+(97, 'GUEST', 'catalogo', 'index'),
+(98, 'GUEST', 'catalogo', 'producto'),
+(99, 'ADMIN', 'catalogo', 'carrito'),
+(100, 'USER', 'catalogo', 'carrito'),
+(101, 'GUEST', 'catalogo', 'index'),
+(102, 'GUEST', 'catalogo', 'producto'),
+(103, 'USER', 'catalogo', 'getcarrito'),
+(104, 'USER', 'catalogo', 'borrarcarrito'),
+(105, 'USER', 'catalogo', 'confirmarcarrito'),
+(106, 'GUEST', 'catalogo', 'categoria'),
+(107, 'GUEST', 'catalogo', 'registro'),
+(108, 'GUEST', 'usuario', 'validar'),
+(109, 'GUEST', 'catalogo', 'validaremail'),
+(110, 'GUEST', 'home', 'index'),
+(111, 'GUEST', 'home', 'privacidad'),
+(112, 'GUEST', 'home', 'contact'),
+(113, 'GUEST', 'home', 'condiciones'),
+(114, 'GUEST', 'home', 'register'),
+(115, 'GUEST', 'index', 'index'),
+(116, 'ADMIN', 'novedad', 'list'),
+(117, 'GUEST', 'catalogo', 'novedades'),
+(118, 'ADMIN', 'index', 'admin'),
+(119, 'ADMIN', 'talletipo', 'index'),
+(120, 'ADMIN', 'talletipo', 'add'),
+(121, 'ADMIN', 'talletipo', 'edit'),
+(122, 'ADMIN', 'talletipo', 'delete'),
+(123, 'ADMIN', 'index', 'generatemodels'),
+(124, 'GUEST', 'home', 'forgotpassword'),
+(125, 'GUEST', 'home', 'reset'),
+(126, 'GUEST', 'home', 'resetpassword');
 
 -- --------------------------------------------------------
 
@@ -2465,41 +2576,56 @@ CREATE TABLE IF NOT EXISTS `talle_por_producto_textil` (
   PRIMARY KEY (`id`),
   KEY `id_producto_textil` (`id_producto_textil`,`id_talle`),
   KEY `id_talle` (`id_talle`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=200 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=274 ;
 
 --
 -- Volcado de datos para la tabla `talle_por_producto_textil`
 --
 
 INSERT INTO `talle_por_producto_textil` (`id`, `id_producto_textil`, `id_talle`, `borrado`, `stock`, `bloqueado_id_usuario`) VALUES
-(84, 5, 43, 'N', 8, NULL),
-(85, 5, 42, 'N', 8, NULL),
-(86, 5, 44, 'N', 8, NULL),
+(84, 5, 43, 'N', 7, NULL),
+(85, 5, 42, 'N', 6, NULL),
+(86, 5, 44, 'N', 7, NULL),
 (87, 5, 45, 'N', 8, NULL),
-(88, 5, 46, 'N', 8, NULL),
-(156, 4, 43, 'N', 12, NULL),
-(157, 4, 42, 'N', 3, NULL),
-(158, 4, 44, 'N', 25, NULL),
-(159, 4, 45, 'N', 18, NULL),
-(160, 4, 46, 'N', 8, NULL),
-(179, 6, 43, 'N', 0, NULL),
-(180, 6, 42, 'N', 0, NULL),
-(181, 6, 44, 'N', 0, NULL),
+(88, 5, 46, 'N', 7, NULL),
+(179, 6, 43, 'N', 5, NULL),
+(180, 6, 42, 'N', 1, NULL),
+(181, 6, 44, 'N', 2, NULL),
 (182, 6, 45, 'N', 4, NULL),
-(183, 6, 46, 'N', 0, NULL),
-(184, 2, 43, 'N', 3, NULL),
-(185, 2, 42, 'N', 9, NULL),
-(186, 2, 44, 'N', 3, NULL),
-(187, 2, 45, 'N', 6, NULL),
-(188, 2, 46, 'N', 7, NULL),
-(189, 3, 43, 'N', 3, NULL),
-(190, 3, 42, 'N', 4, NULL),
+(183, 6, 46, 'N', 5, NULL),
 (191, 3, 44, 'N', 45, NULL),
-(192, 3, 45, 'N', 65, NULL),
-(193, 3, 46, 'N', 454, NULL),
-(197, 7, 47, 'N', 2, NULL),
-(198, 7, 48, 'N', 3, NULL),
-(199, 7, 49, 'N', 3, NULL);
+(197, 7, 47, 'N', 1, NULL),
+(198, 7, 48, 'N', 2, NULL),
+(199, 7, 49, 'N', 2, NULL),
+(225, 4, 43, 'N', 8, NULL),
+(226, 4, 42, 'N', 0, NULL),
+(227, 4, 44, 'N', 17, NULL),
+(228, 4, 45, 'N', 11, NULL),
+(229, 4, 46, 'N', 3, NULL),
+(235, 2, 43, 'N', 8, NULL),
+(236, 2, 42, 'N', 9, NULL),
+(237, 2, 44, 'N', 3, NULL),
+(238, 2, 45, 'N', 6, NULL),
+(239, 2, 46, 'N', 8, NULL),
+(255, 8, 47, 'N', 0, NULL),
+(256, 8, 48, 'N', 39, NULL),
+(257, 8, 49, 'N', 0, NULL),
+(258, 3, 43, 'N', 3, NULL),
+(259, 3, 42, 'N', 2, NULL),
+(260, 3, 45, 'N', 1, NULL),
+(261, 3, 46, 'N', 50, NULL),
+(262, 1, 47, 'N', 4, NULL),
+(263, 1, 48, 'N', 4, NULL),
+(264, 1, 49, 'N', 1, NULL),
+(265, 9, 47, 'N', 3, NULL),
+(266, 9, 48, 'N', 3, NULL),
+(267, 9, 49, 'N', 2, NULL),
+(268, 10, 47, 'N', 4, NULL),
+(269, 10, 48, 'N', 65, NULL),
+(270, 10, 49, 'N', 44, NULL),
+(271, 11, 47, 'N', 83, NULL),
+(272, 11, 48, 'N', 63, NULL),
+(273, 11, 49, 'N', 83, NULL);
 
 -- --------------------------------------------------------
 
@@ -2514,7 +2640,7 @@ CREATE TABLE IF NOT EXISTS `talle_tipo` (
   `borrado` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `app_id` (`app_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `talle_tipo`
@@ -2522,7 +2648,8 @@ CREATE TABLE IF NOT EXISTS `talle_tipo` (
 
 INSERT INTO `talle_tipo` (`id`, `app_id`, `descripcion`, `borrado`) VALUES
 (1, '36dd07ce38b167636f2b1fe96bb44ee6', 'Numerico', 'N'),
-(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'Letras', 'N');
+(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'Letras', 'N'),
+(3, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepito', 'Y');
 
 -- --------------------------------------------------------
 
@@ -2547,7 +2674,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `validationHash` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `perfil` (`perfil`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -2556,7 +2683,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 INSERT INTO `usuario` (`id`, `app_id`, `nombre`, `apellido`, `nick`, `facebookId`, `twitterId`, `googleId`, `password`, `email`, `perfil`, `alta`, `blockeado`, `validationHash`) VALUES
 (40, '', 'Lider', 'Guitar', 'liderguitar', NULL, NULL, NULL, '473b82b81e33ec7a20dddaed1b1f5f33', NULL, 'SUPERADMIN', '2013-11-02 03:00:00', 'N', NULL),
 (42, '36dd07ce38b167636f2b1fe96bb44ee6', 'Gustavo', 'pero', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'liderguitar@gmail.com', 'ADMIN', '2014-01-09 13:19:23', 'N', 'cabaaf2e273cec141e9377c5bbcf2989'),
-(43, '36dd07ce38b167636f2b1fe96bb44ee6', NULL, NULL, '', NULL, NULL, NULL, '79169c861bdf79ebfa17d1cbe1e00817', 'pepito@gmeil2.com', 'USER', '2014-09-08 13:38:16', 'N', NULL);
+(43, '36dd07ce38b167636f2b1fe96bb44ee6', 'Pepito', 'Gimenez', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'pepito@gmail.com', 'ADMIN', '2014-09-08 13:38:16', 'N', 'c8f980282c50c4cf665cde551db7db37'),
+(51, 'c96bd135ae37d6153418d5dd766f9d70', 'ppemm', 'sanchez', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'liderguitaeerwerr@gmail.com', 'ADMIN', '2015-02-05 17:19:05', 'N', 'e6c988c5b02404c4840f6106dcae7c63'),
+(54, 'f50863d2cc199ac104dbdf601b5bd3fd', 'gustavo', 'pero', '', NULL, NULL, NULL, '473b82b81e33ec7a20dddaed1b1f5f33', 'gustavopero@yahoo.com.ar', 'ADMIN', '2015-04-17 01:05:39', 'N', '68b39a54ae569395f66003876990e905');
 
 -- --------------------------------------------------------
 
@@ -2595,25 +2724,27 @@ CREATE TABLE IF NOT EXISTS `venta` (
   `app_id` varchar(100) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `clienteId` int(11) NOT NULL,
-  `vendedorId` int(11) NOT NULL,
+  `vendedorId` int(11) DEFAULT NULL,
   `ventaEstadoId` int(11) NOT NULL,
   `formaDePagoId` int(11) NOT NULL,
+  `formaDePagoPorc` decimal(8,2) DEFAULT NULL,
   `borrado` enum('Y','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `ventaEstadoId` (`ventaEstadoId`),
   KEY `clienteId` (`clienteId`,`ventaEstadoId`,`formaDePagoId`),
   KEY `clienteId_2` (`clienteId`),
   KEY `ventaEstadoId_2` (`ventaEstadoId`),
-  KEY `formaDePagoId` (`formaDePagoId`),
-  KEY `vendedorId` (`vendedorId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  KEY `vendedorId` (`vendedorId`),
+  KEY `fghfgh` (`ventaEstadoId`),
+  KEY `formaDePagoId` (`formaDePagoId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
 
 --
 -- Volcado de datos para la tabla `venta`
 --
 
-INSERT INTO `venta` (`id`, `app_id`, `fecha`, `clienteId`, `vendedorId`, `ventaEstadoId`, `formaDePagoId`, `borrado`) VALUES
-(1, '36dd07ce38b167636f2b1fe96bb44ee6', '2014-09-18 18:44:20', 16, 1, 1, 2, 'N');
+INSERT INTO `venta` (`id`, `app_id`, `fecha`, `clienteId`, `vendedorId`, `ventaEstadoId`, `formaDePagoId`, `formaDePagoPorc`, `borrado`) VALUES
+(50, '36dd07ce38b167636f2b1fe96bb44ee6', '2015-01-26 23:00:53', 14, NULL, 2, 3, -3.00, 'N'),
+(51, '36dd07ce38b167636f2b1fe96bb44ee6', '2015-01-27 14:03:19', 14, NULL, 4, 4, 10.00, 'N');
 
 -- --------------------------------------------------------
 
@@ -2624,22 +2755,38 @@ INSERT INTO `venta` (`id`, `app_id`, `fecha`, `clienteId`, `vendedorId`, `ventaE
 CREATE TABLE IF NOT EXISTS `venta_detalle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ventaId` int(11) NOT NULL,
-  `productoId` int(11) NOT NULL,
+  `productoTextilId` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precioUnitario` decimal(8,2) NOT NULL,
+  `tallePorProductoTextil` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `ventaId` (`ventaId`,`productoId`),
+  KEY `ventaId` (`ventaId`,`productoTextilId`),
   KEY `ventaId_2` (`ventaId`),
-  KEY `productoId` (`productoId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  KEY `productoId` (`productoTextilId`),
+  KEY `tallePorProductoTextil` (`tallePorProductoTextil`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Volcado de datos para la tabla `venta_detalle`
 --
 
-INSERT INTO `venta_detalle` (`id`, `ventaId`, `productoId`, `cantidad`, `precioUnitario`) VALUES
-(1, 1, 1, 2, '100.00'),
-(3, 1, 2, 3, '54.34');
+INSERT INTO `venta_detalle` (`id`, `ventaId`, `productoTextilId`, `cantidad`, `precioUnitario`, `tallePorProductoTextil`) VALUES
+(10, 50, 11, 1, 100.00, 271),
+(11, 50, 11, 1, 100.00, 272),
+(12, 50, 11, 1, 100.00, 273),
+(13, 50, 7, 1, 150.00, 197),
+(14, 50, 7, 1, 150.00, 198),
+(15, 50, 7, 1, 150.00, 199),
+(16, 50, 2, 1, 150.00, 236),
+(17, 50, 2, 1, 150.00, 237),
+(18, 50, 2, 1, 150.00, 238),
+(19, 50, 2, 1, 150.00, 239),
+(20, 51, 2, 1, 150.00, 235),
+(21, 51, 2, 1, 150.00, 237),
+(22, 51, 2, 1, 150.00, 239),
+(23, 51, 7, 1, 150.00, 197),
+(24, 51, 7, 1, 150.00, 198),
+(25, 51, 7, 1, 150.00, 199);
 
 -- --------------------------------------------------------
 
@@ -2649,9 +2796,10 @@ INSERT INTO `venta_detalle` (`id`, `ventaId`, `productoId`, `cantidad`, `precioU
 
 CREATE TABLE IF NOT EXISTS `venta_estado` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_id` varchar(100) NOT NULL,
   `nombre` varchar(200) NOT NULL,
   `devuelveStock` enum('Y','N') NOT NULL,
-  `app_id` varchar(100) NOT NULL,
+  `cancelado` enum('Y','N') DEFAULT 'N',
   `borrado` enum('Y','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
@@ -2660,11 +2808,11 @@ CREATE TABLE IF NOT EXISTS `venta_estado` (
 -- Volcado de datos para la tabla `venta_estado`
 --
 
-INSERT INTO `venta_estado` (`id`, `nombre`, `devuelveStock`, `app_id`, `borrado`) VALUES
-(1, 'Pagado y Pendiente de Entrega', 'Y', '36dd07ce38b167636f2b1fe96bb44ee6', 'N'),
-(2, 'Pendiente de Pago y Entrega', 'Y', '36dd07ce38b167636f2b1fe96bb44ee6', 'N'),
-(3, 'Pagado y Entregado', 'Y', '36dd07ce38b167636f2b1fe96bb44ee6', 'N'),
-(4, 'Cancelado', 'Y', '36dd07ce38b167636f2b1fe96bb44ee6', 'N');
+INSERT INTO `venta_estado` (`id`, `app_id`, `nombre`, `devuelveStock`, `cancelado`, `borrado`) VALUES
+(1, '36dd07ce38b167636f2b1fe96bb44ee6', 'Pagado y Pendiente de Entrega', 'N', 'N', 'N'),
+(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'Pendiente de Pago y Entrega', 'N', 'N', 'N'),
+(3, '36dd07ce38b167636f2b1fe96bb44ee6', 'Pagado y Entregado', 'N', 'N', 'Y'),
+(4, '36dd07ce38b167636f2b1fe96bb44ee6', 'Cancelado', 'Y', 'Y', 'N');
 
 --
 -- Restricciones para tablas volcadas
@@ -2691,6 +2839,12 @@ ALTER TABLE `comentario_por_cliente`
 ALTER TABLE `fotos_por_producto`
   ADD CONSTRAINT `fotos_por_producto_ibfk_1` FOREIGN KEY (`id_foto`) REFERENCES `foto` (`id`),
   ADD CONSTRAINT `fotos_por_producto_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`);
+
+--
+-- Filtros para la tabla `menu_item`
+--
+ALTER TABLE `menu_item`
+  ADD CONSTRAINT `menu_item_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`id`);
 
 --
 -- Filtros para la tabla `pedido_detalle_por_talle`
@@ -2762,17 +2916,18 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD CONSTRAINT `venta_ibfk_4` FOREIGN KEY (`vendedorId`) REFERENCES `vendedor` (`id`),
   ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`),
   ADD CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`ventaEstadoId`) REFERENCES `venta_estado` (`id`),
-  ADD CONSTRAINT `venta_ibfk_3` FOREIGN KEY (`formaDePagoId`) REFERENCES `forma_de_pago` (`id`);
+  ADD CONSTRAINT `venta_ibfk_4` FOREIGN KEY (`vendedorId`) REFERENCES `vendedor` (`id`),
+  ADD CONSTRAINT `venta_ibfk_5` FOREIGN KEY (`formaDePagoId`) REFERENCES `pago_tipo` (`id`);
 
 --
 -- Filtros para la tabla `venta_detalle`
 --
 ALTER TABLE `venta_detalle`
   ADD CONSTRAINT `venta_detalle_ibfk_1` FOREIGN KEY (`ventaId`) REFERENCES `venta` (`id`),
-  ADD CONSTRAINT `venta_detalle_ibfk_2` FOREIGN KEY (`productoId`) REFERENCES `producto` (`id`);
+  ADD CONSTRAINT `venta_detalle_ibfk_2` FOREIGN KEY (`productoTextilId`) REFERENCES `producto_textil` (`id`),
+  ADD CONSTRAINT `venta_detalle_ibfk_3` FOREIGN KEY (`tallePorProductoTextil`) REFERENCES `talle_por_producto_textil` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
