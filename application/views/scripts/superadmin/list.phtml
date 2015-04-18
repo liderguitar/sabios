@@ -1,14 +1,14 @@
 <div class="stock-filters sabios-row sabios-table" style="padding-top: 10px; padding-bottom: 5px">
-     <div class="sabios-filters" >
+    <div class="sabios-filters">
         <form type="post" id="filter-form">
-			<div class="inline" style="margin-left: 10px; width: 250px">
-				<div class="sabios-row label">
-					<label>Buscar Palabra:</label>
-				</div>
-				<div class="sabios-row">
-					<input class="sabios-input" type="text" placeholder="Nombre" id="nombre" value="" name="nombre">
-				</div>
-			</div>
+            <div class="inline" style="margin-left: 10px; width: 250px">
+                <div class="sabios-row label">
+                    <label>Buscar Palabra:</label>
+                </div>
+                <div class="sabios-row">
+                    <input class="sabios-input" type="text" placeholder="Nombre" id="nombre" value="<?=$this->nombre;?>" name="nombre">
+                </div>
+            </div>
 
             <div class="inline" style="float: left; margin-top: 26px; margin-left: 6px">
                 <input type="submit" class="sabios-submit submit-filter" name="submit" value="Filtrar">
@@ -18,7 +18,6 @@
 </div>
 
 
-
 <div class="sabios-table-container sabios-row">
     <div class="sabios-table">
 
@@ -26,11 +25,10 @@
             <div class="sabios-table-tr">
 
                 <div class="sabios-table-td" style="width: 10%">Id</div>
-                <div class="sabios-table-td" style="width: 25%">Nombre</div>
-                <div class="sabios-table-td" style="width: 25%">Estado</div>
-                <div class="sabios-table-td" style="width: 24%">subdominio</div>
-                <div class="sabios-table-td" style="width: 8%">Editar</div>
-                <div class="sabios-table-td" style="width: 8%">Borrar</div>
+                <div class="sabios-table-td" style="width: 35%">Nombre</div>
+                <div class="sabios-table-td" style="width: 35%">subdominio</div>
+                <div class="sabios-table-td" style="width: 20%">Estado</div>
+
 
             </div>
 
@@ -42,19 +40,43 @@
                 ?>
                 <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
                     <div class="sabios-table-td" style="width: 10%"><a href=""><?= $app->id ?></a></div>
-                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->nombre ?></a></div>
-                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->estado ?></a></div>
-                    <div class="sabios-table-td" style="width: 24%"><a href=""><?=  $app->subdominio ?></a></div>
-                    <div class="sabios-table-td" style="width: 8%"><a href="/superadmin/edit/<?= $app->id ?>"><span class="sabios-edit"></span></a></div>
-                    <div class="sabios-table-td" style="width: 8%"><a onclick="confirmDelete('1');" href="#"><span class="sabios-delete"></span></a></div>
-				</div>
+                    <div class="sabios-table-td" style="width: 35%"><a href=""><?= $app->nombre ?></a></div>
+                    <div class="sabios-table-td" style="width: 35%"><a href=""><?= $app->subdominio ?></a></div>
+                    <div class="sabios-table-td" style="width: 20%">
+                        <select class="app-estado" appname="<?= $app->nombre ?>" appid="<?= $app->id ?>"
+                                name="app-estado">
+                            <option value="OFFLINE"<?= $app->estado == "OFFLINE" ? 'selected' : '' ?>>OFFLINE</option>
+                            <option value="ONLINE"<?= $app->estado == "ONLINE" ? 'selected' : '' ?>>ONLINE</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="tr-form-<?= $app->id ?>" class="hide sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <form method="post" id="form-fdp-<?= $fdp->id ?>" action="/formadepago/edit">
+                        <div class="sabios-table-td" style="width: 50%"><input class="fdp-" name="id" type="hidden"
+                                                                               value="<?= $fdp->id ?>"></div>
+                        <div class="sabios-table-td" style="width: 50%"><input class="fdp-nombre sabios-input fdp"
+                                                                               type="text" id="nombre"
+                                                                               value="<?= $fdp->descripcion ?>"
+                                                                               name="nombre"></div>
+                        <div class="sabios-table-td" style="width: 34%"><input class="fdp-porcentaje sabios-input fdp"
+                                                                               type="text" id="porcentaje"
+                                                                               value="<?= $fdp->interes ?>"
+                                                                               name="porcentaje"></div>
+                        <div class="sabios-table-td" style="width: 8%"><a href="#"><i class="fdp-grabar fa fa-floppy-o"
+                                                                                      title="Grabar"
+                                                                                      value="<?= $fdp->id ?>"></i></a><i
+                                title="Cancelar" class="fdp-cancelar fa fa-times" value="<?= $fdp->id ?>"></i></div>
+                        <div class="sabios-table-td" style="width: 8%"><a href="#"><span
+                                    class="sabios-delete"></span></a></div>
+                    </form>
+                </div>
                 <?php
                 $count++;
             endforeach;
-            ?>                                
+            ?>
         </div>
         <div class="sabios-table-tfooter">
-        </div>	
+        </div>
     </div>
 </div>
 
@@ -63,15 +85,48 @@
     <div class="sabios-row tb-image-invalid"></div>
     <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
     <div class="sabios-row tb-text-invalid">
-            <?php if (count($this->errormessages)) : ?>
+        <?php if (count($this->errormessages)) : ?>
             <ul id="messages">
                 <?php foreach ($this->errormessages as $message) : ?>
                     <li><?php echo $this->escape($message); ?></li>
-    <?php endforeach; ?>
+                <?php endforeach; ?>
             </ul>
             <script>
-                    $.blockUI({message: $('#flashmessenger-error'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+                $.blockUI({
+                    message: $('#flashmessenger-error'),
+                    css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}
+                });
             </script>
-<?php endif; ?>
+        <?php endif; ?>
     </div>
 </div>
+<script>
+    $.each($(".app-estado"), function () {
+
+        $(this).change(function () {
+
+            var titulo = $(this).attr("appname");
+            var id = $(this).attr("appid");
+            var valor = $(this).val();
+            sabiosConfirm("Confirme", "Esta seguro de cambiar el estado de la aplicacion " + titulo + " a " + valor + "?", id, function (id) {
+
+                // aqui llamada ajax para cambiar
+
+                $.ajax({
+                    type: "GET",
+                    url: '/superadmin/update?id=' + id,
+                    success: function () {
+                        sabiosMessageBox("&Eacute;xito", "Se ha cambiado la configuraci&oacute;n exitosamente.");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 3000);
+                    }
+
+                });
+            });
+
+        });
+
+    });
+
+</script>
