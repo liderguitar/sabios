@@ -88,6 +88,11 @@ class CatalogoController extends My_Controller_Sabios {
         if(APPLICATION_ID == 'home'){
             header('Location: /home');
         }
+        if(APPLICATION_ID == 'admin'){
+            header('Location: /superadmin/list');
+        }
+
+
         $this->view->id = $id = $this->_request->getParam('id', false);
         $cats = array();
         if (!$id) {
