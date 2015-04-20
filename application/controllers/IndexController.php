@@ -43,7 +43,7 @@ Zend_Debug::dump(Doctrine_Core::generateModelsFromDb(APPLICATION_PATH.  '/models
             ->leftJoin("vd.ProductoTextil pt")
             ->leftJoin("pt.Producto")
             ->where('app_id="' . APPLICATION_ID . '" and v.borrado="N"')
-            ->andWhere("")->orderBy("v.id desc")->limit(5)->execute();
+            ->orderBy("v.id desc")->limit(5)->execute();
 
         $this->view->contactsuccess = $this->_request->getParam('contactsuccess', false);
     }
