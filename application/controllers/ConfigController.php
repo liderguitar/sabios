@@ -20,7 +20,7 @@ class ConfigController extends My_Controller_Sabios {
 
         $app = Doctrine_Core::getTable('Application')->findByDql("app_id='".APPLICATION_ID."'");
         $app = $app[0];
-        $this->view->logo = $app->logo ? "/files/" . $app->logo : '/images/sabios-logo.png';
+        $this->view->logo = $app->logo ? "/files/" . $app->logo : '/images/sabbios-logo.png';
 
         if ($this->_request->isPost()) {
 
@@ -41,7 +41,7 @@ class ConfigController extends My_Controller_Sabios {
 
         $app = Doctrine_Core::getTable('Application')->findByDql("app_id='".APPLICATION_ID."'");
         $app = $app[0];
-        $this->view->logo = $app->logo ? $app->logo : 'sabios-logo.png';
+        $this->view->logo = $app->logo ? $app->logo : 'sabbios-logo.png';
         $app->save();
 
         $this->_redirect("/config");
