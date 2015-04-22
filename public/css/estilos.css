@@ -500,7 +500,7 @@ table.calcells td.hover {
     margin-top: 80px;
 }
 .label {
-    color: #2A1B78;
+    color: #00bff2;
     font-family: 'helveticaneuelight';
     font-size: 16px;
     margin-bottom: -8px;
@@ -1894,4 +1894,15 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
 }
 .fdp-cancelar.fa.fa-times {
   margin-left: 5px;
+}
+.sabios-row.separator {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+.righty{
+    float: right;
+}
+.help {
+    color: red;
+    font-weight: bold;
 }
