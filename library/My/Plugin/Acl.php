@@ -20,8 +20,8 @@ class My_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $action = $request->getActionName();
         $resource = $request->getControllerName();
         $privilegio = $request->getActionName();
-        $referer =  $_SERVER['HTTP_REFERER'];
-        dump($_SERVER);
+        $referer =  $_SERVER['REDIRECT_URL'];
+
         if ($action == "error" && $resource == "error")
             return;
 
