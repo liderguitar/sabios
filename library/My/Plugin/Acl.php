@@ -48,8 +48,8 @@ class My_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
             
            // throw new Exception($message);
             $request = $this->getRequest();
-            $request->setControllerName('error')
-                    ->setActionName('error')
+            $request->setControllerName('usuario')
+                    ->setActionName('login')
                     ->setParam('message', $message);
         }
     }
