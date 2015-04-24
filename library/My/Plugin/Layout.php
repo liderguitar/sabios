@@ -18,6 +18,7 @@ class My_Plugin_Layout extends Zend_Controller_Plugin_Abstract {
     public function preDispatch(Zend_Controller_Request_Abstract $request) {
         $auth = Zend_Auth::getInstance();
         $resource = $request->getControllerName();
+        $privilegio = $request->getActionName();
        //d ie();
         if($resource == 'home') {
                 Zend_Layout::startMvc(array(
@@ -30,6 +31,16 @@ class My_Plugin_Layout extends Zend_Controller_Plugin_Abstract {
                 return;
         }
 
+        if($resource == 'usuario' &&$privilegio == 'login' ) {
+            Zend_Layout::startMvc(array(
+                    'layoutPath' => APPLICATION_PATH .
+                        DIRECTORY_SEPARATOR . "layouts" .
+                        DIRECTORY_SEPARATOR . "scripts",
+                    'layout' => 'layout2'
+                )
+            );
+            return;
+        }
 
         if (!$auth->hasIdentity()) {
 
