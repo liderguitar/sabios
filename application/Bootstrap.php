@@ -196,7 +196,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     public function _initMetas() {
         $metas = array(
             "Keywords" => "",
-            "Description" => "Sabbios - Software on-line de gestión y administración de stock enfocado a mejorar las ventas",
+            "Description" => "Sabbios - Software on-line de gestión y administración de stock enfocado a mejorar las ventas. Control y manejo de stock, mercadería e insumos con código de barras. Catálogo para realizar ventas online. Información al instante desde cualquier lugar. Sin instalación y muy seguro. Gratis.",
             "language" => "Spanish",
             "author" => "Gustavo Pero",
             "copyright" => date('Y'),
