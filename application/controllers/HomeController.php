@@ -91,7 +91,7 @@ class HomeController extends My_Controller_Sabios {
                     "bodytext" => "Estimado " . $data['nombre'] . " " . $data['apellido'] . ", <br>
               &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirar su cuenta SABIOS gratuita:<br>
               <a href='http://sabibos.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
-              http://sabiosweb.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
+              http://sabbios.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
               Saludos Cordiales<br>
               <a href='http://sabbios.com'>SABBIOS</a><br>
               <a href='http://sabbios.com/home/condiciones'>Condiciones</a> <a href='http://sabbios.com/home/privacidad'>Privacidad</a>",
@@ -154,8 +154,8 @@ class HomeController extends My_Controller_Sabios {
             $mail = new Zend_Mail();
             $mail->setBodyHtml($html);
             $mail->setFrom($data['email'], 'Sabios');
-            $mail->addTo('info@sabiosweb.com', 'Contacto');
-            $mail->setSubject('Sabios - Contacto');
+            $mail->addTo('info@sabbios.com', 'Contacto');
+            $mail->setSubject('Sabbios - Contacto');
             $mail->send();
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Gracias por contactarse con nosotros.');
             return $this->_redirect("/?contactsuccess=true");
@@ -178,8 +178,8 @@ class HomeController extends My_Controller_Sabios {
             $mail = new Zend_Mail();
             $mail->setBodyHtml($html);
             $mail->setFrom($data['email'], 'Sabios');
-            $mail->addTo('info@sabiosweb.com', 'Inversores');
-            $mail->setSubject('Sabios - Inversores');
+            $mail->addTo('info@sabbios.com', 'Inversores');
+            $mail->setSubject('Sabbios - Inversores');
             $mail->send();
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Gracias por contactarse con nosotros.');
             return $this->_redirect("/?contactsuccess=true");

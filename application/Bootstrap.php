@@ -97,7 +97,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $domains = split('\.', $_SERVER['SERVER_NAME']);
         //    dump($domains);
 //        if (APPLICATION_ENV == 'production') {
-        if ($domains[0] == 'www' || $domains[0] == 'sabiosweb') {
+        if ($domains[0] == 'www' || $domains[0] == 'sabbios') {
             // header('location: /home');
             $this->configuration = Doctrine_Core::getTable('Application')->find(4);
             define("PUBLIC_FOLDER", $this->configuration->publicFolder);
