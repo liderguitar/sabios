@@ -195,8 +195,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     public function _initMetas() {
         $metas = array(
-            "Keywords" => "mejor un libro,Dicionarios,Diccionarios enciclopedicos,Enciclopedias,Cuentos Intantiles,Libros para mama,Libros para Papa,Libros de cocina,Medicina,Enfermeria,Libros para docentes,Dia del nino,Regalos para dia del nino,Libros en cuotas,Enciclopedias de Argentina,Libros de cocina,Oficios y profesiones,Mecanica automotor,Oceano,Circulo Latino Austral,Billiken,Planeta,Educacion sexual,Negri ediciones,Ediciones RT,Contrareembolso,Libros por contrareembolso,LIBROS  para todos,Aprender leyendo",
-            "Description" => "Mejor Un Libro, sitio de venta online de libros",
+            "Keywords" => "",
+            "Description" => "Sabbios - Software on-line de gestión y administración de stock enfocado a mejorar las ventas",
             "language" => "Spanish",
             "author" => "Gustavo Pero",
             "copyright" => date('Y'),
