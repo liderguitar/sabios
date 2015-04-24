@@ -6,7 +6,7 @@
  * @author
  * @version 
  */
-class UsuarioController extends Zend_Controller_Action {
+class UsuarioController extends My_Controller_Sabios {
 
     /**
      * The default action - show the home page
