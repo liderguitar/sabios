@@ -22,14 +22,15 @@ class UsuarioController extends My_Controller_Sabios {
        // die(APPLICATION_ID);
         
         if ($this->_auth->hasIdentity()) {
-            die('tiene');
+           // die('tiene');
             return $this->_redirect('/catalogo/categoria');
         }
-        $origin = $this->_request->getHeader('referer');
+       // $origin = $this->_request->getHeader('referer');
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
         $this->_helper->flashMessenger->clearCurrentMessages();
 
         $type = $this->_request->getParam("type", "local");
+        $origin = $this->_request->getParam("backurl", false);
 
         if ($type <> 'local' && $type <> 'twitter' && $type <> 'facebook')
             throw new Zend_Exception('Parametro erroneo', 404);
@@ -57,7 +58,7 @@ class UsuarioController extends My_Controller_Sabios {
                             $this->_helper->flashMessenger->addMessage('El usuario ' .
                                     $this->_auth->getIdentity()->nick .
                                     ' se ha logueado correctamente.');
-                            return $this->_redirect($origin);
+                            if($origin) return $this->_redirect($origin); else return $this->_redirect('/catalogo/categoria');
                         } else {
                             $this->_helper->flashMessenger->addMessage('No se ha podido loguear. Verifica tus credenciales.');
                             return $this->_redirect($origin);
