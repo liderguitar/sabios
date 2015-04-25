@@ -3,21 +3,16 @@
 class HomeController extends My_Controller_Sabios {
 
     private $_adapter = null;
-    private $_auth = null;
     private $_registerSession;
     private $_twitter_session;
 
     public function init() {
         $this->_auth = Zend_Auth::getInstance();
-        $this->view->messages = $this->_helper->flashMessenger->setNamespace('success')->getMessages();
-        $this->view->errormessages = $this->_helper->flashMessenger->setNamespace('error')->getMessages();
         $this->_registerSession = new Zend_Session_Namespace('register');
+        parent::init();
     }
 
-    public function indexAction() {
-
-
-
+    public function indexAction(){
 
 //  	Zend_Debug::dump(Doctrine_Core::generateModelsFromDb(APPLICATION_PATH.  '/models',array('doctrine'),array('generateTableClasses' => true)));
 //die;
@@ -29,8 +24,10 @@ class HomeController extends My_Controller_Sabios {
     }
 
     public function registerAction() {
-        $errors = false;
 
+
+        $errors = false;
+        $config = new Zend_Config_Ini(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'application.ini', 'production');
         if ($this->_request->isPost()) {
 
             $data = $this->_request->getParams();
@@ -56,7 +53,7 @@ class HomeController extends My_Controller_Sabios {
             $app = new Application();
             $app->app_id = md5($date->toString("yyyy-MM-dd HH:mm:ss") . $data['cuenta']);
             $app->nombre = $data['cuenta'];
-            $app->subdominio = $data['cuenta'];
+            $app->subdominio = strtolower($data['cuenta']);
             $app->tipo_actividad = $data['tipoactividad'];
             $app->web = $data['web'];
             $app->estado = 'OFFLINE';
@@ -89,15 +86,26 @@ class HomeController extends My_Controller_Sabios {
             My_Function_Function::sendEmail(
                 array(
                     "bodytext" => "Estimado " . $data['nombre'] . " " . $data['apellido'] . ", <br>
-              &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirar su cuenta SABIOS gratuita:<br>
-              <a href='http://sabibos.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
-              http://sabbios.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
+              &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirmar su cuenta SABBIOS gratuita:<br>
+              <a href='http://sabbios.com/usuario/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
+              http://sabbios.com/usuario/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
+              Para ver su sitio ir a <a href='http://".$app->subdominio.".sabbios.com/'></a><br>
+              Para administrar tu cuenta <a href='http://".$app->subdominio.".sabbios.com/admin</a>
               Saludos Cordiales<br>
               <a href='http://sabbios.com'>SABBIOS</a><br>
               <a href='http://sabbios.com/home/condiciones'>Condiciones</a> <a href='http://sabbios.com/home/privacidad'>Privacidad</a>",
-                    "subject" => "Registro en Sabios",
+                    "subject" => "Registro en Sabbios",
                     "email" => $data['email'],
                     "name" => $newUser->nombre
+            ));
+
+            My_Function_Function::sendEmail( array(
+                "bodytext" => "Se ha registrado  " . $data['nombre'] . " " . $data['apellido'] . ", <br>
+              con la cuenta: <a href='http://".$app->subdominio.".sabbios.com/'></a><br>
+              Saludos Cordiales<br>",
+                "subject" => "Nueva Cuenta Registro en Sabbios",
+                "email" => $config->superadmin->email,
+                "name" => $newUser->nombre
             ));
 
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Verifique su casilla de email para confirmar su registro.');

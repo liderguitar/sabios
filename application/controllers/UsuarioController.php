@@ -16,6 +16,7 @@ class UsuarioController extends My_Controller_Sabios {
     public function init() {
         $this->_auth = Zend_Auth::getInstance();
         $this->config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'production');
+        parent::init();
     }
 
     public function loginAction() {
@@ -31,7 +32,7 @@ class UsuarioController extends My_Controller_Sabios {
 
         $type = $this->_request->getParam("type", "local");
         $origin = $this->_request->getParam("backurl", false);
-
+        $this->view->backurl = $origin;
         if ($type <> 'local' && $type <> 'twitter' && $type <> 'facebook')
             throw new Zend_Exception('Parametro erroneo', 404);
         //$this->_helper->redirector('error', 'error','default');
@@ -207,19 +208,19 @@ class UsuarioController extends My_Controller_Sabios {
         $email = $this->_request->getparam('email', '');
 
         if (!$email || !$hash) {
-            $this->_helper->flashMessenger->addMessage('validacion incorrecta');
-            return $this->_redirect("/");
+            $this->_helper->flashMessenger->setNamespace('error')->addMessage('validacion incorrecta');
+            return $this->_redirect("/home");
         }
 
         $respuesta = Usuario::validarUsuario($email, $hash);
         if ($respuesta) {
-
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Se ha validado correctamente el usuario');
         } else {
             $this->_helper->flashMessenger->setNamespace('error')->addMessage('No se ha podido validar el usuario');
+
         }
 
-        return $this->_redirect("/");
+        return $this->_redirect("/home");
     }
 
     public function verificarNickAction() {

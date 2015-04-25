@@ -75,23 +75,6 @@ $this->headLink()->offsetSetStylesheet(657, PUBLIC_FOLDER . '/css/estilos_home.c
     </div>  
     <div class="sabios-row"><div class="forgot-pass">&#191;Olvidaste tu contraseña&#63;</div></div>
 </div>
-<div class="textbox message" id="flashmessenger">
-    <div class="sabios-row tb-close"></div>
-    <div class="sabios-row tb-image"></div>
-    <div class="sabios-row tb-title">Mensaje</div>
-    <div class ="sabios-row tb-text">
-<?php if (count($this->messages)) : ?>
-            <ul id="messages">
-            <?php foreach ($this->messages as $message) : ?>
-                    <li><?php echo $this->escape($message); ?></li>
-                <?php endforeach; ?>
-            </ul>
-            <script>
-                $.blockUI({message: $('#flashmessenger'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
-            </script>
-<?php endif; ?>
-    </div>
-</div>
 <div class="textbox invalid" id="flashmessenger-error">
     <div class="sabios-row tb-close"></div>
     <div class="sabios-row tb-image-invalid"></div>

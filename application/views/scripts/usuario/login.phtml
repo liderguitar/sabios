@@ -8,7 +8,7 @@ $this->headScript()->offsetSetFile(507, PUBLIC_FOLDER . '/js/login.js');
     </div>
     <div class="middle">
         <div class="left-column" style="width: 100%">
-            <form id="login-form" enctype="application/x-www-form-urlencoded" method="post" action="/usuario/login?type=local">
+            <form id="login-form" enctype="application/x-www-form-urlencoded" method="post" action="/usuario/login?type=local&backurl=<?=$this->backurl;?>">
                 <div class="sabios-row"><h1>Loguearse</h1></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
