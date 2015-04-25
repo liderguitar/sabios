@@ -96,7 +96,7 @@ class HomeController extends My_Controller_Sabios {
               <a href='http://sabbios.com'>SABBIOS</a><br>
               <a href='http://sabbios.com/home/condiciones'>Condiciones</a> <a href='http://sabbios.com/home/privacidad'>Privacidad</a>",
                     "subject" => "Registro en Sabbios",
-                    "email" => "{$data['email']} <{$data['email']}>",
+                    "email" => $data['email'],
                     "name" => $newUser->nombre
             ));
 
@@ -105,7 +105,7 @@ class HomeController extends My_Controller_Sabios {
               con la cuenta: <a href='http://".$app->subdominio.".sabbios.com/'></a><br>
               Saludos Cordiales<br>",
                 "subject" => "Nueva Cuenta Registro en Sabbios",
-                "email" => $config->superadmin->email." <".$config->superadmin->email.">",
+                "email" => $config->superadmin->email,
                 "name" => $newUser->nombre
             ));
 
