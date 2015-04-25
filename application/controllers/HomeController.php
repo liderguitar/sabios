@@ -28,6 +28,7 @@ class HomeController extends My_Controller_Sabios {
 
         $errors = false;
         $config = new Zend_Config_Ini(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'application.ini', 'production');
+
         if ($this->_request->isPost()) {
 
             $data = $this->_request->getParams();
@@ -90,8 +91,8 @@ class HomeController extends My_Controller_Sabios {
               <a href='http://sabbios.com/usuario/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
               http://sabbios.com/usuario/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
               Un administrador activar&aacute: tu cuenta despues de eso <br>
-              Para ver su sitio ir a <a href='http://".$app->subdominio.".sabbios.com/'></a><br>
-              Para administrar tu cuenta <a href='http://".$app->subdominio.".sabbios.com/admin'></a>
+              <a href='http://".$app->subdominio.".sabbios.com/'>Ver Sitio</a><br>
+              <a href='http://".$app->subdominio.".sabbios.com/admin'>Administrar</a>
               Saludos Cordiales<br>
               <a href='http://sabbios.com'>SABBIOS</a><br>
               <a href='http://sabbios.com/home/condiciones'>Condiciones</a> <a href='http://sabbios.com/home/privacidad'>Privacidad</a>",
