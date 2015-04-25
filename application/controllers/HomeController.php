@@ -89,13 +89,14 @@ class HomeController extends My_Controller_Sabios {
               &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirmar su cuenta SABBIOS gratuita:<br>
               <a href='http://sabbios.com/usuario/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
               http://sabbios.com/usuario/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
+              Un administrador activar&aacute: tu cuenta despues de eso <br>
               Para ver su sitio ir a <a href='http://".$app->subdominio.".sabbios.com/'></a><br>
-              Para administrar tu cuenta <a href='http://".$app->subdominio.".sabbios.com/admin</a>
+              Para administrar tu cuenta <a href='http://".$app->subdominio.".sabbios.com/admin'></a>
               Saludos Cordiales<br>
               <a href='http://sabbios.com'>SABBIOS</a><br>
               <a href='http://sabbios.com/home/condiciones'>Condiciones</a> <a href='http://sabbios.com/home/privacidad'>Privacidad</a>",
                     "subject" => "Registro en Sabbios",
-                    "email" => $data['email'],
+                    "email" => "{$data['email']} <{$data['email']}>",
                     "name" => $newUser->nombre
             ));
 
@@ -104,7 +105,7 @@ class HomeController extends My_Controller_Sabios {
               con la cuenta: <a href='http://".$app->subdominio.".sabbios.com/'></a><br>
               Saludos Cordiales<br>",
                 "subject" => "Nueva Cuenta Registro en Sabbios",
-                "email" => $config->superadmin->email,
+                "email" => $config->superadmin->email." <".$config->superadmin->email.">",
                 "name" => $newUser->nombre
             ));
 
