@@ -102,8 +102,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             define("PUBLIC_FOLDER", $this->configuration->publicFolder);
             define("APPLICATION_ID", $this->configuration->app_id);
             define("APPLICATION_SECRET", $this->configuration->app_secret);
-            define("APPLICATION_LOGO", $this->configuration->logo);
-            define("APPLICATION_NAME", $this->configuration->nombre);
+            if($this->configuration->logo == '') {
+                define("APPLICATION_LOGO", "images/sabbios-logo.png");
+            }
+            else {
+                define("APPLICATION_LOGO",  "files/thumb_" . $this->configuration->logo);
+            }
         } else {
 //            
             $this->configuration = Doctrine_Core::getTable('Application')->findByDql("subdominio='" . $domains[0] . "'");
@@ -112,7 +116,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 define("PUBLIC_FOLDER", $this->configuration->publicFolder);
                 define("APPLICATION_ID", $this->configuration->app_id);
                 define("APPLICATION_SECRET", $this->configuration->app_secret);
-                define("APPLICATION_LOGO", $this->configuration->logo);
+                if($this->configuration->logo == '') {
+                    define("APPLICATION_LOGO", "images/sabbios-logo.png");
+                }
+                else {
+                    define("APPLICATION_LOGO",  "files/thumb_" . $this->configuration->logo);
+                }
                 define("APPLICATION_NAME", $this->configuration->nombre);
                 if($this->configuration->estado == 'OFFLINE') {
                     header('location: http://www.sabbios.com/home');
