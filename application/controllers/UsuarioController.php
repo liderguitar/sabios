@@ -56,12 +56,12 @@ class UsuarioController extends My_Controller_Sabios {
                         $result = $this->_auth->authenticate($authAdapter);
                        
                         if ($result->isValid()) {
-                            $this->_helper->flashMessenger->addMessage('El usuario ' .
+                            $this->_helper->flashMessenger->setNamespace('success')->addMessage('El usuario ' .
                                     $this->_auth->getIdentity()->nick .
                                     ' se ha logueado correctamente.');
                             if($origin) return $this->_redirect($origin); else return $this->_redirect('/catalogo/categoria');
                         } else {
-                            $this->_helper->flashMessenger->addMessage('No se ha podido loguear. Verifica tus credenciales.');
+                            $this->_helper->flashMessenger->setNamespace('error')->addMessage('No se ha podido loguear. Verifica tus credenciales.');
                             return $this->_redirect($origin);
                         }
                     }

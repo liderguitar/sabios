@@ -73,7 +73,7 @@
                 ->where("{$this->_credentialCol} = '" . $this->_credential . "'")  
                 ->andWhere("{$this->_identityCol} = '" . $this->_identity ."'")
                 ->andWhere("blockeado = 'N'")
-                ->andWhere("app_id='".APPLICATION_ID."'")
+                ->andWhere("( app_id='".APPLICATION_ID."' or u.perfil = 'SUPERADMIN')" )
                 ->execute();  
                 return new Zend_Auth_Result(  
                 $result[0]->id ? Zend_Auth_Result::SUCCESS : Zend_Auth_Result::FAILURE,   

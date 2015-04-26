@@ -93,7 +93,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
     public function _initSite() {
-
         $domains = split('\.', $_SERVER['SERVER_NAME']);
         //    dump($domains);
 //        if (APPLICATION_ENV == 'production') {

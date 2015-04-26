@@ -1440,6 +1440,7 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
 }
 #description {
     margin-bottom: 15px;
+    padding: 5px;
 }
 #sabios-messagebox,#sabios-confirm {
     width: 336px;
