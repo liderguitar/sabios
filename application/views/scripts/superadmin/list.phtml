@@ -24,10 +24,11 @@
         <div class="sabios-table-head sabios-back-gradient">
             <div class="sabios-table-tr">
 
-                <div class="sabios-table-td" style="width: 10%">Id</div>
+                <div class="sabios-table-td" style="width: 5%">Id</div>
                 <div class="sabios-table-td" style="width: 35%">Nombre</div>
                 <div class="sabios-table-td" style="width: 35%">subdominio</div>
                 <div class="sabios-table-td" style="width: 20%">Estado</div>
+                <div class="sabios-table-td" style="width: 5%">Link</div>
 
 
             </div>
@@ -39,7 +40,7 @@
             foreach ($this->objects as $app) :
                 ?>
                 <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
-                    <div class="sabios-table-td" style="width: 10%"><a href=""><?= $app->id ?></a></div>
+                    <div class="sabios-table-td" style="width: 5%"><a href=""><?= $app->id ?></a></div>
                     <div class="sabios-table-td" style="width: 35%"><a href=""><?= $app->nombre ?></a></div>
                     <div class="sabios-table-td" style="width: 35%"><a href=""><?= $app->subdominio ?></a></div>
                     <div class="sabios-table-td" style="width: 20%">
@@ -49,6 +50,7 @@
                             <option value="ONLINE"<?= $app->estado == "ONLINE" ? 'selected' : '' ?>>ONLINE</option>
                         </select>
                     </div>
+                    <div class="sabios-table-td" style="width: 5%"><a href="http://<?= $app->subdominio . ".sabbios.com/admin"  ?>" target="_blank">Entrar</a></div>
                 </div>
                 <div id="tr-form-<?= $app->id ?>" class="hide sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
                     <form method="post" id="form-fdp-<?= $fdp->id ?>" action="/formadepago/edit">

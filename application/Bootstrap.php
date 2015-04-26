@@ -103,10 +103,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             define("APPLICATION_ID", $this->configuration->app_id);
             define("APPLICATION_SECRET", $this->configuration->app_secret);
             if($this->configuration->logo == '') {
-                define("APPLICATION_LOGO", "images/sabbios-logo.png");
+                define("APPLICATION_LOGO", "/images/sabbios-logo.png");
             }
             else {
-                define("APPLICATION_LOGO",  "files/thumb_" . $this->configuration->logo);
+                define("APPLICATION_LOGO",  "/files/thumb_" . $this->configuration->logo);
             }
         } else {
 //            
@@ -117,10 +117,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 define("APPLICATION_ID", $this->configuration->app_id);
                 define("APPLICATION_SECRET", $this->configuration->app_secret);
                 if($this->configuration->logo == '') {
-                    define("APPLICATION_LOGO", "images/sabbios-logo.png");
+                    define("APPLICATION_LOGO", "/images/sabbios-logo.png");
                 }
                 else {
-                    define("APPLICATION_LOGO",  "files/thumb_" . $this->configuration->logo);
+                    define("APPLICATION_LOGO",  "/files/thumb_" . $this->configuration->logo);
                 }
                 define("APPLICATION_NAME", $this->configuration->nombre);
                 if($this->configuration->estado == 'OFFLINE') {
