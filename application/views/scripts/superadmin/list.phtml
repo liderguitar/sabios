@@ -25,9 +25,10 @@
             <div class="sabios-table-tr">
 
                 <div class="sabios-table-td" style="width: 5%">Id</div>
-                <div class="sabios-table-td" style="width: 35%">Nombre</div>
-                <div class="sabios-table-td" style="width: 35%">subdominio</div>
-                <div class="sabios-table-td" style="width: 20%">Estado</div>
+                <div class="sabios-table-td" style="width: 25%">Nombre</div>
+                <div class="sabios-table-td" style="width: 25%">subdominio</div>
+                <div class="sabios-table-td" style="width: 15%">Estado</div>
+                <div class="sabios-table-td" style="width: 25%">Email</div>
                 <div class="sabios-table-td" style="width: 5%">Link</div>
 
 
@@ -41,36 +42,18 @@
                 ?>
                 <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
                     <div class="sabios-table-td" style="width: 5%"><a href=""><?= $app->id ?></a></div>
-                    <div class="sabios-table-td" style="width: 35%"><a href=""><?= $app->nombre ?></a></div>
-                    <div class="sabios-table-td" style="width: 35%"><a href=""><?= $app->subdominio ?></a></div>
-                    <div class="sabios-table-td" style="width: 20%">
+                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->nombre ?></a></div>
+                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->subdominio ?></a></div>
+                    <div class="sabios-table-td" style="width: 15%">
                         <select class="app-estado" appname="<?= $app->nombre ?>" appid="<?= $app->id ?>"
                                 name="app-estado">
                             <option value="OFFLINE"<?= $app->estado == "OFFLINE" ? 'selected' : '' ?>>OFFLINE</option>
                             <option value="ONLINE"<?= $app->estado == "ONLINE" ? 'selected' : '' ?>>ONLINE</option>
                         </select>
                     </div>
+                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->responsable_email ?></a></div>
+
                     <div class="sabios-table-td" style="width: 5%"><a href="http://<?= $app->subdominio . ".sabbios.com/admin"  ?>" target="_blank">Entrar</a></div>
-                </div>
-                <div id="tr-form-<?= $app->id ?>" class="hide sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
-                    <form method="post" id="form-fdp-<?= $fdp->id ?>" action="/formadepago/edit">
-                        <div class="sabios-table-td" style="width: 50%"><input class="fdp-" name="id" type="hidden"
-                                                                               value="<?= $fdp->id ?>"></div>
-                        <div class="sabios-table-td" style="width: 50%"><input class="fdp-nombre sabios-input fdp"
-                                                                               type="text" id="nombre"
-                                                                               value="<?= $fdp->descripcion ?>"
-                                                                               name="nombre"></div>
-                        <div class="sabios-table-td" style="width: 34%"><input class="fdp-porcentaje sabios-input fdp"
-                                                                               type="text" id="porcentaje"
-                                                                               value="<?= $fdp->interes ?>"
-                                                                               name="porcentaje"></div>
-                        <div class="sabios-table-td" style="width: 8%"><a href="#"><i class="fdp-grabar fa fa-floppy-o"
-                                                                                      title="Grabar"
-                                                                                      value="<?= $fdp->id ?>"></i></a><i
-                                title="Cancelar" class="fdp-cancelar fa fa-times" value="<?= $fdp->id ?>"></i></div>
-                        <div class="sabios-table-td" style="width: 8%"><a href="#"><span
-                                    class="sabios-delete"></span></a></div>
-                    </form>
                 </div>
                 <?php
                 $count++;
