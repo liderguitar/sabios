@@ -430,7 +430,7 @@ table.calcells td.hover {
 .sabios-submit {
     cursor: pointer;
     border: 1px solid #BABABA;
-    border-radius: 8px;
+    border-radius: 4px;
     color: #FFFFFF;
     font-family: Helvetica,sans-serif;
     font-size: 18px;
@@ -449,7 +449,7 @@ table.calcells td.hover {
 .sabios-submit2 {
     cursor: pointer;
     border: 1px solid #BABABA;
-    border-radius: 8px;
+    border-radius: 4px;
     color: #FFFFFF;
     font-family: Helvetica,sans-serif;
     font-size: 18px;
@@ -482,8 +482,8 @@ table.calcells td.hover {
 }
 .sabios-input2 {
     border: 1px solid #A4A5A5;
-    -webkit-border-radius: 6px; /* Android ≤ 1.6, iOS 1-3.2, Safari 3-4 */
-    border-radius: 6px;
+    -webkit-border-radius: 4px; /* Android ≤ 1.6, iOS 1-3.2, Safari 3-4 */
+    border-radius: 4px;
     color: #A4A5A5;
     font-family: helveticaneuelight !important;
     font-size: 18px !important;
@@ -620,8 +620,8 @@ button.login {
 
 .sabios-error {
     background-color: #000000;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
     font-size: 12px;
     height: 32px;
     padding: 8px 10px 0 10px;
@@ -900,7 +900,7 @@ a {
 .down-arrow {
   background: url("/images/arrow-down-s2.png") no-repeat scroll 4px 10px, -moz-linear-gradient(center top , #c8f4f9 0%, #2391da 93%, #2391da 100%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
   border: 1px solid #a4a5a5;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   float: right;
   height: 27px;
@@ -1336,7 +1336,7 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
 }
 .stock-filters {
     border: 1px solid #CCCCCC;
-    border-radius: 6px;
+    border-radius: 4px;
     padding: 0px;
     width: 100%x;
     margin-left: 0px;
@@ -1439,8 +1439,9 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
     border-radius: 4px;  
 }
 #description {
+    font-family: helveticaneuelight;
     margin-bottom: 15px;
-    padding: 5px;
+    padding: 10px;
 }
 #sabios-messagebox,#sabios-confirm {
     width: 336px;
@@ -1452,7 +1453,7 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
 .sabios-fdp-submit {
     cursor: pointer;
     border: 1px solid #BABABA;
-    border-radius: 8px;
+    border-radius: 4px;
     color: #FFFFFF;
     font-family: Helvetica,sans-serif;
     font-size: 13px;
@@ -1580,7 +1581,7 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
 }
 .info-prod {
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
     font-size: 13px;
     margin-left: 5px;
     float: left;
@@ -1784,10 +1785,10 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
   width: 101px;
 }
 .sabios-user .sabios-submit {
-  font-size: 14px;
-  height: 30px;
-  padding: 3px;
-  width: 85px !important;
+    font-size: 12px;
+    height: 39px;
+    padding: 3px;
+    width: 85px !important;
 }
 .sabios-submit.new-client {
   float: right;
@@ -1806,13 +1807,12 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
   padding: 2px;
 }
 .sabios-submit.new-client {
-  color: #fff !important;
-  float: right;
-  font-size: 12px;
-  height: 39px;
-  margin-top: -7px;
-  padding: 2px 0 0 19px;
-  width: 54px !important;
+    color: #fff !important;
+    float: right;
+    font-size: 12px;
+    height: 20px;
+    padding: 2px 0 0 19px;
+    width: 94px !important;
 }
 .logo-container {
   border: 1px solid #ccc;
@@ -1906,4 +1906,18 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
 .help {
     color: red;
     font-weight: bold;
+}
+.forgot-pass.fp-admin {
+    margin-left: 200px;
+    margin-top: -28px;
+    cursor: pointer;
+}
+.sabios-row.fp {
+    font-family: helveticaneuelight;
+    font-size: 15px;
+}
+.forgot-pass.fp-catalogo {
+    font-size: 13px;
+    margin-left: 34px;
+    width: 200px;
 }

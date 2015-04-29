@@ -83,7 +83,7 @@ class Usuario extends BaseUsuario {
     }
     public static function getUserByEmail($email){
         
-        
+
         $usuario = Doctrine_Query::create()
                         ->from("Usuario u")
                         ->where("u.email = '".$email."'")

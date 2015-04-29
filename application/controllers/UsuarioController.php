@@ -220,7 +220,7 @@ class UsuarioController extends My_Controller_Sabios {
 
         }
 
-        return $this->_redirect("/home");
+        return $this->_redirect("/catalogo/categoria");
     }
 
     public function verificarNickAction() {
@@ -233,7 +233,71 @@ class UsuarioController extends My_Controller_Sabios {
         $this->_response->outputBody();
         exit;
     }
-    
+    public function forgotpasswordAction() {
+        if ($this->_request->isPost()) {
+            $email = $this->_request->getParam('email', false);
+            $user = Usuario::getUserByEmail($email);
+            if (!$user) {
+
+                $this->_helper->flashMessenger->setNamespace('error')->addMessage('Email no registrado');
+                $this->view->email = $email;
+
+            } else {
+
+                $user->blockeado = 'Y';
+
+                $date = Zend_Date::now();
+                $fecha = $date->toString("yyyy-MM-dd HH:mm:ss");
+                $user->validationHash = md5($email . $fecha);
+                $user->save();
+                My_Function_Function::sendEmail(
+                    array(
+                        "bodytext" => "Haga click en el siguiente enlace para Resetear su contrase&ntilde;a. <a href='http://" . $_SERVER['SERVER_NAME'] . "/usuario/resetpassword?hash=" . $user->validationHash . "&email=" . $user->email . "'>Validar</a>",
+                        "subject" => "Restablecer Contrase&ntilde;a en Sabbios",
+                        "email" => $email,
+                        "name" => "")
+                );
+                $this->_helper->flashMessenger->setNamespace('success')->addMessage('Se ha enviado un mail con un link para cambiar la clave');
+                return $this->_redirect("/catalogo/categoria");
+
+
+            }
+        }
+    }
+
+    public function resetpasswordAction() {
+
+        $email = utf8_decode($this->_request->getParam('email', FALSE));
+        $hash = utf8_decode($this->_request->getParam('hash', FALSE));
+        if (!$email || !$hash) {
+            $this->_helper->flashMessenger->setNamespace('error')->addMessage('Url no v&aacute;lida.');
+            return $this->_redirect("/catalogo/categoria");
+        }
+        if ($this->_request->isPost()) {
+
+            $data = $this->_request->getPost();
+            $respuesta = Usuario::validarUsuario($data['email'], $data['hash']);
+            if ($respuesta) {
+                $user = Doctrine_Query::create()
+                    ->from("Usuario U")
+                    ->where("U.email = ?", $data['email'])
+                    ->andWhere("U.validationHash = ?", $data['hash'])->fetchOne();
+                $user->password = md5($data['password']);
+                $user->save();
+
+                $this->_helper->flashMessenger->setNamespace('success')->addMessage('Se ha reestablecido su contrase&ntilde;a');
+            } else {
+                $this->_helper->flashMessenger->setNamespace('error')->addMessage('No se ha podido reestabler su contrase&ntilde;a');
+            }
+
+            return $this->_redirect("/catalogo/categoria");
+        } else {
+            $this->view->email = $email;
+            $this->view->hash = $hash;
+        }
+    }
+
+
 
 
 }

@@ -24,7 +24,7 @@ echo $this->doctype();
     <body>
         <table width="960px" cellspacing="0" cellpadding="0" border="0" align="center" class="bordes_header">
             <tbody><tr>
-                    <td width="200" class="logo-container" align="center"><img style="width: 156px" vspace="10" src="/files/<?= APPLICATION_LOGO ?>"></td>
+                    <td width="200" class="logo-container" align="center"><img style="width: 156px" vspace="10" src="<?= APPLICATION_LOGO ?>"></td>
                     <td width="710" align="right" class="titulo_welcome_header"><div class="sabbios-logo"><img style="width: 156px" vspace="10" src="/images/sabbios-logo.png"></div>
                         <div class="dashboard sabios-user">
                             <?php if ($this->isLogged) : ?>
@@ -43,9 +43,9 @@ echo $this->doctype();
                                     </div>
                                     <div class="sabios-row">
                                         <input type="submit" name="submit" id="submit" value="Ingresar" class="sabios-submit cat-submit">
-                                        <button name="submit" id="forgot_pass" value="" class="sabios-submit forgot-pass-cat">No recuerdo la cotrase&ntilde;a</button>
-                                        <a href="/catalogo/registro"  id="register" value="" class="sabios-submit new-client">Nuevo <br>Cliente</a>
+                                        <a href="/catalogo/registro"  id="register" value="" class="sabios-submit new-client">Nuevo Cliente</a>
                                     </div>
+                                        <div class="sabios-row"><div class="forgot-pass fp-catalogo"><a href="/usuario/forgotpassword">¿Olvidaste tu contraseña?</a></div></div>
                                 </form>
                             <?php endif; ?>
                         </div>

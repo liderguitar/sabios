@@ -3,7 +3,8 @@
 class CatalogoController extends My_Controller_Sabios {
 
     public function indexAction() {
-        
+        return $this->_redirect("/catalogo/categoria");
+
     }
 
     public function productoAction() {

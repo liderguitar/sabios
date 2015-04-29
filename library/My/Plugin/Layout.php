@@ -31,7 +31,7 @@ class My_Plugin_Layout extends Zend_Controller_Plugin_Abstract {
                 return;
         }
 
-        if($resource == 'usuario' &&$privilegio == 'login' ) {
+        if($resource == 'usuario' ) {
             Zend_Layout::startMvc(array(
                     'layoutPath' => APPLICATION_PATH .
                         DIRECTORY_SEPARATOR . "layouts" .
@@ -41,6 +41,7 @@ class My_Plugin_Layout extends Zend_Controller_Plugin_Abstract {
             );
             return;
         }
+
 
         if (!$auth->hasIdentity()) {
 

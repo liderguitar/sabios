@@ -1,4 +1,9 @@
 application/configs/application.ini
-public/files/*
-.idea/*
+public/files/
+.idea/
+# Linux
+.*
+!.gitignore
+!.htaccess
+*~
 
