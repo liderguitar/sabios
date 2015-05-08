@@ -25,10 +25,10 @@
             <div class="sabios-table-tr">
 
                 <div class="sabios-table-td" style="width: 5%">Id</div>
-                <div class="sabios-table-td" style="width: 25%">Nombre</div>
-                <div class="sabios-table-td" style="width: 25%">subdominio</div>
+                <div class="sabios-table-td" style="width: 20%">Nombre</div>
+                <div class="sabios-table-td" style="width: 20%">subdominio</div>
                 <div class="sabios-table-td" style="width: 15%">Estado</div>
-                <div class="sabios-table-td" style="width: 25%">Email</div>
+                <div class="sabios-table-td" style="width: 35%">Email</div>
                 <div class="sabios-table-td" style="width: 5%">Link</div>
 
 
@@ -42,8 +42,8 @@
                 ?>
                 <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
                     <div class="sabios-table-td" style="width: 5%"><a href=""><?= $app->id ?></a></div>
-                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->nombre ?></a></div>
-                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->subdominio ?></a></div>
+                    <div class="sabios-table-td" style="width: 20%"><a href=""><?= $app->nombre ?></a></div>
+                    <div class="sabios-table-td" style="width: 20%"><a href=""><?= $app->subdominio ?></a></div>
                     <div class="sabios-table-td" style="width: 15%">
                         <select class="app-estado" appname="<?= $app->nombre ?>" appid="<?= $app->id ?>"
                                 name="app-estado">
@@ -51,7 +51,7 @@
                             <option value="ONLINE"<?= $app->estado == "ONLINE" ? 'selected' : '' ?>>ONLINE</option>
                         </select>
                     </div>
-                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $app->responsable_email ?></a></div>
+                    <div class="sabios-table-td" style="width: 35%"><a href=""><?= $app->responsable_email ?></a></div>
 
                     <div class="sabios-table-td" style="width: 5%"><a href="http://<?= $app->subdominio . ".sabbios.com/admin"  ?>" target="_blank">Entrar</a></div>
                 </div>
