@@ -64,6 +64,11 @@ class HomeController extends My_Controller_Sabios {
             $app->responsable_direccion = $data['responsabledireccion'];
             $app->save();
 
+            // insertar categorias y talles por defecto
+
+            $this->generarTallesPorDefecto($app->app_id);
+            $this->generarCategoriasPorDefecto($app->app_id);
+
             $newUser = new Usuario();
             //$newUser->nick = $data['nick'];
             $newUser->nombre = $data['nombre'];
@@ -432,5 +437,142 @@ class HomeController extends My_Controller_Sabios {
     public function privacidadAction() {
         
     }
+    private function generarCategoriasPorDefecto($app_id){
+
+        $prioridad = 1;
+        $cat = new Categoria();
+        $cat->app_id = $app_id;
+        $cat->nombre = "Hombre";
+        $cat->parent_id =0;
+        $cat->save();
+
+        $hombre_id = $cat->id;
+
+        $prioridad ++;
+        $cat2 = new Categoria();
+        $cat2->app_id = $app_id;
+        $cat2->nombre = "Mujer";
+        $cat2->parent_id =0;
+        $cat2->save();
+
+        $mujer_id=$cat2->id;
+
+        $hombre = array(
+            "Remeras Mangas Cortas",
+            "Musculosas",
+            "Pantalones",
+            "Zapatillas",
+            "Boxer",
+            "Camisas",
+            "Mallas",
+            "Buzos",
+            "Camperas"
+        );
+        $mujer = array("Remeras Mangas Cortas",
+            "Musculosas",
+            "Mallas",
+            "Buzos",
+            "Camperas");
+
+        $prioridad = 1;
+        foreach($hombre as $h){
+            $cat3 = new Categoria();
+            $cat3->nombre = $h;
+            $cat3->app_id = $app_id;
+            $cat3->prioridad = $prioridad;
+            $cat3->parent_id = $hombre_id;
+            $cat3->save();
+            $prioridad++;
+        }
+
+        $prioridad = 1;
+
+        foreach($mujer as $h){
+            $cat3 = new Categoria();
+            $cat3->nombre = $h;
+            $cat3->app_id = $app_id;
+            $cat3->prioridad = $prioridad;
+            $cat3->parent_id = $mujer_id;
+            $cat3->save();
+            $prioridad++;
+        }
+
+    }
+
+    private function generarTallesPorDefecto($app_id){
+
+        $tt = new TalleTipo();
+        $tt->app_id = $app_id;
+        $tt->descripcion = "XS al XXL";
+        $tt->save();
+
+        $talles = array( "XS", "S", "M", "L", "XL", "XXL");
+        $prioridad = 1;
+        foreach($talles as $t){
+
+            $t= new Talle();
+            $t->app_id = $app_id;
+            $t->prioridad = $prioridad;
+            $t->id_tipo_talle = $tt->id;
+            $t->talle = $t;
+            $t->save();
+            $prioridad++;
+        }
+
+        $tt = new TalleTipo();
+        $tt->app_id = $app_id;
+        $tt->descripcion = "Numeros pares 6 al 16";
+        $tt->save();
+
+        $talles = array( 6, 8, 10, 12, 14, 16);
+        $prioridad = 1;
+        foreach($talles as $t){
+
+            $t= new Talle();
+            $t->app_id = $app_id;
+            $t->prioridad = $prioridad;
+            $t->id_tipo_talle = $tt->id;
+            $t->talle = $t;
+            $t->save();
+            $prioridad++;
+        }
+        $tt = new TalleTipo();
+        $tt->app_id = $app_id;
+        $tt->descripcion = "Numeros pares 38 al 50";
+        $tt->save();
+
+        $talles = array( 38, 40, 42, 44, 46, 48, 50);
+        $prioridad = 1;
+        foreach($talles as $t){
+
+            $t= new Talle();
+            $t->app_id = $app_id;
+            $t->prioridad = $prioridad;
+            $t->id_tipo_talle = $tt->id;
+            $t->talle = $t;
+            $t->save();
+            $prioridad++;
+        }
+
+        $tt = new TalleTipo();
+        $tt->app_id = $app_id;
+        $tt->descripcion = "Numeros del 34 al 50";
+        $tt->save();
+
+        $talles = array( 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50);
+        $prioridad = 1;
+        foreach($talles as $t){
+
+            $t= new Talle();
+            $t->app_id = $app_id;
+            $t->prioridad = $prioridad;
+            $t->id_tipo_talle = $tt->id;
+            $t->talle = $t;
+            $t->save();
+            $prioridad++;
+        }
+
+    }
 
 }
+
