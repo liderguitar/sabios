@@ -532,7 +532,7 @@ class HomeController extends My_Controller_Sabios {
             $t->app_id = $app_id;
             $t->prioridad = $prioridad;
             $t->id_tipo_talle = $tt->id;
-            $t->talle = $t;
+            $t->talle = (string)$t;
             $t->save();
             $prioridad++;
         }
@@ -549,7 +549,7 @@ class HomeController extends My_Controller_Sabios {
             $t->app_id = $app_id;
             $t->prioridad = $prioridad;
             $t->id_tipo_talle = $tt->id;
-            $t->talle = $t;
+            $t->talle = (string)$t;
             $t->save();
             $prioridad++;
         }
@@ -567,7 +567,7 @@ class HomeController extends My_Controller_Sabios {
             $t->app_id = $app_id;
             $t->prioridad = $prioridad;
             $t->id_tipo_talle = $tt->id;
-            $t->talle = $t;
+            $t->talle = (string)$t;
             $t->save();
             $prioridad++;
         }
