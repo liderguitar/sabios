@@ -14,6 +14,8 @@ class HomeController extends My_Controller_Sabios {
 
     public function indexAction(){
 
+
+
 //  	Zend_Debug::dump(Doctrine_Core::generateModelsFromDb(APPLICATION_PATH.  '/models',array('doctrine'),array('generateTableClasses' => true)));
 //die;
         $this->view->contactsuccess = $this->_request->getParam('contactsuccess', false);
@@ -57,7 +59,7 @@ class HomeController extends My_Controller_Sabios {
             $app->subdominio = strtolower($data['cuenta']);
             $app->tipo_actividad = $data['tipoactividad'];
             $app->web = $data['web'];
-            $app->estado = 'OFFLINE';
+            $app->estado = $this->isAvailable() ? 'ONLINE' : 'OFFLINE';
             $app->responsable_nombre = $data['responsablenombre'];
             $app->responsable_email = $data['responsableemail'];
             $app->responsable_telefono = $data['responsabletelefono'];
@@ -571,6 +573,15 @@ class HomeController extends My_Controller_Sabios {
             $t->save();
             $prioridad++;
         }
+
+    }
+
+    private function isAvailable(){
+
+        $q = Doctrine_Manager::getInstance()->getCurrentConnection();
+        $result = $q->execute("select count(*) as cantidad from application")->fetchAll();
+
+        return (int)$result[0]["cantidad"] < 21 ? true : false;
 
     }
 
