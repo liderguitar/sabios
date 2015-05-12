@@ -225,9 +225,8 @@ class BrowserController extends Zend_Controller_Action {
                     $this->_response->outputBody();
                     exit;
                 }
+                list($width, $height, $type, $attr) = getimagesize($file['tmp_name']);
 
-                $height = imagesy($file["tmp_name"]);
-                $width = imagesx($file["tmp_name"]);
                 $tmp_name = $file["tmp_name"];
                 if ($height < 300 || $width < 300) {
                     $data['success'] = false;
