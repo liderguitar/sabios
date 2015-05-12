@@ -34,12 +34,13 @@ echo $this->doctype();
                     <div class="sabios-row">Bienvenido/a, <?= $this->user ?></div>
                     <div class="sabios-row"><a href="/usuario/logout">
                             <button class="sabios-submit cerrar-session" value="">Cerrar Sesi&oacute;n</button>
-                        </a></div>
-                    <?php if ($this->userPerfil == "ADMIN" || $this->userPerfil == "SUPERADMIN") : ?>
-                        <div class="sabios-row"><a href="/admin">
+                        </a>
+                        <?php if ($this->userPerfil == "ADMIN" || $this->userPerfil == "SUPERADMIN") : ?>
+                            <a href="/admin">
                                 <button class="sabios-submit cerrar-session" value="">Administrar</button>
-                            </a></div>
-                    <?php endif; ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
                 <?php else : ?>
                     <form id="login-form" enctype="application/x-www-form-urlencoded" method="post"
                           action="/usuario/login?type=local">
@@ -167,32 +168,32 @@ echo $this->doctype();
 
 <?php
 if (count($this->errormessages)) :
-foreach ($this->errormessages as $message) :
-?>
-<script>
-    //  $(document).ready(function() {
-    sabiosMessageBox("Error", "<?= $message ?>");
-    // });
+    foreach ($this->errormessages as $message) :
+        ?>
+        <script>
+            //  $(document).ready(function() {
+            sabiosMessageBox("Error", "<?= $message ?>");
+            // });
 
 
-</script>
-<?php
-endforeach;
+        </script>
+    <?php
+    endforeach;
 endif;
 ?>
-        <?php
-if (count($this->messages)) :
-foreach ($this->messages as $message) :
-?>
-<script>
-    //  $(document).ready(function() {
-    sabiosMessageBox("Éxito", "<?= $message ?>");
-    // });
-
-
-</script>
 <?php
-endforeach;
+if (count($this->messages)) :
+    foreach ($this->messages as $message) :
+        ?>
+        <script>
+            //  $(document).ready(function() {
+            sabiosMessageBox("Éxito", "<?= $message ?>");
+            // });
+
+
+        </script>
+    <?php
+    endforeach;
 endif;
 ?>
 <div id="show_image"></div>
