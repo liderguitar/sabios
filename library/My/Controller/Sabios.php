@@ -8,6 +8,7 @@ class My_Controller_Sabios extends Zend_Controller_Action {
 
         $this->_auth = Zend_Auth::getInstance();
         $this->view->user = isset($this->_auth->getIdentity()->nombre) ? $this->_auth->getIdentity()->nombre :false;
+        $this->view->userPerfil = isset($this->_auth->getIdentity()->perfil) ? $this->_auth->getIdentity()->perfil :false;
         $this->_user_id = isset($this->_auth->getIdentity()->id) ? $this->_auth->getIdentity()->id : false;
         $this->view->isLogged = isset($this->_auth->getIdentity()->id) ? true : false;
         $this->view->messages = $this->_helper->flashMessenger->setNamespace('success')->getMessages();

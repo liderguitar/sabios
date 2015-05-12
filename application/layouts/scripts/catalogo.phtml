@@ -4,171 +4,197 @@ echo $this->doctype();
 ?>
 
 <html>
-    <head>
+<head>
 
-        <link rel="shortcut icon" href="<?= PUBLIC_FOLDER ?>/images/favicon.ico">
-        <?php echo $this->headTitle(); ?>
+    <link rel="shortcut icon" href="<?= PUBLIC_FOLDER ?>/images/favicon.ico">
+    <?php echo $this->headTitle(); ?>
 
-        <?php echo $this->headMeta() ?>
+    <?php echo $this->headMeta() ?>
 
-        <?php echo $this->headScript() ?>
+    <?php echo $this->headScript() ?>
 
-        <?php echo $this->headLink() ?>
+    <?php echo $this->headLink() ?>
 
-        <?php echo $this->headStyle() ?>
-
-
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-
-    </head>
-    <body>
-        <table width="960px" cellspacing="0" cellpadding="0" border="0" align="center" class="bordes_header">
-            <tbody><tr>
-                    <td width="200" class="logo-container" align="center"><img style="width: 156px" vspace="10" src="<?= APPLICATION_LOGO ?>"></td>
-                    <td width="710" align="right" class="titulo_welcome_header"><div class="sabbios-logo"><img style="width: 156px" vspace="10" src="/images/sabbios-logo.png"></div>
-                        <div class="dashboard sabios-user">
-                            <?php if ($this->isLogged) : ?>
-                                <div class="sabios-row">Bienvenido/a, <?= $this->user ?></div>
-                                <div class="sabios-row"><a href="/usuario/logout"><button class="sabios-submit cerrar-session" value="">Cerrar Sesi&oacute;n</button></a></div>
-                            <?php else : ?>
-                                <form id="login-form" enctype="application/x-www-form-urlencoded" method="post" action="/usuario/login?type=local">
-                                    <div class="sabios-row">
-                                        <input type="text" placeholder="Email de acceso" name="nick" id="nick" value="" class="sabios-input">
-                                    </div>
-                                    <div class="sabios-row">
+    <?php echo $this->headStyle() ?>
 
 
-                                        <input type="password" placeholder="Contraseña" name="password" id="password" value="" class="sabios-input">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-                                    </div>
-                                    <div class="sabios-row">
-                                        <input type="submit" name="submit" id="submit" value="Ingresar" class="sabios-submit cat-submit">
-                                        <a href="/catalogo/registro"  id="register" value="" class="sabios-submit new-client">Nuevo Cliente</a>
-                                    </div>
-                                        <div class="sabios-row"><div class="forgot-pass fp-catalogo"><a href="/usuario/forgotpassword">¿Olvidaste tu contraseña?</a></div></div>
-                                </form>
-                            <?php endif; ?>
+</head>
+<body>
+<table width="960px" cellspacing="0" cellpadding="0" border="0" align="center" class="bordes_header">
+    <tbody>
+    <tr>
+        <td width="200" class="logo-container" align="center"><img style="width: 156px" vspace="10"
+                                                                   src="<?= APPLICATION_LOGO ?>"></td>
+        <td width="710" align="right" class="titulo_welcome_header">
+            <div class="sabbios-logo"><img style="width: 156px" vspace="10" src="/images/sabbios-logo.png"></div>
+            <div class="dashboard sabios-user">
+                <?php if ($this->isLogged) : ?>
+                    <div class="sabios-row">Bienvenido/a, <?= $this->user ?></div>
+                    <div class="sabios-row"><a href="/usuario/logout">
+                            <button class="sabios-submit cerrar-session" value="">Cerrar Sesi&oacute;n</button>
+                        </a></div>
+                    <?php if ($this->userPerfil == "ADMIN" || $this->userPerfil == "SUPERADMIN") : ?>
+                        <div class="sabios-row"><a href="/admin">
+                                <button class="sabios-submit cerrar-session" value="">Administrar</button>
+                            </a></div>
+                    <?php endif; ?>
+                <?php else : ?>
+                    <form id="login-form" enctype="application/x-www-form-urlencoded" method="post"
+                          action="/usuario/login?type=local">
+                        <div class="sabios-row">
+                            <input type="text" placeholder="Email de acceso" name="nick" id="nick" value=""
+                                   class="sabios-input">
+                        </div>
+                        <div class="sabios-row">
+
+
+                            <input type="password" placeholder="Contraseña" name="password" id="password" value=""
+                                   class="sabios-input">
+
+                        </div>
+                        <div class="sabios-row">
+                            <input type="submit" name="submit" id="submit" value="Ingresar"
+                                   class="sabios-submit cat-submit">
+                            <a href="/catalogo/registro" id="register" value="" class="sabios-submit new-client">Nuevo
+                                Cliente</a>
+                        </div>
+                        <div class="sabios-row">
+                            <div class="forgot-pass fp-catalogo"><a href="/usuario/forgotpassword">¿Olvidaste tu
+                                    contraseña?</a></div>
+                        </div>
+                    </form>
+                <?php endif; ?>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<table width="960px" cellspacing="0" cellpadding="0" border="0" align="center">
+    <tbody>
+    <tr>
+        <td width="230px" style="vertical-align: top;">
+
+            <table width="" cellspacing="0" cellpadding="0" border="0" align="center" class="texto"
+                   style="padding-top:0px; padding-bottom:0px;">
+                <tbody>
+                <tr>
+                    <td width="210" valign="top">
+                        <div style="float:left;">
+                            <table width="210" cellspacing="0" cellpadding="0" border="0" class="menu">
+                                <tbody>
+                                <tr>
+                                    <td style="padding-left:5px; padding-right:5px; padding-top:0px; padding-bottom:20px;">
+                                        <!--  -->
+                                        <div align="center" class="titulo_menu" style="padding-bottom:8px">Men&uacute;
+                                            Principal
+                                        </div>
+
+
+                                        <div class="menu2" id="menu-principal" style="display: block;">
+                                            <?php
+                                            echo '<ul>' . My_Function_Function::getMenuHtml(0, 0, 2) . '</ul>';
+                                            echo My_Function_Function::getMenuCatHtml();
+                                            ?>
+                                        </div>
+                                        <br><br><br><br><br><br>
+                                        <!--  -->
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </td>
+                    <td width="20" valign="top">&nbsp;</td>
+
                 </tr>
-            </tbody>
-        </table>
-        <br>
-        <table width="960px" cellspacing="0" cellpadding="0" border="0" align="center">
-            <tbody><tr>
-                    <td width="230px" style="vertical-align: top;">
 
-                        <table width="" cellspacing="0" cellpadding="0" border="0" align="center" class="texto" style="padding-top:0px; padding-bottom:0px;">
-                            <tbody><tr>
-                                    <td width="210" valign="top">
-                                        <div style="float:left;">
-                                            <table width="210" cellspacing="0" cellpadding="0" border="0" class="menu">
-                                                <tbody><tr>
-                                                        <td style="padding-left:5px; padding-right:5px; padding-top:0px; padding-bottom:20px;"> 
-                                                            <!--  -->
-                                                            <div align="center" class="titulo_menu" style="padding-bottom:8px">Men&uacute; Principal</div>
+                </tbody>
+            </table>
 
 
-                                                            <div class="menu2" id="menu-principal" style="display: block;">
-                                                                <?php
-                                                                echo '<ul>' . My_Function_Function::getMenuHtml(0, 0, 2) . '</ul>';
-                                                                echo My_Function_Function::getMenuCatHtml();
-                                                                ?>
-                                                            </div>
-                                                            <br><br><br><br><br><br>
-                                                            <!--  -->
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </td>
-                                    <td width="20" valign="top">&nbsp;</td>
+        </td>
+        <td style="vertical-align:top; padding-top:0px;"><?php echo $this->layout()->content; ?></td>
+    </tr>
+    </tbody>
+</table>
+<div align="center" class="footer"><a target="_blank" href="">2013</a>
+    &copy; Lider Soft
+</div>
+<div id="sabios-messagebox" class="hide sabios-table-container sabios-row">
+    <div class="sabios-table">
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
 
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-
-                    </td>
-                    <td style="vertical-align:top; padding-top:0px;" ><?php echo $this->layout()->content; ?></td>
-                </tr>
-            </tbody></table>
-        <div align="center" class="footer"> <a target="_blank" href="">2013</a> 
-            &copy; Lider Soft</div>
-        <div id="sabios-messagebox" class="hide sabios-table-container sabios-row">
-            <div class="sabios-table">
-                <div class="sabios-table-head sabios-back-gradient">
-                    <div class="sabios-table-tr">
-
-                        <div class="sabios-table-td sabios-table-titulo" style="width: 100%"><span>TITULO</span></div>
-                    </div>
-                </div>
-                <div class="sabios-table-tbody">
-                    <div id="description" class="sabios-table-ttr">
-                        <p></p>
-                    </div>
-                    <div class="sabios-table-ttr">
-                        <button class="sabios-fdp-submit tb-close">Ok</button>
-                    </div>                    
-                </div>
-                <div class="sabios-table-tfooter">
-                </div>	
+                <div class="sabios-table-td sabios-table-titulo" style="width: 100%"><span>TITULO</span></div>
             </div>
         </div>
-        <div id="sabios-confirm" class="hide sabios-table-container sabios-row">
-            <div class="sabios-table">
-                <div class="sabios-table-head sabios-back-gradient">
-                    <div class="sabios-table-tr">
-
-                        <div class="sabios-table-td sabios-table-titulo" style="width: 100%"><span>TITULO</span></div>
-                    </div>
-                </div>
-                <div class="sabios-table-tbody">
-                    <div id="description" class="sabios-table-ttr">
-                        <p></p>
-                    </div>
-                    <div class="sabios-table-ttr">
-                        <button class="sabios-fdp-submit option-no">No</button>
-                        <button class="sabios-fdp-submit option-yes">Si</button>
-                    </div>                    
-                </div>
-                <div class="sabios-table-tfooter">
-                </div>	
+        <div class="sabios-table-tbody">
+            <div id="description" class="sabios-table-ttr">
+                <p></p>
+            </div>
+            <div class="sabios-table-ttr">
+                <button class="sabios-fdp-submit tb-close">Ok</button>
             </div>
         </div>
+        <div class="sabios-table-tfooter">
+        </div>
+    </div>
+</div>
+<div id="sabios-confirm" class="hide sabios-table-container sabios-row">
+    <div class="sabios-table">
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
 
+                <div class="sabios-table-td sabios-table-titulo" style="width: 100%"><span>TITULO</span></div>
+            </div>
+        </div>
+        <div class="sabios-table-tbody">
+            <div id="description" class="sabios-table-ttr">
+                <p></p>
+            </div>
+            <div class="sabios-table-ttr">
+                <button class="sabios-fdp-submit option-no">No</button>
+                <button class="sabios-fdp-submit option-yes">Si</button>
+            </div>
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>
+    </div>
+</div>
+
+<?php
+if (count($this->errormessages)) :
+foreach ($this->errormessages as $message) :
+?>
+<script>
+    //  $(document).ready(function() {
+    sabiosMessageBox("Error", "<?= $message ?>");
+    // });
+
+
+</script>
+<?php
+endforeach;
+endif;
+?>
         <?php
-        if (count($this->errormessages)) :
-            foreach ($this->errormessages as $message) :
-                ?>
-                <script>
-                    //  $(document).ready(function() {
-                    sabiosMessageBox("Error", "<?= $message ?>");
-                    // });
+if (count($this->messages)) :
+foreach ($this->messages as $message) :
+?>
+<script>
+    //  $(document).ready(function() {
+    sabiosMessageBox("Éxito", "<?= $message ?>");
+    // });
 
 
-                </script>
-                <?php
-            endforeach;
-        endif;
-        ?>
-        <?php
-        if (count($this->messages)) :
-            foreach ($this->messages as $message) :
-                ?>
-                <script>
-                    //  $(document).ready(function() {
-                    sabiosMessageBox("Éxito", "<?= $message ?>");
-                    // });
-
-
-                </script>
-                <?php
-            endforeach;
-        endif;
-        ?>  
-        <div id="show_image"></div>                   
-    </body>
+</script>
+<?php
+endforeach;
+endif;
+?>
+<div id="show_image"></div>
+</body>
 </html>
