@@ -199,7 +199,6 @@ function validarPassword(){
     if (passwordStrength($("#password").val()) < 2) {
         $(".password-error").css("visibility", "visible");
         $(".password-error").find("span.white").html("Verifica la fortaleza de tu contraseña");
-        $("#password").focus();
         valido++;
     } else {
         $(".password-error").css("visibility", "hidden");
@@ -275,19 +274,14 @@ function passwordStrength(password)
         $(this).hide();
     });
     $(".desc-" + desc[score]).show();
-
     return score;
 
 }
 
 function setError(element) {
-
         $("." + element.attr('id') + "-error").css("visibility", "visible");
 }
 
 function clearError(element) {
-
         $("." + element.attr('id') + "-error").css("visibility", "hidden");
 }
-
-
