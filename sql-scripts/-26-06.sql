@@ -2,10 +2,10 @@
 -- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 17-04-2015 a las 23:02:01
--- Versión del servidor: 5.5.41-0ubuntu0.14.04.1
--- Versión de PHP: 5.5.9-1ubuntu4.7
+-- Host: localhost
+-- Generation Time: Jun 26, 2015 at 02:20 PM
+-- Server version: 5.5.41-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `sabios`
+-- Database: `sabios`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `alerta_emails`
+-- Table structure for table `alerta_emails`
 --
 
 CREATE TABLE IF NOT EXISTS `alerta_emails` (
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `alerta_emails` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Volcado de datos para la tabla `alerta_emails`
+-- Dumping data for table `alerta_emails`
 --
 
 INSERT INTO `alerta_emails` (`id`, `app_id`, `email1`, `email2`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `alerta_emails` (`id`, `app_id`, `email1`, `email2`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `application`
+-- Table structure for table `application`
 --
 
 CREATE TABLE IF NOT EXISTS `application` (
@@ -69,25 +69,29 @@ CREATE TABLE IF NOT EXISTS `application` (
   `email3` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE` (`subdominio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
--- Volcado de datos para la tabla `application`
+-- Dumping data for table `application`
 --
 
 INSERT INTO `application` (`id`, `app_id`, `nombre`, `template`, `estado`, `publicFolder`, `subdominio`, `app_secret`, `auth_token`, `auth_token_expires`, `tipo_actividad`, `web`, `responsable_nombre`, `responsable_email`, `responsable_telefono`, `responsable_direccion`, `logo`, `email2`, `email3`) VALUES
-(1, '04f50f7dfc94e524e2fc6ce675663c1d', 'MottaCo', 'admin', 'ONLINE', '', 'motta', '11d54b904e378009ce0b009cd7041a15', 'MTI3LjAuMC4xMjAxMzEyMDIxODQ3NDg=', '2013-12-02 18:47:48', '', '', '', '', '', '', '', NULL, NULL),
-(2, '221f67098b91c66830d0ec9b9305f510', 'Artesanias', 'admin', 'ONLINE', '', 'artesanias', 'd4b426ca4bd99cd61ebfbabd04ae7d4f', NULL, NULL, '', '', '', '', '', '', '', NULL, NULL),
-(3, '04f50f7dfc94e524e2fc6ce675663c1d', 'API', 'admin', 'ONLINE', '', 'api', NULL, NULL, NULL, '', '', '', '', '', '', '', NULL, NULL),
+(1, '04f50f7dfc94e524e2fc6ce675663c1d', 'MottaCo', 'admin', 'OFFLINE', '', 'motta', '11d54b904e378009ce0b009cd7041a15', 'MTI3LjAuMC4xMjAxMzEyMDIxODQ3NDg=', '2013-12-02 18:47:48', '', '', '', '', '', '', '', NULL, NULL),
+(2, '221f67098b91c66830d0ec9b9305f510', 'Artesanias', 'admin', 'OFFLINE', '', 'artesanias', 'd4b426ca4bd99cd61ebfbabd04ae7d4f', NULL, NULL, '', '', '', '', '', '', '', NULL, NULL),
+(3, '04f50f7dfc94e524e2fc6ce675663c1d', 'API', 'admin', 'OFFLINE', '', 'api', NULL, NULL, NULL, '', '', '', '', '', '', '', NULL, NULL),
 (4, 'home', 'Sabbios', '', 'ONLINE', NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', '', 'logo.png', NULL, NULL),
-(6, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepito', '', 'ONLINE', NULL, 'pepito', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.pepito.com', 'gustavo', 'pepito@gmail.com', '456456456', 'lkdflgkdfg', 'logo.png', NULL, NULL),
-(7, 'c96bd135ae37d6153418d5dd766f9d70', 'GanjaStore', '', 'ONLINE', NULL, 'GanjaStore', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.popo.com', 'pepe', 'lider@sdfsd.com', '23423423423', 'cuchacuca 456', '', NULL, NULL),
-(10, 'f50863d2cc199ac104dbdf601b5bd3fd', 'charuto', '', 'ONLINE', NULL, 'charuto', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.charuto.com', '', 'lider@dgf.com', '', '', '', NULL, NULL);
+(6, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepito', '', 'ONLINE', NULL, 'pepito', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.pepito.com', 'gustavo', 'pepito@gmail.com', '456456456', 'lkdflgkdfg', '1431474349.jpg', NULL, NULL),
+(7, 'c96bd135ae37d6153418d5dd766f9d70', 'GanjaStore', '', 'OFFLINE', NULL, 'GanjaStore', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.popo.com', 'pepe', 'lider@sdfsd.com', '23423423423', 'cuchacuca 456', '', NULL, NULL),
+(10, 'f50863d2cc199ac104dbdf601b5bd3fd', 'charuto', '', 'ONLINE', NULL, 'charuto', NULL, NULL, NULL, 'Sabios Textil y Calzado', 'www.charuto.com', '', 'lider@dgf.com', '', '', '', NULL, NULL),
+(11, 'admin', 'admin', '', 'ONLINE', NULL, 'admin', NULL, NULL, NULL, '', '', '', '', '', '', '', NULL, NULL),
+(13, 'db654538e7944c7e0c1c79c4cb2dce11', 'lider', '', 'ONLINE', NULL, 'lider', NULL, NULL, NULL, 'Sabios Textil y Calzado', '', 'lider', 'liderguitar@gmail.com', '', '', '', NULL, NULL),
+(14, '6e6ccab5bfc8904e61b3136f30a7f61f', '', '', 'ONLINE', NULL, '', NULL, NULL, NULL, '0', '', '', '', '', '', '', NULL, NULL),
+(15, '48bb9441a5e715bdf900d5ced75a95a7', 'pepor', '', 'ONLINE', NULL, 'pepor', NULL, NULL, NULL, 'Sabios Textil y Calzado', '', '', 'liderguitar@gmail.com', '', '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `articulo`
+-- Table structure for table `articulo`
 --
 
 CREATE TABLE IF NOT EXISTS `articulo` (
@@ -111,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `articulo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auditoria`
+-- Table structure for table `auditoria`
 --
 
 CREATE TABLE IF NOT EXISTS `auditoria` (
@@ -128,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `auditoria` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=171 ;
 
 --
--- Volcado de datos para la tabla `auditoria`
+-- Dumping data for table `auditoria`
 --
 
 INSERT INTO `auditoria` (`id`, `app_id`, `id_usuario`, `entidad`, `id_entidad`, `operacion`, `fecha`, `data_new`, `data_old`) VALUES
@@ -307,7 +311,7 @@ INSERT INTO `auditoria` (`id`, `app_id`, `id_usuario`, `entidad`, `id_entidad`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cargo`
+-- Table structure for table `cargo`
 --
 
 CREATE TABLE IF NOT EXISTS `cargo` (
@@ -320,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `cargo` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `cargo`
+-- Dumping data for table `cargo`
 --
 
 INSERT INTO `cargo` (`id`, `app_id`, `nombre`, `borrado`) VALUES
@@ -330,7 +334,7 @@ INSERT INTO `cargo` (`id`, `app_id`, `nombre`, `borrado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria`
+-- Table structure for table `categoria`
 --
 
 CREATE TABLE IF NOT EXISTS `categoria` (
@@ -342,10 +346,10 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `borrado` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `app_id` (`app_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
 
 --
--- Volcado de datos para la tabla `categoria`
+-- Dumping data for table `categoria`
 --
 
 INSERT INTO `categoria` (`id`, `app_id`, `nombre`, `parent_id`, `prioridad`, `borrado`) VALUES
@@ -364,12 +368,44 @@ INSERT INTO `categoria` (`id`, `app_id`, `nombre`, `parent_id`, `prioridad`, `bo
 (13, '36dd07ce38b167636f2b1fe96bb44ee6', 'Cuello en U', 5, 0, 'N'),
 (19, '36dd07ce38b167636f2b1fe96bb44ee6', 'Cuello Mao', 0, 0, 'N'),
 (20, '36dd07ce38b167636f2b1fe96bb44ee6', 'Zapatillas', 1, 0, 'N'),
-(21, 'c96bd135ae37d6153418d5dd766f9d70', 'Hombre', 0, 0, 'N');
+(21, 'c96bd135ae37d6153418d5dd766f9d70', 'Hombre', 0, 0, 'N'),
+(22, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Hombre', 0, 0, 'N'),
+(23, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Mujer', 0, 0, 'N'),
+(24, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Remeras Mangas Cortas', 22, 1, 'N'),
+(25, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Musculosas', 22, 2, 'N'),
+(26, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Pantalones', 22, 3, 'N'),
+(27, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Zapatillas', 22, 4, 'N'),
+(28, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Boxer', 22, 5, 'N'),
+(29, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Camisas', 22, 6, 'N'),
+(30, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Mallas', 22, 7, 'N'),
+(31, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Buzos', 22, 8, 'N'),
+(32, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Camperas', 22, 9, 'N'),
+(33, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Remeras Mangas Cortas', 23, 1, 'N'),
+(34, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Musculosas', 23, 2, 'N'),
+(35, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Mallas', 23, 3, 'N'),
+(36, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Buzos', 23, 4, 'N'),
+(37, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Camperas', 23, 5, 'N'),
+(38, '48bb9441a5e715bdf900d5ced75a95a7', 'Hombre', 0, 0, 'N'),
+(39, '48bb9441a5e715bdf900d5ced75a95a7', 'Mujer', 0, 0, 'N'),
+(40, '48bb9441a5e715bdf900d5ced75a95a7', 'Remeras Mangas Cortas', 38, 1, 'N'),
+(41, '48bb9441a5e715bdf900d5ced75a95a7', 'Musculosas', 38, 2, 'N'),
+(42, '48bb9441a5e715bdf900d5ced75a95a7', 'Pantalones', 38, 3, 'N'),
+(43, '48bb9441a5e715bdf900d5ced75a95a7', 'Zapatillas', 38, 4, 'N'),
+(44, '48bb9441a5e715bdf900d5ced75a95a7', 'Boxer', 38, 5, 'N'),
+(45, '48bb9441a5e715bdf900d5ced75a95a7', 'Camisas', 38, 6, 'N'),
+(46, '48bb9441a5e715bdf900d5ced75a95a7', 'Mallas', 38, 7, 'N'),
+(47, '48bb9441a5e715bdf900d5ced75a95a7', 'Buzos', 38, 8, 'N'),
+(48, '48bb9441a5e715bdf900d5ced75a95a7', 'Camperas', 38, 9, 'N'),
+(49, '48bb9441a5e715bdf900d5ced75a95a7', 'Remeras Mangas Cortas', 39, 1, 'N'),
+(50, '48bb9441a5e715bdf900d5ced75a95a7', 'Musculosas', 39, 2, 'N'),
+(51, '48bb9441a5e715bdf900d5ced75a95a7', 'Mallas', 39, 3, 'N'),
+(52, '48bb9441a5e715bdf900d5ced75a95a7', 'Buzos', 39, 4, 'N'),
+(53, '48bb9441a5e715bdf900d5ced75a95a7', 'Camperas', 39, 5, 'N');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria_tree`
+-- Table structure for table `categoria_tree`
 --
 
 CREATE TABLE IF NOT EXISTS `categoria_tree` (
@@ -380,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `categoria_tree` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- Volcado de datos para la tabla `categoria_tree`
+-- Dumping data for table `categoria_tree`
 --
 
 INSERT INTO `categoria_tree` (`id`, `nombre`, `parent_id`) VALUES
@@ -395,7 +431,7 @@ INSERT INTO `categoria_tree` (`id`, `nombre`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cliente`
+-- Table structure for table `cliente`
 --
 
 CREATE TABLE IF NOT EXISTS `cliente` (
@@ -441,7 +477,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
--- Volcado de datos para la tabla `cliente`
+-- Dumping data for table `cliente`
 --
 
 INSERT INTO `cliente` (`id`, `app_id`, `nombre_comercial`, `tipo`, `telefono1`, `telefono2`, `usuario_id`, `sms1`, `sms2`, `sms3`, `email1`, `email2`, `email3`, `empresa_de_preferencia`, `asegurado`, `direccion_de_envio`, `enviar_a_nombre_de`, `razon_social`, `tipo_contribucion`, `cuit`, `provincia_id`, `localidad`, `muestra_precio`, `aplica_iva`, `habilita_acceso_pedidos`, `borrado`, `estado_id`, `fecha_alta`, `direccion_facturacion`, `observaciones`, `viajante_id`) VALUES
@@ -460,7 +496,7 @@ INSERT INTO `cliente` (`id`, `app_id`, `nombre_comercial`, `tipo`, `telefono1`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cliente_estado`
+-- Table structure for table `cliente_estado`
 --
 
 CREATE TABLE IF NOT EXISTS `cliente_estado` (
@@ -470,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `cliente_estado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `cliente_estado`
+-- Dumping data for table `cliente_estado`
 --
 
 INSERT INTO `cliente_estado` (`id`, `descripcion`) VALUES
@@ -481,7 +517,7 @@ INSERT INTO `cliente_estado` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cliente_tipo`
+-- Table structure for table `cliente_tipo`
 --
 
 CREATE TABLE IF NOT EXISTS `cliente_tipo` (
@@ -494,7 +530,7 @@ CREATE TABLE IF NOT EXISTS `cliente_tipo` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
--- Volcado de datos para la tabla `cliente_tipo`
+-- Dumping data for table `cliente_tipo`
 --
 
 INSERT INTO `cliente_tipo` (`id`, `app_id`, `nombre`, `borrado`) VALUES
@@ -513,7 +549,7 @@ INSERT INTO `cliente_tipo` (`id`, `app_id`, `nombre`, `borrado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comentario`
+-- Table structure for table `comentario`
 --
 
 CREATE TABLE IF NOT EXISTS `comentario` (
@@ -527,7 +563,7 @@ CREATE TABLE IF NOT EXISTS `comentario` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comentario_por_cliente`
+-- Table structure for table `comentario_por_cliente`
 --
 
 CREATE TABLE IF NOT EXISTS `comentario_por_cliente` (
@@ -542,7 +578,7 @@ CREATE TABLE IF NOT EXISTS `comentario_por_cliente` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `foto`
+-- Table structure for table `foto`
 --
 
 CREATE TABLE IF NOT EXISTS `foto` (
@@ -554,7 +590,7 @@ CREATE TABLE IF NOT EXISTS `foto` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
--- Volcado de datos para la tabla `foto`
+-- Dumping data for table `foto`
 --
 
 INSERT INTO `foto` (`id`, `url`, `descripcion`, `id_cliente`) VALUES
@@ -637,7 +673,7 @@ INSERT INTO `foto` (`id`, `url`, `descripcion`, `id_cliente`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `fotos_por_producto`
+-- Table structure for table `fotos_por_producto`
 --
 
 CREATE TABLE IF NOT EXISTS `fotos_por_producto` (
@@ -650,7 +686,7 @@ CREATE TABLE IF NOT EXISTS `fotos_por_producto` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=76 ;
 
 --
--- Volcado de datos para la tabla `fotos_por_producto`
+-- Dumping data for table `fotos_por_producto`
 --
 
 INSERT INTO `fotos_por_producto` (`id`, `id_foto`, `id_producto`) VALUES
@@ -669,27 +705,28 @@ INSERT INTO `fotos_por_producto` (`id`, `id_foto`, `id_producto`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `menu`
+-- Table structure for table `menu`
 --
 
 CREATE TABLE IF NOT EXISTS `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `menu`
+-- Dumping data for table `menu`
 --
 
 INSERT INTO `menu` (`id`, `nombre`) VALUES
 (1, 'Admin'),
-(2, 'Catalogo');
+(2, 'Catalogo'),
+(3, 'Superadmin');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `menu_item`
+-- Table structure for table `menu_item`
 --
 
 CREATE TABLE IF NOT EXISTS `menu_item` (
@@ -702,10 +739,10 @@ CREATE TABLE IF NOT EXISTS `menu_item` (
   `id_menu` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`,`nombre`),
   KEY `id_menu` (`id_menu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
--- Volcado de datos para la tabla `menu_item`
+-- Dumping data for table `menu_item`
 --
 
 INSERT INTO `menu_item` (`id`, `nombre`, `path`, `icon_url`, `id_parent_menu_item`, `prioridad`, `id_menu`) VALUES
@@ -724,7 +761,7 @@ INSERT INTO `menu_item` (`id`, `nombre`, `path`, `icon_url`, `id_parent_menu_ite
 (14, 'Informaci&oacute;n Adicional', NULL, NULL, 2, 14, 1),
 (15, 'Listar y Editar Secciones', '/seccion/list', NULL, 14, 15, 1),
 (16, 'Visualizaci&oacute;n Gr&aacute;fica', NULL, NULL, 2, 16, 1),
-(17, 'Cargar Logo', '/logo/add', NULL, 16, 17, 1),
+(17, 'Cargar Logo', '/config', NULL, 16, 17, 1),
 (18, 'Cargar Fondo', '/fondo/cargar', NULL, 16, 18, 1),
 (19, 'Color y Tama&ntilde;o de Texto', '/texto/add', NULL, 16, 19, 1),
 (20, 'Clientes', NULL, NULL, 0, 20, 1),
@@ -754,12 +791,13 @@ INSERT INTO `menu_item` (`id`, `nombre`, `path`, `icon_url`, `id_parent_menu_ite
 (45, 'Vendedores', '/vendedor', NULL, 44, 41, 1),
 (46, 'Estados de Ventas', '/ventaestado', NULL, 26, 100, 1),
 (47, 'Novedades', '/novedades', NULL, 0, 1, 2),
-(48, 'Tipos de Talle', '/talletipo', NULL, 42, 100, 1);
+(48, 'Tipos de Talle', '/talletipo', NULL, 42, 100, 1),
+(49, 'Aplicaciones', '/superadmin/list', NULL, 0, NULL, 3);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `novedad`
+-- Table structure for table `novedad`
 --
 
 CREATE TABLE IF NOT EXISTS `novedad` (
@@ -773,7 +811,7 @@ CREATE TABLE IF NOT EXISTS `novedad` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
--- Volcado de datos para la tabla `novedad`
+-- Dumping data for table `novedad`
 --
 
 INSERT INTO `novedad` (`id`, `app_id`, `imagen`, `url`, `posicion`, `borrado`) VALUES
@@ -791,7 +829,7 @@ INSERT INTO `novedad` (`id`, `app_id`, `imagen`, `url`, `posicion`, `borrado`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pago_tipo`
+-- Table structure for table `pago_tipo`
 --
 
 CREATE TABLE IF NOT EXISTS `pago_tipo` (
@@ -805,7 +843,7 @@ CREATE TABLE IF NOT EXISTS `pago_tipo` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Volcado de datos para la tabla `pago_tipo`
+-- Dumping data for table `pago_tipo`
 --
 
 INSERT INTO `pago_tipo` (`id`, `app_id`, `descripcion`, `interes`, `contenido`, `borrado`) VALUES
@@ -817,7 +855,7 @@ INSERT INTO `pago_tipo` (`id`, `app_id`, `descripcion`, `interes`, `contenido`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pais`
+-- Table structure for table `pais`
 --
 
 CREATE TABLE IF NOT EXISTS `pais` (
@@ -832,7 +870,7 @@ CREATE TABLE IF NOT EXISTS `pais` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=240 ;
 
 --
--- Volcado de datos para la tabla `pais`
+-- Dumping data for table `pais`
 --
 
 INSERT INTO `pais` (`id`, `nombre`, `iso_code_2`, `iso_code_3`, `address_format_id`, `borrado`) VALUES
@@ -1079,7 +1117,7 @@ INSERT INTO `pais` (`id`, `nombre`, `iso_code_2`, `iso_code_3`, `address_format_
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedido`
+-- Table structure for table `pedido`
 --
 
 CREATE TABLE IF NOT EXISTS `pedido` (
@@ -1096,7 +1134,7 @@ CREATE TABLE IF NOT EXISTS `pedido` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
--- Volcado de datos para la tabla `pedido`
+-- Dumping data for table `pedido`
 --
 
 INSERT INTO `pedido` (`id`, `app_id`, `id_cliente`, `fecha`, `importe`, `id_tipo_pago`, `interes`, `iva`, `id_pedido_estado`) VALUES
@@ -1105,7 +1143,7 @@ INSERT INTO `pedido` (`id`, `app_id`, `id_cliente`, `fecha`, `importe`, `id_tipo
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedido_detalle_por_talle`
+-- Table structure for table `pedido_detalle_por_talle`
 --
 
 CREATE TABLE IF NOT EXISTS `pedido_detalle_por_talle` (
@@ -1123,7 +1161,7 @@ CREATE TABLE IF NOT EXISTS `pedido_detalle_por_talle` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
--- Volcado de datos para la tabla `pedido_detalle_por_talle`
+-- Dumping data for table `pedido_detalle_por_talle`
 --
 
 INSERT INTO `pedido_detalle_por_talle` (`id`, `id_pedido`, `id_producto`, `id_talle`, `cantidad`, `precio`) VALUES
@@ -1132,7 +1170,7 @@ INSERT INTO `pedido_detalle_por_talle` (`id`, `id_pedido`, `id_producto`, `id_ta
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedido_estado`
+-- Table structure for table `pedido_estado`
 --
 
 CREATE TABLE IF NOT EXISTS `pedido_estado` (
@@ -1144,7 +1182,7 @@ CREATE TABLE IF NOT EXISTS `pedido_estado` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- Volcado de datos para la tabla `pedido_estado`
+-- Dumping data for table `pedido_estado`
 --
 
 INSERT INTO `pedido_estado` (`id_estado`, `nombre`, `descripcion`, `color`) VALUES
@@ -1159,7 +1197,7 @@ INSERT INTO `pedido_estado` (`id_estado`, `nombre`, `descripcion`, `color`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `perfil`
+-- Table structure for table `perfil`
 --
 
 CREATE TABLE IF NOT EXISTS `perfil` (
@@ -1172,7 +1210,7 @@ CREATE TABLE IF NOT EXISTS `perfil` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `perfil`
+-- Dumping data for table `perfil`
 --
 
 INSERT INTO `perfil` (`nombre`, `descripcion`, `parent`, `orden`) VALUES
@@ -1184,7 +1222,7 @@ INSERT INTO `perfil` (`nombre`, `descripcion`, `parent`, `orden`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `personal`
+-- Table structure for table `personal`
 --
 
 CREATE TABLE IF NOT EXISTS `personal` (
@@ -1207,7 +1245,7 @@ CREATE TABLE IF NOT EXISTS `personal` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
--- Volcado de datos para la tabla `personal`
+-- Dumping data for table `personal`
 --
 
 INSERT INTO `personal` (`id`, `app_id`, `nombre_apellido`, `cargo`, `telefono1`, `telefono2`, `email1`, `email2`, `dia_nacimiento`, `mes_nacimiento`, `observaciones`, `borrado`) VALUES
@@ -1223,7 +1261,7 @@ INSERT INTO `personal` (`id`, `app_id`, `nombre_apellido`, `cargo`, `telefono1`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `personal_por_cliente`
+-- Table structure for table `personal_por_cliente`
 --
 
 CREATE TABLE IF NOT EXISTS `personal_por_cliente` (
@@ -1236,7 +1274,7 @@ CREATE TABLE IF NOT EXISTS `personal_por_cliente` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Volcado de datos para la tabla `personal_por_cliente`
+-- Dumping data for table `personal_por_cliente`
 --
 
 INSERT INTO `personal_por_cliente` (`id`, `id_cliente`, `id_personal`) VALUES
@@ -1247,7 +1285,7 @@ INSERT INTO `personal_por_cliente` (`id`, `id_cliente`, `id_personal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `privilegio`
+-- Table structure for table `privilegio`
 --
 
 CREATE TABLE IF NOT EXISTS `privilegio` (
@@ -1257,7 +1295,7 @@ CREATE TABLE IF NOT EXISTS `privilegio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `privilegio`
+-- Dumping data for table `privilegio`
 --
 
 INSERT INTO `privilegio` (`nombre`) VALUES
@@ -1269,7 +1307,7 @@ INSERT INTO `privilegio` (`nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto`
+-- Table structure for table `producto`
 --
 
 CREATE TABLE IF NOT EXISTS `producto` (
@@ -1292,12 +1330,12 @@ CREATE TABLE IF NOT EXISTS `producto` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Volcado de datos para la tabla `producto`
+-- Dumping data for table `producto`
 --
 
 INSERT INTO `producto` (`id`, `app_id`, `codigo`, `nombre`, `descripcion`, `precio`, `costo`, `id_subcategoria`, `foto`, `borrado`, `bloqueado_id_usuario`, `bloqueado_datetime`) VALUES
 (1, '36dd07ce38b167636f2b1fe96bb44ee6', 'YYY67364', 'Remera Dub Explosion2', 'Remera blancas con colores rasta', 101.45, 33.56, 4, '', 'N', 42, '2015-01-26 12:36:00'),
-(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'JH87687', 'Do the Evolution', 'Una camisa manga de lagarto', 150.00, 100.00, 4, '', 'N', 42, '2015-01-10 17:57:50'),
+(2, '36dd07ce38b167636f2b1fe96bb44ee6', 'JH87687', 'Do the Evolution', 'Una camisa manga de lagarto', 150.00, 100.00, 4, '', 'N', 42, '2015-04-21 21:12:48'),
 (3, '36dd07ce38b167636f2b1fe96bb44ee6', 'UYH65R', 'muchas fotos modified', 'dsfsdfsdf modified', 151.00, 101.00, 10, '', 'N', 42, '2015-01-10 17:59:57'),
 (4, '36dd07ce38b167636f2b1fe96bb44ee6', 'HRC0194-B', 'Psicotropic Circle B', '', 101.00, 51.00, 11, '', 'N', 0, NULL),
 (5, '36dd07ce38b167636f2b1fe96bb44ee6', 'UHJ-895', 'Camisa Cheta', '', 120.00, 100.00, 11, '', 'N', 0, NULL),
@@ -1312,7 +1350,7 @@ INSERT INTO `producto` (`id`, `app_id`, `codigo`, `nombre`, `descripcion`, `prec
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto_textil`
+-- Table structure for table `producto_textil`
 --
 
 CREATE TABLE IF NOT EXISTS `producto_textil` (
@@ -1325,7 +1363,7 @@ CREATE TABLE IF NOT EXISTS `producto_textil` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
--- Volcado de datos para la tabla `producto_textil`
+-- Dumping data for table `producto_textil`
 --
 
 INSERT INTO `producto_textil` (`id`, `id_producto`, `talle_tipo_id`) VALUES
@@ -1344,7 +1382,7 @@ INSERT INTO `producto_textil` (`id`, `id_producto`, `talle_tipo_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `provincia`
+-- Table structure for table `provincia`
 --
 
 CREATE TABLE IF NOT EXISTS `provincia` (
@@ -1358,7 +1396,7 @@ CREATE TABLE IF NOT EXISTS `provincia` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=871 ;
 
 --
--- Volcado de datos para la tabla `provincia`
+-- Dumping data for table `provincia`
 --
 
 INSERT INTO `provincia` (`id`, `id_pais`, `id_provincia`, `nombre`, `borrado`) VALUES
@@ -2236,7 +2274,7 @@ INSERT INTO `provincia` (`id`, `id_pais`, `id_provincia`, `nombre`, `borrado`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `recurso`
+-- Table structure for table `recurso`
 --
 
 CREATE TABLE IF NOT EXISTS `recurso` (
@@ -2246,7 +2284,7 @@ CREATE TABLE IF NOT EXISTS `recurso` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `recurso`
+-- Dumping data for table `recurso`
 --
 
 INSERT INTO `recurso` (`nombre`, `descripcion`) VALUES
@@ -2257,11 +2295,13 @@ INSERT INTO `recurso` (`nombre`, `descripcion`) VALUES
 ('categoria', ''),
 ('cliente', ''),
 ('clientetipo', ''),
+('config', ''),
 ('formadepago', ''),
 ('home', ''),
 ('index', ''),
 ('novedad', ''),
 ('productotextil', ''),
+('superadmin', ''),
 ('talle', ''),
 ('talletipo', ''),
 ('usuario', ''),
@@ -2272,7 +2312,7 @@ INSERT INTO `recurso` (`nombre`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `recursos_por_perfil`
+-- Table structure for table `recursos_por_perfil`
 --
 
 CREATE TABLE IF NOT EXISTS `recursos_por_perfil` (
@@ -2284,10 +2324,10 @@ CREATE TABLE IF NOT EXISTS `recursos_por_perfil` (
   KEY `privilegio` (`privilegio`),
   KEY `perfil` (`perfil`),
   KEY `recurso` (`recurso`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=138 ;
 
 --
--- Volcado de datos para la tabla `recursos_por_perfil`
+-- Dumping data for table `recursos_por_perfil`
 --
 
 INSERT INTO `recursos_por_perfil` (`id`, `perfil`, `recurso`, `privilegio`) VALUES
@@ -2378,12 +2418,21 @@ INSERT INTO `recursos_por_perfil` (`id`, `perfil`, `recurso`, `privilegio`) VALU
 (123, 'ADMIN', 'index', 'generatemodels'),
 (124, 'GUEST', 'home', 'forgotpassword'),
 (125, 'GUEST', 'home', 'reset'),
-(126, 'GUEST', 'home', 'resetpassword');
+(126, 'GUEST', 'home', 'resetpassword'),
+(127, 'SUPERADMIN', 'superadmin', 'list'),
+(128, 'SUPERADMIN', 'superadmin', 'update'),
+(129, 'ADMIN', 'config', 'index'),
+(131, 'ADMIN', 'config', 'remove'),
+(133, 'GUEST', 'usuario', 'validar'),
+(134, 'GUEST', 'usuario', 'forgotpassword'),
+(135, 'GUEST', 'usuario', 'resetpassword'),
+(136, 'ADMIN', 'browser', 'ajaxuploadlogo'),
+(137, 'ADMIN', 'config', 'fondo');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `site_configuration`
+-- Table structure for table `site_configuration`
 --
 
 CREATE TABLE IF NOT EXISTS `site_configuration` (
@@ -2400,7 +2449,7 @@ CREATE TABLE IF NOT EXISTS `site_configuration` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `site_configuration`
+-- Dumping data for table `site_configuration`
 --
 
 INSERT INTO `site_configuration` (`id`, `app_id`, `nombre`, `template`, `estado`, `publicFolder`, `subdominio`, `baseclass`) VALUES
@@ -2410,7 +2459,7 @@ INSERT INTO `site_configuration` (`id`, `app_id`, `nombre`, `template`, `estado`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `subcategoria`
+-- Table structure for table `subcategoria`
 --
 
 CREATE TABLE IF NOT EXISTS `subcategoria` (
@@ -2426,7 +2475,7 @@ CREATE TABLE IF NOT EXISTS `subcategoria` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Volcado de datos para la tabla `subcategoria`
+-- Dumping data for table `subcategoria`
 --
 
 INSERT INTO `subcategoria` (`id`, `app_id`, `categoriaId`, `nombre`, `prioridad`, `borrado`) VALUES
@@ -2439,7 +2488,7 @@ INSERT INTO `subcategoria` (`id`, `app_id`, `categoriaId`, `nombre`, `prioridad`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sucursal`
+-- Table structure for table `sucursal`
 --
 
 CREATE TABLE IF NOT EXISTS `sucursal` (
@@ -2457,7 +2506,7 @@ CREATE TABLE IF NOT EXISTS `sucursal` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
--- Volcado de datos para la tabla `sucursal`
+-- Dumping data for table `sucursal`
 --
 
 INSERT INTO `sucursal` (`id`, `app_id`, `nombre`, `direccion`, `encargados`, `telefono1`, `telefono2`, `observaciones`, `borrado`) VALUES
@@ -2483,7 +2532,7 @@ INSERT INTO `sucursal` (`id`, `app_id`, `nombre`, `direccion`, `encargados`, `te
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sucursal_por_cliente`
+-- Table structure for table `sucursal_por_cliente`
 --
 
 CREATE TABLE IF NOT EXISTS `sucursal_por_cliente` (
@@ -2496,7 +2545,7 @@ CREATE TABLE IF NOT EXISTS `sucursal_por_cliente` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
--- Volcado de datos para la tabla `sucursal_por_cliente`
+-- Dumping data for table `sucursal_por_cliente`
 --
 
 INSERT INTO `sucursal_por_cliente` (`id`, `id_cliente`, `id_sucursal`) VALUES
@@ -2506,7 +2555,7 @@ INSERT INTO `sucursal_por_cliente` (`id`, `id_cliente`, `id_sucursal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `talle`
+-- Table structure for table `talle`
 --
 
 CREATE TABLE IF NOT EXISTS `talle` (
@@ -2519,10 +2568,10 @@ CREATE TABLE IF NOT EXISTS `talle` (
   PRIMARY KEY (`id`),
   KEY `tipotalle` (`id_tipo_talle`),
   KEY `app_id` (`app_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=122 ;
 
 --
--- Volcado de datos para la tabla `talle`
+-- Dumping data for table `talle`
 --
 
 INSERT INTO `talle` (`id`, `app_id`, `prioridad`, `id_tipo_talle`, `talle`, `borrado`) VALUES
@@ -2558,12 +2607,84 @@ INSERT INTO `talle` (`id`, `app_id`, `prioridad`, `id_tipo_talle`, `talle`, `bor
 (46, '36dd07ce38b167636f2b1fe96bb44ee6', 5, 2, 'XXL', 'N'),
 (47, '36dd07ce38b167636f2b1fe96bb44ee6', 1, 1, '23', 'N'),
 (48, '36dd07ce38b167636f2b1fe96bb44ee6', 2, 1, '24', 'N'),
-(49, '36dd07ce38b167636f2b1fe96bb44ee6', 3, 1, '25', 'N');
+(49, '36dd07ce38b167636f2b1fe96bb44ee6', 3, 1, '25', 'N'),
+(50, '6e6ccab5bfc8904e61b3136f30a7f61f', 1, 4, 'XS', 'N'),
+(51, '6e6ccab5bfc8904e61b3136f30a7f61f', 2, 4, 'S', 'N'),
+(52, '6e6ccab5bfc8904e61b3136f30a7f61f', 3, 4, 'M', 'N'),
+(53, '6e6ccab5bfc8904e61b3136f30a7f61f', 4, 4, 'L', 'N'),
+(54, '6e6ccab5bfc8904e61b3136f30a7f61f', 5, 4, 'XL', 'N'),
+(55, '6e6ccab5bfc8904e61b3136f30a7f61f', 6, 4, 'XXL', 'N'),
+(56, '6e6ccab5bfc8904e61b3136f30a7f61f', 1, 5, '6', 'N'),
+(57, '6e6ccab5bfc8904e61b3136f30a7f61f', 2, 5, '8', 'N'),
+(58, '6e6ccab5bfc8904e61b3136f30a7f61f', 3, 5, '10', 'N'),
+(59, '6e6ccab5bfc8904e61b3136f30a7f61f', 4, 5, '12', 'N'),
+(60, '6e6ccab5bfc8904e61b3136f30a7f61f', 5, 5, '14', 'N'),
+(61, '6e6ccab5bfc8904e61b3136f30a7f61f', 6, 5, '16', 'N'),
+(62, '6e6ccab5bfc8904e61b3136f30a7f61f', 1, 6, '38', 'N'),
+(63, '6e6ccab5bfc8904e61b3136f30a7f61f', 2, 6, '40', 'N'),
+(64, '6e6ccab5bfc8904e61b3136f30a7f61f', 3, 6, '42', 'N'),
+(65, '6e6ccab5bfc8904e61b3136f30a7f61f', 4, 6, '44', 'N'),
+(66, '6e6ccab5bfc8904e61b3136f30a7f61f', 5, 6, '46', 'N'),
+(67, '6e6ccab5bfc8904e61b3136f30a7f61f', 6, 6, '48', 'N'),
+(68, '6e6ccab5bfc8904e61b3136f30a7f61f', 7, 6, '50', 'N'),
+(69, '6e6ccab5bfc8904e61b3136f30a7f61f', 1, 7, '34', 'N'),
+(70, '6e6ccab5bfc8904e61b3136f30a7f61f', 2, 7, '35', 'N'),
+(71, '6e6ccab5bfc8904e61b3136f30a7f61f', 3, 7, '36', 'N'),
+(72, '6e6ccab5bfc8904e61b3136f30a7f61f', 4, 7, '37', 'N'),
+(73, '6e6ccab5bfc8904e61b3136f30a7f61f', 5, 7, '38', 'N'),
+(74, '6e6ccab5bfc8904e61b3136f30a7f61f', 6, 7, '39', 'N'),
+(75, '6e6ccab5bfc8904e61b3136f30a7f61f', 7, 7, '40', 'N'),
+(76, '6e6ccab5bfc8904e61b3136f30a7f61f', 8, 7, '41', 'N'),
+(77, '6e6ccab5bfc8904e61b3136f30a7f61f', 9, 7, '42', 'N'),
+(78, '6e6ccab5bfc8904e61b3136f30a7f61f', 10, 7, '43', 'N'),
+(79, '6e6ccab5bfc8904e61b3136f30a7f61f', 11, 7, '44', 'N'),
+(80, '6e6ccab5bfc8904e61b3136f30a7f61f', 12, 7, '45', 'N'),
+(81, '6e6ccab5bfc8904e61b3136f30a7f61f', 13, 7, '46', 'N'),
+(82, '6e6ccab5bfc8904e61b3136f30a7f61f', 14, 7, '47', 'N'),
+(83, '6e6ccab5bfc8904e61b3136f30a7f61f', 15, 7, '48', 'N'),
+(84, '6e6ccab5bfc8904e61b3136f30a7f61f', 16, 7, '49', 'N'),
+(85, '6e6ccab5bfc8904e61b3136f30a7f61f', 17, 7, '50', 'N'),
+(86, '48bb9441a5e715bdf900d5ced75a95a7', 1, 8, 'XS', 'N'),
+(87, '48bb9441a5e715bdf900d5ced75a95a7', 2, 8, 'S', 'N'),
+(88, '48bb9441a5e715bdf900d5ced75a95a7', 3, 8, 'M', 'N'),
+(89, '48bb9441a5e715bdf900d5ced75a95a7', 4, 8, 'L', 'N'),
+(90, '48bb9441a5e715bdf900d5ced75a95a7', 5, 8, 'XL', 'N'),
+(91, '48bb9441a5e715bdf900d5ced75a95a7', 6, 8, 'XXL', 'N'),
+(92, '48bb9441a5e715bdf900d5ced75a95a7', 1, 9, '6', 'N'),
+(93, '48bb9441a5e715bdf900d5ced75a95a7', 2, 9, '8', 'N'),
+(94, '48bb9441a5e715bdf900d5ced75a95a7', 3, 9, '10', 'N'),
+(95, '48bb9441a5e715bdf900d5ced75a95a7', 4, 9, '12', 'N'),
+(96, '48bb9441a5e715bdf900d5ced75a95a7', 5, 9, '14', 'N'),
+(97, '48bb9441a5e715bdf900d5ced75a95a7', 6, 9, '16', 'N'),
+(98, '48bb9441a5e715bdf900d5ced75a95a7', 1, 10, '38', 'N'),
+(99, '48bb9441a5e715bdf900d5ced75a95a7', 2, 10, '40', 'N'),
+(100, '48bb9441a5e715bdf900d5ced75a95a7', 3, 10, '42', 'N'),
+(101, '48bb9441a5e715bdf900d5ced75a95a7', 4, 10, '44', 'N'),
+(102, '48bb9441a5e715bdf900d5ced75a95a7', 5, 10, '46', 'N'),
+(103, '48bb9441a5e715bdf900d5ced75a95a7', 6, 10, '48', 'N'),
+(104, '48bb9441a5e715bdf900d5ced75a95a7', 7, 10, '50', 'N'),
+(105, '48bb9441a5e715bdf900d5ced75a95a7', 1, 11, '34', 'N'),
+(106, '48bb9441a5e715bdf900d5ced75a95a7', 2, 11, '35', 'N'),
+(107, '48bb9441a5e715bdf900d5ced75a95a7', 3, 11, '36', 'N'),
+(108, '48bb9441a5e715bdf900d5ced75a95a7', 4, 11, '37', 'N'),
+(109, '48bb9441a5e715bdf900d5ced75a95a7', 5, 11, '38', 'N'),
+(110, '48bb9441a5e715bdf900d5ced75a95a7', 6, 11, '39', 'N'),
+(111, '48bb9441a5e715bdf900d5ced75a95a7', 7, 11, '40', 'N'),
+(112, '48bb9441a5e715bdf900d5ced75a95a7', 8, 11, '41', 'N'),
+(113, '48bb9441a5e715bdf900d5ced75a95a7', 9, 11, '42', 'N'),
+(114, '48bb9441a5e715bdf900d5ced75a95a7', 10, 11, '43', 'N'),
+(115, '48bb9441a5e715bdf900d5ced75a95a7', 11, 11, '44', 'N'),
+(116, '48bb9441a5e715bdf900d5ced75a95a7', 12, 11, '45', 'N'),
+(117, '48bb9441a5e715bdf900d5ced75a95a7', 13, 11, '46', 'N'),
+(118, '48bb9441a5e715bdf900d5ced75a95a7', 14, 11, '47', 'N'),
+(119, '48bb9441a5e715bdf900d5ced75a95a7', 15, 11, '48', 'N'),
+(120, '48bb9441a5e715bdf900d5ced75a95a7', 16, 11, '49', 'N'),
+(121, '48bb9441a5e715bdf900d5ced75a95a7', 17, 11, '50', 'N');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `talle_por_producto_textil`
+-- Table structure for table `talle_por_producto_textil`
 --
 
 CREATE TABLE IF NOT EXISTS `talle_por_producto_textil` (
@@ -2579,7 +2700,7 @@ CREATE TABLE IF NOT EXISTS `talle_por_producto_textil` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=274 ;
 
 --
--- Volcado de datos para la tabla `talle_por_producto_textil`
+-- Dumping data for table `talle_por_producto_textil`
 --
 
 INSERT INTO `talle_por_producto_textil` (`id`, `id_producto_textil`, `id_talle`, `borrado`, `stock`, `bloqueado_id_usuario`) VALUES
@@ -2630,7 +2751,7 @@ INSERT INTO `talle_por_producto_textil` (`id`, `id_producto_textil`, `id_talle`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `talle_tipo`
+-- Table structure for table `talle_tipo`
 --
 
 CREATE TABLE IF NOT EXISTS `talle_tipo` (
@@ -2640,21 +2761,29 @@ CREATE TABLE IF NOT EXISTS `talle_tipo` (
   `borrado` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `app_id` (`app_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
--- Volcado de datos para la tabla `talle_tipo`
+-- Dumping data for table `talle_tipo`
 --
 
 INSERT INTO `talle_tipo` (`id`, `app_id`, `descripcion`, `borrado`) VALUES
 (1, '36dd07ce38b167636f2b1fe96bb44ee6', 'Numerico', 'N'),
 (2, '36dd07ce38b167636f2b1fe96bb44ee6', 'Letras', 'N'),
-(3, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepito', 'Y');
+(3, '36dd07ce38b167636f2b1fe96bb44ee6', 'pepito', 'Y'),
+(4, '6e6ccab5bfc8904e61b3136f30a7f61f', 'XS al XXL', 'N'),
+(5, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Numeros pares 6 al 16', 'N'),
+(6, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Numeros pares 38 al 50', 'N'),
+(7, '6e6ccab5bfc8904e61b3136f30a7f61f', 'Numeros del 34 al 50', 'N'),
+(8, '48bb9441a5e715bdf900d5ced75a95a7', 'XS al XXL', 'N'),
+(9, '48bb9441a5e715bdf900d5ced75a95a7', 'Numeros pares 6 al 16', 'N'),
+(10, '48bb9441a5e715bdf900d5ced75a95a7', 'Numeros pares 38 al 50', 'N'),
+(11, '48bb9441a5e715bdf900d5ced75a95a7', 'Numeros del 34 al 50', 'N');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE IF NOT EXISTS `usuario` (
@@ -2674,23 +2803,26 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `validationHash` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `perfil` (`perfil`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `app_id`, `nombre`, `apellido`, `nick`, `facebookId`, `twitterId`, `googleId`, `password`, `email`, `perfil`, `alta`, `blockeado`, `validationHash`) VALUES
-(40, '', 'Lider', 'Guitar', 'liderguitar', NULL, NULL, NULL, '473b82b81e33ec7a20dddaed1b1f5f33', NULL, 'SUPERADMIN', '2013-11-02 03:00:00', 'N', NULL),
-(42, '36dd07ce38b167636f2b1fe96bb44ee6', 'Gustavo', 'pero', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'liderguitar@gmail.com', 'ADMIN', '2014-01-09 13:19:23', 'N', 'cabaaf2e273cec141e9377c5bbcf2989'),
-(43, '36dd07ce38b167636f2b1fe96bb44ee6', 'Pepito', 'Gimenez', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'pepito@gmail.com', 'ADMIN', '2014-09-08 13:38:16', 'N', 'c8f980282c50c4cf665cde551db7db37'),
+(40, 'admin', 'Lider', 'Guitar', 'liderguitar', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'gustavopero@yahoo.com.ar', 'SUPERADMIN', '2013-11-02 03:00:00', 'N', NULL),
+(42, '36dd07ce38b167636f2b1fe96bb44ee6', 'Gustavo', 'pero', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'liderguitar@gmail.com', 'SUPERADMIN', '2014-01-09 13:19:23', 'N', '27a8a86e5028d2a9aefc4230ad8a2ec5'),
+(43, '36dd07ce38b167636f2b1fe96bb44ee6', 'Pepito', 'Gimenez', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'pepito@gmail.com', 'ADMIN', '2014-09-08 13:38:16', 'N', '28735105d6ac13ff028609f66925a3b4'),
 (51, 'c96bd135ae37d6153418d5dd766f9d70', 'ppemm', 'sanchez', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'liderguitaeerwerr@gmail.com', 'ADMIN', '2015-02-05 17:19:05', 'N', 'e6c988c5b02404c4840f6106dcae7c63'),
-(54, 'f50863d2cc199ac104dbdf601b5bd3fd', 'gustavo', 'pero', '', NULL, NULL, NULL, '473b82b81e33ec7a20dddaed1b1f5f33', 'gustavopero@yahoo.com.ar', 'ADMIN', '2015-04-17 01:05:39', 'N', '68b39a54ae569395f66003876990e905');
+(54, 'f50863d2cc199ac104dbdf601b5bd3fd', 'gustavo', 'pero', '', NULL, NULL, NULL, '473b82b81e33ec7a20dddaed1b1f5f33', 'gustavopero@yahoo.com.ar', 'ADMIN', '2015-04-17 01:05:39', 'N', '68b39a54ae569395f66003876990e905'),
+(56, 'db654538e7944c7e0c1c79c4cb2dce11', 'lider', 'guitar', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'liderguitar@gmail.com', 'ADMIN', '2015-04-25 19:48:21', 'N', 'ea65655767a09adb916479f18e71663b'),
+(57, '6e6ccab5bfc8904e61b3136f30a7f61f', '', '', '', NULL, NULL, NULL, 'd41d8cd98f00b204e9800998ecf8427e', 'dfdfgd', 'ADMIN', '2015-05-16 23:40:19', 'Y', 'bcc6d1f579fc8cf433b9043a7f6c0dfa'),
+(58, '48bb9441a5e715bdf900d5ced75a95a7', 'Gustavo', 'Pero', '', NULL, NULL, NULL, '61a447de1913596835acc818919f8218', 'lidersdfs@dsdfs.com', 'ADMIN', '2015-05-16 23:51:17', 'Y', 'c1b738ccf48d97491668e731509adfd2');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `vendedor`
+-- Table structure for table `vendedor`
 --
 
 CREATE TABLE IF NOT EXISTS `vendedor` (
@@ -2705,7 +2837,7 @@ CREATE TABLE IF NOT EXISTS `vendedor` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `vendedor`
+-- Dumping data for table `vendedor`
 --
 
 INSERT INTO `vendedor` (`id`, `nombre`, `app_id`, `id_usuario`, `estado`, `borrado`) VALUES
@@ -2716,7 +2848,7 @@ INSERT INTO `vendedor` (`id`, `nombre`, `app_id`, `id_usuario`, `estado`, `borra
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta`
+-- Table structure for table `venta`
 --
 
 CREATE TABLE IF NOT EXISTS `venta` (
@@ -2739,7 +2871,7 @@ CREATE TABLE IF NOT EXISTS `venta` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
 
 --
--- Volcado de datos para la tabla `venta`
+-- Dumping data for table `venta`
 --
 
 INSERT INTO `venta` (`id`, `app_id`, `fecha`, `clienteId`, `vendedorId`, `ventaEstadoId`, `formaDePagoId`, `formaDePagoPorc`, `borrado`) VALUES
@@ -2749,7 +2881,7 @@ INSERT INTO `venta` (`id`, `app_id`, `fecha`, `clienteId`, `vendedorId`, `ventaE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_detalle`
+-- Table structure for table `venta_detalle`
 --
 
 CREATE TABLE IF NOT EXISTS `venta_detalle` (
@@ -2767,7 +2899,7 @@ CREATE TABLE IF NOT EXISTS `venta_detalle` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
--- Volcado de datos para la tabla `venta_detalle`
+-- Dumping data for table `venta_detalle`
 --
 
 INSERT INTO `venta_detalle` (`id`, `ventaId`, `productoTextilId`, `cantidad`, `precioUnitario`, `tallePorProductoTextil`) VALUES
@@ -2791,7 +2923,7 @@ INSERT INTO `venta_detalle` (`id`, `ventaId`, `productoTextilId`, `cantidad`, `p
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_estado`
+-- Table structure for table `venta_estado`
 --
 
 CREATE TABLE IF NOT EXISTS `venta_estado` (
@@ -2805,7 +2937,7 @@ CREATE TABLE IF NOT EXISTS `venta_estado` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Volcado de datos para la tabla `venta_estado`
+-- Dumping data for table `venta_estado`
 --
 
 INSERT INTO `venta_estado` (`id`, `app_id`, `nombre`, `devuelveStock`, `cancelado`, `borrado`) VALUES
@@ -2815,11 +2947,11 @@ INSERT INTO `venta_estado` (`id`, `app_id`, `nombre`, `devuelveStock`, `cancelad
 (4, '36dd07ce38b167636f2b1fe96bb44ee6', 'Cancelado', 'Y', 'Y', 'N');
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `cliente`
+-- Constraints for table `cliente`
 --
 ALTER TABLE `cliente`
   ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`tipo`) REFERENCES `cliente_tipo` (`id`),
@@ -2827,27 +2959,27 @@ ALTER TABLE `cliente`
   ADD CONSTRAINT `cliente_ibfk_4` FOREIGN KEY (`estado_id`) REFERENCES `cliente_estado` (`id`);
 
 --
--- Filtros para la tabla `comentario_por_cliente`
+-- Constraints for table `comentario_por_cliente`
 --
 ALTER TABLE `comentario_por_cliente`
   ADD CONSTRAINT `cl` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
   ADD CONSTRAINT `cm` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id`);
 
 --
--- Filtros para la tabla `fotos_por_producto`
+-- Constraints for table `fotos_por_producto`
 --
 ALTER TABLE `fotos_por_producto`
   ADD CONSTRAINT `fotos_por_producto_ibfk_1` FOREIGN KEY (`id_foto`) REFERENCES `foto` (`id`),
   ADD CONSTRAINT `fotos_por_producto_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`);
 
 --
--- Filtros para la tabla `menu_item`
+-- Constraints for table `menu_item`
 --
 ALTER TABLE `menu_item`
   ADD CONSTRAINT `menu_item_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`id`);
 
 --
--- Filtros para la tabla `pedido_detalle_por_talle`
+-- Constraints for table `pedido_detalle_por_talle`
 --
 ALTER TABLE `pedido_detalle_por_talle`
   ADD CONSTRAINT `pedido_detalle_por_talle_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`),
@@ -2855,65 +2987,65 @@ ALTER TABLE `pedido_detalle_por_talle`
   ADD CONSTRAINT `pedido_detalle_por_talle_ibfk_3` FOREIGN KEY (`id_talle`) REFERENCES `talle` (`id`);
 
 --
--- Filtros para la tabla `personal_por_cliente`
+-- Constraints for table `personal_por_cliente`
 --
 ALTER TABLE `personal_por_cliente`
   ADD CONSTRAINT `personal_por_cliente_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
   ADD CONSTRAINT `personal_por_cliente_ibfk_2` FOREIGN KEY (`id_personal`) REFERENCES `personal` (`id`);
 
 --
--- Filtros para la tabla `producto`
+-- Constraints for table `producto`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_subcategoria`) REFERENCES `categoria` (`id`);
 
 --
--- Filtros para la tabla `producto_textil`
+-- Constraints for table `producto_textil`
 --
 ALTER TABLE `producto_textil`
   ADD CONSTRAINT `producto_textil_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`),
   ADD CONSTRAINT `producto_textil_ibfk_2` FOREIGN KEY (`talle_tipo_id`) REFERENCES `talle_tipo` (`id`);
 
 --
--- Filtros para la tabla `provincia`
+-- Constraints for table `provincia`
 --
 ALTER TABLE `provincia`
   ADD CONSTRAINT `provincia_ibfk_1` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id`);
 
 --
--- Filtros para la tabla `subcategoria`
+-- Constraints for table `subcategoria`
 --
 ALTER TABLE `subcategoria`
   ADD CONSTRAINT `subcategoria_ibfk_1` FOREIGN KEY (`categoriaId`) REFERENCES `categoria` (`id`);
 
 --
--- Filtros para la tabla `sucursal_por_cliente`
+-- Constraints for table `sucursal_por_cliente`
 --
 ALTER TABLE `sucursal_por_cliente`
   ADD CONSTRAINT `sucursal_por_cliente_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursal` (`id`),
   ADD CONSTRAINT `sucursal_por_cliente_ibfk_3` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`);
 
 --
--- Filtros para la tabla `talle`
+-- Constraints for table `talle`
 --
 ALTER TABLE `talle`
   ADD CONSTRAINT `talle_ibfk_1` FOREIGN KEY (`id_tipo_talle`) REFERENCES `talle_tipo` (`id`);
 
 --
--- Filtros para la tabla `talle_por_producto_textil`
+-- Constraints for table `talle_por_producto_textil`
 --
 ALTER TABLE `talle_por_producto_textil`
   ADD CONSTRAINT `talle_por_producto_textil_ibfk_1` FOREIGN KEY (`id_producto_textil`) REFERENCES `producto_textil` (`id`),
   ADD CONSTRAINT `talle_por_producto_textil_ibfk_2` FOREIGN KEY (`id_talle`) REFERENCES `talle` (`id`);
 
 --
--- Filtros para la tabla `usuario`
+-- Constraints for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`perfil`) REFERENCES `perfil` (`nombre`);
 
 --
--- Filtros para la tabla `venta`
+-- Constraints for table `venta`
 --
 ALTER TABLE `venta`
   ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`clienteId`) REFERENCES `cliente` (`id`),
@@ -2922,7 +3054,7 @@ ALTER TABLE `venta`
   ADD CONSTRAINT `venta_ibfk_5` FOREIGN KEY (`formaDePagoId`) REFERENCES `pago_tipo` (`id`);
 
 --
--- Filtros para la tabla `venta_detalle`
+-- Constraints for table `venta_detalle`
 --
 ALTER TABLE `venta_detalle`
   ADD CONSTRAINT `venta_detalle_ibfk_1` FOREIGN KEY (`ventaId`) REFERENCES `venta` (`id`),
