@@ -93,18 +93,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
     public function _initSite() {
-
         $domains = split('\.', $_SERVER['SERVER_NAME']);
         //    dump($domains);
 //        if (APPLICATION_ENV == 'production') {
-        if ($domains[0] == 'www' || $domains[0] == 'sabiosweb') {
+        if ($domains[0] == 'www' || $domains[0] == 'sabbios') {
             // header('location: /home');
             $this->configuration = Doctrine_Core::getTable('Application')->find(4);
             define("PUBLIC_FOLDER", $this->configuration->publicFolder);
             define("APPLICATION_ID", $this->configuration->app_id);
             define("APPLICATION_SECRET", $this->configuration->app_secret);
-            define("APPLICATION_LOGO", $this->configuration->logo);
-            define("APPLICATION_NAME", $this->configuration->nombre);
+            if($this->configuration->logo == '') {
+                define("APPLICATION_LOGO", "/images/sabbios-logo.png");
+            }
+            else {
+                define("APPLICATION_LOGO",  "/files/thumb_" . $this->configuration->logo);
+            }
         } else {
 //            
             $this->configuration = Doctrine_Core::getTable('Application')->findByDql("subdominio='" . $domains[0] . "'");
@@ -113,11 +116,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 define("PUBLIC_FOLDER", $this->configuration->publicFolder);
                 define("APPLICATION_ID", $this->configuration->app_id);
                 define("APPLICATION_SECRET", $this->configuration->app_secret);
-                define("APPLICATION_LOGO", $this->configuration->logo);
+                if($this->configuration->logo == '') {
+                    define("APPLICATION_LOGO", "/images/sabbios-logo.png");
+                }
+                else {
+                    define("APPLICATION_LOGO",  "/files/thumb_" . $this->configuration->logo);
+                }
                 define("APPLICATION_NAME", $this->configuration->nombre);
                 if($this->configuration->estado == 'OFFLINE') {
                     header('location: http://www.sabbios.com/home');
-
                 }
             } else {
                 if (APPLICATION_ENV == 'production') {
@@ -196,8 +203,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     public function _initMetas() {
         $metas = array(
-            "Keywords" => "mejor un libro,Dicionarios,Diccionarios enciclopedicos,Enciclopedias,Cuentos Intantiles,Libros para mama,Libros para Papa,Libros de cocina,Medicina,Enfermeria,Libros para docentes,Dia del nino,Regalos para dia del nino,Libros en cuotas,Enciclopedias de Argentina,Libros de cocina,Oficios y profesiones,Mecanica automotor,Oceano,Circulo Latino Austral,Billiken,Planeta,Educacion sexual,Negri ediciones,Ediciones RT,Contrareembolso,Libros por contrareembolso,LIBROS  para todos,Aprender leyendo",
-            "Description" => "Mejor Un Libro, sitio de venta online de libros",
+            "Keywords" => "Gestion de Negocios Online, Control de Stock, Software Gratis, Informes de Ganancias, Catalogo, Ventas",
+            "Description" => "Sabbios - Software on-line de gestión y administración de stock enfocado a mejorar las ventas. Control y manejo de stock, mercadería e insumos con código de barras. Catálogo para realizar ventas online. Información al instante desde cualquier lugar. Sin instalación y muy seguro. Gratis.",
             "language" => "Spanish",
             "author" => "Gustavo Pero",
             "copyright" => date('Y'),

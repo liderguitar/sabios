@@ -1,57 +1,90 @@
 <?php $this->headScript()->offsetSetFile(1009, PUBLIC_FOLDER . '/js/index.js'); ?>
+<div class="inline label sabios-row"><label>Ultimos Clientes:</label></div>
 
-<div class="sabios-table-container" style="margin-top:0px">
-	<div class="sabios-table">
+<div class="sabios-table-container sabios-row">
 
-		<div class="sabios-table-head sabios-back-gradient">
-			<div class="sabios-table-tr">
+    <div class="sabios-table">
 
-				<div class="sabios-table-td" style="width: 50%">Nombre</div>
-				<div class="sabios-table-td" style="width: 15%">Fecha</div>
-				<div class="sabios-table-td" style="width: 15%">Pais</div>
-				<div class="sabios-table-td" style="width: 20%">Provincia</div>
-			</div>
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
 
-		</div>
-		<div class="sabios-table-tbody">
-			<div class="sabios-table-tr">
-				<div class="sabios-table-td"></div>
-				<div class="sabios-table-td">No hay clientes nuevos</div>
-			</div>    
-		</div>
-		<div class="sabios-table-tfooter">
-			<div class="sabios-table-tr">
-			</div>    
-		</div>	
-	</div>
+                <div class="sabios-table-td" style="width: 10%">C&oacute;digo</div>
+                <div class="sabios-table-td" style="width: 25%">Nombre</div>
+                <div class="sabios-table-td" style="width: 29%">Tipo</div>
+                <div class="sabios-table-td" style="width: 28%">Estado</div>
+                <div class="sabios-table-td" style="width: 8%">Editar</div>
+
+            </div>
+
+        </div>
+        <div class="sabios-table-tbody">
+            <?php
+            $count = 0;
+            foreach ($this->clientes as $cliente) :
+                ?>
+                <div class="sabios-table-tr <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div class="sabios-table-td" style="width: 10%"><a href=""><?= $cliente->id ?></a></div>
+                    <div class="sabios-table-td" style="width: 25%"><a href=""><?= $cliente->nombre_comercial ?></a></div>
+                    <div class="sabios-table-td" style="width: 29%"><a href=""><?= $cliente->ClienteTipo['nombre'] ?></a></div>
+                    <div class="sabios-table-td" style="width: 28%"><a href=""><?=  $cliente->ClienteEstado['descripcion'] ?></a></div>
+                    <div class="sabios-table-td" style="width: 8%"><a href="/cliente/edit/<?= $cliente->id ?>"><span class="sabios-edit"></span></a></div>
+                </div>
+                <?php
+                $count++;
+            endforeach;
+            ?>
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>
+    </div>
 </div>
 
-<div class="sabios-table-container">
-	<div class="sabios-table">
+<div class="sabios-row  sabios-table-container sabios-table ventas-list" style="vertical-align:top">
+    <div class="inline label sabios-row"><label>Ultimos Pedidos:</label></div>
+    <div class="sabios-row"></div>
+    <div style="margin-left: 10px; margin-top: 5px">
+    </div>
+    <div class="sabios-row" style="margin-top: 10px">
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr sabios-table">
+                <div style="width: 5%" class="sabios-table-td">Nro</div>
+                <div style="width: 10%" class="sabios-table-td">Fecha</div>
+                <div style="width: 15%" class="sabios-table-td">Nombre de Cliente</div>
+                <div style="width: 30%" class="sabios-table-td">Estado</div>
+                <div style="width: 20%" class="sabios-table-td">Formas de Pago</div>
+                <div style="width: 13%" class="sabios-table-td">Importe</div>
+                <div style="width: 5%" class="sabios-table-td">Editar</div>
+            </div>
+        </div>
+        <div class="sabios-table-tbody">
+            <?php
+            $count = 0;
 
-		<div class="sabios-table-head sabios-back-gradient">
-			<div class="sabios-table-tr">
-
-				<div class="sabios-table-td" style="width: 15%">Fecha</div>
-				<div class="sabios-table-td" style="width: 15%">Nro Pedido</div>
-				<div class="sabios-table-td" style="width: 25%">Cliente</div>
-				<div class="sabios-table-td" style="width: 15%">Importe</div>
-				<div class="sabios-table-td" style="width: 15%">Pais</div>
-				<div class="sabios-table-td" style="width: 15%">Provincia</div>
-			</div>
-
-		</div>
-		<div class="sabios-table-tbody">
-			<div class="sabios-table-tr">
-				<div class="sabios-table-td"></div>
-				<div class="sabios-table-td">No hay pedidos nuevos</div>
-			</div>    
-		</div>
-		<div class="sabios-table-tfooter">
-			<div class="sabios-table-tr">
-			</div>    
-		</div>	
-	</div>
+            foreach ($this->ventas as $venta) :
+                // dump($venta->id);
+                $total = 0;
+                foreach ($venta->VentaDetalle as $detalle) {
+                    $total += $detalle->precioUnitario * $detalle->cantidad;
+                }
+                ?>
+                <div class="sabios-table-tr sabios-table <?= ($count % 2) ? "grey" : ""; ?>">
+                    <div style="width: 5%" class="sabios-table-td"><?= $venta->id ?></div>
+                    <div style="width: 10%" class="sabios-table-td"><?= substr($venta->fecha, 0, 10) ?></div>
+                    <div style="width: 15%" class="sabios-table-td"><?= $venta->Cliente->nombre_comercial ?></div>
+                    <div style="width: 30%" class="sabios-table-td"><?= $venta->VentaEstado->nombre ?></div>
+                    <div style="width: 20%" class="sabios-table-td"><?= $venta->PagoTipo->descripcion ?></div>
+                    <div style="width: 10%" class="sabios-table-td right"><?= number_format($total, 2, ',', '.') ?></div>
+                    <div style="width: 5%" class="sabios-table-td edit"> <a href="/venta/edit/<?= $venta->id ?>"><span class="sabios-edit"></span></a></div>
+                </div>
+                <?php
+                $count++;
+            endforeach;
+            ?>
+        </div>
+        <div class="sabios-table-tfooter">
+            <div class="sabios-table-tr"></div>
+        </div>
+    </div>
 </div>
 
 

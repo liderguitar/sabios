@@ -1,0 +1,131 @@
+<?php
+//
+//$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/producto-add.js');
+?>
+<script>
+    $(document).ready(function() {
+        $(".sabios-row.tb-close").click(function() {
+            $.unblockUI();
+        });
+    });
+</script>
+<div class="sabios-container">
+
+    <div class="middle">
+        <div class="left-column" style="width: 100%">
+            <form method="post" action="" id="logo-form">
+                <h1>Cargar Logo</h1>
+                <div class="sabios-row separator"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row label"><label>Logo Actual</label><div class="label righty"><a href="/config/remove"><span class="sabios-delete" style="margin-top: 1px;margin-right: 10px"></span>Eliminar Logo</a></div></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"><img src="<?= $this->logo ?>"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row">                <label>Seleccionar una imagen <a class="help" href="javascript:void(0)">(?)</a></label>
+                </div>
+                <div class="sabios-row">
+                    <div id="foto-container" class="foto-container rounded first">
+                        <div class="foto-file"><input number="1" id="foto-1" type="file" name="foto-1"></div>
+                        <input class="fotoname" type="hidden" name="fotoname-1" id="fotoname-1">
+                    </div>
+                </div>
+                <div class="sabios-row"><button class="sabios-submit">Cargar Logo</button></div>
+            </form>            
+        </div>
+    </div>
+    <div class="bottom">
+    </div>    
+</div>
+<div class="textbox message" id="flashmessenger">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image"></div>
+    <div class="sabios-row tb-title">Mensaje</div>
+    <div class="sabios-row tb-text">
+        <?php if (count($this->messages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->messages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({message: $('#flashmessenger'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+        <?php endif; ?>
+    </div>
+</div>
+<div class="textbox invalid" id="flashmessenger-error">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image-invalid"></div>
+    <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
+    <div class="sabios-row tb-text-invalid">
+        <?php if (count($this->errormessages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->errormessages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({message: $('#flashmessenger-error'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+            </script>
+        <?php endif; ?>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(".foto-file input").live('change', function () {
+            var id = $(this).attr("id");
+            $this = $(this);
+            $.ajaxFileUpload
+            (
+                {
+                    url: '/browser/ajaxupload',
+                    secureuri: false,
+                    fileElementId: id,
+                    dataType: 'json',
+                    beforeSend: function () {
+                        //
+                    },
+                    complete: function () {
+                        //$("#loading").hide();
+                    },
+                    success: function (data, status) {
+                        console.log(data);
+                        if (typeof(data.message) !== 'undefined') {
+                            if (data.success) {
+                                var number = $("#" + id).attr("number");
+                                $("#fotoname-" + number).val(data.fileName);
+                                $("#" + id).after("<div class='close'></div><img width='100px' src='" + data.publicFolder + "/" + data.fileName + "'/>");
+                                $("#" + id).hide();
+                                //$("#" + id).val(data.fileName);
+                            } else {
+                                alert(data.message);
+                            }
+                        }
+                    },
+                    error: function (data, status, e) {
+                        alert(e);
+                    }
+                }
+            );
+        });
+        $(".close").live('click', function() {
+            $(this).parent().find("input").val('');
+            $(this).parent().find("input").show();
+            $(this).parent().find("img").remove();
+            $(this).hide();
+        });
+        $(".help").click(function(){
+            sabiosMessageBox("Ayuda", "La imagen puede tener extension jpg gif o png. El tamanio ideal es 400x300");
+        });
+    });
+
+</script>

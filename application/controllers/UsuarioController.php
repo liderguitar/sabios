@@ -6,7 +6,7 @@
  * @author
  * @version 
  */
-class UsuarioController extends Zend_Controller_Action {
+class UsuarioController extends My_Controller_Sabios {
 
     /**
      * The default action - show the home page
@@ -16,21 +16,23 @@ class UsuarioController extends Zend_Controller_Action {
     public function init() {
         $this->_auth = Zend_Auth::getInstance();
         $this->config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'production');
+        parent::init();
     }
 
     public function loginAction() {
        // die(APPLICATION_ID);
         
         if ($this->_auth->hasIdentity()) {
-            die('tiene');
+           // die('tiene');
             return $this->_redirect('/catalogo/categoria');
         }
-        $origin = $this->_request->getHeader('referer');
+       // $origin = $this->_request->getHeader('referer');
         $this->view->messages = $this->_helper->flashMessenger->getMessages();
         $this->_helper->flashMessenger->clearCurrentMessages();
 
         $type = $this->_request->getParam("type", "local");
-
+        $origin = $this->_request->getParam("backurl", false);
+        $this->view->backurl = $origin;
         if ($type <> 'local' && $type <> 'twitter' && $type <> 'facebook')
             throw new Zend_Exception('Parametro erroneo', 404);
         //$this->_helper->redirector('error', 'error','default');
@@ -54,12 +56,12 @@ class UsuarioController extends Zend_Controller_Action {
                         $result = $this->_auth->authenticate($authAdapter);
                        
                         if ($result->isValid()) {
-                            $this->_helper->flashMessenger->addMessage('El usuario ' .
+                            $this->_helper->flashMessenger->setNamespace('success')->addMessage('El usuario ' .
                                     $this->_auth->getIdentity()->nick .
                                     ' se ha logueado correctamente.');
-                            return $this->_redirect($origin);
+                            if($origin) return $this->_redirect($origin); else return $this->_redirect('/catalogo/categoria');
                         } else {
-                            $this->_helper->flashMessenger->addMessage('No se ha podido loguear. Verifica tus credenciales.');
+                            $this->_helper->flashMessenger->setNamespace('error')->addMessage('No se ha podido loguear. Verifica tus credenciales.');
                             return $this->_redirect($origin);
                         }
                     }
@@ -206,19 +208,19 @@ class UsuarioController extends Zend_Controller_Action {
         $email = $this->_request->getparam('email', '');
 
         if (!$email || !$hash) {
-            $this->_helper->flashMessenger->addMessage('validacion incorrecta');
-            return $this->_redirect("/");
+            $this->_helper->flashMessenger->setNamespace('error')->addMessage('validacion incorrecta');
+            return $this->_redirect("/home");
         }
 
         $respuesta = Usuario::validarUsuario($email, $hash);
         if ($respuesta) {
-
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Se ha validado correctamente el usuario');
         } else {
             $this->_helper->flashMessenger->setNamespace('error')->addMessage('No se ha podido validar el usuario');
+
         }
 
-        return $this->_redirect("/");
+        return $this->_redirect("/catalogo/categoria");
     }
 
     public function verificarNickAction() {
@@ -231,7 +233,71 @@ class UsuarioController extends Zend_Controller_Action {
         $this->_response->outputBody();
         exit;
     }
-    
+    public function forgotpasswordAction() {
+        if ($this->_request->isPost()) {
+            $email = $this->_request->getParam('email', false);
+            $user = Usuario::getUserByEmail($email);
+            if (!$user) {
+
+                $this->_helper->flashMessenger->setNamespace('error')->addMessage('Email no registrado');
+                $this->view->email = $email;
+
+            } else {
+
+                $user->blockeado = 'Y';
+
+                $date = Zend_Date::now();
+                $fecha = $date->toString("yyyy-MM-dd HH:mm:ss");
+                $user->validationHash = md5($email . $fecha);
+                $user->save();
+                My_Function_Function::sendEmail(
+                    array(
+                        "bodytext" => "Haga click en el siguiente enlace para Resetear su contrase&ntilde;a. <a href='http://" . $_SERVER['SERVER_NAME'] . "/usuario/resetpassword?hash=" . $user->validationHash . "&email=" . $user->email . "'>Validar</a>",
+                        "subject" => "Restablecer Contrase&ntilde;a en Sabbios",
+                        "email" => $email,
+                        "name" => "")
+                );
+                $this->_helper->flashMessenger->setNamespace('success')->addMessage('Se ha enviado un mail con un link para cambiar la clave');
+                return $this->_redirect("/catalogo/categoria");
+
+
+            }
+        }
+    }
+
+    public function resetpasswordAction() {
+
+        $email = utf8_decode($this->_request->getParam('email', FALSE));
+        $hash = utf8_decode($this->_request->getParam('hash', FALSE));
+        if (!$email || !$hash) {
+            $this->_helper->flashMessenger->setNamespace('error')->addMessage('Url no v&aacute;lida.');
+            return $this->_redirect("/catalogo/categoria");
+        }
+        if ($this->_request->isPost()) {
+
+            $data = $this->_request->getPost();
+            $respuesta = Usuario::validarUsuario($data['email'], $data['hash']);
+            if ($respuesta) {
+                $user = Doctrine_Query::create()
+                    ->from("Usuario U")
+                    ->where("U.email = ?", $data['email'])
+                    ->andWhere("U.validationHash = ?", $data['hash'])->fetchOne();
+                $user->password = md5($data['password']);
+                $user->save();
+
+                $this->_helper->flashMessenger->setNamespace('success')->addMessage('Se ha reestablecido su contrase&ntilde;a');
+            } else {
+                $this->_helper->flashMessenger->setNamespace('error')->addMessage('No se ha podido reestabler su contrase&ntilde;a');
+            }
+
+            return $this->_redirect("/catalogo/categoria");
+        } else {
+            $this->view->email = $email;
+            $this->view->hash = $hash;
+        }
+    }
+
+
 
 
 }

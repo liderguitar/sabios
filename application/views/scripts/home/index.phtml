@@ -18,7 +18,7 @@ $this->headLink()->offsetSetStylesheet(657, PUBLIC_FOLDER . '/css/estilos_home.c
     });
 </script>
 <div class="sabios-container">
-    <div class="logo"><img alt="Sabios - Software de Gestión" title="Sabios - Software de Gestión" src="/images/sabios-logo.png"/></div>
+    <div class="logo"><img alt="Sabios - Software de Gestión" title="Sabios - Software de Gestión" src="/images/sabbios-logo.png"/></div>
     <div class="middle">
         <div class="left-column">
             <div class="text">
@@ -28,7 +28,7 @@ $this->headLink()->offsetSetStylesheet(657, PUBLIC_FOLDER . '/css/estilos_home.c
                 <span>Mirá el video.</span>
             </div>
             <div class="youtube">
-                <iframe width="400" height="275" src="//www.youtube.com/embed/JPl9bI0RX3o" frameborder="0" allowfullscreen></iframe>
+                <iframe width="400" height="275" src="http://www.youtube.com/embed/pQxwrYVrYxs" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
         <div class="right-column">
@@ -44,15 +44,12 @@ $this->headLink()->offsetSetStylesheet(657, PUBLIC_FOLDER . '/css/estilos_home.c
                 </ul>
             </span>
             <div class=""><a href="/home/register"><button class="login-submit login">Registrarse</button></a></div>
-            <div class="iniciar-sesion">Iniciar sesión</div>
         </div>
     </div>
     <div class="bottom">
         <div class="links">
             <ul>
                 <a href="/home/contact"><li>Contacto</li></a>
-                <a href="/home/condiciones"><li>Condiciones</li></a>
-                <a href="/home/privacidad"><li>Privacidad</li></a>
                 <a href="/home"><li>home</li></a>
             </ul>
         </div>
@@ -74,23 +71,6 @@ $this->headLink()->offsetSetStylesheet(657, PUBLIC_FOLDER . '/css/estilos_home.c
         </a>
     </div>  
     <div class="sabios-row"><div class="forgot-pass">&#191;Olvidaste tu contraseña&#63;</div></div>
-</div>
-<div class="textbox message" id="flashmessenger">
-    <div class="sabios-row tb-close"></div>
-    <div class="sabios-row tb-image"></div>
-    <div class="sabios-row tb-title">Mensaje</div>
-    <div class="sabios-row tb-text">
-<?php if (count($this->messages)) : ?>
-            <ul id="messages">
-            <?php foreach ($this->messages as $message) : ?>
-                    <li><?php echo $this->escape($message); ?></li>
-                <?php endforeach; ?>
-            </ul>
-            <script>
-                $.blockUI({message: $('#flashmessenger'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
-            </script>
-<?php endif; ?>
-    </div>
 </div>
 <div class="textbox invalid" id="flashmessenger-error">
     <div class="sabios-row tb-close"></div>

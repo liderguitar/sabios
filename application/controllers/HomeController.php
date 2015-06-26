@@ -3,19 +3,16 @@
 class HomeController extends My_Controller_Sabios {
 
     private $_adapter = null;
-    private $_auth = null;
     private $_registerSession;
     private $_twitter_session;
 
     public function init() {
         $this->_auth = Zend_Auth::getInstance();
-        $this->view->messages = $this->_helper->flashMessenger->setNamespace('success')->getMessages();
-        $this->view->errormessages = $this->_helper->flashMessenger->setNamespace('error')->getMessages();
         $this->_registerSession = new Zend_Session_Namespace('register');
+        parent::init();
     }
 
-    public function indexAction() {
-
+    public function indexAction(){
 
 
 
@@ -29,7 +26,10 @@ class HomeController extends My_Controller_Sabios {
     }
 
     public function registerAction() {
+
+
         $errors = false;
+        $config = new Zend_Config_Ini(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR . 'application.ini', 'production');
 
         if ($this->_request->isPost()) {
 
@@ -56,15 +56,20 @@ class HomeController extends My_Controller_Sabios {
             $app = new Application();
             $app->app_id = md5($date->toString("yyyy-MM-dd HH:mm:ss") . $data['cuenta']);
             $app->nombre = $data['cuenta'];
-            $app->subdominio = $data['cuenta'];
+            $app->subdominio = strtolower($data['cuenta']);
             $app->tipo_actividad = $data['tipoactividad'];
             $app->web = $data['web'];
-            $app->estado = 'OFFLINE';
+            $app->estado = $this->isAvailable() ? 'ONLINE' : 'OFFLINE';
             $app->responsable_nombre = $data['responsablenombre'];
             $app->responsable_email = $data['responsableemail'];
             $app->responsable_telefono = $data['responsabletelefono'];
             $app->responsable_direccion = $data['responsabledireccion'];
             $app->save();
+
+            // insertar categorias y talles por defecto
+
+            $this->generarTallesPorDefecto($app->app_id);
+            $this->generarCategoriasPorDefecto($app->app_id);
 
             $newUser = new Usuario();
             //$newUser->nick = $data['nick'];
@@ -89,15 +94,27 @@ class HomeController extends My_Controller_Sabios {
             My_Function_Function::sendEmail(
                 array(
                     "bodytext" => "Estimado " . $data['nombre'] . " " . $data['apellido'] . ", <br>
-              &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirar su cuenta SABIOS gratuita:<br>
-              <a href='http://sabibos.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
-              http://sabiosweb.com/index/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
+              &#161;Bienvenido a Sabios&#33; Por favor haga click en el siguiente link para confirmar su cuenta SABBIOS gratuita:<br>
+              <a href='http://sabbios.com/usuario/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "'>
+              http://sabbios.com/usuario/validar/hash/" . $newUser->validationHash . "/email/" . $data['email'] . "</a><br>
+              Un administrador activar&aacute: tu cuenta despues de eso <br>
+              <a href='http://".$app->subdominio.".sabbios.com/'>Ver Sitio</a><br>
+              <a href='http://".$app->subdominio.".sabbios.com/admin'>Administrar</a>
               Saludos Cordiales<br>
               <a href='http://sabbios.com'>SABBIOS</a><br>
               <a href='http://sabbios.com/home/condiciones'>Condiciones</a> <a href='http://sabbios.com/home/privacidad'>Privacidad</a>",
-                    "subject" => "Registro en Sabios",
+                    "subject" => "Registro en Sabbios",
                     "email" => $data['email'],
                     "name" => $newUser->nombre
+            ));
+
+            My_Function_Function::sendEmail( array(
+                "bodytext" => "Se ha registrado  " . $data['nombre'] . " " . $data['apellido'] . ", <br>
+              con la cuenta: <a href='http://".$app->subdominio.".sabbios.com/'></a><br>
+              Saludos Cordiales<br>",
+                "subject" => "Nueva Cuenta Registro en Sabbios",
+                "email" => $config->superadmin->email,
+                "name" => $newUser->nombre
             ));
 
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Verifique su casilla de email para confirmar su registro.');
@@ -154,8 +171,8 @@ class HomeController extends My_Controller_Sabios {
             $mail = new Zend_Mail();
             $mail->setBodyHtml($html);
             $mail->setFrom($data['email'], 'Sabios');
-            $mail->addTo('info@sabiosweb.com', 'Contacto');
-            $mail->setSubject('Sabios - Contacto');
+            $mail->addTo('info@sabbios.com', 'Contacto');
+            $mail->setSubject('Sabbios - Contacto');
             $mail->send();
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Gracias por contactarse con nosotros.');
             return $this->_redirect("/?contactsuccess=true");
@@ -178,8 +195,8 @@ class HomeController extends My_Controller_Sabios {
             $mail = new Zend_Mail();
             $mail->setBodyHtml($html);
             $mail->setFrom($data['email'], 'Sabios');
-            $mail->addTo('info@sabiosweb.com', 'Inversores');
-            $mail->setSubject('Sabios - Inversores');
+            $mail->addTo('info@sabbios.com', 'Inversores');
+            $mail->setSubject('Sabbios - Inversores');
             $mail->send();
             $this->_helper->flashMessenger->setNamespace('success')->addMessage('Gracias por contactarse con nosotros.');
             return $this->_redirect("/?contactsuccess=true");
@@ -422,5 +439,151 @@ class HomeController extends My_Controller_Sabios {
     public function privacidadAction() {
         
     }
+    private function generarCategoriasPorDefecto($app_id){
+
+        $prioridad = 1;
+        $cat = new Categoria();
+        $cat->app_id = $app_id;
+        $cat->nombre = "Hombre";
+        $cat->parent_id =0;
+        $cat->save();
+
+        $hombre_id = $cat->id;
+
+        $prioridad ++;
+        $cat2 = new Categoria();
+        $cat2->app_id = $app_id;
+        $cat2->nombre = "Mujer";
+        $cat2->parent_id =0;
+        $cat2->save();
+
+        $mujer_id=$cat2->id;
+
+        $hombre = array(
+            "Remeras Mangas Cortas",
+            "Musculosas",
+            "Pantalones",
+            "Zapatillas",
+            "Boxer",
+            "Camisas",
+            "Mallas",
+            "Buzos",
+            "Camperas"
+        );
+        $mujer = array("Remeras Mangas Cortas",
+            "Musculosas",
+            "Mallas",
+            "Buzos",
+            "Camperas");
+
+        $prioridad = 1;
+        foreach($hombre as $h){
+            $cat3 = new Categoria();
+            $cat3->nombre = $h;
+            $cat3->app_id = $app_id;
+            $cat3->prioridad = $prioridad;
+            $cat3->parent_id = $hombre_id;
+            $cat3->save();
+            $prioridad++;
+        }
+
+        $prioridad = 1;
+
+        foreach($mujer as $h){
+            $cat3 = new Categoria();
+            $cat3->nombre = $h;
+            $cat3->app_id = $app_id;
+            $cat3->prioridad = $prioridad;
+            $cat3->parent_id = $mujer_id;
+            $cat3->save();
+            $prioridad++;
+        }
+
+    }
+
+    private function generarTallesPorDefecto($app_id){
+
+        $tt = new TalleTipo();
+        $tt->app_id = $app_id;
+        $tt->descripcion = "XS al XXL";
+        $tt->save();
+
+        $talles = array( "XS", "S", "M", "L", "XL", "XXL");
+        $prioridad = 1;
+        foreach($talles as $ttt){
+
+            $t= new Talle();
+            $t->app_id = $app_id;
+            $t->prioridad = $prioridad;
+            $t->id_tipo_talle = $tt->id;
+            $t->talle = $ttt;
+            $t->save();
+            $prioridad++;
+        }
+
+        $tt = new TalleTipo();
+        $tt->app_id = $app_id;
+        $tt->descripcion = "Numeros pares 6 al 16";
+        $tt->save();
+
+        $talles = array( 6, 8, 10, 12, 14, 16);
+        $prioridad = 1;
+        foreach($talles as $ttt){
+
+            $t= new Talle();
+            $t->app_id = $app_id;
+            $t->prioridad = $prioridad;
+            $t->id_tipo_talle = $tt->id;
+            $t->talle = $ttt;
+            $t->save();
+            $prioridad++;
+        }
+        $tt = new TalleTipo();
+        $tt->app_id = $app_id;
+        $tt->descripcion = "Numeros pares 38 al 50";
+        $tt->save();
+
+        $talles = array( 38, 40, 42, 44, 46, 48, 50);
+        $prioridad = 1;
+        foreach($talles as $ttt){
+
+            $t= new Talle();
+            $t->app_id = $app_id;
+            $t->prioridad = $prioridad;
+            $t->id_tipo_talle = $tt->id;
+            $t->talle = $ttt;
+            $t->save();
+            $prioridad++;
+        }
+
+        $tt = new TalleTipo();
+        $tt->app_id = $app_id;
+        $tt->descripcion = "Numeros del 34 al 50";
+        $tt->save();
+
+        $talles = array( 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50);
+        $prioridad = 1;
+        foreach($talles as $ttt){
+
+            $t= new Talle();
+            $t->app_id = $app_id;
+            $t->prioridad = $prioridad;
+            $t->id_tipo_talle = $tt->id;
+            $t->talle = $ttt;
+            $t->save();
+            $prioridad++;
+        }
+
+    }
+
+    private function isAvailable(){
+
+        $q = Doctrine_Manager::getInstance()->getCurrentConnection();
+        $result = $q->execute("select count(*) as cantidad from application")->fetchAll();
+
+        return (int)$result[0]["cantidad"] < 21 ? true : false;
+
+    }
 
 }
+

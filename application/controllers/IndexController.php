@@ -24,6 +24,27 @@ Zend_Debug::dump(Doctrine_Core::generateModelsFromDb(APPLICATION_PATH.  '/models
     public function adminAction() {
 //  	Zend_Debug::dump(Doctrine_Core::generateModelsFromDb(APPLICATION_PATH.  '/models',array('doctrine'),array('generateTableClasses' => true)));
 //die;
+
+        $this->view->clientes =
+            Doctrine_Query::create()
+                ->from("Cliente c")
+                ->leftJoin('c.ClienteTipo ct')
+                ->leftJoin('c.ClienteEstado ce')
+                ->where("c.borrado = 'N' and app_id='" . APPLICATION_ID . "'")->orderBy("c.id desc")->limit(5)->execute();
+
+
+        $this->view->ventas = Doctrine_Query::create()
+            ->from("Venta v")
+            ->leftJoin("v.Cliente c")
+            ->leftJoin("v.PagoTipo f")
+            ->leftJoin("v.VentaEstado ve")
+            ->leftJoin("v.VentaDetalle vd")
+            ->leftJoin("v.Vendedor vn")
+            ->leftJoin("vd.ProductoTextil pt")
+            ->leftJoin("pt.Producto")
+            ->where('app_id="' . APPLICATION_ID . '" and v.borrado="N"')
+            ->orderBy("v.id desc")->limit(5)->execute();
+
         $this->view->contactsuccess = $this->_request->getParam('contactsuccess', false);
     }
 

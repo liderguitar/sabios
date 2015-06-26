@@ -22,5 +22,49 @@ echo $this->doctype();
 echo $this->layout()->content;
 ?>
 </div>
+<div id="sabios-messagebox" class="hide sabios-table-container sabios-row">
+    <div class="sabios-table">
+        <div class="sabios-table-head sabios-back-gradient">
+            <div class="sabios-table-tr">
+
+                <div class="sabios-table-td sabios-table-titulo" style="width: 100%"><span>TITULO</span></div>
+            </div>
+        </div>
+        <div class="sabios-table-tbody">
+            <div id="description" class="sabios-table-ttr">
+                <p></p>
+            </div>
+            <div class="sabios-table-ttr">
+                <button class="sabios-fdp-submit tb-close">Ok</button>
+            </div>
+        </div>
+        <div class="sabios-table-tfooter">
+        </div>
+    </div>
+</div>
+<?php if(count($this->errormessages)) :
+    foreach($this->errormessages as $message) :
+        ?>
+        <script>
+            //  $(document).ready(function() {
+            sabiosMessageBox("Error", "<?= $message ?>");
+            // });
+
+
+        </script>
+    <?php endforeach;
+endif; ?>
+<?php if(count($this->messages)) :
+    foreach($this->messages as $message) :
+        ?>
+        <script>
+            //  $(document).ready(function() {
+            sabiosMessageBox("Éxito", "<?= $message ?>");
+            // });
+
+
+        </script>
+    <?php endforeach;
+endif; ?>
 </body>
 </html>

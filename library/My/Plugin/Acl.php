@@ -20,8 +20,8 @@ class My_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $action = $request->getActionName();
         $resource = $request->getControllerName();
         $privilegio = $request->getActionName();
+        $referer =  $_SERVER['REDIRECT_URL'];
 
-        
         if ($action == "error" && $resource == "error")
             return;
 
@@ -48,9 +48,10 @@ class My_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
             
            // throw new Exception($message);
             $request = $this->getRequest();
-            $request->setControllerName('error')
-                    ->setActionName('error')
-                    ->setParam('message', $message);
+            $request->setControllerName('usuario')
+                    ->setActionName('login')
+                    ->setParam('message', $message)
+                    ->setParam('backurl', $referer);
         }
     }
 

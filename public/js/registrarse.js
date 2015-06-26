@@ -16,6 +16,7 @@ $(document).ready(function() {
     $("#password").keyup(function() {
         passwordStrength($("#password").val());
     });
+
     $(".check").click(function() {
         if ($(this).hasClass("checked")) {
 
@@ -36,41 +37,196 @@ $(document).ready(function() {
     $("#password").focus(function() {
         $(".password-div").css("visibility", "visible");
     });
-    registerValidate();
+  //  registerValidate();
     $('form#register-form').submit(function() {
         
-        var valido = true;
-        verifyValidNombre($("#nombre"));
-        verifyValidNombre($("#apellido"));
-        verifyValidNombre($("#email"));
-        verifyValidNombre($("#repitePassword"));
-        verifyValidNombre($("#password"));
-        verifyValidNombre($("#cuenta"));
-        verifyValidNombre($("#web"));
-        verifyValidNombre($("#responsableemail"));
-        
-        if($("#tyc").val()==="0") {
-             $(".tyc-error").css("visibility", "visible");
-             valido =  false;
-        } else {
-             $(".tyc-error").css("visibility", "hidden");
-        }
-        
-        if($("#tipoactividad").attr("value")==="0") {
-             $(".tipodecuenta-error").css("visibility", "visible");
-             valido = false;
-        }  else {
-             $(".tipodecuenta-error").css("visibility", "hidden");
-        }     
-        
-        return valido;
+        return validarRegistro();
     });
 
+    $("#nombre").blur(function(){
+        validarNombre();
+    });
+    $("#apellido").blur(function(){
+        validarApellido();
+    });
 
+    $("#repitePassword").blur(function(){
+        validarRepitePassword();
+    });
 
-
+    $("#email").blur(function(){
+        validarEmaill();
+    });
+    $("#cuenta").blur(function(){
+        validarCuenta();
+    });
+    $("#password").blur(function(){
+        validarPassword();
+    });
+    $("#web").blur(function(){
+        validarWeb();
+    });
+    $("#responsableemail").blur(function(){
+        validarResponsableEmail();
+    });
+    $("#tipoactividad").blur(function(){
+        validarTipoActividad();
+    });
 
 });
+
+
+function validarNombre(){
+    var valido = 0;
+    if( $("#nombre").val().length < 4 || $("#nombre").val().length > 50 ) {
+        setError($("#nombre"));
+        valido++;
+    }else{
+        clearError($("#nombre"));
+    }
+    return valido;
+}
+
+function validarApellido(){
+    var valido = 0;
+    if( $("#apellido").val().length < 4 || $("#apellido").val().length > 50 ) {
+        setError($("#apellido"));
+        valido++;
+    }else{
+        clearError($("#apellido"));
+    }
+    return valido;
+}
+
+function validarEmaill(){
+    var valido = 0;
+    if (!isValidEmailAddress($("#email").val())) {
+        setError($("#email"));
+        valido++;
+    }else{
+        clearError($("#email"));
+    }
+    return valido;
+
+}
+
+function validarRepitePassword(){
+    var valido = 0;
+
+    if ($("#password").val() !== $("#repitePassword").val()){
+        setError($("#repitePassword"));
+        valido++;
+    }else{
+        clearError($("#repitePassword"));
+    }
+    return valido;
+
+}
+
+function validarCuenta(){
+    var valido = 0;
+
+    var pattern = new RegExp(/^[a-zA-Z0-9]+$/);
+    if( !pattern.test($("#cuenta").val())){
+        setError($("#cuenta"));
+        valido++;
+    }else{
+        clearError($("#cuenta"));
+    }
+    return valido;
+
+}
+
+function validarWeb(){
+    var valido = 0;
+
+    if($("#web").val().length) {
+        var pattern = new RegExp(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/);
+        if (!pattern.test($("#web").val())) {
+            setError($("#web"));
+            valido++;
+        } else {
+            clearError($("#web"));
+        }
+    }else {
+        clearError($("#web"));
+    }
+    return valido;
+
+}
+function validarResponsableEmail(){
+    var valido = 0;
+
+    if (!isValidEmailAddress($("#responsableemail").val())) {
+        setError($("#responsableemail"));
+        valido++;
+    }else{
+        clearError($("#responsableemail"));
+    }
+    return valido;
+
+}
+
+function validarTyc(){
+    var valido = 0;
+
+    if($("#tyc").val()==="0") {
+        $(".tyc-error").css("visibility", "visible");
+        valido++;
+    } else {
+        $(".tyc-error").css("visibility", "hidden");
+    }
+    return valido;
+
+}
+
+function validarTipoActividad(){
+    var valido = 0;
+
+    if($("#tipoactividad").attr("value")==="0") {
+        $(".tipodecuenta-error").css("visibility", "visible");
+        valido++;
+    }  else {
+        $(".tipodecuenta-error").css("visibility", "hidden");
+    }
+    return valido;
+
+}
+
+function validarPassword(){
+    var valido = 0;
+
+    if (passwordStrength($("#password").val()) < 2) {
+        $(".password-error").css("visibility", "visible");
+        $(".password-error").find("span.white").html("Verifica la fortaleza de tu contraseña");
+        valido++;
+    } else {
+        $(".password-error").css("visibility", "hidden");
+      }
+    return valido;
+
+}
+
+
+
+function validarRegistro(){
+    var valido = 0;
+
+    valido += validarNombre();
+    valido += validarApellido();
+    valido += validarEmaill();
+    valido += validarCuenta();
+    valido += validarRepitePassword();
+    valido += validarResponsableEmail();
+    valido += validarTipoActividad();
+    valido += validarWeb();
+    valido += validarPassword();
+    valido += validarTyc();
+    return valido == 0 ? true : false;
+}
+
+
+
 function passwordStrength(password)
 {
     var desc = new Array(),
@@ -118,153 +274,14 @@ function passwordStrength(password)
         $(this).hide();
     });
     $(".desc-" + desc[score]).show();
-
     return score;
 
 }
-function registerValidate() {
 
-    jQuery.validator.addMethod("regex",
-            function(value, element, regexp) {
-                var re = new RegExp(regexp);
-                return this.optional(element) || re.test(value);
-            },
-            "");
-    jQuery.validator.addMethod("verificarNick",
-            function(value, element, value2) {
-                var resp = true;
-                self = this;
-                $.ajax({
-                    type: "POST",
-                    url: "/usuario/verificar-nick/nick/" + value,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function(data) {
-                        if (data["result"] === "true") {
-                            self.resp = false;
-                        } else {
-                            self.resp = true;
-                        }
-                    }
-                });
-
-                return this.optional(element) || self.resp;
-            },
-            "");
-    jQuery.validator.addMethod("valueNotEquals", function(value) {
-        return $("#register-form #password").val() == value;
-    }, "Value must not equal arg.");
-
-    $('form#register-form').validate({
-        rules: {
-            nombre: {
-                required: true,
-                minlength: 4,
-                maxlength: 50
-            },
-            apellido: {
-                required: true,
-                minlength: 4,
-                maxlength: 50
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            password: {
-                required: true
-            },
-            repitePassword: {
-                required: true,
-                valueNotEquals: $("#register-form #repitePassword").val()
-            },
-            cuenta: {
-                required: true,
-                regex: /^[a-zA-Z0-9]+$/
-            },
-            web: {
-                regex: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/
-            },
-            responsableemail:{
-                required: true,
-                email: true
-            } 
-        },
-        submitHandler: function(form) {
-
-            if ($("#tyc").val() === "0") {
-                $(".tyc-error").css("visibility", "visible");
-                return false;
-            }
-
-            if (passwordStrength($("#password").val()) < 2) {
-                $(".password-error").css("visibility", "visible");
-                $(".password-error").find("span.white").html("Verifica la fortaleza de tu contraseña");
-                $("#password").focus();
-                return false;
-
-            }
-
-
-            if ($("#register-form").valid()) {
-                $("#register-form").submit();
-            }
-
-
-            return false;
-        },
-        errorPlacement: function(error, element) {
-            $("." + element.attr('id') + "-error").find("span.white").html(error.html());
-            $("#register-form #" + element.attr('id')).next(error);
-            element.focus();
-        },
-        messages: {
-            nombre: {
-                required: 'Debe Ingresar un Nombre.',
-                minlength: 'Minimo 4 caracteres.',
-                maxlength: 'Largo hasta 28 caracteres.'
-            },
-            apellido: {
-                required: 'Debe Ingresar un Apellido.',
-                minlength: 'Minimo 4 caracteres.',
-                maxlength: 'Largo hasta 28 caracteres.'
-            },
-            email: {
-                required: 'Debe ingresar un Email',
-                email: 'no es un email valido'
-            },
-            repitePassword: {
-                required: 'Debe repetir la contrase&ntilde;a',
-                valueNotEquals: 'La Contrase&ntilde;a no coincide'
-            },
-            password: {
-                required: 'Ingrese una contrase&ntilde;a'
-            },
-            cuenta: {
-                required: 'Ingrese un nombre de cuenta',
-                regex: 'solo letras y numeros'
-            },
-            web: {
-                required: 'Ingrese un nombre de cuenta',
-                regex: 'solo letras y numeros'
-            },
-            responsableemail: {
-                required: 'Debe ingresar un Email',
-                email: 'no es un email valido'
-            }
-
-        }
-    });
-
-
-}
-
-function verifyValidNombre(element) {
-    element.valid();
-    if (element.hasClass("valid"))
-        $("." + element.attr('id') + "-error").css("visibility", "hidden");
-    else
+function setError(element) {
         $("." + element.attr('id') + "-error").css("visibility", "visible");
 }
 
-
+function clearError(element) {
+        $("." + element.attr('id') + "-error").css("visibility", "hidden");
+}
