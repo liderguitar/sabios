@@ -3,8 +3,8 @@
 //$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/producto-add.js');
 ?>
 <script>
-    $(document).ready(function() {
-        $(".sabios-row.tb-close").click(function() {
+    $(document).ready(function () {
+        $(".sabios-row.tb-close").click(function () {
             $.unblockUI();
         });
     });
@@ -13,8 +13,10 @@
 
     <div class="middle">
         <div class="left-column" style="width: 100%">
-            <form method="post" action="" id="logo-form">
+            <form method="post" action="" id="fondo-form">
+                <input type="hidden" id="fondo" name="fondo">
                 <h1>Cargar Fondo</h1>
+
                 <div class="sabios-row separator"></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
@@ -26,9 +28,9 @@
                 <div class="sabios-row"></div>
                 <div class="sabios-row">
                     <?php
-                    for($i=1;$i<11;$i++):?>
-                        <div class="back-example" id="<?=$i?>">
-                            <img src="/images/textures/t<?=$i?>.png">
+                    for ($i = 1; $i < 11; $i++):?>
+                        <div class="back-example" id="<?= $i ?>">
+                            <img src="/images/textures/t<?= $i ?>.png">
                         </div>
                     <?php endfor; ?>
                 </div>
@@ -38,7 +40,7 @@
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
-                <div class="sabios-row"><input type="radio" class="" name="tipo" value="0">
+                <div class="sabios-row"><input type="radio" class="" name="tipo" value="1">
                     <label>o Seleccionar una imagen <a class="help" href="javascript:void(0)">(?)</a></label>
                 </div>
                 <div class="sabios-row">
@@ -47,12 +49,14 @@
                         <input class="fotoname" type="hidden" name="fotoname-1" id="fotoname-1">
                     </div>
                 </div>
-                <div class="sabios-row"><button class="sabios-submit">Cargar Fondo</button></div>
-            </form>            
+                <div class="sabios-row">
+                    <button class="sabios-submit">Cargar Fondo</button>
+                </div>
+            </form>
         </div>
     </div>
     <div class="bottom">
-    </div>    
+    </div>
 </div>
 <div class="textbox message" id="flashmessenger">
     <div class="sabios-row tb-close"></div>
@@ -66,7 +70,10 @@
                 <?php endforeach; ?>
             </ul>
             <script>
-                $.blockUI({message: $('#flashmessenger'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+                $.blockUI({
+                    message: $('#flashmessenger'),
+                    css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}
+                });
             </script>
         <?php endif; ?>
     </div>
@@ -83,23 +90,45 @@
                 <?php endforeach; ?>
             </ul>
             <script>
-                $.blockUI({message: $('#flashmessenger-error'), css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}});
+                $.blockUI({
+                    message: $('#flashmessenger-error'),
+                    css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}
+                });
             </script>
         <?php endif; ?>
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        $(".back-example").click(function(){
-            $("body").css("background-image","url(/images/textures/t"+$(this).attr("id")+".png)");
+    $(document).ready(function () {
+
+        $("#fondo-form").submit(function(){
+
+                if(!$("#fondo").val()){
+                    alert("Debe seleccionar un tipo de fondo");
+                    return false;
+                }
+            });
+
+
+        $(".back-example").click(function () {
+            $("body").css("background-image", "url(/images/textures/t" + $(this).attr("id") + ".png)");
+            $(".back-example").css("border", "1px dashed");
+            $(this).css("border", "1px dashed green");
+            $("#fondo").val("/images/textures/t" + $(this).attr("id") + ".png");
         });
+        $("input[name=tipo]").change(function () {
+            var seleccion = $("input:radio[name=tipo]:checked").val();
+            $("body").css("background-image", "none");
+        });
+
+
         $(".foto-file input").live('change', function () {
             var id = $(this).attr("id");
             $this = $(this);
             $.ajaxFileUpload
             (
                 {
-                    url: '/browser/ajaxuploadlogo',
+                    url: '/browser/ajaxuploadfondo',
                     secureuri: false,
                     fileElementId: id,
                     dataType: 'json',
@@ -113,11 +142,9 @@
                         console.log(data);
                         if (typeof(data.message) !== 'undefined') {
                             if (data.success) {
-                                var number = $("#" + id).attr("number");
-                                $("#fotoname-" + number).val(data.fileName);
-                                $("#" + id).after("<div class='close'></div><img width='100px' src='" + data.publicFolder + "/" + data.fileName + "'/>");
-                                $("#" + id).hide();
-                                //$("#" + id).val(data.fileName);
+
+                                $("body").css("background-image", "url(" + data.publicFolder + "/" + data.fileName +")");
+                                $("#fondo").val(data.publicFolder + "/" + data.fileName);
                             } else {
                                 alert(data.message);
                             }
@@ -129,13 +156,13 @@
                 }
             );
         });
-        $(".close").live('click', function() {
+        $(".close").live('click', function () {
             $(this).parent().find("input").val('');
             $(this).parent().find("input").show();
             $(this).parent().find("img").remove();
             $(this).hide();
         });
-        $(".help").click(function(){
+        $(".help").click(function () {
             sabiosMessageBox("Ayuda", "La imagen puede tener extension jpg gif o png. El tamanio ideal es 400x300");
         });
     });

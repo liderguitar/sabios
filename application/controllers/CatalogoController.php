@@ -2,6 +2,12 @@
 
 class CatalogoController extends My_Controller_Sabios {
 
+    public function init(){
+        $app = Doctrine_Core::getTable('Application')->findByDql("app_id='" . APPLICATION_ID . "'");
+        $app = $app[0];
+        $this->view->fondo = $app->catalog_background;
+    }
+
     public function indexAction() {
         return $this->_redirect("/catalogo/categoria");
 

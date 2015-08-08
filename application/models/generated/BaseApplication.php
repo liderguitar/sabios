@@ -24,6 +24,7 @@ Doctrine_Manager::getInstance()->bindComponent('Application', 'doctrine');
  * @property string $responsable_telefono
  * @property string $responsable_direccion
  * @property string $logo
+ * @property string $catalog_background
  * @property string $email2
  * @property string $email3
  * 
@@ -185,6 +186,15 @@ abstract class BaseApplication extends Doctrine_Record
              'autoincrement' => false,
              ));
         $this->hasColumn('logo', 'string', 250, array(
+             'type' => 'string',
+             'length' => 250,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('catalog_background', 'string', 250, array(
              'type' => 'string',
              'length' => 250,
              'fixed' => false,

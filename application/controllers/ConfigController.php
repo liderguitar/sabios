@@ -46,20 +46,16 @@ class ConfigController extends My_Controller_Sabios
 
         $app = Doctrine_Core::getTable('Application')->findByDql("app_id='" . APPLICATION_ID . "'");
         $app = $app[0];
-        $this->view->logo = $app->logo ? "/files/" . $app->logo : '/images/sabbios-logo.png';
 
         if ($this->_request->isPost()) {
-
             if (!is_null($this->_request->getParam('fotoname-1', null))) {
-
-                $app->logo = $this->_request->getParam('fotoname-1');
-                $this->view->logo = "/files/" . $app->logo;
-                @define("APPLICATION_LOGO", $app->logo);
-
+                $app->catalog_background = $this->_request->getParam('fondo');
                 $app->save();
+                $this->_redirect("/catalog");
 
             }
         }
+
     }
     public function removeAction()
     {

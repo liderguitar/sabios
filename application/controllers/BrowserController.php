@@ -172,6 +172,69 @@ class BrowserController extends Zend_Controller_Action {
         $this->_response->outputBody();
         exit;
     }
+  public function ajaxuploadfondoAction()
+    {
+        $result = array();
+        if ($this->_request->isPost()) {
+
+            foreach ($_FILES as $file) {
+                $type = explode("/", $file["type"]);
+                $extension = $type[1];
+
+                if ($extension == "jpeg")
+                    $extension = "jpg";
+
+                if (
+                    $extension <> "jpg" &&
+                    $extension <> "gif" &&
+                    $extension <> "png"
+                ) {
+                    $data['success'] = false;
+                    $data['message'] = "Error al cargar el archivo. Verifique la extension";
+                    $result = Zend_Json_Encoder::encode($data);
+                    $this->_helper->layout()->disableLayout();
+                    $this->_helper->viewRenderer->setNoRender(true);
+                    $this->_response->setBody($result);
+                    $this->_response->outputBody();
+                    exit;
+                }
+                $tmp_name = $file["tmp_name"];
+
+                $imagen = getimagesize($tmp_name);
+                $ancho = $imagen[0];              //Ancho
+                $alto = $imagen[1];
+
+                if ($file["size"] > 2000000) {
+                    $data['success'] = false;
+                    $data['message'] = "Error al cargar el archivo. Verifique que el tamaño menor a 2 Mb.";
+                    $result = Zend_Json_Encoder::encode($data);
+                    $this->_helper->layout()->disableLayout();
+                    $this->_helper->viewRenderer->setNoRender(true);
+                    $this->_response->setBody($result);
+                    $this->_response->outputBody();
+                    exit;
+                }
+
+                $name = $this->getFileName() . "." . $extension;
+                if (!move_uploaded_file($tmp_name, "files/" . $name)) {
+                    $data['success'] = false;
+                    $data['message'] = "Error al cargar el archivo. Verifique la extension y el tamaño menor a 200kb.";
+                } else {
+
+                    $data['success'] = true;
+                    $data['publicFolder'] = PUBLIC_FOLDER . "/files";
+                    $data['fileName'] = $name;
+                    $data['message'] = "Archivo cargado con exito";
+                }
+            }
+        }
+        $result = Zend_Json_Encoder::encode($data);
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_response->setBody($result);
+        $this->_response->outputBody();
+        exit;
+    }
 
     public function ajaxuploadnovedadAction() {
         $result = array();
