@@ -1922,3 +1922,12 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
     margin-left: 34px;
     width: 200px;
 }
+.back-example {
+    border: 1px dashed;
+    float: left;
+    height: 72px;
+    margin: 4px;
+    overflow: hidden;
+    width: 85px;
+    cursor: pointer;
+}

@@ -14,23 +14,32 @@
     <div class="middle">
         <div class="left-column" style="width: 100%">
             <form method="post" action="" id="logo-form">
-                <h1>Cargar Logo</h1>
+                <h1>Cargar Fondo</h1>
                 <div class="sabios-row separator"></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
+                <div class="sabios-row"><input type="radio" class="" name="tipo" value="0" checked>
+                    <label>Seleccionar un fondo predeterminado</label>
+                </div>
                 <div class="sabios-row"></div>
-                <div class="sabios-row label"><label>Logo Actual</label><div class="label righty"><a href="/config/remove"><span class="sabios-delete" style="margin-top: 1px;margin-right: 10px"></span>Eliminar Logo</a></div></div>
+                <div class="sabios-row">
+                    <?php
+                    for($i=1;$i<11;$i++):?>
+                        <div class="back-example" id="<?=$i?>">
+                            <img src="/images/textures/t<?=$i?>.png">
+                        </div>
+                    <?php endfor; ?>
+                </div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
-                <div class="sabios-row"><img src="<?= $this->logo ?>"></div>
                 <div class="sabios-row"></div>
                 <div class="sabios-row"></div>
-                <div class="sabios-row"></div>
-                <div class="sabios-row">                <label>Seleccionar una imagen <a class="help" href="javascript:void(0)">(?)</a></label>
+                <div class="sabios-row"><input type="radio" class="" name="tipo" value="0">
+                    <label>o Seleccionar una imagen <a class="help" href="javascript:void(0)">(?)</a></label>
                 </div>
                 <div class="sabios-row">
                     <div id="foto-container" class="foto-container rounded first">
@@ -38,7 +47,7 @@
                         <input class="fotoname" type="hidden" name="fotoname-1" id="fotoname-1">
                     </div>
                 </div>
-                <div class="sabios-row"><button class="sabios-submit">Cargar Logo</button></div>
+                <div class="sabios-row"><button class="sabios-submit">Cargar Fondo</button></div>
             </form>            
         </div>
     </div>
@@ -81,6 +90,9 @@
 </div>
 <script>
     $(document).ready(function() {
+        $(".back-example").click(function(){
+            $("body").css("background-image","url(/images/textures/t"+$(this).attr("id")+".png)");
+        });
         $(".foto-file input").live('change', function () {
             var id = $(this).attr("id");
             $this = $(this);
