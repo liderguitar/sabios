@@ -48,7 +48,7 @@ class ConfigController extends My_Controller_Sabios
         $app = $app[0];
 
         if ($this->_request->isPost()) {
-            if (!is_null($this->_request->getParam('fotoname-1', null))) {
+            if (!is_null($this->_request->getParam('fondo', null))) {
                 $app->catalog_background = $this->_request->getParam('fondo');
                 $app->save();
                 $this->_redirect("/catalog");
