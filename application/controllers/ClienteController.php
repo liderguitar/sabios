@@ -42,6 +42,7 @@ class ClienteController extends My_Controller_Sabios {
             // grabar usuario
             $user = new Usuario();
             $user->email = $this->_request->getParam('email');
+            $user->nombre = $this->_request->getParam('nombre');
             if($this->_request->getParam('password',false)){
                 $user->password = md5($this->_request->getParam('password'));
             }
@@ -209,7 +210,8 @@ class ClienteController extends My_Controller_Sabios {
             if($this->_request->getParam('password',false)){
                $usuario->password = md5($this->_request->getParam('password')); 
             }
-           
+            $usuario->nombre = $this->_request->getParam('nombre');
+
             $usuario->save();
 
 
