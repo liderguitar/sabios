@@ -63,7 +63,7 @@ function clienteValidate() {
                 email: true
             },
             password: {
-                required: true,
+                required: false,
                 minlength: 3,
                 maxlength: 25,
                 regex: /^[a-zA-Z0-9]+$/
