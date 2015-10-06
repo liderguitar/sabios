@@ -95,9 +95,13 @@
                 <div class="sabios-row"><input class="sabios-input" placeholder="login" type="text" name="email" id="email" value="<?= $this->usuario->email?>"/>
                     <div class="error-field email-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Email Inv&aacute;lido<br></span><span class="white">Por favor ingrese un email v&aacute;lido</span></div></div>
                 </div>
-                <div class="sabios-row label"><label>Password</label></div>
-                <div class="sabios-row"><input class="sabios-input" placeholder="password" type="text" name="password" id="password" value=""/>
-                    <div class="error-field password-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Contrase&ntilde;a Inv&aacute;lida<br></span><span class="white">Por favor ingrese una contrase&ntilde;a v&aacute;lida</span></div></div>
+                <div class="sabios-row label"><label>Reset Password</label></div>
+                <div class="sabios-row"><input class="sabios-input" placeholder="password" type="checkbox" name="reset-pass" id="reset-pass" />
+                <div class="pass-cont">
+                    <div class="sabios-row label"><label>Password</label></div>
+                    <div class="sabios-row"><input class="sabios-input" placeholder="password" type="text" name="password" id="password" value=""/>
+                        <div class="error-field password-error"><div class="error-arrow"></div><div class="sabios-error"><span class="red">Contrase&ntilde;a Inv&aacute;lida<br></span><span class="white">Por favor ingrese una contrase&ntilde;a v&aacute;lida</span></div></div>
+                    </div>
                 </div>
                 <div class="sabios-row label"><label>Deshabilitar acceso al sistema de pedidos? </label></div>
                 <div class="sabios-row">

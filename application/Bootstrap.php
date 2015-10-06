@@ -175,6 +175,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $this->view->headLink()->offsetSetStylesheet(654, $this->configuration->publicFolder . '/css/jquery.dataTables.css');
         $this->view->headLink()->offsetSetStylesheet(655, $this->configuration->publicFolder . '/css/jquery.dataTables_themeroller.css');
         $this->view->headLink()->offsetSetStylesheet(656, $this->configuration->publicFolder . '/css/select2.css');
+        $this->view->headLink()->offsetSetStylesheet(657, $this->configuration->publicFolder . '/css/colorpicker.css');
+      //  $this->view->headLink()->offsetSetStylesheet(658, $this->configuration->publicFolder . '/css/layout.css');
         //  $this->view->headLink()->offsetSetStylesheet(657, $this->configuration->publicFolder . '/css/estilos_home.css');
     }
 
@@ -199,6 +201,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $this->view->headScript()->offsetSetFile(111, $this->configuration->publicFolder . '/js/plugins/jquery.base64.js');
         $this->view->headScript()->offsetSetFile(112, $this->configuration->publicFolder . '/js/validation.js');
         $this->view->headScript()->offsetSetFile(113, $this->configuration->publicFolder . '/js/select2.min.js');
+        $this->view->headScript()->offsetSetFile(114, $this->configuration->publicFolder . '/js/colorpicker.js');
     }
 
     public function _initMetas() {

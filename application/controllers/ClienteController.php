@@ -42,7 +42,9 @@ class ClienteController extends My_Controller_Sabios {
             // grabar usuario
             $user = new Usuario();
             $user->email = $this->_request->getParam('email');
-            $user->password = md5($this->_request->getParam('password'));
+            if($this->_request->getParam('password',false)){
+                $user->password = md5($this->_request->getParam('password'));
+            }
             $user->app_id = APPLICATION_ID;
             $user->perfil = 'USER';
             $user->blockeado = 'N';
