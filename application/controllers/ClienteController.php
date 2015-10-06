@@ -46,6 +46,7 @@ class ClienteController extends My_Controller_Sabios {
             $user->app_id = APPLICATION_ID;
             $user->perfil = 'USER';
             $user->blockeado = 'N';
+            $user->save();
 
             $cat->usuario_id = $user->id;
 
@@ -58,7 +59,6 @@ class ClienteController extends My_Controller_Sabios {
 
 
 
-            $user->save();
 
             $this->saveAuditoria($cat->id);
 
