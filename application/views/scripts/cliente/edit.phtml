@@ -382,7 +382,15 @@
         </div>
     </div>
 </div>
-
+<script>
+    $("#reset-pass").click(function(){
+        if($(this).attr("checked") == "checked"){
+            $(".pass-cont").css("display","block");
+        } else {
+            $(".pass-cont").css("display","none");
+        }
+    });
+</script>
 
 
 
