@@ -6,6 +6,8 @@ class CatalogoController extends My_Controller_Sabios {
         $app = Doctrine_Core::getTable('Application')->findByDql("app_id='" . APPLICATION_ID . "'");
         $app = $app[0];
         $this->view->fondo = $app->catalog_background;
+        parent::init();
+
     }
 
     public function indexAction() {
