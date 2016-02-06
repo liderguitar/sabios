@@ -1,0 +1,221 @@
+<?php
+//
+//$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/producto-add.js');
+?>
+<script>
+    $(document).ready(function () {
+        $(".sabios-row.tb-close").click(function () {
+            $.unblockUI();
+        });
+    });
+</script>
+<div class="sabios-container">
+
+    <div class="middle">
+        <div class="left-column" style="width: 100%">
+            <form method="post" action="" id="fondo-form">
+                <h1>Configurar Fuentes y Colores</h1>
+
+                <div class="sabios-row separator"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row">
+                    <label>Tama&ntilde;o de Fuente</label>
+                    <div class="sabios-row"></div>
+                    <div class="sabios-row"></div>
+
+                    <div id="slider"></div><input type="hidden" id="font-size" name="font-size" value="13" style="width: 17px;">
+                </div>                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row separator"></div>
+
+                <div class="sabios-row">
+                    <label>Color de Fondo</label>
+                    <div class="colorSelector" id="fondo">
+                        <div style="background-color: #f9f9f9"></div>
+                    </div>
+                </div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row separator"></div>
+
+                <div class="sabios-row">
+                    <label>Color de Fuente</label>
+
+                    <div class="colorSelector" id="fuente">
+                        <div style="background-color: #a5a6a7"></div>
+                    </div>
+                </div>
+                <div class="sabios-row">
+                    <label>Fuente</label>
+
+                    <select name="font-family" id="font-family">
+                        <option value="helveticaneuelight">Helvetica Neue</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Verdana">Verdana </option>
+                        <option value="Courier New">Courier New</option>
+                    </select>
+                </div>
+
+
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row">
+                    <div id="prod-right">
+                        <div class="info-prod">
+                            <div class="sabios-row">
+                                INFORMACIÓN DE PRODUCTO
+                            </div>
+                            <div class="sabios-row">
+                                Código:YYY67364
+                            </div>
+                            <div class="sabios-row">
+                                Nombre:Remera Dub Explosion2
+                            </div>
+                        </div>
+                        <div class="info-prod">
+                            <div class="sabios-row">
+                                PRECIOS
+                            </div>
+                            <div class="sabios-row">
+                                Formas de Pago:
+                            </div>
+                            <div class="sabios-row">
+
+                                Precio de Lista :
+                                <div class="fdp-currency">$101,45</div>
+                            </div>
+                            <div class="sabios-row">
+
+                                Efectivo :
+                                <div class="fdp-currency">$91,31</div>
+                            </div>
+                            <div class="sabios-row">
+
+                                Deposito/Transferencia :
+                                <div class="fdp-currency">$98,41</div>
+                            </div>
+                            <div class="sabios-row">
+
+                                Tarjeta de Credito :
+                                <div class="fdp-currency">$111,60</div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+                <div class="sabios-row"></div>
+
+                <div class="sabios-row">
+                    <button class="sabios-submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="bottom">
+    </div>
+</div>
+<div class="textbox message" id="flashmessenger">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image"></div>
+    <div class="sabios-row tb-title">Mensaje</div>
+    <div class="sabios-row tb-text">
+        <?php if (count($this->messages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->messages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({
+                    message: $('#flashmessenger'),
+                    css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}
+                });
+            </script>
+        <?php endif; ?>
+    </div>
+</div>
+<div class="textbox invalid" id="flashmessenger-error">
+    <div class="sabios-row tb-close"></div>
+    <div class="sabios-row tb-image-invalid"></div>
+    <div class="sabios-row tb-title-invalid">&#161;Error&#33;</div>
+    <div class="sabios-row tb-text-invalid">
+        <?php if (count($this->errormessages)) : ?>
+            <ul id="messages">
+                <?php foreach ($this->errormessages as $message) : ?>
+                    <li><?php echo $this->escape($message); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <script>
+                $.blockUI({
+                    message: $('#flashmessenger-error'),
+                    css: {'width': '326px', 'border': 'none', 'border-radius': '8px'}
+                });
+            </script>
+        <?php endif; ?>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $( "#font-family" ).change(function(){
+            $(".info-prod").css("font-family", $(this).val());
+        });
+
+        $( "#slider" ).slider({
+            value:13,
+            min: 9,
+            max: 18,
+            step: 1,
+            slide: function( event, ui ) {
+                $( "#font-size" ).val(  ui.value );
+                $(" .info-prod").css("fontSize",ui.value +"px");
+            }
+        });
+
+        $('#fondo').ColorPicker({
+            color: '#0000ff',
+            onShow: function (colpkr) {
+                $(colpkr).fadeIn(500);
+                return false;
+            },
+            onHide: function (colpkr) {
+                $(colpkr).fadeOut(500);
+                return false;
+            },
+            onChange: function (hsb, hex, rgb) {
+                $('#fondo div').css('backgroundColor', '#' + hex);
+                $(".info-prod").css('backgroundColor', '#' + hex);
+            }
+        });
+
+    });
+    $(document).ready(function () {
+        $('#fuente').ColorPicker({
+            color: '#0000ff',
+            onShow: function (colpkr) {
+                $(colpkr).fadeIn(500);
+                return false;
+            },
+            onHide: function (colpkr) {
+                $(colpkr).fadeOut(500);
+                return false;
+            },
+            onChange: function (hsb, hex, rgb) {
+                $('#fuente div').css('backgroundColor', '#' + hex);
+                $(".info-prod").css('color', '#' + hex);
+
+            }
+        });
+
+    });
+
+</script>

@@ -1008,19 +1008,26 @@ a {
     width: 75px;
 }
 .foto-file {
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 1px solid #cccccc;
     margin-bottom: 15px;
     padding-bottom: 36px;
-    width: 380px;
+    width: 99%;
+}
+.foto-file img {
+    width: 100%;
 }
 .close {
     background-image: url("/images/delete.png");
     background-repeat: no-repeat;
+    cursor: pointer;
     height: 13px;
     margin-left: 100px;
     padding: 2px;
+    position: absolute;
+    right: 10px;
+    top: 1px;
     width: 13px;
-    cursor: pointer;
+    z-index: 9999;
 }
 textarea.sabios-input {
     height: inherit;
@@ -1958,3 +1965,14 @@ div.growlUI h1, div.growlUI h2, div.growlUI-error h1, div.growlUI-error h2{
 .pass-cont {
     display: none;
 }
+.ui-widget {
+    font-size:80%;
+}
+.foto-file > div {
+    border: 2px solid;
+    position: relative;
+    width: auto;
+}
+
+.foto-cont{ border: solid #5C5C5C 2px; padding:5px;position: absolute;}
+#dialog-confirm {display:none;}

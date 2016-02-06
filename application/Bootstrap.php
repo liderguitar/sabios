@@ -94,6 +94,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     public function _initSite() {
         $domains = split('\.', $_SERVER['SERVER_NAME']);
+
+        define("UPLOAD_FOLDER", 'files');
+        define("TMP_FOLDER", "tmp");
         //    dump($domains);
 //        if (APPLICATION_ENV == 'production') {
         if ($domains[0] == 'www' || $domains[0] == 'sabbios') {
@@ -101,6 +104,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $this->configuration = Doctrine_Core::getTable('Application')->find(4);
             define("PUBLIC_FOLDER", $this->configuration->publicFolder);
             define("APPLICATION_ID", $this->configuration->app_id);
+
             define("APPLICATION_SECRET", $this->configuration->app_secret);
             if($this->configuration->logo == '') {
                 define("APPLICATION_LOGO", "/images/sabbios-logo.png");
@@ -168,22 +172,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     public function _initStyles() {
         $this->view->headLink()->offsetSetStylesheet(600, $this->configuration->publicFolder . '/css/screen.css');
-        $this->view->headLink()->offsetSetStylesheet(200, $this->configuration->publicFolder . '/css/jquery-ui-1.8.16.custom.css');
-        $this->view->headLink()->offsetSetStylesheet(201, $this->configuration->publicFolder . '/css/smoothness/jquery-ui.css');
+      //  $this->view->headLink()->offsetSetStylesheet(200, $this->configuration->publicFolder . '/css/jquery-ui-1.8.16.custom.css');
+        $this->view->headLink()->offsetSetStylesheet(201, $this->configuration->publicFolder . '/css/jquery-ui.min.css');
         $this->view->headLink()->offsetSetStylesheet(650, $this->configuration->publicFolder . '/css/estilos.css');
         $this->view->headLink()->offsetSetStylesheet(653, $this->configuration->publicFolder . '/css/font-awesome.min.css');
         $this->view->headLink()->offsetSetStylesheet(654, $this->configuration->publicFolder . '/css/jquery.dataTables.css');
         $this->view->headLink()->offsetSetStylesheet(655, $this->configuration->publicFolder . '/css/jquery.dataTables_themeroller.css');
         $this->view->headLink()->offsetSetStylesheet(656, $this->configuration->publicFolder . '/css/select2.css');
         $this->view->headLink()->offsetSetStylesheet(657, $this->configuration->publicFolder . '/css/colorpicker.css');
+        $this->view->headLink()->offsetSetStylesheet(658, $this->configuration->publicFolder . '/css/cropper.min.css');
       //  $this->view->headLink()->offsetSetStylesheet(658, $this->configuration->publicFolder . '/css/layout.css');
         //  $this->view->headLink()->offsetSetStylesheet(657, $this->configuration->publicFolder . '/css/estilos_home.css');
     }
 
     public function _initJS() {
 
-        $this->view->headScript()->offsetSetFile(100, $this->configuration->publicFolder . '/js/jquery-1.8.3.min.js');
-        $this->view->headScript()->offsetSetFile(200, $this->configuration->publicFolder . '/js/jquery-ui-1.10.4.custom.min.js');
+        //$this->view->headScript()->offsetSetFile(100, $this->configuration->publicFolder . '/js/jquery-1.8.3.min.js');
+        $this->view->headScript()->offsetSetFile(100, 'https://code.jquery.com/jquery-2.2.0.min.js');
+        $this->view->headScript()->offsetSetFile(200, $this->configuration->publicFolder . '/js/jquery-ui.min.js');
         $this->view->headScript()->offsetSetFile(300, $this->configuration->publicFolder . '/js/jquery.styly.min.js');
 
         $this->view->headScript()->offsetSetFile(960, $this->configuration->publicFolder . '/js/blockUI.js');
@@ -202,6 +208,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $this->view->headScript()->offsetSetFile(112, $this->configuration->publicFolder . '/js/validation.js');
         $this->view->headScript()->offsetSetFile(113, $this->configuration->publicFolder . '/js/select2.min.js');
         $this->view->headScript()->offsetSetFile(114, $this->configuration->publicFolder . '/js/colorpicker.js');
+        $this->view->headScript()->offsetSetFile(101, $this->configuration->publicFolder . '/js/cropper.js');
     }
 
     public function _initMetas() {

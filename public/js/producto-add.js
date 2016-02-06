@@ -1,17 +1,85 @@
+var selectedcoords;
+
 $(document).ready(function() {
 
 
+    $(document.body).on('click', ".cancelcrop", function(){
 
-    $(".close").live('click', function() {
-
-        $(this).parent().find("input").val('');
-        $(this).parent().find("input").show();
-        $(this).parent().find("img").remove();
-        $(this).hide();
+        $("#"+$(this).attr("image")).cropper("destroy");
+        $(this).parent().animate({width:"200px"},1000)
+        $(this).parent().find(".cropper").remove();
+        $(this).parent().find(".cancelcrop").remove();
 
 
     });
 
+    $(document.body).on('click', ".close",  function() {
+
+        $this = $(this);
+
+        $(function() {
+            $( "#dialog-confirm" ).dialog({
+                resizable: false,
+                height:140,
+                modal: true,
+                buttons: {
+                    "Borrar": function() {
+
+                        $( this ).dialog( "close" );
+                        $this.parent().find("img").cropper("destroy");
+                        $this.parent().parent().find("input").val('');
+                        $this.parent().parent().find(".fotoname").remove();
+                        $this.parent().parent().find("input").show();
+                        $this.parent().remove();
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            data : {path: $this.parent().find("img").attr("src")},
+                            url: '/browser/ajaxdeleteimage/',
+                            success : function(data) {
+                                if(data.success) {
+                                    // hacer algo?
+                                }
+                            }
+                        });
+                        $this.parent().find("img").remove();
+                    },
+                    "Cancelar" : function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+        });
+
+
+    });
+    $(document.body).on('click', ".cropper", function(){
+
+        $this=$(this);
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/browser/ajaxcrop/',
+            data : selectedcoords,
+            success : function(data) {
+                if(data.success) {
+                    $("#image_" + data.number).cropper('destroy');
+                    $("#image_" + data.number).attr('src', data.publicFolder + "/" + data.fileName);
+                    $("#fotoname-"+ data.number).val(data.fileName);
+                    $this.parent().animate({width:"200px"},1000)
+                    $this.parent().find(".cancelcrop").remove();
+                    $this.parent().find(".cropper").remove();
+
+                } else
+                {
+                    $("#image_" + data.number).cropper('clear');
+                    $this.parent().animate({width:"200px"},1000)
+
+
+                }
+            }
+        });
+    });
     Sabios.sabiosSelect(".talletipo");
     Sabios.sabiosSelect(".categoria");
 
@@ -46,7 +114,7 @@ $(document).ready(function() {
     });
 
 
-    $(".foto-file input").live('change', function() {
+    $(document.body).on('change', ".foto-file input", function() {
         var id = $(this).attr("id");
         $this = $(this);
         $.ajaxFileUpload
@@ -72,9 +140,29 @@ $(document).ready(function() {
                                     {
                                         var number = $("#" + id).attr("number");
                                         $("#fotoname-" + number).val(data.fileName);
-                                        $("#" + id).after("<div class='close'></div><img width='100px' src='" + data.publicFolder + "/" + data.fileName + "'/>");
+                                        $("#" + id).after("<div class='foto-cont'><div class='close'></div><img id='image_"+number+"' file='"+data.fileName+"' src='" + data.publicFolder + "/" + data.fileName + "'/><input type='button' class='cropper sabios-submit' image='image_"+number+"' value='Guardar Cambios'/><input type='button' class='cancelcrop sabios-submit' image='image_"+number+"' value='Cancelar'/></div>");
                                         $("#" + id).hide();
-                                        //$("#" + id).val(data.fileName);
+                                        $("#image_" + number).cropper({
+                                            aspectRatio: 4 / 3,
+                                            minContainerHeight: 600,
+                                            minContainerWidth: 800,
+                                            zoomOnWheel: false,
+                                            crop: function(e) {
+
+                                                selectedcoords = {
+                                                    "imageNumber" : number,
+                                                    "imageId" : data.fileName,
+                                                    "x": e.x,
+                                                    "y": e.y,
+                                                    "width": e.width,
+                                                    "height": e.height,
+                                                    "mime" : e.mime
+                                                };
+
+                                                //        $("#data_"+number).val(JSON.stringify(selectedcoords));
+                                            }
+                                        });
+
                                     } else
                                     {
                                         alert(data.message);

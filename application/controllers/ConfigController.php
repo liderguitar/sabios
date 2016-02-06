@@ -57,6 +57,14 @@ class ConfigController extends My_Controller_Sabios
         }
 
     }
+
+    public function fuentesAction(){
+
+
+
+    }
+
+
     public function removeAction()
     {
 

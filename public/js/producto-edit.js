@@ -1,46 +1,110 @@
+var selectedcoords;
+
 $(document).ready(function() {
 
 
+    $(document.body).on('click', ".cancelcrop", function(){
 
-    $(".close").live('click', function(){
-        $(this).parent().find("input").val('');
-        $(this).parent().find("input").show();
-        $(this).parent().find("img").remove();
-        $(this).hide();
-        var number = $(this).parent().find("input").attr("number");
-        $("#fotoname-"+number).remove();
+        $("#"+$(this).attr("image")).cropper("destroy");
+        $(this).parent().animate({width:"200px"},1000)
+        $(this).parent().find(".cropper").remove();
+        $(this).parent().find(".cancelcrop").remove();
+
+
     });
 
+    $(document.body).on('click', ".close",  function() {
+
+        $this = $(this);
+
+        $(function() {
+            $( "#dialog-confirm" ).dialog({
+                resizable: false,
+                height:140,
+                modal: true,
+                buttons: {
+                    "Borrar": function() {
+
+                        $( this ).dialog( "close" );
+                        $this.parent().find("img").cropper("destroy");
+                        $this.parent().parent().find("input").val('');
+                        $this.parent().parent().find("input").show();
+                        $this.parent().remove();
+                        $.ajax({
+                            type: 'post',
+                            dataType: 'json',
+                            data : {path: $this.parent().find("img").attr("src")},
+                            url: '/browser/ajaxdeleteimage/',
+                            success : function(data) {
+                                if(data.success) {
+                                    // hacer algo?
+                                }
+                            }
+                        });
+                        $this.parent().find("img").remove();
+                    },
+                    "Cancelar" : function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+        });
+
+
+    });
+    $(document.body).on('click', ".cropper", function(){
+
+        $this=$(this);
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/browser/ajaxcrop/',
+            data : selectedcoords,
+            success : function(data) {
+                if(data.success) {
+                    $("#image_" + data.number).cropper('destroy');
+                    $("#image_" + data.number).attr('src', data.publicFolder + "/" + data.fileName);
+                    $("#fotoname-"+ data.number).val(data.fileName);
+                    $this.parent().animate({width:"200px"},1000)
+                    $this.parent().find(".cancelcrop").remove();
+                    $this.parent().find(".cropper").remove();
+
+                } else
+                {
+                    $("#image_" + data.number).cropper('clear');
+                    $this.parent().animate({width:"200px"},1000)
+
+
+                }
+            }
+        });
+    });
     Sabios.sabiosSelect(".talletipo");
     Sabios.sabiosSelect(".categoria");
-   
-    //registerValidate();
-    $('form#register-form').submit(function() {
+
+    productoValidate();
+    $('form#product-form').submit(function() {
 
         var valido = true;
+        verifyValidNombre($("#codigo"));
         verifyValidNombre($("#nombre"));
-        verifyValidNombre($("#apellido"));
-        verifyValidNombre($("#email"));
-        verifyValidNombre($("#repitePassword"));
-        verifyValidNombre($("#password"));
-        verifyValidNombre($("#cuenta"));
-        verifyValidNombre($("#web"));
-        verifyValidNombre($("#responsableemail"));
+        verifyValidNombre($("#precio"));
+        verifyValidNombre($("#costo"));
 
-        if ($("#tyc").val() === "0") {
-            $(".tyc-error").css("visibility", "visible");
+        if ($("#tipotalle").val() === "0") {
             valido = false;
+            $(".tipotalle-error").css("visibility", "visible");
         } else {
-            $(".tyc-error").css("visibility", "hidden");
+            $(".tipotalle-error").css("visibility", "hidden");
         }
 
-        if ($("#tipoactividad").attr("value") === "0") {
-            $(".tipodecuenta-error").css("visibility", "visible");
+        if ($("#categoria").val() === "0") {
             valido = false;
+            $(".categoria-error").css("visibility", "visible");
         } else {
-            $(".tipodecuenta-error").css("visibility", "hidden");
-        }
+            $(".categoria-error").css("visibility", "hidden");
 
+        }
         return valido;
     });
 
@@ -49,183 +113,152 @@ $(document).ready(function() {
     });
 
 
-    $(".foto-file input").live('change', function() {
+    $(document.body).on('change', ".foto-file input", function() {
         var id = $(this).attr("id");
         $this = $(this);
         $.ajaxFileUpload
-                (
+        (
+            {
+                url: '/browser/ajaxupload/',
+                secureuri: false,
+                fileElementId: id,
+                dataType: 'json',
+                beforeSend: function()
+                {
+                    //
+                },
+                complete: function()
+                {
+                    //$("#loading").hide();
+                },
+                success: function(data, status)
+                {
+                    if (typeof(data.message) !== 'undefined')
+                    {
+                        if (data.success)
                         {
-                            url: '/browser/ajaxupload/',
-                            secureuri: false,
-                            fileElementId: id,
-                            dataType: 'json',
-                            beforeSend: function()
-                            {
-                                //
-                            },
-                            complete: function()
-                            {
-                                //$("#loading").hide();
-                            },
-                            success: function(data, status)
-                            {
-                                console.log(data);
-                                if (typeof(data.message) !== 'undefined')
-                                {
-                                    if (data.success)
-                                    {
-                                        var number =  $("#" + id).attr("number");
-                                        $("#fotoname-" + number).val(data.fileName);
-                                        $("#" + id).after("<div class='close'></div><img width='100px' src='" + data.publicFolder + "/" + data.fileName + "'/>");
-                                        $("#" + id).hide();
-                                        //$("#" + id).val(data.fileName);
-                                    } else
-                                    {
-                                        alert(data.message);
-                                    }
+                            var number = $("#" + id).attr("number");
+                            $("#fotoname-" + number).val(data.fileName);
+                            $("#" + id).after("<div class='foto-cont'><div class='close'></div><img id='image_"+number+"' file='"+data.fileName+"' src='" + data.publicFolder + "/" + data.fileName + "'/><input type='button' class='cropper sabios-submit' image='image_"+number+"' value='Guardar Cambios'/><input type='button' class='cancelcrop sabios-submit' image='image_"+number+"' value='Cancelar'/></div>");
+                            $("#" + id).hide();
+                            $("#image_" + number).cropper({
+                                aspectRatio: 4 / 3,
+                                minContainerHeight: 600,
+                                minContainerWidth: 800,
+                                zoomOnWheel: false,
+                                crop: function(e) {
+
+                                    selectedcoords = {
+                                        "imageNumber" : number,
+                                        "imageId" : data.fileName,
+                                        "x": e.x,
+                                        "y": e.y,
+                                        "width": e.width,
+                                        "height": e.height,
+                                        "mime" : e.mime
+                                    };
+
+                                    //        $("#data_"+number).val(JSON.stringify(selectedcoords));
                                 }
-                            },
-                            error: function(data, status, e)
-                            {
-                                alert(e);
-                            }
+                            });
+
+                        } else
+                        {
+                            alert(data.message);
                         }
-                );
+                    }
+                },
+                error: function(data, status, e)
+                {
+                    alert(e);
+                }
+            }
+        );
     });
 
 
 
 });
 
-function registerValidate() {
+function productoValidate() {
 
     jQuery.validator.addMethod("regex",
-            function(value, element, regexp) {
-                var re = new RegExp(regexp);
-                return this.optional(element) || re.test(value);
-            },
-            "");
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "");
     jQuery.validator.addMethod("verificarNick",
-            function(value, element, value2) {
-                var resp = true;
-                self = this;
-                $.ajax({
-                    type: "POST",
-                    url: "/usuario/verificar-nick/nick/" + value,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function(data) {
-                        if (data["result"] === "true") {
-                            self.resp = false;
-                        } else {
-                            self.resp = true;
-                        }
+        function(value, element, value2) {
+            var resp = true;
+            self = this;
+            $.ajax({
+                type: "POST",
+                url: "/usuario/verificar-nick/nick/" + value,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data) {
+                    if (data["result"] === "true") {
+                        self.resp = false;
+                    } else {
+                        self.resp = true;
                     }
-                });
+                }
+            });
 
-                return this.optional(element) || self.resp;
-            },
-            "");
+            return this.optional(element) || self.resp;
+        },
+        "");
     jQuery.validator.addMethod("valueNotEquals", function(value) {
         return $("#register-form #password").val() == value;
     }, "Value must not equal arg.");
 
-    $('form#register-form').validate({
+    $('form#product-form').validate({
         rules: {
+            codigo: {
+                required: true,
+                minlength: 4,
+                maxlength: 50
+            },
             nombre: {
                 required: true,
                 minlength: 4,
                 maxlength: 50
             },
-            apellido: {
-                required: true,
-                minlength: 4,
-                maxlength: 50
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            password: {
+            precio: {
+                number: true,
                 required: true
             },
-            repitePassword: {
-                required: true,
-                valueNotEquals: $("#register-form #repitePassword").val()
-            },
-            cuenta: {
-                required: true,
-                regex: /^[a-zA-Z0-9]+$/
-            },
-            web: {
-                regex: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/
-            },
-            responsableemail: {
-                required: true,
-                email: true
+            costo: {
+                number: true,
+                required: true
             }
         },
-        submitHandler: function(form) {
-
-            if ($("#tyc").val() === "0") {
-                $(".tyc-error").css("visibility", "visible");
-                return false;
-            }
-
-            if (passwordStrength($("#password").val()) < 2) {
-                $(".password-error").css("visibility", "visible");
-                $(".password-error").find("span.white").html("Verifica la fortaleza de tu contraseña");
-                $("#password").focus();
-                return false;
-
-            }
 
 
-            if ($("#register-form").valid()) {
-                $("#register-form").submit();
-            }
-
-
-            return false;
-        },
         errorPlacement: function(error, element) {
             $("." + element.attr('id') + "-error").find("span.white").html(error.html());
             $("#register-form #" + element.attr('id')).next(error);
             element.focus();
         },
         messages: {
-            nombre: {
+            codigo: {
                 required: 'Debe Ingresar un Nombre.',
                 minlength: 'Minimo 4 caracteres.',
                 maxlength: 'Largo hasta 28 caracteres.'
             },
-            apellido: {
+            nombre: {
                 required: 'Debe Ingresar un Apellido.',
                 minlength: 'Minimo 4 caracteres.',
                 maxlength: 'Largo hasta 28 caracteres.'
             },
-            email: {
-                required: 'Debe ingresar un Email',
-                email: 'no es un email valido'
+            precio: {
+                required: 'Debe ingresar un precio',
+                number: 'no es un precio valido'
             },
-            repitePassword: {
-                required: 'Debe repetir la contrase&ntilde;a',
-                valueNotEquals: 'La Contrase&ntilde;a no coincide'
-            },
-            password: {
-                required: 'Ingrese una contrase&ntilde;a'
-            },
-            cuenta: {
-                required: 'Ingrese un nombre de cuenta',
-                regex: 'solo letras y numeros'
-            },
-            web: {
-                required: 'Ingrese un nombre de cuenta',
-                regex: 'solo letras y numeros'
-            },
-            responsableemail: {
-                required: 'Debe ingresar un Email',
-                email: 'no es un email valido'
+            costo: {
+                required: 'Debe ingresar un costo',
+                number: 'no es un costo valido'
             }
 
         }
@@ -243,12 +276,12 @@ function verifyValidNombre(element) {
 }
 function addFoto() {
     var number = $(".foto-file").length + 1;
-    
+
     if (number > 6)
         return false;
-        
+
     var html = '<div class="foto-file"><label>Foto ' + number + ':&nbsp;</label><input number="' + number + '" id="foto-' + number + '" type="file" name="foto-' + number + '"></div><input class="fotoname" type="hidden" name="fotoname-' + number + '" id="fotoname-' + number + '">';
-    $(".foto-container").append(html);  
+    $(".foto-container").append(html);
 
 
 }

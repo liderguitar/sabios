@@ -1,6 +1,6 @@
 <?php
 //
-$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/producto-edit.js');
+$this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/producto-add.js');
 ?>
 <script>
     $(document).ready(function() {
@@ -102,15 +102,21 @@ $this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/producto-edit.js');
                             <div class="foto-file">
                                 <label>Foto <?= $counter ?>:&nbsp;</label>
                                 <input type="file" name="foto-<?= $counter ?>" id="foto-<?= $counter ?>" number="<?= $counter ?>" style="display: none;">
-                                <div class="close"></div><img width="100px" src="/files/<?= $foto["Foto"]["url"] ?>">
-                            </div> 
-                            <input class="fotoname" type="hidden" value="<?= $foto["Foto"]["url"] ?>" name="fotoname-<?= $counter ?>" id="fotoname-<?= $counter ?>">
+
+                                <div class="foto-cont" style="width: 200px;">
+                                    <div class="close"></div>
+                                    <img width="200px" src="/files/<?= $foto["Foto"]["url"] ?>" file="" id="image_<?= $counter ?>">
+                                </div>
+                                <input class="fotoname" type="hidden" value="<?= $foto["Foto"]["url"] ?>" name="fotoname-<?= $counter ?>" id="fotoname-<?= $counter ?>">
+                            </div>
                             <?php
                             $counter++;
                         endforeach;
                         ?>
+
                     </div>
                     <div class="add-foto sabios-submit">Agregar foto</div>
+                </div>
 
                 </div>
 
@@ -170,4 +176,7 @@ $this->headScript()->offsetSetFile(500, PUBLIC_FOLDER . '/js/producto-edit.js');
             </script>
         <?php endif; ?>
     </div>
-</div>   
+</div>
+<div id="dialog-confirm" title="Empty the recycle bin?">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Esta seguro de borrar esta imagen?</p>
+</div>
