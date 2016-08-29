@@ -10,6 +10,7 @@
  * http://www.gnu.org/licenses/gpl.html
  *
  * Thanks to Amir-Hossein Sobhi for some excellent contributions!
+ * adding new version
  */
 
 ;(function() {
